@@ -1,20 +1,40 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Dimensions } from "react-native";
 import { MapView } from "expo";
 
 //const Marker = MapView.Marker;
-
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 class Maps extends Component {
-  render() {
+  render(props) {
+    //console.log(this.props.initialRegion);
+
     const { region } = this.props;
-    return <MapView style={styles.container} region={region} />;
+    return (
+      <MapView
+        style={styles.container}
+        initialRegion={{
+          latitude: this.props.latitude,
+          longitude: this.props.longitude,
+          latitudeDelta: this.props.latitudeDelta,
+          longitudeDelta: this.props.longitudeDelta
+        }}
+      >
+        <MapView.Marker
+          coordinate={{ latitude: 34.064029, longitude: -118.398768 }}
+          title={"marker.title"}
+          description={"desss"}
+        />
+      </MapView>
+    );
   }
 }
 
 const styles = {
   container: {
-    width: "100%",
-    height: "80%"
+    flex: 1,
+    width,
+    height
   }
 };
 
@@ -30,3 +50,6 @@ export default Maps;
 //       >
 //         {" "}
 //         {this.renderMarkers()
+{
+  /* <MapView style={styles.container} region={region} /> */
+}

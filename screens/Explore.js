@@ -7,11 +7,15 @@ import {
   TextInput,
   Platform,
   StatusBar,
-  ScrollView
+  ScrollView,
+  Image,
+  FlatList,
+  TouchableNativeFeedback
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Location, Permissions } from "expo";
+import { Location, Permissions, MapView } from "expo";
 import api from "../services/Api";
+import StarRating from "react-native-star-rating";
 
 class Explore extends Component {
   state = {
@@ -21,9 +25,8 @@ class Explore extends Component {
     lon: null,
     errorMessage: null
   };
-  componentWillMount() {
+  componentDidMount() {
     this._getLocationAsync();
-    //this.loadBusiness();
     this.startHeaderHeight = 80;
     if (Platform.OS == "android") {
       this.startHeaderHeight = 65 + StatusBar.currentHeight;
@@ -68,13 +71,61 @@ class Explore extends Component {
       //let { total } = response.data;
 
       this.setState({ business: businesses });
-      console.log(businesses);
+      //console.log(this.state.business);
       //this.setState({ total: total });
 
       await this.setState({ loading: false });
     } catch (e) {
       console.log("valor", e.message);
     }
+  };
+
+  renderItem = ({ item }) => {
+    <TouchableNativeFeedback
+      onPress={() => {
+        this.props.navigation.navigate("Places", { places: item });
+      }}
+    >
+      <View
+        style={{
+          flex: 1,
+          width: "auto",
+          backgroundColor: "#FFFFFF",
+          flexDirection: "row",
+          marginTop: 5,
+          marginBottom: 5,
+          marginLeft: 10,
+          marginRight: 10,
+          borderRadius: 5
+        }}
+      >
+        <Image
+          source={{ uri: item.image_url }}
+          style={{ flex: 1, width: 100, height: 100, borderRadius: 5 }}
+        />
+        <View style={{ flex: 2, width: "auto", height: "auto", padding: 10 }}>
+          <Text style={{ flexGrow: 1, fontSize: 16, color: "#666666" }}>
+            {item.name}
+          </Text>
+          console.log(item.name);
+          <Text style={{ fontSize: 12, color: "#999999" }}>
+            {item.location.address1}
+          </Text>
+          <View style={{ marginTop: 5, flexDirection: "row" }}>
+            <Text>{item.price}</Text>
+            <StarRating
+              disabled={true}
+              maxStars={5}
+              rating={item.rating}
+              starSize={12}
+              fullStarColor="orange"
+              emptyStarColor="orange"
+            />
+          </View>
+        </View>
+      </View>
+      ;
+    </TouchableNativeFeedback>;
   };
 
   render() {
@@ -131,6 +182,7 @@ class Explore extends Component {
             </View>
             <View />
           </View>
+
           <ScrollView scrollEventThrottle={16}>
             <View style={{ flex: 1 }}>
               <Text
@@ -144,11 +196,70 @@ class Explore extends Component {
                 Take a Break!
               </Text>
             </View>
-            <View>
-              <Text>
-                {text} {text1}{" "}
-              </Text>
-            </View>
+
+            <FlatList
+              data={this.state.business}
+              keyExtractor={item => item.id}
+              renderItem={({ item }) => {
+                <TouchableNativeFeedback
+                  onPress={() => {
+                    this.props.navigation.navigate("Places", { places: item });
+                  }}
+                >
+                  <View
+                    style={{
+                      flex: 1,
+                      width: "auto",
+                      backgroundColor: "#FFFFFF",
+                      flexDirection: "row",
+                      marginTop: 5,
+                      marginBottom: 5,
+                      marginLeft: 10,
+                      marginRight: 10,
+                      borderRadius: 5
+                    }}
+                  >
+                    <Image
+                      source={{ uri: item.image_url }}
+                      style={{
+                        flex: 1,
+                        width: 100,
+                        height: 100,
+                        borderRadius: 5
+                      }}
+                    />
+                    <View
+                      style={{
+                        flex: 2,
+                        width: "auto",
+                        height: "auto",
+                        padding: 10
+                      }}
+                    >
+                      <Text
+                        style={{ flexGrow: 1, fontSize: 16, color: "#666666" }}
+                      >
+                        {item.name}
+                      </Text>
+                      <Text style={{ fontSize: 12, color: "#999999" }}>
+                        {item.location.address1}
+                      </Text>
+                      <View style={{ marginTop: 5, flexDirection: "row" }}>
+                        <Text>{item.price}</Text>
+                        <StarRating
+                          disabled={true}
+                          maxStars={5}
+                          rating={item.rating}
+                          starSize={12}
+                          fullStarColor="orange"
+                          emptyStarColor="orange"
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </TouchableNativeFeedback>;
+              }}
+            />
           </ScrollView>
         </View>
       </SafeAreaView>
@@ -196,3 +307,14 @@ const styles = StyleSheet.create({
 //       console.log("Error" + error);
 //     });
 // };
+// {
+//   /* <FontAwesome
+//                             name={"dollar"}
+//                             size={14}
+//                             color="black"
+//                           /> */
+// }
+// {
+//   /* <FontAwesome name={"dollar"} size={14} color="black" /> */
+// }
+// /import { FontAwesome } from "@expo/vector-icons";
