@@ -4,10 +4,6 @@ import { Card, CardItem, Right } from "native-base";
 import StarRating from "react-native-star-rating";
 
 class Results extends Component {
-  //   componentDidMount() {
-  //     this.recommend();
-  //   }
-
   recommend(props) {
     console.log(this.props.business);
     return this.props.business.map(function(item, i) {
@@ -28,7 +24,9 @@ class Results extends Component {
                 paddingHorizontal: 20
               }}
             >
-              <Text>{item.name}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 14 }}>
+                {item.name}
+              </Text>
               <Text>
                 {item.location.address1} {item.location.address2}
               </Text>

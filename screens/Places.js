@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Container, Content, Header, Left, Right, Icon } from "native-base";
+import {
+  Container,
+  Content,
+  Header,
+  Left,
+  Right,
+  Icon,
+  Button,
+  Body
+} from "native-base";
 
 import { MapView } from "expo";
 import Maps from "../components/Maps";
@@ -29,11 +38,27 @@ class Places extends Component {
       <Container>
         <Header
           style={{
-            backgroundColor: "dodgerblue",
-            height: 90,
-            borderBottomColor: "#3a455c"
+            backgroundColor: "#3a455c",
+            height: 100,
+            borderBottomColor: "#757575"
           }}
-        />
+        >
+          <Left>
+            <Button transparent>
+              <Icon name="arrow-back" />
+            </Button>
+          </Left>
+          <Body>
+            <Text
+              style={{
+                fontSize: 18,
+                color: "white"
+              }}
+            >
+              DETAILS
+            </Text>
+          </Body>
+        </Header>
         <Content>
           <Maps
             style={{ flex: 1 }}
