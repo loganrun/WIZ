@@ -10,12 +10,27 @@ import {
   ScrollView,
   Image,
   FlatList,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  TouchableOpacity
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+//import { Ionicons } from "@expo/vector-icons";
 import { Location, Permissions, MapView } from "expo";
 import api from "../services/Api";
-import StarRating from "react-native-star-rating";
+
+import {
+  Container,
+  Content,
+  Left,
+  Right,
+  Icon,
+  Header,
+  Input,
+  Item,
+  Card,
+  CardItem
+} from "native-base";
+
+import Result from "../components/Results";
 
 class Explore extends Component {
   state = {
@@ -27,10 +42,10 @@ class Explore extends Component {
   };
   componentDidMount() {
     this._getLocationAsync();
-    this.startHeaderHeight = 80;
-    if (Platform.OS == "android") {
-      this.startHeaderHeight = 65 + StatusBar.currentHeight;
-    }
+    // this.startHeaderHeight = 80;
+    // if (Platform.OS == "android") {
+    //   this.startHeaderHeight = 65 + StatusBar.currentHeight;
+    // }
   }
 
   _getLocationAsync = async () => {
@@ -63,7 +78,7 @@ class Explore extends Component {
         latitude: lat,
         longitude: lon,
         radius: 10000,
-        limit: 10
+        limit: 20
       };
 
       let response = await api.get("/search", { params });
@@ -80,66 +95,97 @@ class Explore extends Component {
     }
   };
 
-  renderItem = ({ item }) => {
-    <TouchableNativeFeedback
-      onPress={() => {
-        this.props.navigation.navigate("Places", { places: item });
-      }}
-    >
-      <View
-        style={{
-          flex: 1,
-          width: "auto",
-          backgroundColor: "#FFFFFF",
-          flexDirection: "row",
-          marginTop: 5,
-          marginBottom: 5,
-          marginLeft: 10,
-          marginRight: 10,
-          borderRadius: 5
-        }}
-      >
-        <Image
-          source={{ uri: item.image_url }}
-          style={{ flex: 1, width: 100, height: 100, borderRadius: 5 }}
-        />
-        <View style={{ flex: 2, width: "auto", height: "auto", padding: 10 }}>
-          <Text style={{ flexGrow: 1, fontSize: 16, color: "#666666" }}>
-            {item.name}
-          </Text>
-          console.log(item.name);
-          <Text style={{ fontSize: 12, color: "#999999" }}>
-            {item.location.address1}
-          </Text>
-          <View style={{ marginTop: 5, flexDirection: "row" }}>
-            <Text>{item.price}</Text>
-            <StarRating
-              disabled={true}
-              maxStars={5}
-              rating={item.rating}
-              starSize={12}
-              fullStarColor="orange"
-              emptyStarColor="orange"
-            />
-          </View>
-        </View>
-      </View>
-      ;
-    </TouchableNativeFeedback>;
-  };
-
   render() {
     let text = "Loading..";
     let text1 = "";
     if (this.state.errorMessage) {
-      text = this.state.errorMessage;
+      //text = this.state.errorMessage;
+      //console.log(this.state.errorMessage);
     } else if (this.state.lon) {
-      text = this.state.lat;
-      text1 = this.state.lon;
+      //text = this.state.lat;
+      //text1 = this.state.lon;
+      //console.log(this.state.business);
     }
 
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <Container>
+        <Header
+          style={{
+            backgroundColor: "#3a455c",
+            height: 100,
+            borderBottomColor: "#757575",
+            paddingBottom: 20
+          }}
+        >
+          <View>
+            <Text
+              style={{
+                fontSize: 18,
+                color: "white",
+                alignContent: "center",
+                justifyContent: "center",
+                marginTop: 50
+              }}
+            >
+              BRAKEZ!!!
+            </Text>
+          </View>
+        </Header>
+        <View
+          style={{
+            backgroundColor: "#3a455c",
+            position: "absolute",
+            flex: 1,
+            left: 0,
+            right: 0,
+            top: 100,
+            height: 70
+          }}
+        >
+          <TouchableOpacity>
+            <Item
+              style={{
+                backgroundColor: "white",
+                marginLeft: 10,
+                marginRight: 10,
+                borderRadius: 4
+              }}
+            >
+              <Icon active name="search" style={{ paddingLeft: 10 }} />
+              <Input placeholder="Where do you want to Brake Today?" />
+            </Item>
+          </TouchableOpacity>
+        </View>
+        <Content style={{ backgroundColor: "#d5d5d6", marginTop: 70 }}>
+          <View
+            style={{
+              height: 50,
+              backgroundColor: "white",
+              fontWeight: "bold",
+              justifyContent: "center",
+              fontSize: 18
+            }}
+          >
+            <Text> Check These Places Out!</Text>
+          </View>
+          <Result business={this.state.business} />
+        </Content>
+      </Container>
+    );
+  }
+}
+export default Explore;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
+
+{
+  /* <SafeAreaView style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
           <View
             style={{
@@ -262,19 +308,8 @@ class Explore extends Component {
             />
           </ScrollView>
         </View>
-      </SafeAreaView>
-    );
-  }
+      </SafeAreaView> */
 }
-export default Explore;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
 
 //#2C75FF
 // getVenues = () => {
