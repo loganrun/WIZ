@@ -6,9 +6,15 @@ import StarRating from "react-native-star-rating";
 class Results extends Component {
   recommend(props) {
     console.log(this.props.business);
-    return this.props.business.map(function(item, i) {
+    // const { params } = navigation.props.business;
+    //const { navigate } = this.props.navigation;
+    return this.props.business.map(function (item, i) {
       return (
-        <TouchableOpacity key={item.id} location={item.coordinates}>
+        <TouchableOpacity
+          key={item.id}
+          location={item.coordinates}
+          onPress={() => { this.props.navigation.navigate("Places", { 'places': item }) }}
+        >
           <CardItem style={{ paddingBottom: 10 }}>
             <View>
               <Image

@@ -22,17 +22,6 @@ class Places extends Component {
     };
   }
 
-  componentDidMount() {
-    // this.localLocation();
-  }
-
-  // localLocation = async () => {
-  //   let lat = 34.058803;
-  //   let lon = -118.337986;
-  //   this.setState({ lon: lon });
-  //   this.setState({ lat: lat });
-  //   console.log(this.state.lat);
-  // };
   render() {
     return (
       <Container>
@@ -67,6 +56,9 @@ class Places extends Component {
             latitudeDelta={0.0922}
             longitudeDelta={0.0421}
           />
+          <View>
+            <Text>Extra goes here</Text>
+          </View>
         </Content>
       </Container>
     );

@@ -95,6 +95,12 @@ class Explore extends Component {
     }
   };
 
+  openDetails = () => {
+    this.props.navigation.navigate("Places", {
+      data: this.state.business,
+    });
+  };
+
   render() {
     let text = "Loading..";
     let text1 = "";
