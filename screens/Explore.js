@@ -30,7 +30,9 @@ import {
   CardItem
 } from "native-base";
 
-import Result from "../components/Results";
+import StarRating from "react-native-star-rating";
+
+//import Result from "../components/Results";
 
 class Explore extends Component {
   state = {
@@ -95,11 +97,60 @@ class Explore extends Component {
     }
   };
 
-  openDetails = () => {
-    this.props.navigation.navigate("Places", {
-      data: this.state.business,
+  // openDetails = () => {
+  //   this.props.navigation.navigate("Places", {
+  //     data: this.state.business,
+  //   });
+  // };
+
+  recommend() {
+    console.log(this.state.business);
+    // const { params } = navigation.props.business;
+    //const { navigate } = this.props.navigation;
+    return this.state.business.map(function (item, i) {
+      return (
+        <TouchableOpacity
+          key={item.id}
+          onPress={() => { this.props.navigation.navigate("Places", { places: item }) }}
+        >
+          <CardItem style={{ paddingBottom: 10 }}>
+            <View>
+              <Image
+                style={{ height: 90, width: 90 }}
+                source={{ uri: item.image_url }}
+              />
+            </View>
+            <Right
+              style={{
+                flex: 1,
+                alignItems: "flex-start",
+                height: 100,
+                paddingHorizontal: 20
+              }}
+            >
+              <Text style={{ fontWeight: "bold", fontSize: 14 }}>
+                {item.name}
+              </Text>
+              <Text>
+                {item.location.address1} {item.location.address2}
+              </Text>
+              <Text>{item.location.city}</Text>
+              <Text>{item.display_phone}</Text>
+              <Text>{item.price}</Text>
+              <StarRating
+                disabled={true}
+                maxStars={5}
+                rating={item.rating}
+                starSize={12}
+                fullStarColor={"orange"}
+                emptyStarColor={"orange"}
+              />
+            </Right>
+          </CardItem>
+        </TouchableOpacity>
+      );
     });
-  };
+  }
 
   render() {
     let text = "Loading..";
@@ -174,7 +225,8 @@ class Explore extends Component {
           >
             <Text> Check These Places Out!</Text>
           </View>
-          <Result business={this.state.business} />
+          <Card>{this.recommend()}</Card>
+
         </Content>
       </Container>
     );
@@ -190,6 +242,9 @@ const styles = StyleSheet.create({
   }
 });
 
+// key={item.id}
+//           location={item.coordinates}
+{/* <Result Result={this.recommend} /> */ }
 {
   /* <SafeAreaView style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
