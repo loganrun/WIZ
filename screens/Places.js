@@ -56,7 +56,7 @@ class Places extends Component {
             latitudeDelta={0.0922}
             longitudeDelta={0.0421}
           />
-          <View>
+          <View style={{ flex: 1, backgroundColor: 'white' }}>
             <Text>Extra goes here</Text>
           </View>
         </Content>
