@@ -103,7 +103,7 @@ class Explore extends Component {
   //   });
   // };
 
-  recommend() {
+  recommend = () => {
     console.log(this.state.business);
     // const { params } = navigation.props.business;
     //const { navigate } = this.props.navigation;
@@ -111,7 +111,7 @@ class Explore extends Component {
       return (
         <TouchableOpacity
           key={item.id}
-          onPress={() => { this.props.navigation.navigate("Places", { places: item }) }}
+          onPress={() => this.props.navigation.navigate("Places")}
         >
           <CardItem style={{ paddingBottom: 10 }}>
             <View>
@@ -184,7 +184,7 @@ class Explore extends Component {
                 marginTop: 50
               }}
             >
-              BRAKEZ!!!
+              Yelpie!!!
             </Text>
           </View>
         </Header>
@@ -209,7 +209,7 @@ class Explore extends Component {
               }}
             >
               <Icon active name="search" style={{ paddingLeft: 10 }} />
-              <Input placeholder="Where do you want to Brake Today?" />
+              <Input placeholder="Were do you want to chow?" />
             </Item>
           </TouchableOpacity>
         </View>
