@@ -20,31 +20,19 @@ class App extends React.Component {
 
 export default App;
 
-const AppContainer = createAppContainer(AppBottomNavigator, AppStackNavigator);
-
 const AppStackNavigator = createStackNavigator({
-  Explore: { screen: Explore },
-  Places: { screen: Places },
-  Favorites: { screen: Favorites }
+  Explore: Explore,
+  Places: Places
 });
 
 const AppBottomNavigator = createBottomTabNavigator(
   {
     Explore: {
-      screen: Explore,
+      screen: AppStackNavigator,
       defaultNavigationOptions: {
         tabBarLabel: "EXPLORE",
         tabBarIcon: ({ tintColor }) => (
           <Ionicons name="md-search" color={tintColor} size={24} />
-        )
-      }
-    },
-    Places: {
-      screen: Places,
-      defaultNavigationOptions: {
-        tabBarLabel: "PLACES",
-        tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="md-car" color={tintColor} size={24} />
         )
       }
     },
@@ -73,6 +61,8 @@ const AppBottomNavigator = createBottomTabNavigator(
     }
   }
 );
+
+const AppContainer = createAppContainer(AppBottomNavigator);
 
 const styles = StyleSheet.create({
   container: {
