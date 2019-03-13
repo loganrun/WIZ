@@ -21,9 +21,11 @@ class Maps extends Component {
         }}
       >
         <MapView.Marker
-          coordinate={{ latitude: 34.064029, longitude: -118.398768 }}
-          title={"marker.title"}
-          description={"desss"}
+          coordinate={{
+            latitude: this.props.latitude,
+            longitude: this.props.longitude
+          }}
+          title={this.props.name}
         />
       </MapView>
     );
