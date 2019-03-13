@@ -26,7 +26,7 @@ class Places extends Component {
   };
   render() {
     let item = this.props.navigation.getParam("item");
-    console.log(item.coordinates);
+    console.log(item);
     let longitude = item.coordinates.longitude;
     let latitude = item.coordinates.latitude;
     // const data = this.props.navigation.getParam('places');
