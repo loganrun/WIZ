@@ -13,56 +13,47 @@ import Favorites from "./screens/Favorites";
 import { Ionicons } from "@expo/vector-icons";
 
 class App extends React.Component {
+  state = {
+    region: null,
+    coffeeShops: []
+  };
   render() {
-    return <AppContainer />;
+    return <View style={styles.container} />;
   }
 }
-
-export default App;
-
 const AppStackNavigator = createStackNavigator({
   Explore: Explore,
   Places: Places
 });
 
-const AppBottomNavigator = createBottomTabNavigator(
-  {
-    Explore: {
-      screen: AppStackNavigator,
-      defaultNavigationOptions: {
-        tabBarLabel: "EXPLORE",
-        tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="md-search" color={tintColor} size={24} />
-        )
+export default createAppContainer(
+  createBottomTabNavigator(
+    {
+      Explore: {
+        screen: AppStackNavigator
+      },
+      Favorites: {
+        screen: Favorites
       }
     },
-    Favorites: {
-      screen: Favorites,
-      defaultNavigationOptions: {
-        tabBarLabel: "FAVORITES",
-        tabBarIcon: ({ tintColor }) => (
-          <Ionicons name="md-heart" color={tintColor} size={24} />
-        )
+    {
+      tabBarOptions: {
+        activeTintColor: "red",
+        inactiveTintColor: "grey",
+        style: {
+          backgroundColor: "white",
+          borderTopWidth: 0,
+          shadowOffset: { width: 5, height: 3 },
+          shadowColor: "black",
+          shadowOpacity: 0.5,
+          elevation: 5
+        }
       }
     }
-  },
-  {
-    tabBarOptions: {
-      activeTintColor: "red",
-      inactiveTintColor: "grey",
-      style: {
-        backgroundColor: "white",
-        borderTopWidth: 0,
-        shadowOffset: { width: 5, height: 3 },
-        shadowColor: "black",
-        shadowOpacity: 0.5,
-        elevation: 5
-      }
-    }
-  }
+  )
 );
 
-const AppContainer = createAppContainer(AppBottomNavigator);
+//const AppContainer = createAppContainer(AppBottomNavigator);
 
 const styles = StyleSheet.create({
   container: {
@@ -81,6 +72,50 @@ const styles = StyleSheet.create({
   }
 });
 
+// class App extends React.Component {
+//   render() {
+//     return <AppContainer />;
+//   }
+// }
+
+//export default App;
+
+// const AppBottomNavigator = createBottomTabNavigator(
+//   {
+//     Explore: {
+//       screen: AppStackNavigator,
+//       defaultNavigationOptions: {
+//         tabBarLabel: "EXPLORE",
+//         tabBarIcon: ({ tintColor }) => (
+//           <Ionicons name="md-search" color={tintColor} size={24} />
+//         )
+//       }
+//     },
+//     Favorites: {
+//       screen: Favorites,
+//       defaultNavigationOptions: {
+//         tabBarLabel: "FAVORITES",
+//         tabBarIcon: ({ tintColor }) => (
+//           <Ionicons name="md-heart" color={tintColor} size={24} />
+//         )
+//       }
+//     }
+//   },
+//   {
+//     tabBarOptions: {
+//       activeTintColor: "red",
+//       inactiveTintColor: "grey",
+//       style: {
+//         backgroundColor: "white",
+//         borderTopWidth: 0,
+//         shadowOffset: { width: 5, height: 3 },
+//         shadowColor: "black",
+//         shadowOpacity: 0.5,
+//         elevation: 5
+//       }
+//     }
+//   }
+// );
 //places={this.state.coffeeShops}
 {
   /* <MapView

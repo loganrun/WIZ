@@ -42,12 +42,30 @@ class Explore extends Component {
     lon: null,
     errorMessage: null
   };
+
+  static navigationOptions = {
+    title: "BRAKEZ",
+    headerStyle: {
+      backgroundColor: "#3a455c"
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
+  };
+
+  // constructor(props) {
+  //   super(props);
+  //   //this.recommend = this.recommend.bind(this);
+  // }
   componentDidMount() {
     this._getLocationAsync();
     // this.startHeaderHeight = 80;
     // if (Platform.OS == "android") {
     //   this.startHeaderHeight = 65 + StatusBar.currentHeight;
     // }
+
+    //console.log(this.props);
   }
 
   _getLocationAsync = async () => {
@@ -64,7 +82,6 @@ class Explore extends Component {
     this.setState({ lat });
     this.setState({ lon });
     await this.loadBusiness();
-    //await this.getVenues();
   };
 
   loadBusiness = async () => {
@@ -72,7 +89,6 @@ class Explore extends Component {
 
     let lat = this.state.lat;
     let lon = this.state.lon;
-    //let price = this.state.price;
 
     try {
       let params = {
@@ -85,33 +101,26 @@ class Explore extends Component {
 
       let response = await api.get("/search", { params });
       let { businesses } = response.data;
-      //let { total } = response.data;
 
       this.setState({ business: businesses });
-      //console.log(this.state.business);
-      //this.setState({ total: total });
-
       await this.setState({ loading: false });
     } catch (e) {
       console.log("valor", e.message);
     }
   };
 
-  // openDetails = () => {
-  //   this.props.navigation.navigate("Places", {
-  //     data: this.state.business,
-  //   });
-  // };
-
   recommend = () => {
-    console.log(this.state.business);
-    // const { params } = navigation.props.business;
-    //const { navigate } = this.props.navigation;
-    return this.state.business.map(function (item, i) {
+    const { navigate } = this.props.navigation;
+    return this.state.business.map((item, i) => {
       return (
         <TouchableOpacity
           key={item.id}
-          onPress={() => this.props.navigation.navigate("Places")}
+          onPress={() => {
+            this.props.navigation.navigate("Places", {
+              id: item.id,
+              item
+            });
+          }}
         >
           <CardItem style={{ paddingBottom: 10 }}>
             <View>
@@ -150,7 +159,7 @@ class Explore extends Component {
         </TouchableOpacity>
       );
     });
-  }
+  };
 
   render() {
     let text = "Loading..";
@@ -170,11 +179,11 @@ class Explore extends Component {
           style={{
             backgroundColor: "#3a455c",
             height: 100,
-            borderBottomColor: "#757575",
-            paddingBottom: 20
+            borderBottomColor: "#757575"
+            //paddingBottom: 20
           }}
         >
-          <View>
+          {/* <View>
             <Text
               style={{
                 fontSize: 18,
@@ -186,7 +195,7 @@ class Explore extends Component {
             >
               Yelpie!!!
             </Text>
-          </View>
+          </View> */}
         </Header>
         <View
           style={{
@@ -195,7 +204,7 @@ class Explore extends Component {
             flex: 1,
             left: 0,
             right: 0,
-            top: 100,
+            top: 40,
             height: 70
           }}
         >
@@ -213,7 +222,7 @@ class Explore extends Component {
             </Item>
           </TouchableOpacity>
         </View>
-        <Content style={{ backgroundColor: "#d5d5d6", marginTop: 70 }}>
+        <Content style={{ backgroundColor: "#d5d5d6", marginTop: 20 }}>
           <View
             style={{
               height: 50,
@@ -226,7 +235,6 @@ class Explore extends Component {
             <Text> Check These Places Out!</Text>
           </View>
           <Card>{this.recommend()}</Card>
-
         </Content>
       </Container>
     );
@@ -244,7 +252,9 @@ const styles = StyleSheet.create({
 
 // key={item.id}
 //           location={item.coordinates}
-{/* <Result Result={this.recommend} /> */ }
+{
+  /* <Result Result={this.recommend} /> */
+}
 {
   /* <SafeAreaView style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
