@@ -25,8 +25,7 @@ class Maps extends Component {
             latitude: this.props.latitude,
             longitude: this.props.longitude
           }}
-          title={"marker.title"}
-          description={"desss"}
+          title={this.props.name}
         />
       </MapView>
     );

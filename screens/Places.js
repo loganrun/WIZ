@@ -17,7 +17,8 @@ class Places extends Component {
   static navigationOptions = {
     title: "DETAILS",
     headerStyle: {
-      backgroundColor: "#3a455c"
+      backgroundColor: "#3a455c",
+      elevation: 0
     },
     headerTintColor: "#fff",
     headerTitleStyle: {
@@ -29,6 +30,7 @@ class Places extends Component {
     console.log(item);
     let longitude = item.coordinates.longitude;
     let latitude = item.coordinates.latitude;
+    let name = item.name;
     // const data = this.props.navigation.getParam('places');
     // // const data = params ? params.data : null;
     // console.log(data)
@@ -66,6 +68,7 @@ class Places extends Component {
               longitude={longitude}
               latitudeDelta={0.022}
               longitudeDelta={0.021}
+              name={name}
             />
             <View
               style={{
