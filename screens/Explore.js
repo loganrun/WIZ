@@ -105,7 +105,7 @@ class Explore extends Component {
       this.setState({ business: businesses });
       await this.setState({ loading: false });
     } catch (e) {
-      console.log("valor", e.message);
+      console.log("error", e.message);
     }
   };
 
