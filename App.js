@@ -11,7 +11,7 @@ import Explore from "./screens/Explore";
 import Places from "./screens/Places";
 import Favorites from "./screens/Favorites";
 import { Ionicons } from "@expo/vector-icons";
-
+import Home from "./screens/Home";
 class App extends React.Component {
   state = {
     region: null,
@@ -21,6 +21,11 @@ class App extends React.Component {
     return <View style={styles.container} />;
   }
 }
+
+const HomeStackNavigator = createStackNavigator({
+  Home: Home,
+  Explore: Explore
+});
 const AppStackNavigator = createStackNavigator({
   Explore: Explore,
   Places: Places
@@ -29,6 +34,9 @@ const AppStackNavigator = createStackNavigator({
 export default createAppContainer(
   createBottomTabNavigator(
     {
+      Home: {
+        screen: HomeStackNavigator
+      },
       Explore: {
         screen: AppStackNavigator
       },
