@@ -34,9 +34,9 @@ const AppStackNavigator = createStackNavigator({
 export default createAppContainer(
   createBottomTabNavigator(
     {
-      Home: {
-        screen: HomeStackNavigator
-      },
+      // Home: {
+      //   screen: HomeStackNavigator
+      // },
       Explore: {
         screen: AppStackNavigator
       },
@@ -45,6 +45,24 @@ export default createAppContainer(
       }
     },
     {
+      // navigationOptions: ({ navigation }) => ({
+      //   tabBarIcon: ({ tintColor }) => {
+      //     const { routeName } = navigation.state;
+
+      //     let icon;
+      //     switch (routeName) {
+      //       case "Explore":
+      //         icon = `md-search`;
+      //         break;
+      //       case "Favorite":
+      //         icon = `md-heart`;
+      //         break;
+      //     }
+
+      //     return <Ionicons name={icon} size={25} color={tintColor} />;
+      //   }
+      // }),
+
       tabBarOptions: {
         activeTintColor: "red",
         inactiveTintColor: "grey",
@@ -80,6 +98,42 @@ const styles = StyleSheet.create({
   }
 });
 
+// {
+//   defaultNavigationOptions: ({ navigation }) => ({
+//     tabBarIcon: ({ focused, horizontal, tintColor }) => {
+//       const { routeName } = navigation.state;
+//       let IconComponent = Ionicons;
+//       let iconName;
+//       if (routeName === 'Home') {
+//         iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+//         // Sometimes we want to add badges to some icons.
+//         // You can check the implementation below.
+//         IconComponent = HomeIconWithBadge;
+//       } else if (routeName === 'Settings') {
+//         iconName = `ios-options${focused ? '' : '-outline'}`;
+//       }
+
+//       // You can return any component that you like here!
+//       return <IconComponent name={iconName} size={25} color={tintColor} />;
+//     },
+//   })
+// }
+
+// tabBarOptions: {
+//   initialRouteNAme: "Explore",
+//   activeTintColor: "red",
+//   inactiveTintColor: "grey",
+//   style: {
+//     backgroundColor: "white",
+//     borderTopWidth: 0,
+//     shadowOffset: { width: 5, height: 3 },
+//     shadowColor: "black",
+//     shadowOpacity: 0.5,
+//     elevation: 5
+//   }
+// }
+// }
+// );
 // class App extends React.Component {
 //   render() {
 //     return <AppContainer />;
