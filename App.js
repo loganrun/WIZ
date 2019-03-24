@@ -34,9 +34,9 @@ const AppStackNavigator = createStackNavigator({
 export default createAppContainer(
   createBottomTabNavigator(
     {
-      // Home: {
-      //   screen: HomeStackNavigator
-      // },
+      Home: {
+        screen: HomeStackNavigator
+      },
       Explore: {
         screen: AppStackNavigator
       },
