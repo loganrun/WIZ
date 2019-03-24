@@ -12,6 +12,7 @@ class Maps extends Component {
     const { region } = this.props;
     return (
       <MapView
+        onPress={this.props.mapOnPress}
         style={styles.container}
         initialRegion={{
           latitude: this.props.latitude,
