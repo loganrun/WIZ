@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Button } from "native-base";
-var backgroundImage = require("../assets/city_traffic2.jpg");
+var backgroundImage = require("../assets/city_traffic3.jpg");
 
 class Home extends Component {
   static navigationOptions = {

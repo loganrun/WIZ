@@ -33,7 +33,6 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 let contentMarginTopAnim = new Animated.Value(200);
 let mapTopMarginAnim = new Animated.Value(-250);
 
-
 class Places extends Component {
   componentWillMount() {
     this.moveAnimation = new Animated.ValueXY({ x: 0, y: SCREEN_HEIGHT - 20 });
@@ -72,10 +71,12 @@ class Places extends Component {
     return (
       <View style={{ flex: 1 }}>
         <ScrollView style={{ flex: 1 }}>
-          <View style={{
-            height: 1000,
-            backgroundColor: "red"
-          }} />
+          <View
+            style={{
+              height: 1000,
+              backgroundColor: "red"
+            }}
+          />
           <Animated.View
             style={{
               position: "absolute",
@@ -95,23 +96,15 @@ class Places extends Component {
               longitudeDelta={0.021}
               name={name}
               mapOnPress={() => {
+                Animated.timing(contentMarginTopAnim, {
+                  toValue: 400,
+                  duration: 1000
+                }).start();
 
-                Animated.timing(
-                  contentMarginTopAnim,
-                  {
-                    toValue: 400,
-                    duration: 1000
-                  }
-                ).start();
-
-                Animated.timing(
-                  mapTopMarginAnim,
-                  {
-                    toValue: -100,
-                    duration: 1000
-                  }
-                ).start();
-
+                Animated.timing(mapTopMarginAnim, {
+                  toValue: -100,
+                  duration: 1000
+                }).start();
               }}
             />
           </Animated.View>
@@ -121,7 +114,7 @@ class Places extends Component {
               top: contentMarginTopAnim,
               left: 0,
               width: "100%",
-              zIndex: 1,
+              zIndex: 1
             }}
           >
             <ContentArea item={item} />
@@ -132,8 +125,6 @@ class Places extends Component {
   }
 }
 export default Places;
-
-
 
 class ContentArea extends React.Component {
   constructor() {
@@ -154,25 +145,19 @@ class ContentArea extends React.Component {
 
     return (
       <Animated.View style={styles.Card}>
-        <TouchableOpacity onPress={() => {
-           Animated.timing(
-            contentMarginTopAnim,
-            {
+        <TouchableOpacity
+          onPress={() => {
+            Animated.timing(contentMarginTopAnim, {
               toValue: 200,
               duration: 1000
-            }
-          ).start();
+            }).start();
 
-          Animated.timing(
-            mapTopMarginAnim,
-            {
+            Animated.timing(mapTopMarginAnim, {
               toValue: -250,
               duration: 1000
-            }
-          ).start();
-
-
-        }}>
+            }).start();
+          }}
+        >
           <Card style={{ paddingBottom: 10 }}>
             <CardItem>
               <Right
@@ -183,9 +168,7 @@ class ContentArea extends React.Component {
                   paddingHorizontal: 20
                 }}
               >
-                <Text style={{ fontWeight: "bold", fontSize: 14 }}>
-                  {name}
-                </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 14 }}>{name}</Text>
                 <Text>
                   {address1} {address2}
                 </Text>
@@ -203,7 +186,6 @@ class ContentArea extends React.Component {
               </Right>
             </CardItem>
           </Card>
-
         </TouchableOpacity>
 
         <View
@@ -214,7 +196,7 @@ class ContentArea extends React.Component {
           }}
         >
           <View style={{ flex: 0.2 }} />
-          <Card style={{ flex: 1 }}>
+          <Card style={{ flex: 1, height: 300 }}>
             <CardItem
               style={{ justifyContent: "center", alignContent: "center" }}
             >
@@ -225,7 +207,7 @@ class ContentArea extends React.Component {
                 }}
               >
                 Place Ad Here
-                  </Text>
+              </Text>
             </CardItem>
           </Card>
           <View style={{ flex: 0.2 }} />
@@ -259,13 +241,13 @@ class ContentArea extends React.Component {
               }}
             >
               <Text style={{ fontWeight: "bold", fontSize: 14 }}>
-                Lorem ipsum dolor sit amet, ad sea idque populo iudicabit.
-                Eos elitr tollit ullamcorper ut, eu vis nonumy laudem
-                accusamus. Vix aliquid convenire persequeris at, doming
-                feugiat has ei. Eu quo debitis probatus, nonumes
-                theophrastus ut usu. Pro no porro aliquando, no sea homero
-                altera. Sonet molestiae est et, et dicat adipisci eam.
-                  </Text>
+                Lorem ipsum dolor sit amet, ad sea idque populo iudicabit. Eos
+                elitr tollit ullamcorper ut, eu vis nonumy laudem accusamus. Vix
+                aliquid convenire persequeris at, doming feugiat has ei. Eu quo
+                debitis probatus, nonumes theophrastus ut usu. Pro no porro
+                aliquando, no sea homero altera. Sonet molestiae est et, et
+                dicat adipisci eam.
+              </Text>
               <Text>
                 {address1} {address2}
               </Text>
@@ -274,10 +256,9 @@ class ContentArea extends React.Component {
           </CardItem>
         </Card>
       </Animated.View>
-    )
+    );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -285,6 +266,6 @@ const styles = StyleSheet.create({
   },
   Card: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#F5F5F5"
   }
 });
