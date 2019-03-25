@@ -32,8 +32,6 @@ import {
 
 import StarRating from "react-native-star-rating";
 
-//import Result from "../components/Results";
-
 class Explore extends Component {
   state = {
     business: [],
@@ -60,12 +58,6 @@ class Explore extends Component {
   // }
   componentDidMount() {
     this._getLocationAsync();
-    // this.startHeaderHeight = 80;
-    // if (Platform.OS == "android") {
-    //   this.startHeaderHeight = 65 + StatusBar.currentHeight;
-    // }
-
-    //console.log(this.props);
   }
 
   _getLocationAsync = async () => {
