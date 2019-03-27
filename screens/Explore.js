@@ -11,10 +11,11 @@ import {
   Image,
   FlatList,
   TouchableNativeFeedback,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
-//import { Ionicons } from "@expo/vector-icons";
-import { Location, Permissions, MapView } from "expo";
+
+import { Location, Permissions } from "expo";
 import api from "../services/Api";
 
 import {
@@ -58,6 +59,7 @@ class Explore extends Component {
   // }
   componentDidMount() {
     this._getLocationAsync();
+    this.setState({ loading: true });
   }
 
   _getLocationAsync = async () => {
@@ -77,7 +79,7 @@ class Explore extends Component {
   };
 
   loadBusiness = async () => {
-    this.setState({ loading: true });
+
 
     let lat = this.state.lat;
     let lon = this.state.lon;
@@ -154,15 +156,11 @@ class Explore extends Component {
   };
 
   render() {
-    let text = "Loading..";
-    let text1 = "";
+    let text = " ";
+    //let text1 = "";
     if (this.state.errorMessage) {
-      //text = this.state.errorMessage;
-      //console.log(this.state.errorMessage);
-    } else if (this.state.lon) {
-      //text = this.state.lat;
-      //text1 = this.state.lon;
-      //console.log(this.state.business);
+      text = this.state.errorMessage;
+    } else if (this.state.loading) {
     }
 
     return (
@@ -174,21 +172,7 @@ class Explore extends Component {
             borderBottomColor: "#757575"
             //paddingBottom: 20
           }}
-        >
-          {/* <View>
-            <Text
-              style={{
-                fontSize: 18,
-                color: "white",
-                alignContent: "center",
-                justifyContent: "center",
-                marginTop: 50
-              }}
-            >
-              Yelpie!!!
-            </Text>
-          </View> */}
-        </Header>
+        />
         <View
           style={{
             backgroundColor: "#3a455c",
@@ -226,6 +210,7 @@ class Explore extends Component {
           >
             <Text> Check These Places Out!</Text>
           </View>
+          {this.state.loading ? <ActivityIndicator size="large" color="blue" style={{ paddingTop: 50 }} /> : false}
           <Card>{this.recommend()}</Card>
         </Content>
       </Container>

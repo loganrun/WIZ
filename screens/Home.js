@@ -8,6 +8,7 @@ class Home extends Component {
     header: null
   };
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <View
@@ -23,18 +24,6 @@ class Home extends Component {
             source={backgroundImage}
             style={{ flex: 1, width: null, height: null }}
           />
-          <View
-            style={{
-              top: 0,
-              left: 0,
-              position: "absolute",
-              height: "100%",
-              width: "100%",
-              backgroundColor: "#708090",
-              opacity: 0,
-              zIndex: 5
-            }}
-          />
         </View>
         <View>
           <Button
@@ -45,6 +34,7 @@ class Home extends Component {
               marginBottom: 40,
               backgroundColor: "#1E90FF"
             }}
+            onPress={() => navigate("Explore")}
           >
             <Text style={{ fontSize: 24, color: "#fff", fontWeight: "bold" }}>
               Take A Break

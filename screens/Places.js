@@ -98,12 +98,12 @@ class Places extends Component {
               mapOnPress={() => {
                 Animated.timing(contentMarginTopAnim, {
                   toValue: 400,
-                  duration: 1000
+                  duration: 800
                 }).start();
 
                 Animated.timing(mapTopMarginAnim, {
                   toValue: -100,
-                  duration: 1000
+                  duration: 800
                 }).start();
               }}
             />
@@ -149,12 +149,12 @@ class ContentArea extends React.Component {
           onPress={() => {
             Animated.timing(contentMarginTopAnim, {
               toValue: 200,
-              duration: 1000
+              duration: 800
             }).start();
 
             Animated.timing(mapTopMarginAnim, {
               toValue: -250,
-              duration: 1000
+              duration: 800
             }).start();
           }}
         >
