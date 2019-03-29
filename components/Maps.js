@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Dimensions } from "react-native";
 import { MapView } from "expo";
+var locationImg = require("../assets/circle_blue2.png");
 
 //const Marker = MapView.Marker;
 const width = Dimensions.get("window").width;
@@ -27,6 +28,14 @@ class Maps extends Component {
             longitude: this.props.longitude
           }}
           title={this.props.name}
+        />
+        <MapView.Marker
+          coordinate={{
+            latitude: this.props.currLat,
+            longitude: this.props.currLon
+          }}
+          title="Current Position"
+          image={locationImg}
         />
       </MapView>
     );

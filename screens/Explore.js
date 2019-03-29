@@ -76,11 +76,11 @@ class Explore extends Component {
     this.setState({ lat });
     this.setState({ lon });
     await this.loadBusiness();
+    //console.log(lat);
+    //console.log(lon);
   };
 
   loadBusiness = async () => {
-
-
     let lat = this.state.lat;
     let lon = this.state.lon;
 
@@ -112,7 +112,9 @@ class Explore extends Component {
           onPress={() => {
             this.props.navigation.navigate("Places", {
               id: item.id,
-              item
+              item,
+              currentLat: this.state.lat,
+              currentLon: this.state.lon
             });
           }}
         >
@@ -170,7 +172,6 @@ class Explore extends Component {
             backgroundColor: "#3a455c",
             height: 100,
             borderBottomColor: "#757575"
-            //paddingBottom: 20
           }}
         />
         <View
@@ -210,7 +211,24 @@ class Explore extends Component {
           >
             <Text> Check These Places Out!</Text>
           </View>
-          {this.state.loading ? <ActivityIndicator size="large" color="blue" style={{ paddingTop: 50 }} /> : false}
+          <View
+            style={{
+              flex: 1,
+              width: "100%",
+              backgroundColor: "#ffff",
+              justifyContent: "center"
+            }}
+          >
+            {this.state.loading ? (
+              <ActivityIndicator
+                size="large"
+                color="blue"
+                style={{ padding: 200 }}
+              />
+            ) : (
+              false
+            )}
+          </View>
           <Card>{this.recommend()}</Card>
         </Content>
       </Container>

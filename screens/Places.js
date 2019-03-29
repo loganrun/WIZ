@@ -53,7 +53,9 @@ class Places extends Component {
     //   transform: this.animation.getTranslateTransform()
     // };
     let item = this.props.navigation.getParam("item");
-    console.log(item);
+    let curLat = this.props.navigation.getParam("currentLat");
+    let curLon = this.props.navigation.getParam("currentLon");
+    //console.log(curLat);
     let longitude = item.coordinates.longitude;
     let latitude = item.coordinates.latitude;
     let name = item.name;
@@ -94,6 +96,8 @@ class Places extends Component {
               longitude={longitude}
               latitudeDelta={0.022}
               longitudeDelta={0.021}
+              currLat={curLat}
+              currLon={curLon}
               name={name}
               mapOnPress={() => {
                 Animated.timing(contentMarginTopAnim, {
