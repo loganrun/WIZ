@@ -30,26 +30,27 @@ class Home extends Component {
             rounded
             style={{
               paddingLeft: 40,
-              paddingRight: 75,
+              paddingRight: 40,
               marginBottom: 40,
-              backgroundColor: "#1E90FF"
+              backgroundColor: "cyan"
             }}
-            onPress={() => navigate("Explore")}
           >
             <Text style={{ fontSize: 24, color: "#fff", fontWeight: "bold" }}>
-              Take A Break
+              Find A Bathroom
             </Text>
           </Button>
           <Button
             rounded
             style={{
               paddingLeft: 40,
-              paddingRight: 40,
-              backgroundColor: "cyan"
+              paddingRight: 75,
+
+              backgroundColor: "#1E90FF"
             }}
+            onPress={() => navigate("Explore")}
           >
             <Text style={{ fontSize: 24, color: "#fff", fontWeight: "bold" }}>
-              Find A Bathroom
+              Are you Hungry?
             </Text>
           </Button>
         </View>

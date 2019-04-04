@@ -76,7 +76,7 @@ class Places extends Component {
           <View
             style={{
               height: 1000,
-              backgroundColor: "red"
+              backgroundColor: "#fff"
             }}
           />
           <Animated.View
@@ -240,7 +240,7 @@ class ContentArea extends React.Component {
               style={{
                 flex: 1,
                 alignItems: "flex-start",
-                height: 100,
+                height: 200,
                 paddingHorizontal: 20
               }}
             >
