@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Button } from "native-base";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 var backgroundImage = require("../assets/city_traffic3.jpg");
-
+var bathroom = require("../assets/icons8-pee-100.png");
 class Home extends Component {
   static navigationOptions = {
     header: null
@@ -27,23 +27,33 @@ class Home extends Component {
           />
         </View>
         <TouchableOpacity style={styles.fabBtn}>
-          <MaterialCommunityIcons name="toilet" size={70} color="black" />
+          {/* <MaterialCommunityIcons name="toilet" size={70} color="green" /> */}
+          <Image source={bathroom} style={{ width: 80, height: 80 }} />
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.fabBtn}
           onPress={() => navigate("Explore")}
         >
-          <MaterialCommunityIcons name="food" size={70} color="black" />
+          <MaterialCommunityIcons name="food" size={70} color="blue" />
         </TouchableOpacity>
-        {/* <TouchableOpacity>
-          <Text style={styles.btn}>Login/SignUp</Text>
+        <TouchableOpacity style={styles.btn1}>
+          <Text
+            style={{
+              fontSize: 24,
+              color: "#00BFFF"
+            }}
+          >
+            Login/SignUp
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btn}>Add Your Restaurant Here</Text>
-        </TouchableOpacity> */}
+        <TouchableOpacity style={styles.btn2}>
+          <Text style={{ fontSize: 20, color: "red" }}>
+            Add Your Restaurant
+          </Text>
+        </TouchableOpacity>
 
-        <View>
+        {/* <View>
           <Button
             bordered
             info
@@ -75,7 +85,7 @@ class Home extends Component {
           >
             <Text>Add Your Restaurant Here</Text>
           </Button>
-        </View>
+        </View> */}
       </View>
     );
   }
@@ -96,21 +106,25 @@ const styles = StyleSheet.create({
     height: 90,
     backgroundColor: "#fff",
     borderRadius: 50,
-    borderColor: "black",
-    borderWidth: 2,
+    //borderColor: "black",
+    //borderWidth: 2,
     marginBottom: 20
   },
-  btn: {
+  btn1: {
     justifyContent: "center",
     alignItems: "center",
-    width: 40,
-    height: 30,
+    position: "relative",
+    width: 200,
+    height: 50,
     backgroundColor: "#fff",
-    paddingLeft: 40,
-    paddingRight: 40,
-    paddingTop: 20,
-    paddingBottom: 20,
-    fontSize: 16,
-    color: "black"
+    marginBottom: 20
+  },
+  btn2: {
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    width: 200,
+    height: 50,
+    backgroundColor: "#fff"
   }
 });

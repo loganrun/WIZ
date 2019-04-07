@@ -39,7 +39,8 @@ class Explore extends Component {
     loading: false,
     lat: null,
     lon: null,
-    errorMessage: null
+    errorMessage: null,
+    search: "restaurants"
   };
 
   static navigationOptions = {
@@ -86,7 +87,7 @@ class Explore extends Component {
 
     try {
       let params = {
-        term: "restaurants",
+        term: this.state.search,
         latitude: lat,
         longitude: lon,
         radius: 10000,
@@ -185,8 +186,15 @@ class Explore extends Component {
             height: 70
           }}
         >
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              console.log("press");
+            }}
+          >
             <Item
+              onPress={() => {
+                console.log("press");
+              }}
               style={{
                 backgroundColor: "white",
                 marginLeft: 10,
@@ -195,7 +203,12 @@ class Explore extends Component {
               }}
             >
               <Icon active name="search" style={{ paddingLeft: 10 }} />
-              <Input placeholder="Were do you want to chow?" />
+              <Input
+                placeholder="Were do you want to chow?"
+                onPress={() => {
+                  console.log("press");
+                }}
+              />
             </Item>
           </TouchableOpacity>
         </View>
@@ -206,10 +219,13 @@ class Explore extends Component {
               backgroundColor: "white",
               fontWeight: "bold",
               justifyContent: "center",
-              fontSize: 18
+              alignItems: "center",
+              fontSize: 24
             }}
           >
-            <Text> Check These Places Out!</Text>
+            <Text style={{ fontSize: 18, fontWeight: "600" }}>
+              Check These Places Out!
+            </Text>
           </View>
           <View
             style={{
