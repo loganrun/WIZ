@@ -8,7 +8,8 @@ import {
   Animated,
   PanResponder,
   Slider,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
 import {
   Container,
@@ -26,6 +27,7 @@ import {
 import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
+var ad = require("../assets/ad.png");
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -194,25 +196,35 @@ class ContentArea extends React.Component {
 
         <View
           style={{
-            marginTop: 10,
+            marginTop: 20,
             flex: 1,
             flexDirection: "row"
           }}
         >
           <View style={{ flex: 0.2 }} />
-          <Card style={{ flex: 1, height: 300 }}>
-            <CardItem
+          <Card
+            style={{
+              flex: 1,
+              height: 300,
+              //margin: 30,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Image source={ad} style={{ height: 320, width: 320 }} />
+            {/* <CardItem
               style={{ justifyContent: "center", alignContent: "center" }}
             >
-              <Text
+              
+              {/* <Text
                 style={{
                   fontWeight: "bold",
                   fontSize: 14
                 }}
               >
                 Place Ad Here
-              </Text>
-            </CardItem>
+              </Text> 
+            </CardItem> */}
           </Card>
           <View style={{ flex: 0.2 }} />
         </View>
@@ -221,7 +233,8 @@ class ContentArea extends React.Component {
             paddingTop: 10,
             paddingLeft: 20,
             fontSize: 14,
-            fontWeight: "bold"
+            fontWeight: "bold",
+            marginTop: 20
           }}
         >
           <Text style={{ fontSize: 16 }}>REVIEWS</Text>

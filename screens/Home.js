@@ -37,18 +37,39 @@ class Home extends Component {
         >
           <MaterialCommunityIcons name="food" size={70} color="blue" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn1}>
-          <Text
-            style={{
-              fontSize: 24,
-              color: "#00BFFF"
-            }}
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            style={styles.btn1}
+            onPress={() => navigate("SignUp")}
           >
-            Login/SignUp
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: 24,
+                color: "#00BFFF"
+              }}
+            >
+              Login
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn1}
+            onPress={() => navigate("SignUp")}
+          >
+            <Text
+              style={{
+                fontSize: 24,
+                color: "#00BFFF"
+              }}
+            >
+              SignUp
+            </Text>
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity style={styles.btn2}>
-          <Text style={{ fontSize: 20, color: "red" }}>
+          <Text
+            style={{ fontSize: 20, color: "red" }}
+            onPress={() => navigate("ResSign")}
+          >
             Add Your Restaurant
           </Text>
         </TouchableOpacity>
@@ -117,7 +138,8 @@ const styles = StyleSheet.create({
     width: 200,
     height: 50,
     backgroundColor: "#fff",
-    marginBottom: 20
+    marginBottom: 20,
+    marginRight: 10
   },
   btn2: {
     justifyContent: "center",

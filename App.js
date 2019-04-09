@@ -12,6 +12,9 @@ import Places from "./screens/Places";
 import Favorites from "./screens/Favorites";
 import { Ionicons } from "@expo/vector-icons";
 import Home from "./screens/Home";
+import Login from "./screens/Login";
+import ResSign from "./screens/ResSign";
+import SignUp from "./screens/SignUp";
 class App extends React.Component {
   state = {
     region: null,
@@ -24,10 +27,15 @@ class App extends React.Component {
 
 const HomeStackNavigator = createStackNavigator({
   Home: Home,
-  Explore: Explore
+  Login: Login,
+  ResSign: ResSign,
+  SignUp: SignUp,
+  Explore: Explore,
+  Favorites: Favorites
 });
 const AppStackNavigator = createStackNavigator({
   Explore: Explore,
+  Home: Home,
   Places: Places
 });
 
