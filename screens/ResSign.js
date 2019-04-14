@@ -4,22 +4,25 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
+import { Formik } from "formik";
+import * as yup from "yup";
 
 class Restaurant extends Component {
-  constructor(props) {
-    super(props);
-  }
-  state = {
-    name: "",
-    email: "",
-    password: "",
-    contact: "",
-    phone: ""
-  };
+  // constructor(props) {
+  //   super(props);
+  // }
+  // state = {
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   contact: "",
+  //   phone: ""
+  // };
   static navigationOptions = {
-    title: "JOIN US",
+    title: "ADD YOUR BUSINESS",
     headerStyle: {
       backgroundColor: "#3a455c",
       elevation: 0
@@ -30,74 +33,99 @@ class Restaurant extends Component {
     }
   };
 
-  handleEmailChange = () => {
-    console.log(this.state.email);
-  };
-
-  handleNameChange = () => {
-    console.log(this.state.name);
-  };
-
-  handlePasswordChange = () => {
-    console.log(this.state.password);
-  };
-
-  handleContactChange = () => {
-    console.log(this.state.service);
-  };
-
-  handlePhoneChange = () => {
-    console.log(this.state.service);
-  };
-
-  handleLoginPress = () => {
-    alert(
-      "Thank You for your interest.  Our sales team will be in touch with you shortly"
-    );
-    const { navigate } = this.props.navigation;
-    navigate("Explore");
-  };
-
   render() {
+    const validationSchema = yup.object().shape({
+      email: yup
+        .string()
+        .email()
+        .label("Email")
+        .required(),
+      business: yup
+        .string()
+        .label("Business name")
+        .required(),
+      contact: yup
+        .string()
+        .label("Contact name")
+        .required(),
+      phone: yup
+        .string()
+        .label("Phone")
+        .required()
+    });
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>SIGN UP</Text>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Name Of Restaurant"
-          value={this.state.name}
-          onChangeText={this.handleNameChange}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder="Email Address"
-          value={this.state.email}
-          onChangeText={this.handleEmailChange}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder="Password"
-          value={this.state.password}
-          onChangeText={this.handlePasswordChange}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder="Contact Person"
-          value={this.state.contact}
-          onChangeText={this.handleContactChange}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder="Phone Number"
-          value={this.state.contact}
-          onChangeText={this.handlePhoneChange}
-        />
-        <TouchableOpacity style={styles.button} onPress={this.handleLoginPress}>
-          <Text style={{ fontSize: 22, color: "#ffff", fontWeight: "bold" }}>
-            Submit
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <Formik
+        initialValues={{
+          business: "",
+          contact: "",
+          email: "",
+          phone: ""
+        }}
+        onSubmit={(value, actions) => {
+          alert(JSON.stringify(value));
+          setTimeout(() => {
+            actions.setSubmitting(false);
+          }, 1000);
+        }}
+        validationSchema={validationSchema}
+      >
+        {formikProps => (
+          <KeyboardAvoidingView style={styles.container} behavior="padding">
+            <Text style={styles.text}>ADD YOUR BUSINESS</Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("business")}
+              onBlur={formikProps.handleBlur("business")}
+              placeholder={"Name of Your Business"}
+              autoFocus
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.business && formikProps.errors.business}
+            </Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("contact")}
+              onBlur={formikProps.handleBlur("contact")}
+              placeholder={"Contact Person"}
+              autoFocus
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.contact && formikProps.errors.contact}
+            </Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("email")}
+              placeholder={"Please enter email"}
+              onBlur={formikProps.handleBlur("email")}
+              autoFocus
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.email && formikProps.errors.email}
+            </Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("phone")}
+              placeholder={"Phone Number"}
+              secureTextEntry
+              onBlur={formikProps.handleBlur("phone")}
+              autoFocus
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.phone && formikProps.errors.phone}
+            </Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={formikProps.handleSubmit}
+            >
+              <Text
+                style={{ fontSize: 22, color: "#ffff", fontWeight: "bold" }}
+              >
+                Submit
+              </Text>
+            </TouchableOpacity>
+          </KeyboardAvoidingView>
+        )}
+      </Formik>
     );
   }
 }
@@ -112,7 +140,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     color: "orange",
-    marginBottom: 40,
+    marginBottom: 10,
     borderBottomColor: "black",
     borderBottomWidth: 3,
     marginRight: 40,
@@ -121,7 +149,7 @@ const styles = StyleSheet.create({
   textInput: {
     alignSelf: "stretch",
     height: 40,
-    marginBottom: 30,
+    marginTop: 30,
     color: "black",
     borderBottomColor: "black",
     borderBottomWidth: 2,

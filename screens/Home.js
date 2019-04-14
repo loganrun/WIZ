@@ -40,7 +40,7 @@ class Home extends Component {
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
             style={styles.btn1}
-            onPress={() => navigate("SignUp")}
+            onPress={() => navigate("Login")}
           >
             <Text
               style={{
@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
     height: 90,
     backgroundColor: "#fff",
     borderRadius: 50,
-    //borderColor: "black",
-    //borderWidth: 2,
+    borderColor: "black",
+    borderWidth: 2,
     marginBottom: 20
   },
   btn1: {
