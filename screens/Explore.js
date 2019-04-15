@@ -12,7 +12,8 @@ import {
   FlatList,
   TouchableNativeFeedback,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  Keyboard
 } from "react-native";
 
 import { Location, Permissions } from "expo";
@@ -34,14 +35,19 @@ import {
 import StarRating from "react-native-star-rating";
 
 class Explore extends Component {
-  state = {
-    business: [],
-    loading: false,
-    lat: null,
-    lon: null,
-    errorMessage: null,
-    search: "restaurants"
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      business: [],
+      loading: false,
+      lat: null,
+      lon: null,
+      errorMessage: null,
+      search: ""
+    };
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   static navigationOptions = {
     title: "BRAKEZ",
@@ -60,6 +66,15 @@ class Explore extends Component {
   // }
   componentDidMount() {
     this._getLocationAsync();
+    this.setState({ loading: true });
+  }
+
+  handleSearch(search) {
+    this.setState({ search: search });
+  }
+
+  handleSubmit() {
+    this.loadBusiness();
     this.setState({ loading: true });
   }
 
@@ -99,6 +114,7 @@ class Explore extends Component {
 
       this.setState({ business: businesses });
       await this.setState({ loading: false });
+      this.setState({ search: "" });
     } catch (e) {
       console.log("error", e.message);
     }
@@ -183,35 +199,56 @@ class Explore extends Component {
             left: 0,
             right: 0,
             top: 40,
-            height: 70
+            height: 70,
+            flexDirection: "row"
           }}
         >
-          <TouchableOpacity
-            onPress={() => {
-              console.log("press");
+          <Item
+            style={{
+              backgroundColor: "white",
+              marginLeft: 15,
+              marginRight: 10,
+              marginBottom: 15,
+              borderRadius: 4,
+              paddingRight: 50,
+              flex: 4
             }}
+            onBlur={Keyboard.dismiss}
           >
-            <Item
-              onPress={() => {
-                console.log("press");
-              }}
+            <Icon
+              active
+              name="search"
+              style={{ paddingLeft: 10, paddingRight: 10 }}
+            />
+            <Input
+              placeholder="Need a Break?"
+              value={this.state.search}
+              onChangeText={this.handleSearch}
+            />
+          </Item>
+          <TouchableOpacity
+            style={{
+              justifyContent: "center",
+              alignItems: "flex-end",
+              marginRight: 15,
+              flex: 1,
+              marginBottom: 15
+            }}
+            onPressIn={Keyboard.dismiss}
+            onPress={this.handleSubmit}
+          >
+            <Text
               style={{
-                backgroundColor: "white",
-                marginLeft: 10,
-                marginRight: 10,
-                borderRadius: 4
+                color: "white",
+                fontSize: 18,
+                fontWeight: "bold"
               }}
             >
-              <Icon active name="search" style={{ paddingLeft: 10 }} />
-              <Input
-                placeholder="Were do you want to chow?"
-                onPress={() => {
-                  console.log("press");
-                }}
-              />
-            </Item>
+              Search
+            </Text>
           </TouchableOpacity>
         </View>
+
         <Content style={{ backgroundColor: "#d5d5d6", marginTop: 20 }}>
           <View
             style={{
