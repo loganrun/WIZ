@@ -155,12 +155,12 @@ class ContentArea extends React.Component {
           onPress={() => {
             Animated.timing(contentMarginTopAnim, {
               toValue: 200,
-              duration: 800
+              duration: 400
             }).start();
 
             Animated.timing(mapTopMarginAnim, {
               toValue: -250,
-              duration: 800
+              duration: 400
             }).start();
           }}
         >
@@ -190,6 +190,31 @@ class ContentArea extends React.Component {
                   emptyStarColor={"orange"}
                 />
               </Right>
+              <Left
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
+              >
+                <TouchableOpacity
+                  style={{
+                    height: 18,
+                    width: 80,
+                    backgroundColor: "red",
+                    alignItems: "center"
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 16,
+                      fontWeight: "bold"
+                    }}
+                  >
+                    Directions
+                  </Text>
+                </TouchableOpacity>
+              </Left>
             </CardItem>
           </Card>
         </TouchableOpacity>

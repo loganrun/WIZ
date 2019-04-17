@@ -60,10 +60,6 @@ class Explore extends Component {
     }
   };
 
-  // constructor(props) {
-  //   super(props);
-  //   //this.recommend = this.recommend.bind(this);
-  // }
   componentDidMount() {
     this._getLocationAsync();
     this.setState({ loading: true });
@@ -240,7 +236,7 @@ class Explore extends Component {
             <Text
               style={{
                 color: "white",
-                fontSize: 18,
+                fontSize: 17,
                 fontWeight: "bold"
               }}
             >
