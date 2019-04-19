@@ -24,8 +24,7 @@ import {
   CardItem
 } from "native-base";
 
-import getDirections from "react-native-google-maps-directions";
-
+import { showLocation } from "react-native-map-link";
 import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
@@ -140,12 +139,15 @@ class Places extends Component {
 export default Places;
 
 class ContentArea extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
-  handleDirections = () => {
-    alert("press");
+  handleDirections = props => {
+    showLocation({
+      latitude: this.props.item.coordinates.latitude,
+      longitude: this.props.item.coordinates.longitude
+    });
   };
 
   render() {
