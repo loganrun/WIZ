@@ -24,6 +24,8 @@ import {
   CardItem
 } from "native-base";
 
+import getDirections from "react-native-google-maps-directions";
+
 import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
@@ -39,6 +41,12 @@ class Places extends Component {
   componentWillMount() {
     this.moveAnimation = new Animated.ValueXY({ x: 0, y: SCREEN_HEIGHT - 20 });
   }
+
+  constructor(props) {
+    super(props);
+    // this.handleDirections = this.handleDirections.bind(this);
+  }
+
   static navigationOptions = {
     title: "DETAILS",
     headerStyle: {
@@ -50,6 +58,7 @@ class Places extends Component {
       fontWeight: "bold"
     }
   };
+
   render() {
     // const animatedHeight = {
     //   transform: this.animation.getTranslateTransform()
@@ -68,10 +77,8 @@ class Places extends Component {
     let price = item.price;
     let rating = item.rating;
 
-    // const data = this.props.navigation.getParam('places');
-    // // const data = params ? params.data : null;
-    // console.log(data)
     const { navigate } = this.props.navigation;
+
     return (
       <View style={{ flex: 1 }}>
         <ScrollView style={{ flex: 1 }}>
@@ -104,12 +111,12 @@ class Places extends Component {
               mapOnPress={() => {
                 Animated.timing(contentMarginTopAnim, {
                   toValue: 400,
-                  duration: 800
+                  duration: 400
                 }).start();
 
                 Animated.timing(mapTopMarginAnim, {
                   toValue: -100,
-                  duration: 800
+                  duration: 400
                 }).start();
               }}
             />
@@ -137,6 +144,10 @@ class ContentArea extends React.Component {
     super();
   }
 
+  handleDirections = () => {
+    alert("press");
+  };
+
   render() {
     let item = this.props.item;
     let longitude = item.coordinates.longitude;
@@ -156,11 +167,13 @@ class ContentArea extends React.Component {
             Animated.timing(contentMarginTopAnim, {
               toValue: 200,
               duration: 400
+              //useNativeDriver: true
             }).start();
 
             Animated.timing(mapTopMarginAnim, {
               toValue: -250,
               duration: 400
+              //useNativeDriver: true
             }).start();
           }}
         >
@@ -190,31 +203,22 @@ class ContentArea extends React.Component {
                   emptyStarColor={"orange"}
                 />
               </Right>
-              <Left
+              <Button
                 style={{
-                  alignItems: "center",
-                  justifyContent: "center"
+                  marginTop: 25,
+                  marginRight: 10,
+                  backgroundColor: "red",
+                  paddingRight: 10,
+                  paddingLeft: 10
                 }}
+                onPress={this.handleDirections}
               >
-                <TouchableOpacity
-                  style={{
-                    height: 18,
-                    width: 80,
-                    backgroundColor: "red",
-                    alignItems: "center"
-                  }}
+                <Text
+                  style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}
                 >
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 16,
-                      fontWeight: "bold"
-                    }}
-                  >
-                    Directions
-                  </Text>
-                </TouchableOpacity>
-              </Left>
+                  Directions
+                </Text>
+              </Button>
             </CardItem>
           </Card>
         </TouchableOpacity>
@@ -237,19 +241,6 @@ class ContentArea extends React.Component {
             }}
           >
             <Image source={ad} style={{ height: 320, width: 320 }} />
-            {/* <CardItem
-              style={{ justifyContent: "center", alignContent: "center" }}
-            >
-              
-              {/* <Text
-                style={{
-                  fontWeight: "bold",
-                  fontSize: 14
-                }}
-              >
-                Place Ad Here
-              </Text> 
-            </CardItem> */}
           </Card>
           <View style={{ flex: 0.2 }} />
         </View>

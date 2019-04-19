@@ -12,15 +12,6 @@ import { Formik } from "formik";
 import * as yup from "yup";
 
 class SignUp extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-  // state = {
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   service: ""
-  // };
   static navigationOptions = {
     title: "SIGN UP",
     headerStyle: {
