@@ -146,7 +146,8 @@ class ContentArea extends React.Component {
   handleDirections = props => {
     showLocation({
       latitude: this.props.item.coordinates.latitude,
-      longitude: this.props.item.coordinates.longitude
+      longitude: this.props.item.coordinates.longitude,
+      title: this.props.item.name
     });
   };
 
