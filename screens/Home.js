@@ -1,31 +1,44 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { Button } from "native-base";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-var backgroundImage = require("../assets/city_traffic3.jpg");
+//import { LinearGradient } from "expo";
+//import { Button } from "native-base";
+//import { MaterialCommunityIcons } from "@expo/vector-icons";
+//var backgroundImage = require("../assets/city_traffic3.jpg");
 var bathroom = require("../assets/icons8-pee-100.png");
+var food = require("../assets/dish.png");
 class Home extends Component {
   static navigationOptions = {
-    header: null
+    title: "BRAKEZ",
+    headerStyle: {
+      backgroundColor: "#3a455c"
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
   };
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <View
+        {/* <LinearGradient
+          colors={["rgba(255,255,255,1)", "rgba(218,245,251,1)"]}
           style={{
-            top: 0,
-            left: 0,
             position: "absolute",
-            height: "100%",
-            width: "100%"
+            left: 0,
+            right: 0,
+            top: 0,
+            height: "100%"
           }}
-        >
-          <Image
-            source={backgroundImage}
-            style={{ flex: 1, width: null, height: null }}
-          />
-        </View>
+        /> */}
+        {/* <View
+          style={{
+            flex: 1,
+            backgroundColor: "#fff"
+            "rgba(223,225,229,1)",
+            "rgba(156,175,217,1)"
+          }}
+        /> */}
         <TouchableOpacity style={styles.fabBtn}>
           {/* <MaterialCommunityIcons name="toilet" size={70} color="green" /> */}
           <Image source={bathroom} style={{ width: 80, height: 80 }} />
@@ -35,7 +48,8 @@ class Home extends Component {
           style={styles.fabBtn}
           onPress={() => navigate("Explore")}
         >
-          <MaterialCommunityIcons name="food" size={70} color="blue" />
+          <Image source={food} style={{ width: 80, height: 80 }} />
+          {/* <MaterialCommunityIcons name="food" size={70} /> */}
         </TouchableOpacity>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity

@@ -82,7 +82,6 @@ class SignUp extends Component {
               onChangeText={formikProps.handleChange("lastName")}
               onBlur={formikProps.handleBlur("lastName")}
               placeholder={"Last Name"}
-              autoFocus
             />
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.lastName && formikProps.errors.lastName}
@@ -92,7 +91,6 @@ class SignUp extends Component {
               onChangeText={formikProps.handleChange("email")}
               placeholder={"Please enter email"}
               onBlur={formikProps.handleBlur("email")}
-              autoFocus
             />
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.email && formikProps.errors.email}
@@ -103,7 +101,6 @@ class SignUp extends Component {
               placeholder={"Password"}
               secureTextEntry
               onBlur={formikProps.handleBlur("password")}
-              autoFocus
             />
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.password && formikProps.errors.password}
@@ -112,7 +109,6 @@ class SignUp extends Component {
               style={styles.textInput}
               onChangeText={formikProps.handleChange("service")}
               onBlur={formikProps.handleBlur("service")}
-              autoFocus
               placeholder="Which service do you drive for?"
             />
             <View style={{ flexDirection: "row" }}>

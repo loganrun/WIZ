@@ -71,7 +71,6 @@ class Login extends Component {
               placeholder="Please enter password"
               secureTextEntry
               onBlur={formikProps.handleBlur("password")}
-              autoFocus
             />
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.password && formikProps.errors.password}

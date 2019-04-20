@@ -87,7 +87,6 @@ class Restaurant extends Component {
               onChangeText={formikProps.handleChange("contact")}
               onBlur={formikProps.handleBlur("contact")}
               placeholder={"Contact Person"}
-              autoFocus
             />
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.contact && formikProps.errors.contact}
@@ -97,7 +96,6 @@ class Restaurant extends Component {
               onChangeText={formikProps.handleChange("email")}
               placeholder={"Please enter email"}
               onBlur={formikProps.handleBlur("email")}
-              autoFocus
             />
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.email && formikProps.errors.email}
@@ -108,7 +106,6 @@ class Restaurant extends Component {
               placeholder={"Phone Number"}
               secureTextEntry
               onBlur={formikProps.handleBlur("phone")}
-              autoFocus
             />
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.phone && formikProps.errors.phone}

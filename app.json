@@ -9,7 +9,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/city_traffic3.png",
+      "image": "./assets/brk_splash.png",
       "resizeMode": "cover"
     },
     "updates": {
