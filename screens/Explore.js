@@ -37,6 +37,7 @@ import StarRating from "react-native-star-rating";
 class Explore extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
     this.state = {
       business: [],
       loading: false,
@@ -50,7 +51,7 @@ class Explore extends Component {
   }
 
   static navigationOptions = {
-    title: "BRAKEZ",
+    title: "BREAK-TIME",
     headerStyle: {
       backgroundColor: "#3a455c"
     },
@@ -272,7 +273,12 @@ class Explore extends Component {
               <ActivityIndicator
                 size="large"
                 color="blue"
-                style={{ padding: 200 }}
+                style={{
+                  paddingTop: 200,
+                  paddingLeft: 200,
+                  paddingRight: 200,
+                  paddingBottom: 400
+                }}
               />
             ) : (
               false

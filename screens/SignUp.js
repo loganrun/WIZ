@@ -13,7 +13,7 @@ import * as yup from "yup";
 
 class SignUp extends Component {
   static navigationOptions = {
-    title: "SIGN UP",
+    title: "HOME",
     headerStyle: {
       backgroundColor: "#3a455c",
       elevation: 0

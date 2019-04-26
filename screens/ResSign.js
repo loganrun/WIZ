@@ -22,7 +22,7 @@ class Restaurant extends Component {
   //   phone: ""
   // };
   static navigationOptions = {
-    title: "ADD YOUR BUSINESS",
+    title: "HOME",
     headerStyle: {
       backgroundColor: "#3a455c",
       elevation: 0

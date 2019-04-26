@@ -15,6 +15,7 @@ import Home from "./screens/Home";
 import Login from "./screens/Login";
 import ResSign from "./screens/ResSign";
 import SignUp from "./screens/SignUp";
+import Bathroom from "./screens/Bathroom";
 class App extends React.Component {
   state = {
     region: null,
@@ -31,7 +32,8 @@ const HomeStackNavigator = createStackNavigator({
   ResSign: ResSign,
   SignUp: SignUp,
   Explore: Explore,
-  Favorites: Favorites
+  Favorites: Favorites,
+  Bathroom: Bathroom
 });
 const AppStackNavigator = createStackNavigator({
   Explore: Explore,

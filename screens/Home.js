@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Location, Permissions } from "expo";
 //import { LinearGradient } from "expo";
 //import { Button } from "native-base";
 //import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -7,15 +8,48 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 var bathroom = require("../assets/icons8-pee-100.png");
 var food = require("../assets/dish.png");
 class Home extends Component {
-  static navigationOptions = {
-    title: "BRAKEZ",
-    headerStyle: {
-      backgroundColor: "#3a455c"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
+  constructor() {
+    super();
+    this.state = {
+      lon: null,
+      lat: null
+    };
+  }
+
+  componentWillMount() {
+    this._getLocationAsync();
+  }
+
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== "granted") {
+      this.setState({
+        errorMessage: "Permission to access location was denied"
+      });
     }
+
+    let location = await Location.getCurrentPositionAsync({});
+    let lat = location.coords.latitude;
+    let lon = location.coords.longitude;
+    //console.log(lat);
+    //console.log(lon);
+    this.setState({ lat });
+    this.setState({ lon });
+    //await this.loadBusiness();
+    console.log(this.state.lat);
+    console.log(this.state.lon);
+  };
+
+  static navigationOptions = {
+    header: null
+    // title: "BRAKEZ",
+    // headerStyle: {
+    //   backgroundColor: "#3a455c"
+    // },
+    // headerTintColor: "#fff",
+    // headerTitleStyle: {
+    //   fontWeight: "bold"
+    // }
   };
   render() {
     const { navigate } = this.props.navigation;
@@ -39,17 +73,28 @@ class Home extends Component {
             "rgba(156,175,217,1)"
           }}
         /> */}
-        <TouchableOpacity style={styles.fabBtn}>
-          {/* <MaterialCommunityIcons name="toilet" size={70} color="green" /> */}
+        <TouchableOpacity
+          style={styles.fabBtn}
+          onPress={() =>
+            navigate("Bathroom", {
+              currentLat: this.state.lat,
+              currentLon: this.state.lon
+            })
+          }
+        >
           <Image source={bathroom} style={{ width: 80, height: 80 }} />
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.fabBtn}
-          onPress={() => navigate("Explore")}
+          onPress={() =>
+            navigate("Explore", {
+              currentLat: this.state.lat,
+              currentLon: this.state.lon
+            })
+          }
         >
           <Image source={food} style={{ width: 80, height: 80 }} />
-          {/* <MaterialCommunityIcons name="food" size={70} /> */}
         </TouchableOpacity>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
@@ -131,7 +176,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "#3a455c"
   },
   fabBtn: {
     justifyContent: "center",
