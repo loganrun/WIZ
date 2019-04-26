@@ -33,7 +33,8 @@ const HomeStackNavigator = createStackNavigator({
   SignUp: SignUp,
   Explore: Explore,
   Favorites: Favorites,
-  Bathroom: Bathroom
+  Bathroom: Bathroom,
+  Places: Places
 });
 const AppStackNavigator = createStackNavigator({
   Explore: Explore,
