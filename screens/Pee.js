@@ -37,7 +37,7 @@ var ad = require("../assets/ad.png");
 let contentMarginTopAnim = new Animated.Value(200);
 let mapTopMarginAnim = new Animated.Value(-250);
 
-class Places extends Component {
+class Pee extends Component {
   // componentWillMount() {
   //   this.moveAnimation = new Animated.ValueXY({ x: 0, y: SCREEN_HEIGHT - 20 });
   // }
@@ -67,15 +67,9 @@ class Places extends Component {
     let curLat = this.props.navigation.getParam("currentLat");
     let curLon = this.props.navigation.getParam("currentLon");
     //console.log(curLat);
-    let longitude = item.coordinates.longitude;
-    let latitude = item.coordinates.latitude;
+    let longitude = item.longitude;
+    let latitude = item.latitude;
     let name = item.name;
-    let phone = item.display_phone;
-    let address1 = item.location.address1;
-    let address2 = item.location.address2;
-    let city = item.location.city;
-    let price = item.price;
-    let rating = item.rating;
 
     const { navigate } = this.props.navigation;
 
@@ -137,7 +131,7 @@ class Places extends Component {
     );
   }
 }
-export default Places;
+export default Pee;
 
 class ContentArea extends React.Component {
   constructor(props) {
@@ -146,23 +140,23 @@ class ContentArea extends React.Component {
 
   handleDirections = props => {
     showLocation({
-      latitude: this.props.item.coordinates.latitude,
-      longitude: this.props.item.coordinates.longitude,
+      latitude: this.props.item.latitude,
+      longitude: this.props.item.longitude,
       title: this.props.item.name
     });
   };
 
   render() {
     let item = this.props.item;
-    let longitude = item.coordinates.longitude;
-    let latitude = item.coordinates.latitude;
+    //console.log(item);
+    //let longitude = item.longitude;
+    //let latitude = item.latitude;
     let name = item.name;
-    let phone = item.display_phone;
-    let address1 = item.location.address1;
-    let address2 = item.location.address2;
-    let city = item.location.city;
-    let price = item.price;
-    let rating = item.rating;
+    //let phone = item.phone;
+    let address = item.street;
+    let city = item.city;
+    let comment = item.comment;
+    let direction = item.directions;
 
     return (
       <Animated.View style={styles.Card}>
@@ -192,20 +186,10 @@ class ContentArea extends React.Component {
                 }}
               >
                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>{name}</Text>
-                <Text>
-                  {address1} {address2}
-                </Text>
+                <Text>{address}</Text>
                 <Text>{city}</Text>
-                <Text>{phone}</Text>
-                <Text>{price}</Text>
-                <StarRating
-                  disabled={true}
-                  maxStars={5}
-                  rating={rating}
-                  starSize={12}
-                  fullStarColor={"orange"}
-                  emptyStarColor={"orange"}
-                />
+                <Text>{comment}</Text>
+                <Text>{direction}</Text>
               </Right>
               <Button
                 style={{
@@ -285,9 +269,7 @@ class ContentArea extends React.Component {
                 aliquando, no sea homero altera. Sonet molestiae est et, et
                 dicat adipisci eam.
               </Text>
-              <Text>
-                {address1} {address2}
-              </Text>
+              <Text>{address}</Text>
               <Text>{city}</Text>
             </Right>
           </CardItem>

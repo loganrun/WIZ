@@ -119,7 +119,7 @@ class Bathroom extends Component {
         <TouchableOpacity
           key={item.id}
           onPress={() => {
-            this.props.navigation.navigate("Places", {
+            this.props.navigation.navigate("Pee", {
               id: item.id,
               item,
               currentLat: this.state.lat,
@@ -192,7 +192,7 @@ class Bathroom extends Component {
             }}
           >
             <Text style={{ fontSize: 18, fontWeight: "600" }}>
-              Check These Places Out!
+              Find Relief Here!
             </Text>
           </View>
           <View
