@@ -17,28 +17,28 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    this._getLocationAsync();
+    //this._getLocationAsync();
   }
 
-  _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      this.setState({
-        errorMessage: "Permission to access location was denied"
-      });
-    }
+  // _getLocationAsync = async () => {
+  //   let { status } = await Permissions.askAsync(Permissions.LOCATION);
+  //   if (status !== "granted") {
+  //     this.setState({
+  //       errorMessage: "Permission to access location was denied"
+  //     });
+  //   }
 
-    let location = await Location.getCurrentPositionAsync({});
-    let lat = location.coords.latitude;
-    let lon = location.coords.longitude;
-    //console.log(lat);
-    //console.log(lon);
-    this.setState({ lat });
-    this.setState({ lon });
-    //await this.loadBusiness();
-    console.log(this.state.lat);
-    console.log(this.state.lon);
-  };
+  //   let location = await Location.getCurrentPositionAsync({});
+  //   let lat = location.coords.latitude;
+  //   let lon = location.coords.longitude;
+  //   //console.log(lat);
+  //   //console.log(lon);
+  //   this.setState({ lat });
+  //   this.setState({ lon });
+  //   //await this.loadBusiness();
+  //   console.log(this.state.lat);
+  //   console.log(this.state.lon);
+  // };
 
   static navigationOptions = {
     header: null
@@ -55,24 +55,6 @@ class Home extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        {/* <LinearGradient
-          colors={["rgba(255,255,255,1)", "rgba(218,245,251,1)"]}
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: 0,
-            height: "100%"
-          }}
-        /> */}
-        {/* <View
-          style={{
-            flex: 1,
-            backgroundColor: "#fff"
-            "rgba(223,225,229,1)",
-            "rgba(156,175,217,1)"
-          }}
-        /> */}
         <TouchableOpacity
           style={styles.fabBtn}
           onPress={() =>
@@ -87,12 +69,7 @@ class Home extends Component {
 
         <TouchableOpacity
           style={styles.fabBtn}
-          onPress={() =>
-            navigate("Explore", {
-              currentLat: this.state.lat,
-              currentLon: this.state.lon
-            })
-          }
+          onPress={() => navigate("Explore")}
         >
           <Image source={food} style={{ width: 80, height: 80 }} />
         </TouchableOpacity>
@@ -132,40 +109,6 @@ class Home extends Component {
             Add Your Restaurant
           </Text>
         </TouchableOpacity>
-
-        {/* <View>
-          <Button
-            bordered
-            info
-            style={{
-              backgroundColor: "#FFF",
-              marginBottom: 20,
-              justifyContent: "center",
-              alignItems: "center"
-              //   paddingLeft: 40,
-              //   paddingRight: 40,
-              //   marginBottom: 40,
-              //   backgroundColor: "cyan"
-            }}
-          >
-            <Text style={{ fontSize: 18, color: "#00BFFF" }}>Login/SignUp</Text>
-          </Button>
-          <Button
-            bordered
-            info
-            style={{
-              //   paddingLeft: 40,
-              //   paddingRight: 75,
-              backgroundColor: "#FFF",
-              marginBottom: 20,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-            onPress={() => navigate("Explore")}
-          >
-            <Text>Add Your Restaurant Here</Text>
-          </Button>
-        </View> */}
       </View>
     );
   }

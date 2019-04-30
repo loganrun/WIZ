@@ -13,7 +13,8 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   ActivityIndicator,
-  Keyboard
+  Keyboard,
+  AsyncStorage
 } from "react-native";
 
 import { Location, Permissions } from "expo";
@@ -37,7 +38,7 @@ import StarRating from "react-native-star-rating";
 class Explore extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    //console.log(this.props);
     this.state = {
       business: [],
       loading: false,
@@ -62,7 +63,7 @@ class Explore extends Component {
   };
 
   componentDidMount() {
-    this._getLocationAsync();
+    this.initBusinesses();
     this.setState({ loading: true });
   }
 
@@ -75,22 +76,48 @@ class Explore extends Component {
     this.setState({ loading: true });
   }
 
-  _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      this.setState({
-        errorMessage: "Permission to access location was denied"
-      });
+  getLocation = async () => {
+    let location = "";
+    try {
+      location = await AsyncStorage.getItem("location");
+    } catch (error) {
+      // Error retrieving data
+      console.log(error.message);
     }
+    return JSON.parse(location);
+  };
 
-    let location = await Location.getCurrentPositionAsync({});
+  getBusinesses = async () => {
+    let businesses = "";
+    try {
+      businesses = await AsyncStorage.getItem("businesses");
+    } catch (error) {
+      // Error retrieving data
+      console.log(error.message);
+    }
+    return JSON.parse(businesses);
+  };
+
+  _getLocationAsync = async () => {
+    // let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    // if (status !== "granted") {
+    //   this.setState({
+    //     errorMessage: "Permission to access location was denied"
+    //   });
+    // }
+
+    let location = await this.getLocation();
     let lat = location.coords.latitude;
     let lon = location.coords.longitude;
     this.setState({ lat });
     this.setState({ lon });
-    await this.loadBusiness();
-    //console.log(lat);
-    //console.log(lon);
+  };
+
+  initBusinesses = async () => {
+    let business = await this.getBusinesses();
+    this.setState({ business: business });
+    this._getLocationAsync();
+    this.setState({ loading: false });
   };
 
   loadBusiness = async () => {
