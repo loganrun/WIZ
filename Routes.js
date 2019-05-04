@@ -14,22 +14,24 @@ import ResSign from "./screens/ResSign";
 import SignUp from "./screens/SignUp";
 import Bathroom from "./screens/Bathroom";
 import Pee from "./screens/Pee";
+import { Icon } from "native-base";
 
 const HomeStackNavigator = createStackNavigator({
   Home: Home,
   Login: Login,
   ResSign: ResSign,
-  SignUp: SignUp,
-  Explore: Explore,
-  Favorites: Favorites,
-  Bathroom: Bathroom,
-  Places: Places,
-  Pee: Pee
+  SignUp: SignUp
+  //Bathroom: Bathroom,
+  //Places: Places,
+  //Pee: Pee
 });
 const AppStackNavigator = createStackNavigator({
   Explore: Explore,
-  Home: Home,
   Places: Places
+});
+const BathStackNavigator = createStackNavigator({
+  Bathroom: Bathroom,
+  Pee: Pee
 });
 
 export default createAppContainer(
@@ -38,7 +40,10 @@ export default createAppContainer(
       Home: {
         screen: HomeStackNavigator
       },
-      Explore: {
+      Bathroom: {
+        screen: BathStackNavigator
+      },
+      Food: {
         screen: AppStackNavigator
       },
       Favorites: {
@@ -46,35 +51,28 @@ export default createAppContainer(
       }
     },
     {
-      // navigationOptions: ({ navigation }) => ({
-      //   tabBarIcon: ({ tintColor }) => {
-      //     const { routeName } = navigation.state;
+      defaultNavigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ tintColor }) => {
+          const { routeName } = navigation.state;
+          let IconComponent = Ionicons;
+          let iconName;
+          if (routeName === "Home") {
+            iconName = `ios-home`;
+          } else if (routeName === "Bathroom") {
+            iconName = `ios-search`;
+          } else if (routeName === "Food") {
+            iconName = `ios-restaurant`;
+          } else if (routeName === "Favorites") {
+            iconName = `ios-heart`;
+          }
 
-      //     let icon;
-      //     switch (routeName) {
-      //       case "Explore":
-      //         icon = `md-search`;
-      //         break;
-      //       case "Favorite":
-      //         icon = `md-heart`;
-      //         break;
-      //     }
-
-      //     return <Ionicons name={icon} size={25} color={tintColor} />;
-      //   }
-      // }),
-
-      tabBarOptions: {
-        activeTintColor: "red",
-        inactiveTintColor: "grey",
-        style: {
-          backgroundColor: "white",
-          borderTopWidth: 0,
-          shadowOffset: { width: 5, height: 3 },
-          shadowColor: "black",
-          shadowOpacity: 0.5,
-          elevation: 5
+          // You can return any component that you like here!
+          return <IconComponent name={iconName} size={25} color={tintColor} />;
         }
+      }),
+      tabBarOptions: {
+        activeTintColor: "tomato",
+        inactiveTintColor: "gray"
       }
     }
   )

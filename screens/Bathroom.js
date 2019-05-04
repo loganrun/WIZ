@@ -32,7 +32,7 @@ import {
 } from "native-base";
 import restApi from "../services/restroom";
 //import StarRating from "react-native-star-rating";
-
+var bathroom = require("../assets/icons8-pee-100.png");
 class Bathroom extends Component {
   constructor(props) {
     super(props);
@@ -128,6 +128,9 @@ class Bathroom extends Component {
           }}
         >
           <CardItem style={{ paddingBottom: 10 }}>
+            <View>
+              <Image style={{ height: 90, width: 90 }} source={bathroom} />
+            </View>
             <Right
               style={{
                 flex: 1,
@@ -160,13 +163,13 @@ class Bathroom extends Component {
 
     return (
       <Container>
-        <Header
+        {/* <Header
           style={{
             backgroundColor: "#3a455c",
             height: 50,
             borderBottomColor: "#757575"
           }}
-        />
+        /> */}
         {/* <View
           style={{
             backgroundColor: "#3a455c",
