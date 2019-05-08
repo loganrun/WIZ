@@ -14,16 +14,12 @@ import ResSign from "./screens/ResSign";
 import SignUp from "./screens/SignUp";
 import Bathroom from "./screens/Bathroom";
 import Pee from "./screens/Pee";
-import { Icon } from "native-base";
 
 const HomeStackNavigator = createStackNavigator({
   Home: Home,
   Login: Login,
   ResSign: ResSign,
   SignUp: SignUp
-  //Bathroom: Bathroom,
-  //Places: Places,
-  //Pee: Pee
 });
 const AppStackNavigator = createStackNavigator({
   Explore: Explore,
