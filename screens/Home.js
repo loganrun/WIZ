@@ -91,10 +91,10 @@ class Home extends Component {
             Find a Restaurant
           </Text>
         </View>
-        <View style={{}}>
+        <View style={{ flex: 0.25 }}>
           <TouchableOpacity
-            style={styles.btn1}
             onPress={() => navigate("Login")}
+            style={styles.btn1}
           >
             <Text
               style={{
@@ -106,7 +106,7 @@ class Home extends Component {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.btn1}
+            style={styles.btn2}
             onPress={() => navigate("SignUp")}
           >
             <Text
@@ -119,14 +119,23 @@ class Home extends Component {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.btn2}>
-          <TouchableOpacity onPress={() => navigate("ResSign")}>
-            <Image source={add} style={{ width: 80, height: 80 }} />
+        <View
+          style={{
+            flex: 0.25
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => navigate("ResSign")}
+            style={styles.btn3}
+          >
+            <Image source={add} style={{ width: 75, height: 75 }} />
           </TouchableOpacity>
           <Text
             style={{
               fontSize: 16,
-              marginTop: 10
+              // marginTop: 10
+              marginLeft: 20
+
               //marginBottom: 10
             }}
           >
@@ -147,7 +156,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff" //#3a455c
   },
   fabBtn: {
-    flex: 0.35,
+    flex: 0.25,
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
@@ -170,6 +179,16 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   btn2: {
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    width: 200,
+    height: 50,
+    backgroundColor: "orange",
+    //marginBottom: 20,
+    marginRight: 10
+  },
+  btn3: {
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
