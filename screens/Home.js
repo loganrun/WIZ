@@ -5,8 +5,9 @@ import { Location, Permissions } from "expo";
 //import { Button } from "native-base";
 //import { MaterialCommunityIcons } from "@expo/vector-icons";
 //var backgroundImage = require("../assets/city_traffic3.jpg");
-var bathroom = require("../assets/icons8-pee-100.png");
-var food = require("../assets/dish.png");
+var bathroom = require("../assets/restroom-main.png");
+var food = require("../assets/restaurant-main.png");
+var add = require("../assets/add-btn.png");
 class Home extends Component {
   constructor() {
     super();
@@ -41,39 +42,56 @@ class Home extends Component {
   // };
 
   static navigationOptions = {
-    header: null
-    // title: "BRAKEZ",
-    // headerStyle: {
-    //   backgroundColor: "#3a455c"
-    // },
-    // headerTintColor: "#fff",
-    // headerTitleStyle: {
-    //   fontWeight: "bold"
-    // }
+    title: "WIZ",
+    headerStyle: {
+      backgroundColor: "#3a455c"
+      //justifyContent: "center"
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
   };
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.fabBtn}
-          onPress={() =>
-            navigate("Bathroom", {
-              currentLat: this.state.lat,
-              currentLon: this.state.lon
-            })
-          }
-        >
-          <Image source={bathroom} style={{ width: 80, height: 80 }} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.fabBtn}
-          onPress={() => navigate("Explore")}
-        >
-          <Image source={food} style={{ width: 80, height: 80 }} />
-        </TouchableOpacity>
-        <View style={{ flexDirection: "row" }}>
+        <View style={styles.fabBtn}>
+          <TouchableOpacity
+            onPress={() =>
+              navigate("Bathroom", {
+                currentLat: this.state.lat,
+                currentLon: this.state.lon
+              })
+            }
+          >
+            <Image source={bathroom} style={{ width: 100, height: 100 }} />
+          </TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 16,
+              marginTop: 10
+              //marginBottom: 10
+            }}
+          >
+            Find a Bathroom
+          </Text>
+        </View>
+        <View style={styles.fabBtn}>
+          <TouchableOpacity onPress={() => navigate("Explore")}>
+            <Image source={food} style={{ width: 100, height: 100 }} />
+          </TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 16,
+              marginTop: 10
+              //marginBottom: 10
+            }}
+          >
+            Find a Restaurant
+          </Text>
+        </View>
+        <View style={{}}>
           <TouchableOpacity
             style={styles.btn1}
             onPress={() => navigate("Login")}
@@ -81,7 +99,7 @@ class Home extends Component {
             <Text
               style={{
                 fontSize: 24,
-                color: "#00BFFF"
+                color: "#fff" //00BFFF
               }}
             >
               Login
@@ -94,21 +112,27 @@ class Home extends Component {
             <Text
               style={{
                 fontSize: 24,
-                color: "#00BFFF"
+                color: "#fff" //#00BFFF
               }}
             >
               SignUp
             </Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.btn2}>
+        <View style={styles.btn2}>
+          <TouchableOpacity onPress={() => navigate("ResSign")}>
+            <Image source={add} style={{ width: 80, height: 80 }} />
+          </TouchableOpacity>
           <Text
-            style={{ fontSize: 20, color: "red" }}
-            onPress={() => navigate("ResSign")}
+            style={{
+              fontSize: 16,
+              marginTop: 10
+              //marginBottom: 10
+            }}
           >
-            Add Your Restaurant
+            Add a Location
           </Text>
-        </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -120,19 +144,20 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#3a455c"
+    backgroundColor: "#fff" //#3a455c
   },
   fabBtn: {
+    flex: 0.35,
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
-    width: 90,
+    width: 150,
     height: 90,
-    backgroundColor: "#fff",
-    borderRadius: 50,
-    borderColor: "black",
-    borderWidth: 2,
-    marginBottom: 20
+    backgroundColor: "#fff"
+    //borderRadius: 50,
+    //borderColor: "black",
+    //borderWidth: 2,
+    //marginBottom: 20
   },
   btn1: {
     justifyContent: "center",
@@ -140,7 +165,7 @@ const styles = StyleSheet.create({
     position: "relative",
     width: 200,
     height: 50,
-    backgroundColor: "#fff",
+    backgroundColor: "orange",
     marginBottom: 20,
     marginRight: 10
   },
@@ -148,8 +173,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
-    width: 200,
-    height: 50,
-    backgroundColor: "#fff"
+    width: 150,
+    height: 90
+    //backgroundColor: "orange"
   }
 });
