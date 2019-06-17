@@ -2,8 +2,21 @@ import React from "react";
 import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 import Routes from "./Routes";
 import { SplashScreen, AppLoading, Location, Permissions } from "expo";
+import * as firebase from 'react-native-firebase'
 import api from "./services/Api";
 import restApi from "./services/restroom";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCfx94bwaO-VnQosXn4aUIi_DKUCdAcdEA",
+  authDomain: "wizusers.firebaseapp.com",
+  databaseURL: "https://wizusers.firebaseio.com",
+  projectId: "wizusers",
+  storageBucket: "wizusers.appspot.com",
+  messagingSenderId: "5680477837",
+  appId: "1:5680477837:web:8bff0f0c656ab065"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 class App extends React.Component {
   constructor() {
