@@ -11,10 +11,12 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
+import * as firebase from "firebase";
+
 
 class AuthLogin extends Component {
   static navigationOptions = {
-    title: "HOME",
+    title: "LOGIN",
     headerStyle: {
       backgroundColor: "#3a455c",
       elevation: 0
@@ -43,10 +45,15 @@ class AuthLogin extends Component {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(value, actions) => {
-          alert(JSON.stringify(value));
-          setTimeout(() => {
-            actions.setSubmitting(false);
-          }, 1000);
+          let email = value.email;
+          let password = value.password
+          firebase.auth().signInWithEmailAndPassword(email, password)
+          .then(cred => this.props.navigation.navigate('Main'))
+          .catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+          });
         }}
         validationSchema={validationSchema}
       >

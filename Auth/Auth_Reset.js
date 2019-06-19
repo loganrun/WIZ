@@ -6,11 +6,10 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Switch
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
-import * as firebase from "firebase";
-
 
 class AuthReg extends Component {
   static navigationOptions = {
@@ -58,18 +57,10 @@ class AuthReg extends Component {
           promotions: false
         }}
         onSubmit={(value, actions) => {
-          
-          let email = value.email;
-          let password = value.password
-
-          firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(cred => this.props.navigation.navigate('Main'))
-          .catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(errorCode)
-            console.log(errorMessage)
-          });
+          alert(JSON.stringify(value));
+          setTimeout(() => {
+            actions.setSubmitting(false);
+          }, 1000);
         }}
         validationSchema={validationSchema}
       >
@@ -120,7 +111,7 @@ class AuthReg extends Component {
               onBlur={formikProps.handleBlur("service")}
               placeholder="Which service do you drive for?"
             />
-            {/* <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "row" }}>
               <Switch
                 style={{ marginTop: 20, marginRight: 10, marginLeft: 20 }}
                 // value={formikProps.promotions[promotions]}
@@ -138,7 +129,7 @@ class AuthReg extends Component {
               >
                 Would you like to receive Coupons and Promotions?
               </Text>
-            </View> */}
+            </View>
             <TouchableOpacity
               style={styles.button}
               onPress={formikProps.handleSubmit}

@@ -91,7 +91,7 @@ class Home extends Component {
             Find a Restaurant
           </Text>
         </View>
-        <View style={{ flex: 0.25 }}>
+        {/* <View style={{ flex: 0.25 }}>
           <TouchableOpacity
             onPress={() => navigate("Login")}
             style={styles.btn1}
@@ -118,7 +118,7 @@ class Home extends Component {
               SignUp
             </Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View
           style={{
             flex: 0.25

@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, AsyncStorage } from "react-native";
-import Routes from "./Routes";
+import Main from './Auth/Main'
 import { SplashScreen, AppLoading, Location, Permissions } from "expo";
-import * as firebase from 'react-native-firebase'
+import * as firebase from 'firebase'
 import api from "./services/Api";
 import restApi from "./services/restroom";
 
@@ -146,7 +146,7 @@ class App extends React.Component {
         />
       );
     } else {
-      return <Routes />;
+      return <Main />;
     }
     //return <Routes />;
   }

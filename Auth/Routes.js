@@ -4,16 +4,16 @@ import {
   createStackNavigator,
   createAppContainer
 } from "react-navigation";
-import Explore from "./screens/Explore";
-import Places from "./screens/Places";
-import Favorites from "./screens/Favorites";
+import Explore from "../screens/Explore";
+import Places from "../screens/Places";
+import Favorites from "../screens/Favorites";
 import { Ionicons } from "@expo/vector-icons";
-import Home from "./screens/Home";
-import Login from "./screens/Login";
-import ResSign from "./screens/ResSign";
-import SignUp from "./screens/SignUp";
-import Bathroom from "./screens/Bathroom";
-import Pee from "./screens/Pee";
+import Home from "../screens/Home";
+import Login from "../screens/Login";
+import ResSign from "../screens/ResSign";
+import SignUp from "../screens/SignUp";
+import Bathroom from "../screens/Bathroom";
+import Pee from "../screens/Pee";
 
 const HomeStackNavigator = createStackNavigator({
   Home: Home,
