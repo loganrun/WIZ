@@ -12,6 +12,7 @@ import * as yup from "yup";
 import * as firebase from "firebase";
 
 
+
 class AuthReg extends Component {
   static navigationOptions = {
     title: "SIGN UP",
@@ -45,6 +46,10 @@ class AuthReg extends Component {
       lastName: yup
         .string()
         .label("Last name")
+        .required(),
+        userName: yup
+        .string()
+        .label("User name")
         .required()
     });
     return (
@@ -53,6 +58,7 @@ class AuthReg extends Component {
           firstName: "",
           lastName: "",
           email: "",
+          userName: "",
           password: "",
           service: "",
           promotions: false
@@ -65,10 +71,17 @@ class AuthReg extends Component {
           firebase.auth().createUserWithEmailAndPassword(email, password)
           .then(cred => this.props.navigation.navigate('Main'))
           .catch(function(error) {
+            
             var errorCode = error.code;
             var errorMessage = error.message;
-            console.log(errorCode)
-            console.log(errorMessage)
+             if(errorCode == "auth/email-already-in-use") {
+               actions.setErrors({email: "Email already in use.  Please login or use another email address."});
+
+             }//else if(errorCode == "auth/wrong-password") {
+            //   actions.setErrors({password: "Password is incorrect"})
+            // }
+      
+            actions.setSubmitting(false)
           });
         }}
         validationSchema={validationSchema}
@@ -94,6 +107,15 @@ class AuthReg extends Component {
             />
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.lastName && formikProps.errors.lastName}
+            </Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("userName")}
+              placeholder={"Please enter a user name"}
+              onBlur={formikProps.handleBlur("userName")}
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.userName && formikProps.errors.userName}
             </Text>
             <TextInput
               style={styles.textInput}

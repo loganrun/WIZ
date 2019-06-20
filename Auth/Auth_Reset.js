@@ -44,6 +44,10 @@ class AuthReg extends Component {
       lastName: yup
         .string()
         .label("Last name")
+        .required(),
+        userName: yup
+        .string()
+        .label("User name")
         .required()
     });
     return (
@@ -51,10 +55,11 @@ class AuthReg extends Component {
         initialValues={{
           firstName: "",
           lastName: "",
+          userName: "",
           email: "",
           password: "",
           service: "",
-          promotions: false
+    
         }}
         onSubmit={(value, actions) => {
           alert(JSON.stringify(value));
@@ -94,6 +99,15 @@ class AuthReg extends Component {
             />
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.email && formikProps.errors.email}
+            </Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("userName")}
+              placeholder={"Please enter a user name"}
+              onBlur={formikProps.handleBlur("userName")}
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.userName && formikProps.errors.userName}
             </Text>
             <TextInput
               style={styles.textInput}

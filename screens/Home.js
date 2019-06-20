@@ -59,7 +59,7 @@ class Home extends Component {
         <View style={styles.fabBtn}>
           <TouchableOpacity
             onPress={() =>
-              navigate("Bathroom", {
+              navigate("BathMap", {
                 currentLat: this.state.lat,
                 currentLon: this.state.lon
               })

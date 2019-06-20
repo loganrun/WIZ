@@ -14,6 +14,7 @@ import ResSign from "../screens/ResSign";
 import SignUp from "../screens/SignUp";
 import Bathroom from "../screens/Bathroom";
 import Pee from "../screens/Pee";
+import BathMap from "../screens/BathMap"
 
 const HomeStackNavigator = createStackNavigator({
   Home: Home,
@@ -27,7 +28,8 @@ const AppStackNavigator = createStackNavigator({
 });
 const BathStackNavigator = createStackNavigator({
   Bathroom: Bathroom,
-  Pee: Pee
+  Pee: Pee,
+  BathMap:  BathMap
 });
 
 export default createAppContainer(

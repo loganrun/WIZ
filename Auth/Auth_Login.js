@@ -14,6 +14,7 @@ import * as yup from "yup";
 import * as firebase from "firebase";
 
 
+
 class AuthLogin extends Component {
   static navigationOptions = {
     title: "LOGIN",
@@ -50,9 +51,17 @@ class AuthLogin extends Component {
           firebase.auth().signInWithEmailAndPassword(email, password)
           .then(cred => this.props.navigation.navigate('Main'))
           .catch(function(error) {
+            
             var errorCode = error.code;
             var errorMessage = error.message;
-            // ...
+            if(errorCode == "auth/user-not-found") {
+              actions.setErrors({email: "User not found.  Please try again"});
+
+            }else if(errorCode == "auth/wrong-password") {
+              actions.setErrors({password: "Password is incorrect"})
+            }
+      
+            actions.setSubmitting(false)
           });
         }}
         validationSchema={validationSchema}
@@ -100,7 +109,7 @@ class AuthLogin extends Component {
                 </Text>
               </TouchableOpacity>
             )}
-            {/* </View> */}
+            
           </KeyboardAvoidingView>
         )}
       </Formik>
