@@ -27,7 +27,7 @@ import {
 import { showLocation } from "react-native-map-link";
 //import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
-//import Maps from "../components/Maps";
+import Maps from "../components/Maps";
 import restApi from "../services/restroom";
 //import ContentArea from "../components/ContentArea";
 //var ad = require("../assets/ad.png");
@@ -119,9 +119,7 @@ componentWillMount() {
   };
 
   render() {
-    // const animatedHeight = {
-    //   transform: this.animation.getTranslateTransform()
-    // };
+    
     // let item = this.props.navigation.getParam("item");
     // let curLat = this.props.navigation.getParam("currentLat");
     // let curLon = this.props.navigation.getParam("currentLon");
@@ -164,8 +162,8 @@ componentWillMount() {
               longitude={longitude}
               latitudeDelta={0.022}
               longitudeDelta={0.021}
-              currLat={curLat}
-              currLon={curLon}
+              currLat={this.state.lat}
+              currLon={this.state.lon}
               name={name}
             /> */}
           
