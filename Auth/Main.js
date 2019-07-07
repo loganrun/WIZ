@@ -20,12 +20,12 @@ const AuthStackNavigator = createStackNavigator({
 });
 
 const switchNavigator = createSwitchNavigator({
-  Auth: AuthStackNavigator,
   Main: Routes,
+  Auth: AuthStackNavigator,
   AuthLoading:  AuthLoading
 },
 {
-  initialRouteName: 'AuthLoading'
+  initialRouteName: 'Main'
 }
 
 );

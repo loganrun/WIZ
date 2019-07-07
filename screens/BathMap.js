@@ -8,32 +8,34 @@ import {
   Animated,
   PanResponder,
   Slider,
+  TouchableHighlight,
   TouchableOpacity,
   Image,AsyncStorage,ActivityIndicator
 } from "react-native";
-import {
-  Container,
-  Content,
-  Header,
-  Left,
-  Right,
-  Icon,
-  Button,
-  Body,
-  Card,
-  CardItem
-} from "native-base";
+// import {
+//   Container,
+//   Content,
+//   Header,
+//   Left,
+//   Right,
+//   Icon,
+//   Button,
+//   Body,
+//   Card,
+//   CardItem
+// } from "native-base";
 
-import { showLocation } from "react-native-map-link";
+//import { showLocation } from "react-native-map-link";
 //import StarRating from "react-native-star-rating";
-//import { MapView } from "expo";
-import Maps from "../components/Maps";
+import { MapView } from "expo";
+//import Maps from "../components/Maps";
 import restApi from "../services/restroom";
+var bathIcon = require("../assets/restroom-main.png")
 //import ContentArea from "../components/ContentArea";
 //var ad = require("../assets/ad.png");
 
-//const SCREEN_HEIGHT = Dimensions.get("window").height;
-//const SCREEN_WIDTH = Dimensions.get("window").width;
+// const height = Dimensions.get("window").height;
+// const width = Dimensions.get("window").width;
 
 //let contentMarginTopAnim = new Animated.Value(200);
 //let mapTopMarginAnim = new Animated.Value(-250);
@@ -44,24 +46,35 @@ constructor(props) {
         super(props);
         this.state = {
             bathroom: [],
+            region: {
+              longitude: -118.39,
+              latitude: 34.022,
+              latitudeDelta: 0.072,//{0.022},
+              longitudeDelta: 0.070,//{0.021}
+            },
             loading: false,
             lat: null,
             lon: null,
             errorMessage: null,
             search: ""
           };
+
+          this.markerClick = this.markerClick.bind(this);
       }
       
-componentWillMount() {
-    this._getLocationAsync();
-    this.setState({ loading: true });
+// componentWillMount() {
+//     this._getLocationAsync();
+//     this.setState({ loading: true });
      
-   }
-
+//    }
+   componentDidMount() {
+    this.initBathroom();
+    this.setState({ loading: true });
+  }
   
 
   static navigationOptions = {
-    title: "DETAILS",
+    title: "WHIZZ",
     headerStyle: {
       backgroundColor: "#3a455c",
       elevation: 0
@@ -76,7 +89,8 @@ componentWillMount() {
     let location = "";
     try {
       location = await AsyncStorage.getItem("location");
-      console.log(location)
+     //console.log(location)
+      //console.log(location)
     } catch (error) {
       // Error retrieving data
       console.log(error.message);
@@ -84,16 +98,38 @@ componentWillMount() {
     return JSON.parse(location);
   };
 
+  initBathroom = async () => {
+    let bathroom = await this.getBathroom();
+    this.setState({ bathroom: bathroom });
+    console.log(this.state.bathroom)
+    this._getLocationAsync();
+    //console.log(this.state.lat)
+    //console.log(this.state.lon)
+    this.setState({ loading: false });
+  };
+
   _getLocationAsync = async () => {
 
     let location = await this.getLocation();
     let lat = location.coords.latitude;
     let lon = location.coords.longitude;
-    this.setState({ lat });
+    this.setState({ latitude: lat });
     this.setState({ lon });
-    await this.loadBathroom();
+    //await this.loadBathroom();
     //console.log(lat);
     //console.log(lon);
+  };
+
+  getBathroom = async () => {
+    let bathroom = "";
+    try {
+      bathroom = await AsyncStorage.getItem("bathroom");
+      console.log(bathroom)
+    } catch (error) {
+      // Error retrieving data
+      console.log(error.message);
+    }
+    return JSON.parse(bathroom);
   };
 
   loadBathroom = async () => {
@@ -103,20 +139,66 @@ componentWillMount() {
     try {
       let params = {
         page: 1,
-        per_page: 30,
-        lat: this.state.lat,
-        lng: this.state.lon
+        per_page: 50,
+        lat: this.state.region.latitude,
+        lng: this.state.region.longitude
       };
 
       let response = await restApi.get("/by_location", { params });
       let bathroom = response.data;
       this.setState({ bathroom: bathroom });
+     
       await this.setState({ loading: false });
-      console.log(bathroom)
+      console.log(this.state.bathroom)
     } catch (e) {
       console.log("error", e.message);
     }
   };
+
+  onRegionChangeComplete = async (region) =>{
+    await this.setState({region})
+    console.log(this.state.region.latitude)
+    this.loadBathroom()
+  }
+
+  markerClick = () =>{
+    console.log("click")
+  }
+
+  createMarkers= () => {
+    const { navigate } = this.props.navigation;
+
+    return this.state.bathroom.map((item, i) => {
+      return (
+        <MapView.Marker
+        key= {item.id}
+        coordinate={{
+          latitude: item.latitude,
+          longitude: item.longitude
+        }}
+        title={item.name}
+        image={bathIcon}
+        onCalloutPress={() => {
+          this.props.navigation.navigate("Pee", {
+            id: item.id,
+            item,
+            currentLat: this.state.region.latitude,
+            currentLon: this.state.region.longitude
+          })}}
+        
+        >
+          <MapView.Callout tooltip style={styles.tool}>
+                <View>
+                  <Text>{item.name}</Text>
+                  <Text>{item.street}</Text>
+                </View>
+          </MapView.Callout>
+        </MapView.Marker>
+      );
+    });
+
+  }
+
 
   render() {
     
@@ -128,19 +210,12 @@ componentWillMount() {
     // let latitude = item.latitude;
     // let name = item.name;
 
-    const { navigate } = this.props.navigation;
+    //const { navigate } = this.props.navigation;
 
+    
+    if (this.state.loading) {
     return (
       <View style={{ flex: 1 }}>
-          <View
-            style={{
-              flex: 1,
-              width: "100%",
-              backgroundColor: "#ffff",
-              justifyContent: "center"
-            }}
-          >
-            {this.state.loading ? (
               <ActivityIndicator
                 size="large"
                 color="blue"
@@ -151,26 +226,49 @@ componentWillMount() {
                   paddingBottom: 400
                 }}
               />
-            ) : (
-              false
-            )}
-          </View>
-        
-            {/* <Maps
-              style={{ flex: 1 }}
-              latitude={latitude}
-              longitude={longitude}
-              latitudeDelta={0.022}
-              longitudeDelta={0.021}
-              currLat={this.state.lat}
-              currLon={this.state.lon}
-              name={name}
-            /> */}
+      </View>
+    );
+              }
+    return (
+      <View style={{flex: 1}}>
+
+            <MapView
+            region={this.state.region}
+              style={styles.container}
+              //latitude={this.state.lat}
+              //longitude={this.state.lon}
+              //latitudeDelta={0.072}//{0.022}
+              //longitudeDelta={0.070}//{0.021}
+              provider="google"
+              showsUserLocation={true}
+              onRegionChangeComplete={this.onRegionChangeComplete}
+             //currLat={this.state.lat}
+              //currLon={this.state.lon}
+              //name={name}
+            >
+
+              {this.createMarkers()}
+            </MapView>
           
       </View>
     );
   }
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    //width,
+    //height
+  },
+  tool:{
+    width: 250,
+    height: 75,
+    backgroundColor: '#fff',
+    borderRadius: 10
+  }
+};
+
 export default BathMap;
 
 // class ContentArea extends React.Component {

@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
+//import {Video} from 'expo-av';
 import {
   Container,
   Content,
@@ -30,6 +31,7 @@ import StarRating from "react-native-star-rating";
 import Maps from "../components/Maps";
 //import ContentArea from "../components/ContentArea";
 var ad = require("../assets/ad.png");
+//var vid = require("../assets/donut.mp4")
 
 //const SCREEN_HEIGHT = Dimensions.get("window").height;
 //const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -229,6 +231,8 @@ class ContentArea extends React.Component {
             }}
           >
             <Image source={ad} style={{ height: 320, width: 320 }} />
+            {/* <Video
+            source={vid} rate={1.0} isMuted={false} resizeMode="cover" shouldPlay isLooping style={{with: 320, height:320}}/> */}
           </Card>
           <View style={{ flex: 0.2 }} />
         </View>

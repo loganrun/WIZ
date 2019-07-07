@@ -22,7 +22,7 @@ class Maps extends Component {
           longitudeDelta: this.props.longitudeDelta
         }}
       >
-        <MapView.Marker
+        {/* <MapView.Marker
           coordinate={{
             latitude: this.props.latitude,
             longitude: this.props.longitude
@@ -36,7 +36,7 @@ class Maps extends Component {
           }}
           title="Current Position"
           image={locationImg}
-        />
+        /> */}
       </MapView>
     );
   }

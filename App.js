@@ -59,9 +59,11 @@ class App extends React.Component {
     //   }
     // };
 
-    await this.loadBusiness();
-    //await this.loadBathroom();
+    //await this.loadBusiness();
+    
+    await this.loadBathroom();
     await this.saveLocation(location);
+    
 
     //console.log(this.state.lat);
     //console.log(this.state.isLoading);
@@ -90,6 +92,16 @@ class App extends React.Component {
     }
   };
 
+  saveBathroom = async bathroom => {
+    try {
+      await AsyncStorage.setItem("bathroom", JSON.stringify(bathroom));
+      //console.log(location);
+    } catch (error) {
+      // Error retrieving data
+      console.log(error.message);
+    }
+  };
+
   loadBusiness = async () => {
     let lat = this.state.lat;
     let lon = this.state.lon;
@@ -99,8 +111,8 @@ class App extends React.Component {
         term: this.state.search,
         latitude: lat,
         longitude: lon,
-        radius: 10000,
-        limit: 20
+        radius: 20000,
+        limit: 50
       };
 
       let response = await api.get("/search", { params });
@@ -129,9 +141,9 @@ class App extends React.Component {
       };
 
       let response = await restApi.get("/by_location", { params });
-      let bathroom = response.data;
-      //console.log(bathroom);
-      this.setState({ bathroom: bathroom });
+      let bathroom  = response.data;
+
+      this.saveBathroom(bathroom);
       //await this.setState({ loading: false });
     } catch (e) {
       console.log("error", e.message);

@@ -16,6 +16,12 @@ import Bathroom from "../screens/Bathroom";
 import Pee from "../screens/Pee";
 import BathMap from "../screens/BathMap"
 
+const BathStackNavigator = createStackNavigator({
+  BathMap:  BathMap,
+  Pee: Pee,
+  Bathroom: Bathroom
+  
+});
 const HomeStackNavigator = createStackNavigator({
   Home: Home,
   Login: Login,
@@ -26,18 +32,14 @@ const AppStackNavigator = createStackNavigator({
   Explore: Explore,
   Places: Places
 });
-const BathStackNavigator = createStackNavigator({
-  Bathroom: Bathroom,
-  Pee: Pee,
-  BathMap:  BathMap
-});
+
 
 export default createAppContainer(
   createBottomTabNavigator(
     {
-      Home: {
-        screen: HomeStackNavigator
-      },
+      // Home: {
+      //   screen: HomeStackNavigator
+      // },
       Bathroom: {
         screen: BathStackNavigator
       },
@@ -47,7 +49,9 @@ export default createAppContainer(
       Favorites: {
         screen: Favorites
       }
+      
     },
+    
     {
       defaultNavigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ tintColor }) => {
@@ -71,7 +75,8 @@ export default createAppContainer(
       tabBarOptions: {
         activeTintColor: "orange",
         inactiveTintColor: "gray"
-      }
-    }
+      },
+    },
+   
   )
 );
