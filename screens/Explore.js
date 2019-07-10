@@ -63,7 +63,7 @@ class Explore extends Component {
   };
 
   componentDidMount() {
-    this.initBusinesses();
+    this._getLocationAsync();
     this.setState({ loading: true });
   }
 
@@ -111,6 +111,7 @@ class Explore extends Component {
     let lon = location.coords.longitude;
     this.setState({ lat });
     this.setState({ lon });
+    this.loadBusiness();
   };
 
   initBusinesses = async () => {
