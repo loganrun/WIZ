@@ -22,14 +22,14 @@ class Maps extends Component {
           longitudeDelta: this.props.longitudeDelta
         }}
       >
-        {/* <MapView.Marker
+        <MapView.Marker
           coordinate={{
             latitude: this.props.latitude,
             longitude: this.props.longitude
           }}
           title={this.props.name}
         />
-        <MapView.Marker
+        {/* <MapView.Marker
           coordinate={{
             latitude: this.props.currLat,
             longitude: this.props.currLon

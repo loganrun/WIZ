@@ -82,7 +82,23 @@ const AppTabNavigator = createBottomTabNavigator(
       screen: AppStackNavigator
     },
     Favorites: {
-      screen: Favorites
+      screen: Favorites,
+      navigationOptions:({navigation}) =>{
+        return{
+          headerLeft: (
+            <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+          ),
+          title: "FAVORITES",
+        headerStyle: {
+          backgroundColor: "#3a455c",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+        };
+      }
     }
     
   },
@@ -115,17 +131,7 @@ const AppTabNavigator = createBottomTabNavigator(
  
 );
 
-const MainStackNavigator = createStackNavigator(
-  {
-    MainStackNavigator: AppTabNavigator,
-    navigationOptions:({navigation}) => {
-      return {
-        header: null
-      }
-    }
-  }
-  
-);
+
 
 const AppDrawerNavigator = createDrawerNavigator(
   {

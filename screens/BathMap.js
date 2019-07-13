@@ -12,25 +12,27 @@ import {
   TouchableOpacity,
   Image,AsyncStorage,ActivityIndicator
 } from "react-native";
-// import {
+ import {
 //   Container,
 //   Content,
 //   Header,
-//   Left,
-//   Right,
-//   Icon,
+   Left,
+  Right,
+   Icon,
 //   Button,
 //   Body,
-//   Card,
-//   CardItem
-// } from "native-base";
+   Card,
+   CardItem,
+   Row
+ } from "native-base";
 
 //import { showLocation } from "react-native-map-link";
 //import StarRating from "react-native-star-rating";
 import { MapView } from "expo";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
-var bathIcon = require("../assets/restroom-main.png")
+var bathIcon = require("../assets/restroom-main.png");
+var button5 = require("../assets/button.png")
 //import ContentArea from "../components/ContentArea";
 //var ad = require("../assets/ad.png");
 
@@ -187,11 +189,16 @@ constructor(props) {
           })}}
         
         >
-          <MapView.Callout tooltip style={styles.tool}>
-                <View>
-                  <Text>{item.name}</Text>
-                  <Text>{item.street}</Text>
-                </View>
+          <MapView.Callout tooltip>
+                <Card style={{flexDirection: 'row'}}>
+                  <Image style={{height: 50, width: 50}} source={button5}/>
+                  <CardItem style={{flexDirection: 'column'}}>
+                    <Right style={{flex:1, alignItems: 'flex-start'}}>
+                      <Text>{item.name}</Text>
+                      <Text>{item.street}</Text>
+                    </Right>
+                  </CardItem>
+                </Card>
           </MapView.Callout>
         </MapView.Marker>
       );

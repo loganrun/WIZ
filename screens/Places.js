@@ -183,12 +183,11 @@ class ContentArea extends React.Component {
         >
           <Card style={{ paddingBottom: 10 }}>
             <CardItem>
-              <Right
+              <Left
                 style={{
-                  flex: 1,
+                  flexDirection: 'column',
                   alignItems: "flex-start",
-                  height: 100,
-                  paddingHorizontal: 20
+                  paddingHorizontal: 10
                 }}
               >
                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>{name}</Text>
@@ -206,7 +205,7 @@ class ContentArea extends React.Component {
                   fullStarColor={"orange"}
                   emptyStarColor={"orange"}
                 />
-              </Right>
+              </Left>
               <Button
                 style={{
                   marginTop: 25,
