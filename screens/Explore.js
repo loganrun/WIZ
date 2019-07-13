@@ -51,16 +51,16 @@ class Explore extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  static navigationOptions = {
-    title: "BREAK-TIME",
-    headerStyle: {
-      backgroundColor: "#3a455c"
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
-  };
+  // static navigationOptions = {
+  //   title: "BREAK-TIME",
+  //   headerStyle: {
+  //     backgroundColor: "#3a455c"
+  //   },
+  //   headerTintColor: "#fff",
+  //   headerTitleStyle: {
+  //     fontWeight: "bold"
+  //   }
+  // };
 
   componentDidMount() {
     this._getLocationAsync();

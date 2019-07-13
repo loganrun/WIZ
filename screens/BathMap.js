@@ -74,15 +74,15 @@ constructor(props) {
   
 
   static navigationOptions = {
-    title: "WHIZZ",
-    headerStyle: {
-      backgroundColor: "#3a455c",
-      elevation: 0
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
+    // title: "WHIZZ",
+    // headerStyle: {
+    //   backgroundColor: "#3a455c",
+    //   elevation: 0
+    // },
+    // headerTintColor: "#fff",
+    // headerTitleStyle: {
+    //   fontWeight: "bold"
+    // }
   };
 
   getLocation = async () => {
