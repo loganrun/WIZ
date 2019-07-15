@@ -272,8 +272,7 @@ class ContentArea extends React.Component {
               style={{
                 flex: 1,
                 alignItems: "flex-start",
-                height: 200,
-                paddingHorizontal: 20
+                paddingHorizontal: 10
               }}
             >
               <Text style={{ fontWeight: "bold", fontSize: 14 }}>

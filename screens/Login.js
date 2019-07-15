@@ -13,17 +13,17 @@ import { Formik } from "formik";
 import * as yup from "yup";
 
 class Login extends Component {
-  static navigationOptions = {
-    title: "HOME",
-    headerStyle: {
-      backgroundColor: "#3a455c",
-      elevation: 0
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
-  };
+  // static navigationOptions = {
+  //   title: "HOME",
+  //   headerStyle: {
+  //     backgroundColor: "#3a455c",
+  //     elevation: 0
+  //   },
+  //   headerTintColor: "#fff",
+  //   headerTitleStyle: {
+  //     fontWeight: "bold"
+  //   }
+  // };
 
   render() {
     const validationSchema = yup.object().shape({

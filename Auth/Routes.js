@@ -1,4 +1,5 @@
 import React from "react";
+import {Platform, Dimensions} from 'react-native'
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -16,6 +17,11 @@ import SignUp from "../screens/SignUp";
 import Bathroom from "../screens/Bathroom";
 import Pee from "../screens/Pee";
 import BathMap from "../screens/BathMap"
+
+const Width = Dimensions.get('window').width
+const DrawerConfig = {
+  drawerWidth: Width*0.8,
+}
 
 const BathStackNavigator = createStackNavigator({
   BathMap: {  
@@ -135,16 +141,74 @@ const AppTabNavigator = createBottomTabNavigator(
 
 const AppDrawerNavigator = createDrawerNavigator(
   {
-    Main:{
+    Home:{
       screen: AppTabNavigator,
-      // navigationOptions:({navigation}) => {
-      //     return {
-      //       header: null
-      //     }
-      //   }
-      
-    }
-  }
+      navigationOptions:({navigation}) =>{
+        return{
+          drawerLabel: 'Home',
+          drawerIcon: (
+            <Ionicons name='ios-home' size={30}/>
+          ),
+          title: "Login",
+        headerStyle: {
+          backgroundColor: "#3a455c",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+        };
+      }
+    },
+    SignIn: {
+      screen: Login,
+      navigationOptions:({navigation}) =>{
+        return{
+          drawerLabel: 'SignIn',
+          drawerIcon: (
+            <Ionicons name='ios-key' size={30}/>
+          ),
+          headerLeft: (
+            <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+          ),
+          title: "Login",
+        headerStyle: {
+          backgroundColor: "#3a455c",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+        };
+      }
+    },
+    SignUp: {
+      screen: SignUp,
+      navigationOptions:({navigation}) =>{
+        return{
+          drawerLabel: 'SignUp',
+          drawerIcon: (
+            <Ionicons name='ios-person-add' size={30}/>
+          ),
+          headerLeft: (
+            <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+          ),
+          title: "Sign Up",
+        headerStyle: {
+          backgroundColor: "#3a455c",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+        };
+      }
+    },
+  },
+  DrawerConfig
   
 );
 

@@ -27,7 +27,7 @@ import {
  } from "native-base";
 
 //import { showLocation } from "react-native-map-link";
-//import StarRating from "react-native-star-rating";
+import StarRating from "react-native-star-rating";
 import { MapView } from "expo";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
@@ -189,12 +189,14 @@ constructor(props) {
           })}}
         
         >
-          <MapView.Callout tooltip>
+          <MapView.Callout tooltip={true}>
                 <Card style={{flexDirection: 'row'}}>
-                  <Image style={{height: 50, width: 50}} source={button5}/>
+                  <Left style={{paddingLeft: 10}}><View><Image style={{height: 50, width: 50}} source={bathIcon}/></View></Left>
+                  
+                  
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
-                      <Text>{item.name}</Text>
+                      <Text style={{fontWeight: 'bold'}}>{item.name}</Text>
                       <Text>{item.street}</Text>
                     </Right>
                   </CardItem>
@@ -218,6 +220,7 @@ constructor(props) {
     // let name = item.name;
 
     //const { navigate } = this.props.navigation;
+   
 
     
     if (this.state.loading) {
@@ -278,6 +281,14 @@ const styles = {
 
 export default BathMap;
 
+{/* <StarRating 
+                disabled={true}
+                maxStars={5}
+                rating={5}
+                starSize={12}
+                fullStarColor={"orange"}
+                emptyStarColor={"orange"}
+              /> */}
 // class ContentArea extends React.Component {
 //   constructor(props) {
 //     super(props);
