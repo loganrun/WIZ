@@ -52,7 +52,7 @@ class Pee extends Component {
   static navigationOptions = {
     title: "DETAILS",
     headerStyle: {
-      backgroundColor: "#3a455c",
+      backgroundColor: "#52AEA0",
       elevation: 0
     },
     headerTintColor: "#fff",
@@ -181,7 +181,7 @@ class ContentArea extends React.Component {
             <CardItem>
               <Left
                 style={{
-                  flexDirection: 'column',
+                  flexDirection: "column",
                   alignItems: "flex-start",
                   paddingHorizontal: 10
                 }}
@@ -189,7 +189,9 @@ class ContentArea extends React.Component {
                 <Text style={{ fontWeight: "bold", fontSize: 20 }}>{name}</Text>
                 <Text>{address}</Text>
                 <Text>{city}</Text>
-                <Text style={{fontWeight: "bold", fontSize: 14}}>Directions</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 14 }}>
+                  Directions
+                </Text>
                 <Text>{direction}</Text>
               </Left>
               <Button

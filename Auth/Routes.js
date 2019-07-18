@@ -1,5 +1,5 @@
 import React from "react";
-import {Platform, Dimensions} from 'react-native'
+import { Platform, Dimensions } from "react-native";
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -16,38 +16,43 @@ import ResSign from "../screens/ResSign";
 import Bathroom from "../screens/Bathroom";
 import Pee from "../screens/Pee";
 import BathMap from "../screens/BathMap";
-//import AuthHome from "./Auth_Home";
+import AuthHome from "./Auth_Home";
 import Reset from "../Auth/Auth_Reset";
 import SignUp from "../Auth/Auth_Reg";
 
-const Width = Dimensions.get('window').width
+const Width = Dimensions.get("window").width;
 const DrawerConfig = {
-  drawerWidth: Width*0.8,
-}
+  drawerWidth: Width * 0.8
+};
 
 const BathStackNavigator = createStackNavigator({
-  BathMap: {  
-  screen: BathMap,
-  navigationOptions:({navigation}) =>{
-    return{
-      headerLeft: (
-        <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
-      ),
-      title: "WHIZZ",
-    headerStyle: {
-      backgroundColor: '#52AEA0',//"#3a455c",
-      elevation: 0
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
+  BathMap: {
+    screen: BathMap,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+            color={"#fff"}
+          />
+        ),
+        title: "WHIZZ",
+        headerStyle: {
+          backgroundColor: "#52AEA0", //"#3a455c",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+      };
     }
-    };
-  }
-},
+  },
   Pee: Pee,
   Bathroom: Bathroom
-  
 });
 const HomeStackNavigator = createStackNavigator({
   Home: Home,
@@ -57,21 +62,27 @@ const HomeStackNavigator = createStackNavigator({
 });
 const LoginStackNavigator = createStackNavigator({
   Login: {
-    screen: Login,
-    navigationOptions:({navigation}) =>{
-      return{
+    screen: AuthHome,
+    navigationOptions: ({ navigation }) => {
+      return {
         headerLeft: (
-          <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+            color={"#fff"}
+          />
         ),
         title: "LOGIN",
-      headerStyle: {
-        backgroundColor: "#3a455c",
-        elevation: 0
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold"
-      }
+        headerStyle: {
+          backgroundColor: "#3a455c",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
       };
     }
   },
@@ -81,20 +92,26 @@ const LoginStackNavigator = createStackNavigator({
 const SignStackNavigator = createStackNavigator({
   SignUp: {
     screen: SignUp,
-    navigationOptions:({navigation}) =>{
-      return{
+    navigationOptions: ({ navigation }) => {
+      return {
         headerLeft: (
-          <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+            color={"#fff"}
+          />
         ),
         title: "SIGNUP",
-      headerStyle: {
-        backgroundColor: "#3a455c",
-        elevation: 0
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold"
-      }
+        headerStyle: {
+          backgroundColor: "#3a455c",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
       };
     }
   }
@@ -102,48 +119,58 @@ const SignStackNavigator = createStackNavigator({
 const AppStackNavigator = createStackNavigator({
   Explore: {
     screen: Explore,
-    navigationOptions:({navigation}) =>{
-      return{
+    navigationOptions: ({ navigation }) => {
+      return {
         headerLeft: (
-          <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+            color={"#fff"}
+          />
         ),
         title: "FOOD",
-      headerStyle: {
-        backgroundColor: "#3a455c",
-        elevation: 0
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold"
-      }
+        headerStyle: {
+          backgroundColor: "#3a455c",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
       };
     }
-},
+  },
   Places: Places
 });
 
 const FavoriteStackNavigator = createStackNavigator({
-
-  Favorites:{
+  Favorites: {
     screen: Favorites,
-    navigationOptions:({navigation}) =>{
-      return{
+    navigationOptions: ({ navigation }) => {
+      return {
         headerLeft: (
-          <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+            color={"#fff"}
+          />
         ),
         title: "FAVORITES",
-      headerStyle: {
-        backgroundColor: "#3a455c",
-        elevation: 0
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold"
-      }
+        headerStyle: {
+          backgroundColor: "#3a455c",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
       };
     }
   }
-
 });
 
 const AppTabNavigator = createBottomTabNavigator(
@@ -158,18 +185,16 @@ const AppTabNavigator = createBottomTabNavigator(
       screen: AppStackNavigator
     },
     Favorites: {
-      screen: FavoriteStackNavigator,
-      
+      screen: FavoriteStackNavigator
     }
-    
   },
-  
+
   {
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state;
         let IconComponent = Ionicons;
-        let iconName="";
+        let iconName = "";
         if (routeName === "Home") {
           iconName = `ios-home`;
         } else if (routeName === "Bathroom") {
@@ -187,110 +212,113 @@ const AppTabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       activeTintColor: "orange",
       inactiveTintColor: "gray"
-    },
-  },
- 
+    }
+  }
 );
-
-
 
 const AppDrawerNavigator = createDrawerNavigator(
   {
-    Home:{
+    Home: {
       screen: AppTabNavigator,
-      navigationOptions:({navigation}) =>{
-        return{
-          drawerLabel: 'Home',
-          drawerIcon: (
-            <Ionicons name='ios-home' size={30}/>
-          ),
+      navigationOptions: ({ navigation }) => {
+        return {
+          drawerLabel: "Home",
+          drawerIcon: <Ionicons name="ios-home" size={30} />,
           title: "Login",
-        headerStyle: {
-          backgroundColor: "#3a455c",
-          elevation: 0
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold"
-        }
+          headerStyle: {
+            backgroundColor: "#3a455c",
+            elevation: 0
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
         };
       }
     },
     SignIn: {
       screen: LoginStackNavigator,
-      navigationOptions:({navigation}) =>{
-        return{
-          drawerLabel: 'SignIn',
-          drawerIcon: (
-            <Ionicons name='ios-key' size={30}/>
-          ),
+      navigationOptions: ({ navigation }) => {
+        return {
+          drawerLabel: "SignIn",
+          drawerIcon: <Ionicons name="ios-key" size={30} />,
           headerLeft: (
-            <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+            <Ionicons
+              style={{ padding: 10 }}
+              onPress={() => navigation.openDrawer()}
+              name="md-menu"
+              size={30}
+              color={"#fff"}
+            />
           ),
           title: "Login",
-        headerStyle: {
-          backgroundColor: "#3a455c",
-          elevation: 0
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold"
-        }
+          headerStyle: {
+            backgroundColor: "#3a455c",
+            elevation: 0
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
         };
       }
     },
     SignUp: {
       screen: SignStackNavigator,
-      navigationOptions:({navigation}) =>{
-        return{
-          drawerLabel: 'SignUp',
-          drawerIcon: (
-            <Ionicons name='ios-person-add' size={30}/>
-          ),
+      navigationOptions: ({ navigation }) => {
+        return {
+          drawerLabel: "SignUp",
+          drawerIcon: <Ionicons name="ios-person-add" size={30} />,
           headerLeft: (
-            <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+            <Ionicons
+              style={{ padding: 10 }}
+              onPress={() => navigation.openDrawer()}
+              name="md-menu"
+              size={30}
+              color={"#fff"}
+            />
           ),
           title: "Sign Up",
-        headerStyle: {
-          backgroundColor: "#3a455c",
-          elevation: 0
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold"
-        }
+          headerStyle: {
+            backgroundColor: "#3a455c",
+            elevation: 0
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
         };
       }
     },
     Favorites: {
       screen: FavoriteStackNavigator,
-      navigationOptions:({navigation}) =>{
-        return{
-          drawerLabel: 'Favorites',
-          drawerIcon: (
-            <Ionicons name='ios-heart' size={30}/>
-          ),
+      navigationOptions: ({ navigation }) => {
+        return {
+          drawerLabel: "Favorites",
+          drawerIcon: <Ionicons name="ios-heart" size={30} />,
           headerLeft: (
-            <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+            <Ionicons
+              style={{ padding: 10 }}
+              onPress={() => navigation.openDrawer()}
+              name="md-menu"
+              size={30}
+              color={"#fff"}
+            />
           ),
           title: "Sign Up",
-        headerStyle: {
-          backgroundColor: "#3a455c",
-          elevation: 0
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold"
-        }
+          headerStyle: {
+            backgroundColor: "#3a455c",
+            elevation: 0
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
         };
       }
-    },
+    }
   },
   DrawerConfig
-  
 );
-
-
-
 
 export default createAppContainer(AppDrawerNavigator);
