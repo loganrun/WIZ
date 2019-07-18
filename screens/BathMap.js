@@ -60,11 +60,12 @@ constructor(props) {
             lon: null,
             errorMessage: null,
             search: "",
-            color:  ['green', 'yellow', 'tan'], //['#13DE25','#FFFF08','#C26138'],
-            pick: ''
+            mapMargin:  1
+            //color:  ['green', 'yellow', 'tan'], //['#13DE25','#FFFF08','#C26138'],
+            //pick: ''
           };
 
-          this.markerClick = this.markerClick.bind(this);
+          //this.markerClick = this.markerClick.bind(this);
       }
       
 // componentWillMount() {
@@ -77,6 +78,9 @@ constructor(props) {
     this.setState({ loading: true });
   }
   
+  setMargin=()=>{
+    this.setState({mapMargin: 0});
+  }
 
   static navigationOptions = {
     // title: "WHIZZ",
@@ -166,9 +170,9 @@ constructor(props) {
     this.loadBathroom()
   }
 
-  markerClick = () =>{
-    console.log("click")
-  }
+  // markerClick = () =>{
+  //   console.log("click")
+  // }
 
   
 
@@ -176,16 +180,16 @@ constructor(props) {
     const { navigate } = this.props.navigation;
 
     return this.state.bathroom.map((item, i) => {
-      colorPick = () => {
-        this.setState({
-          pick: this.state.color[Math.floor(Math.random()*this.state.color.length)]
-        })
+      // colorPick = () => {
+      //   this.setState({
+      //     pick: this.state.color[Math.floor(Math.random()*this.state.color.length)]
+      //   })
 
-        console.log(this.state.pick)
+      //   console.log(this.state.pick)
         
-      }
-      //const color = this.colorPick()
-      //console.log(color)
+      // }
+      // //const color = this.colorPick()
+      // //console.log(color)
       return (
         <MapView.Marker
         key= {item.id}
@@ -260,11 +264,11 @@ constructor(props) {
     );
               }
     return (
-      <View style={{flex: 1}}>
-
+     
+            <View style={styles.container}>
             <MapView
-            region={this.state.region}
-              style={styles.container}
+            initialRegion={this.state.region}
+              style={{flex:1, marginTop:this.state.mapMargin}}
               //latitude={this.state.lat}
               //longitude={this.state.lon}
               //latitudeDelta={0.072}//{0.022}
@@ -272,6 +276,7 @@ constructor(props) {
               provider="google"
               showsUserLocation={true}
               showsMyLocationButton={true}
+              onMapReady={this.setMargin}
               onRegionChangeComplete={this.onRegionChangeComplete}
              //currLat={this.state.lat}
               //currLon={this.state.lon}
@@ -280,8 +285,8 @@ constructor(props) {
 
               {this.createMarkers()}
             </MapView>
+            </View>
           
-      </View>
     );
   }
 }
