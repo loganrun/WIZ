@@ -23,7 +23,8 @@ import {
 //   Body,
    Card,
    CardItem,
-   Row
+   Row,
+   Button
  } from "native-base";
 
 //import { showLocation } from "react-native-map-link";
@@ -58,7 +59,9 @@ constructor(props) {
             lat: null,
             lon: null,
             errorMessage: null,
-            search: ""
+            search: "",
+            color:  ['green', 'yellow', 'tan'], //['#13DE25','#FFFF08','#C26138'],
+            pick: ''
           };
 
           this.markerClick = this.markerClick.bind(this);
@@ -103,7 +106,7 @@ constructor(props) {
   initBathroom = async () => {
     let bathroom = await this.getBathroom();
     this.setState({ bathroom: bathroom });
-    console.log(this.state.bathroom)
+    //console.log(this.state.bathroom)
     this._getLocationAsync();
     //console.log(this.state.lat)
     //console.log(this.state.lon)
@@ -126,7 +129,7 @@ constructor(props) {
     let bathroom = "";
     try {
       bathroom = await AsyncStorage.getItem("bathroom");
-      console.log(bathroom)
+      //console.log(bathroom)
     } catch (error) {
       // Error retrieving data
       console.log(error.message);
@@ -151,7 +154,7 @@ constructor(props) {
       this.setState({ bathroom: bathroom });
      
       await this.setState({ loading: false });
-      console.log(this.state.bathroom)
+      //console.log(this.state.bathroom)
     } catch (e) {
       console.log("error", e.message);
     }
@@ -159,7 +162,7 @@ constructor(props) {
 
   onRegionChangeComplete = async (region) =>{
     await this.setState({region})
-    console.log(this.state.region.latitude)
+    //console.log(this.state.region.latitude)
     this.loadBathroom()
   }
 
@@ -167,10 +170,22 @@ constructor(props) {
     console.log("click")
   }
 
+  
+
   createMarkers= () => {
     const { navigate } = this.props.navigation;
 
     return this.state.bathroom.map((item, i) => {
+      colorPick = () => {
+        this.setState({
+          pick: this.state.color[Math.floor(Math.random()*this.state.color.length)]
+        })
+
+        console.log(this.state.pick)
+        
+      }
+      //const color = this.colorPick()
+      //console.log(color)
       return (
         <MapView.Marker
         key= {item.id}
@@ -180,6 +195,7 @@ constructor(props) {
         }}
         title={item.name}
         image={bathIcon}
+       // pinColor={'yellow'}
         onCalloutPress={() => {
           this.props.navigation.navigate("Pee", {
             id: item.id,
@@ -191,9 +207,13 @@ constructor(props) {
         >
           <MapView.Callout tooltip={true}>
                 <Card style={{flexDirection: 'row'}}>
-                  <Left style={{paddingLeft: 10}}><View><Image style={{height: 50, width: 50}} source={bathIcon}/></View></Left>
-                  
-                  
+                  <Left style={{paddingLeft: 10}}>
+                    <View>
+                      <Button style={{width: 50, height: 50, backgroundColor: '#13DE25'}}>
+                        <Text style={{fontWeight:'bold', fontSize: 35, color: 'white', paddingLeft: 15}}>5</Text>
+                        </Button>
+                        </View>
+                        </Left>
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
                       <Text style={{fontWeight: 'bold'}}>{item.name}</Text>
@@ -251,6 +271,7 @@ constructor(props) {
               //longitudeDelta={0.070}//{0.021}
               provider="google"
               showsUserLocation={true}
+              showsMyLocationButton={true}
               onRegionChangeComplete={this.onRegionChangeComplete}
              //currLat={this.state.lat}
               //currLon={this.state.lon}

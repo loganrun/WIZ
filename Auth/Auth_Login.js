@@ -16,17 +16,17 @@ import * as firebase from "firebase";
 
 
 class AuthLogin extends Component {
-  static navigationOptions = {
-    title: "LOGIN",
-    headerStyle: {
-      backgroundColor: "#3a455c",
-      elevation: 0
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
-  };
+  // static navigationOptions = {
+  //   title: "LOGIN",
+  //   headerStyle: {
+  //     backgroundColor: "#3a455c",
+  //     elevation: 0
+  //   },
+  //   headerTintColor: "#fff",
+  //   headerTitleStyle: {
+  //     fontWeight: "bold"
+  //   }
+  // };
 
   render() {
     const validationSchema = yup.object().shape({
