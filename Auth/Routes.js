@@ -33,6 +33,8 @@ const BathStackNavigator = createStackNavigator({
       headerLeft: (
         <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
       ),
+
+      
       title: "WHIZZ",
     headerStyle: {
       backgroundColor: '#52AEA0',//"#3a455c",

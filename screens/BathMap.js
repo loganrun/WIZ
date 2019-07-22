@@ -30,6 +30,7 @@ import {
 //import { showLocation } from "react-native-map-link";
 import StarRating from "react-native-star-rating";
 import { MapView } from "expo";
+import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
 var bathIcon = require("../assets/restroom-main.png");
@@ -82,17 +83,30 @@ constructor(props) {
     this.setState({mapMargin: 0});
   }
 
-  static navigationOptions = {
-    // title: "WHIZZ",
-    // headerStyle: {
-    //   backgroundColor: "#3a455c",
-    //   elevation: 0
-    // },
-    // headerTintColor: "#fff",
-    // headerTitleStyle: {
-    //   fontWeight: "bold"
-    // }
+  static navigationOptions = ({ navigation }) => {
+    //const { navigate } = this.props.navigation;
+    return {
+      headerRight: (
+        <Ionicons style={{padding:10}} name='ios-list' size={30} color={"#fff"}/>
+      ),
+    };
   };
+
+  // static navigationOptions = {
+  //   // title: "WHIZZ",
+  //   // headerStyle: {
+  //   //   backgroundColor: "#3a455c",
+  //   //   elevation: 0
+  //   // },
+  //   // headerTintColor: "#fff",
+  //   // headerTitleStyle: {
+  //   //   fontWeight: "bold"
+  //   // }
+  //   headerRight:(
+  //     <Ionicons style={{padding:10}} onPress={()=>this.props.navigation.navigate('Bathroom')} name='ios-list' size={30} color={"#fff"}/>
+
+  //   ),
+  // };
 
   getLocation = async () => {
     let location = "";

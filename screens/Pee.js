@@ -52,7 +52,7 @@ class Pee extends Component {
   static navigationOptions = {
     title: "DETAILS",
     headerStyle: {
-      backgroundColor: "#3a455c",
+      backgroundColor: "#52AEA0",
       elevation: 0
     },
     headerTintColor: "#fff",
