@@ -26,6 +26,7 @@ const DrawerConfig = {
 };
 
 const BathStackNavigator = createStackNavigator({
+<<<<<<< HEAD
   BathMap: {
     screen: BathMap,
     navigationOptions: ({ navigation }) => {
@@ -49,6 +50,25 @@ const BathStackNavigator = createStackNavigator({
           fontWeight: "bold"
         }
       };
+=======
+  BathMap: {  
+  screen: BathMap,
+  navigationOptions:({navigation}) =>{
+    return{
+      headerLeft: (
+        <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
+      ),
+
+      
+      title: "WHIZZ",
+    headerStyle: {
+      backgroundColor: '#52AEA0',//"#3a455c",
+      elevation: 0
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+>>>>>>> dae1f08f5fe05696e8562e8753b7f7b6738c08c8
     }
   },
   Pee: Pee,
@@ -210,7 +230,7 @@ const AppTabNavigator = createBottomTabNavigator(
       }
     }),
     tabBarOptions: {
-      activeTintColor: "orange",
+      activeTintColor: 'orange',
       inactiveTintColor: "gray"
     }
   }
