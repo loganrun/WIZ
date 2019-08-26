@@ -211,14 +211,14 @@ class Explore extends Component {
       <Container>
         <Header
           style={{
-            backgroundColor: "#3a455c",
+            backgroundColor: "#52AEA0",
             height: 100,
             borderBottomColor: "#757575"
           }}
         />
         <View
           style={{
-            backgroundColor: "#3a455c",
+            backgroundColor: "#52AEA0",
             position: "absolute",
             flex: 1,
             left: 0,
@@ -242,11 +242,11 @@ class Explore extends Component {
           >
             <Icon
               active
-              name="search"
+              name='search'
               style={{ paddingLeft: 10, paddingRight: 10 }}
             />
             <Input
-              placeholder="Need a Break?"
+              placeholder='Need a Break?'
               value={this.state.search}
               onChangeText={this.handleSearch}
             />
@@ -299,8 +299,8 @@ class Explore extends Component {
           >
             {this.state.loading ? (
               <ActivityIndicator
-                size="large"
-                color="blue"
+                size='large'
+                color='blue'
                 style={{
                   paddingTop: 200,
                   paddingLeft: 200,

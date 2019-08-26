@@ -26,7 +26,6 @@ const DrawerConfig = {
 };
 
 const BathStackNavigator = createStackNavigator({
-<<<<<<< HEAD
   BathMap: {
     screen: BathMap,
     navigationOptions: ({ navigation }) => {
@@ -35,7 +34,7 @@ const BathStackNavigator = createStackNavigator({
           <Ionicons
             style={{ padding: 10 }}
             onPress={() => navigation.openDrawer()}
-            name="md-menu"
+            name='md-menu'
             size={30}
             color={"#fff"}
           />
@@ -50,30 +49,12 @@ const BathStackNavigator = createStackNavigator({
           fontWeight: "bold"
         }
       };
-=======
-  BathMap: {  
-  screen: BathMap,
-  navigationOptions:({navigation}) =>{
-    return{
-      headerLeft: (
-        <Ionicons style={{padding: 10}} onPress={() => navigation.openDrawer()} name="md-menu" size={30} color={"#fff"} />
-      ),
-
-      
-      title: "WHIZZ",
-    headerStyle: {
-      backgroundColor: '#52AEA0',//"#3a455c",
-      elevation: 0
-    },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
->>>>>>> dae1f08f5fe05696e8562e8753b7f7b6738c08c8
     }
   },
   Pee: Pee,
   Bathroom: Bathroom
 });
+
 const HomeStackNavigator = createStackNavigator({
   Home: Home,
   Login: Login,
@@ -89,14 +70,14 @@ const LoginStackNavigator = createStackNavigator({
           <Ionicons
             style={{ padding: 10 }}
             onPress={() => navigation.openDrawer()}
-            name="md-menu"
+            name='md-menu'
             size={30}
             color={"#fff"}
           />
         ),
         title: "LOGIN",
         headerStyle: {
-          backgroundColor: "#3a455c",
+          backgroundColor: "#52AEA0",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -118,14 +99,14 @@ const SignStackNavigator = createStackNavigator({
           <Ionicons
             style={{ padding: 10 }}
             onPress={() => navigation.openDrawer()}
-            name="md-menu"
+            name='md-menu'
             size={30}
             color={"#fff"}
           />
         ),
         title: "SIGNUP",
         headerStyle: {
-          backgroundColor: "#3a455c",
+          backgroundColor: "#52AEA0",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -145,14 +126,14 @@ const AppStackNavigator = createStackNavigator({
           <Ionicons
             style={{ padding: 10 }}
             onPress={() => navigation.openDrawer()}
-            name="md-menu"
+            name='md-menu'
             size={30}
             color={"#fff"}
           />
         ),
         title: "FOOD",
         headerStyle: {
-          backgroundColor: "#3a455c",
+          backgroundColor: "#52AEA0",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -174,14 +155,14 @@ const FavoriteStackNavigator = createStackNavigator({
           <Ionicons
             style={{ padding: 10 }}
             onPress={() => navigation.openDrawer()}
-            name="md-menu"
+            name='md-menu'
             size={30}
             color={"#fff"}
           />
         ),
         title: "FAVORITES",
         headerStyle: {
-          backgroundColor: "#3a455c",
+          backgroundColor: "#52AEA0",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -230,7 +211,7 @@ const AppTabNavigator = createBottomTabNavigator(
       }
     }),
     tabBarOptions: {
-      activeTintColor: 'orange',
+      activeTintColor: "#52AEA0",
       inactiveTintColor: "gray"
     }
   }
@@ -243,10 +224,10 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Home",
-          drawerIcon: <Ionicons name="ios-home" size={30} />,
+          drawerIcon: <Ionicons name='ios-home' size={30} />,
           title: "Login",
           headerStyle: {
-            backgroundColor: "#3a455c",
+            backgroundColor: "#52AEA0",
             elevation: 0
           },
           headerTintColor: "#fff",
@@ -261,19 +242,19 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "SignIn",
-          drawerIcon: <Ionicons name="ios-key" size={30} />,
+          drawerIcon: <Ionicons name='ios-key' size={30} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
               onPress={() => navigation.openDrawer()}
-              name="md-menu"
+              name='md-menu'
               size={30}
               color={"#fff"}
             />
           ),
           title: "Login",
           headerStyle: {
-            backgroundColor: "#3a455c",
+            backgroundColor: "#52AEA0",
             elevation: 0
           },
           headerTintColor: "#fff",
@@ -288,19 +269,19 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "SignUp",
-          drawerIcon: <Ionicons name="ios-person-add" size={30} />,
+          drawerIcon: <Ionicons name='ios-person-add' size={30} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
               onPress={() => navigation.openDrawer()}
-              name="md-menu"
+              name='md-menu'
               size={30}
               color={"#fff"}
             />
           ),
           title: "Sign Up",
           headerStyle: {
-            backgroundColor: "#3a455c",
+            backgroundColor: "#52AEA0",
             elevation: 0
           },
           headerTintColor: "#fff",
@@ -315,19 +296,19 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Favorites",
-          drawerIcon: <Ionicons name="ios-heart" size={30} />,
+          drawerIcon: <Ionicons name='ios-heart' size={30} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
               onPress={() => navigation.openDrawer()}
-              name="md-menu"
+              name='md-menu'
               size={30}
               color={"#fff"}
             />
           ),
           title: "Sign Up",
           headerStyle: {
-            backgroundColor: "#3a455c",
+            backgroundColor: "#52AEA0",
             elevation: 0
           },
           headerTintColor: "#fff",
