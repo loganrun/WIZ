@@ -30,7 +30,8 @@ import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
 //import ContentArea from "../components/ContentArea";
-var ad = require("../assets/ad.png");
+let ad = require("../assets/ad.png");
+let bathicon = require('../assets/bath3.png')
 //var vid = require("../assets/donut.mp4")
 
 //const SCREEN_HEIGHT = Dimensions.get("window").height;

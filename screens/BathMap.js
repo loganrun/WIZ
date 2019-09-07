@@ -33,7 +33,7 @@ import { MapView } from "expo";
 import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
-var bathIcon = require("../assets/restroom-main.png");
+var bathIcon = require("../assets/bath3.png");
 var button5 = require("../assets/button.png")
 //import ContentArea from "../components/ContentArea";
 //var ad = require("../assets/ad.png");
