@@ -28,6 +28,7 @@ import { showLocation } from "react-native-map-link";
 import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
+import Ad from "../components/Ads"
 //import ContentArea from "../components/ContentArea";
 var ad = require("../assets/ad.png");
 
@@ -225,8 +226,9 @@ class ContentArea extends React.Component {
             </CardItem>
           </Card>
         </TouchableOpacity>
+        <Ad/>
 
-        <View
+        {/* <View
           style={{
             marginTop: 20,
             flex: 1,
@@ -246,7 +248,7 @@ class ContentArea extends React.Component {
             <Image source={ad} style={{ height: 320, width: 320 }} />
           </Card>
           <View style={{ flex: 0.2 }} />
-        </View>
+        </View> */}
         <View
           style={{
             paddingTop: 10,
