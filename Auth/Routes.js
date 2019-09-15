@@ -55,12 +55,12 @@ const BathStackNavigator = createStackNavigator({
   Bathroom: Bathroom
 });
 
-const HomeStackNavigator = createStackNavigator({
-  Home: Home,
-  Login: Login,
-  ResSign: ResSign,
-  SignUp: SignUp
-});
+// const HomeStackNavigator = createStackNavigator({
+//   Home: Home,
+//   Login: Login,
+//   ResSign: ResSign,
+//   SignUp: SignUp
+// });
 const LoginStackNavigator = createStackNavigator({
   Login: {
     screen: AuthHome,

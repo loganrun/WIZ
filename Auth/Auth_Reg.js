@@ -5,19 +5,17 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
+  KeyboardAvoidingView
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
 
-
-
 class AuthReg extends Component {
   static navigationOptions = {
     title: "SIGN UP",
     headerStyle: {
-      backgroundColor: "#3a455c",
+      backgroundColor: "#52AEA0",
       elevation: 0
     },
     headerTintColor: "#fff",
@@ -47,7 +45,7 @@ class AuthReg extends Component {
         .string()
         .label("Last name")
         .required(),
-        userName: yup
+      userName: yup
         .string()
         .label("User name")
         .required()
@@ -64,30 +62,32 @@ class AuthReg extends Component {
           promotions: false
         }}
         onSubmit={(value, actions) => {
-          
           let email = value.email;
-          let password = value.password
+          let password = value.password;
 
-          firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(cred => this.props.navigation.navigate('Main'))
-          .catch(function(error) {
-            
-            var errorCode = error.code;
-            var errorMessage = error.message;
-             if(errorCode == "auth/email-already-in-use") {
-               actions.setErrors({email: "Email already in use.  Please login or use another email address."});
+          firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(cred => this.props.navigation.navigate("Main"))
+            .catch(function(error) {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              if (errorCode == "auth/email-already-in-use") {
+                actions.setErrors({
+                  email:
+                    "Email already in use.  Please login or use another email address."
+                });
+              } //else if(errorCode == "auth/wrong-password") {
+              //   actions.setErrors({password: "Password is incorrect"})
+              // }
 
-             }//else if(errorCode == "auth/wrong-password") {
-            //   actions.setErrors({password: "Password is incorrect"})
-            // }
-      
-            actions.setSubmitting(false)
-          });
+              actions.setSubmitting(false);
+            });
         }}
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView style={styles.container} behavior="padding">
+          <KeyboardAvoidingView style={styles.container} behavior='padding'>
             <Text style={styles.text}>SIGN UP</Text>
             <TextInput
               style={styles.textInput}
@@ -140,7 +140,7 @@ class AuthReg extends Component {
               style={styles.textInput}
               onChangeText={formikProps.handleChange("service")}
               onBlur={formikProps.handleBlur("service")}
-              placeholder="Which service do you drive for?"
+              placeholder='Which service do you drive for?'
             />
             {/* <View style={{ flexDirection: "row" }}>
               <Switch

@@ -13,20 +13,18 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
 
-
-
 class AuthLogin extends Component {
-  // static navigationOptions = {
-  //   title: "LOGIN",
-  //   headerStyle: {
-  //     backgroundColor: "#3a455c",
-  //     elevation: 0
-  //   },
-  //   headerTintColor: "#fff",
-  //   headerTitleStyle: {
-  //     fontWeight: "bold"
-  //   }
-  // };
+  static navigationOptions = {
+    title: "LOGIN",
+    headerStyle: {
+      backgroundColor: "#52AEA0",
+      elevation: 0
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold"
+    }
+  };
 
   render() {
     const validationSchema = yup.object().shape({
@@ -47,27 +45,29 @@ class AuthLogin extends Component {
         initialValues={{ email: "", password: "" }}
         onSubmit={(value, actions) => {
           let email = value.email;
-          let password = value.password
-          firebase.auth().signInWithEmailAndPassword(email, password)
-          .then(cred => this.props.navigation.navigate('Main'))
-          .catch(function(error) {
-            
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if(errorCode == "auth/user-not-found") {
-              actions.setErrors({email: "User not found.  Please try again"});
+          let password = value.password;
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(cred => this.props.navigation.navigate("Main"))
+            .catch(function(error) {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              if (errorCode == "auth/user-not-found") {
+                actions.setErrors({
+                  email: "User not found.  Please try again"
+                });
+              } else if (errorCode == "auth/wrong-password") {
+                actions.setErrors({ password: "Password is incorrect" });
+              }
 
-            }else if(errorCode == "auth/wrong-password") {
-              actions.setErrors({password: "Password is incorrect"})
-            }
-      
-            actions.setSubmitting(false)
-          });
+              actions.setSubmitting(false);
+            });
         }}
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView style={styles.container} behavior="padding">
+          <KeyboardAvoidingView style={styles.container} behavior='padding'>
             {/* <View style={styles.container}> */}
             <Text style={styles.text}>Login</Text>
             <TextInput
@@ -84,7 +84,7 @@ class AuthLogin extends Component {
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("password")}
-              placeholder="Please enter password"
+              placeholder='Please enter password'
               secureTextEntry
               onBlur={formikProps.handleBlur("password")}
             />
@@ -109,7 +109,6 @@ class AuthLogin extends Component {
                 </Text>
               </TouchableOpacity>
             )}
-            
           </KeyboardAvoidingView>
         )}
       </Formik>

@@ -42,9 +42,9 @@ class Home extends Component {
   // };
 
   static navigationOptions = {
-    title: "WIZ",
+    title: "WHIZZ",
     headerStyle: {
-      backgroundColor: "#3a455c"
+      backgroundColor: "#52AEA0"
       //justifyContent: "center"
     },
     headerTintColor: "#fff",

@@ -40,9 +40,9 @@ class AuthHome extends Component {
   // };
 
   static navigationOptions = {
-    title: "WIZ",
+    title: "WHIZZ",
     headerStyle: {
-      backgroundColor: "#3a455c"
+      backgroundColor: "#52AEA0"
       //justifyContent: "center"
     },
     headerTintColor: "#fff",
@@ -56,20 +56,7 @@ class AuthHome extends Component {
       <View style={styles.container}>
         <View style={{ flex: 0.25 }}>
           <TouchableOpacity
-            onPress={() => navigate("Login")}
             style={styles.btn1}
-          >
-            <Text
-              style={{
-                fontSize: 24,
-                color: "#fff" //00BFFF
-              }}
-            >
-              Login
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btn2}
             onPress={() => navigate("SignUp")}
           >
             <Text
@@ -81,7 +68,45 @@ class AuthHome extends Component {
               SignUp
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigate("Login")}
+            style={styles.btn2}
+          >
+            <Text
+              style={{
+                fontSize: 24,
+                color: "#fff" //00BFFF
+              }}
+            >
+              Login
+            </Text>
+          </TouchableOpacity>
         </View>
+
+        <Text
+          style={{
+            fontSize: 20,
+            marginBottom: 15,
+            marginTop: 30,
+            textAlign: "center"
+          }}
+        >
+          {" "}
+          Add Your Business To Our Growing Community!
+        </Text>
+        <TouchableOpacity
+          style={styles.btn1}
+          onPress={() => navigate("SignUp")}
+        >
+          <Text
+            style={{
+              fontSize: 24,
+              color: "#fff" //#00BFFF
+            }}
+          >
+            SignUp
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }

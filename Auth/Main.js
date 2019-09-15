@@ -9,8 +9,7 @@ import Login from "./Auth_Login";
 import Reset from "./Auth_Reset";
 import SignUp from "./Auth_Reg";
 import Routes from "./Routes";
-import AuthLoading from '../screens/AuthLoading'
-
+import AuthLoading from "../screens/AuthLoading";
 
 const AuthStackNavigator = createStackNavigator({
   Home: AuthHome,
@@ -19,15 +18,15 @@ const AuthStackNavigator = createStackNavigator({
   SignUp: SignUp
 });
 
-const switchNavigator = createSwitchNavigator({
-  Main: Routes,
-  Auth: AuthStackNavigator,
-  AuthLoading:  AuthLoading
-},
-{
-  initialRouteName: 'Main'
-}
-
+const switchNavigator = createSwitchNavigator(
+  {
+    AuthLoading: AuthLoading,
+    Main: Routes,
+    Auth: AuthStackNavigator
+  },
+  {
+    initialRouteName: "AuthLoading"
+  }
 );
 
 export default createAppContainer(switchNavigator);

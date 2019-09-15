@@ -15,7 +15,7 @@ class SignUp extends Component {
   static navigationOptions = {
     title: "HOME",
     headerStyle: {
-      backgroundColor: "#3a455c",
+      backgroundColor: "#52AEA0",
       elevation: 0
     },
     headerTintColor: "#fff",
@@ -65,7 +65,7 @@ class SignUp extends Component {
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView style={styles.container} behavior="padding">
+          <KeyboardAvoidingView style={styles.container} behavior='padding'>
             <Text style={styles.text}>SIGN UP</Text>
             <TextInput
               style={styles.textInput}
@@ -109,7 +109,7 @@ class SignUp extends Component {
               style={styles.textInput}
               onChangeText={formikProps.handleChange("service")}
               onBlur={formikProps.handleBlur("service")}
-              placeholder="Which service do you drive for?"
+              placeholder='Which service do you drive for?'
             />
             <View style={{ flexDirection: "row" }}>
               <Switch
