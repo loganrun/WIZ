@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   TextInput,
+  ActivityIndicator,
   TouchableOpacity,
   KeyboardAvoidingView
 } from "react-native";
@@ -161,16 +162,24 @@ class AuthReg extends Component {
                 Would you like to receive Coupons and Promotions?
               </Text>
             </View> */}
-            <TouchableOpacity
-              style={styles.button}
-              onPress={formikProps.handleSubmit}
-            >
-              <Text
-                style={{ fontSize: 22, color: "#ffff", fontWeight: "bold" }}
+            {formikProps.isSubmitting ? (
+              <ActivityIndicator />
+            ) : (
+              <TouchableOpacity
+                style={styles.button}
+                onPress={formikProps.handleSubmit}
               >
-                Submit
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{
+                    fontSize: 22,
+                    color: "#ffff",
+                    fontWeight: "bold"
+                  }}
+                >
+                  Submit
+                </Text>
+              </TouchableOpacity>
+            )}
           </KeyboardAvoidingView>
         )}
       </Formik>
