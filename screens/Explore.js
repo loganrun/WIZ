@@ -17,7 +17,7 @@ import {
   AsyncStorage
 } from "react-native";
 
-import { Location, Permissions } from "expo";
+//import { Location, Permissions } from "expo";
 import api from "../services/Api";
 
 import {
