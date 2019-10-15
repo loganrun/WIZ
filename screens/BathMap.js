@@ -29,7 +29,7 @@ import {
 
 //import { showLocation } from "react-native-map-link";
 import StarRating from "react-native-star-rating";
-import { MapView } from "expo";
+import MapView from 'react-native-maps';
 import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";

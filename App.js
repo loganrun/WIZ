@@ -1,7 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 import Main from './Auth/Main'
-import { SplashScreen, AppLoading, Location, Permissions } from "expo";
+import { SplashScreen, AppLoading } from "expo";
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 import * as firebase from 'firebase'
 import api from "./services/Api";
 import restApi from "./services/restroom";

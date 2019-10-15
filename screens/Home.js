@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { Location, Permissions } from "expo";
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 //import { LinearGradient } from "expo";
 //import { Button } from "native-base";
 //import { MaterialCommunityIcons } from "@expo/vector-icons";

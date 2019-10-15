@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, Dimensions } from "react-native";
-import { MapView } from "expo";
+import MapView from 'react-native-maps';
 var locationImg = require("../assets/circle_blue2.png");
 
 //const Marker = MapView.Marker;

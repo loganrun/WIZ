@@ -16,7 +16,8 @@ import {
   Keyboard
 } from "react-native";
 
-import { Location, Permissions } from "expo";
+import * as Permissions from 'expo-permissions';
+import * as Location from 'expo-location';
 
 import {
   Container,
