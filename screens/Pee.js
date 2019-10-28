@@ -30,8 +30,9 @@ import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
 //import ContentArea from "../components/ContentArea";
-let ad = require("../assets/ad.png");
-let bathicon = require('../assets/bath3.png')
+//let ad = require("../assets/ad.png");
+//let bathicon = require('../assets/bath3.png')
+import Ad from "../components/Ads";
 //var vid = require("../assets/donut.mp4")
 
 //const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -214,8 +215,8 @@ class ContentArea extends React.Component {
             </CardItem>
           </Card>
         </TouchableOpacity>
-
-        <View
+        <Ad />
+        {/* <View
           style={{
             marginTop: 20,
             flex: 1,
@@ -235,9 +236,10 @@ class ContentArea extends React.Component {
             <Image source={ad} style={{ height: 320, width: 320 }} />
             {/* <Video
             source={vid} rate={1.0} isMuted={false} resizeMode="cover" shouldPlay isLooping style={{with: 320, height:320}}/> */}
-          </Card>
+        {/* </Card>
           <View style={{ flex: 0.2 }} />
-        </View>
+        </View> */}
+        
         <View
           style={{
             paddingTop: 10,
