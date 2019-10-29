@@ -220,7 +220,7 @@ const AppTabNavigator = createBottomTabNavigator(
 const AppDrawerNavigator = createDrawerNavigator(
   {
     Home: {
-      screen: BathMap,
+      screen: AppTabNavigator,
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Home",
