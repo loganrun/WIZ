@@ -22,7 +22,9 @@ import SignUp from "../Auth/Auth_Reg";
 
 const Width = Dimensions.get("window").width;
 const DrawerConfig = {
-  drawerWidth: Width * 0.8
+  drawerWidth: Width * 0.8,
+  drawerBackgroundColor: "#f5f5f5", //"#d2b48c", //"#fdf5e6",
+  overlayColor: 0
 };
 
 const BathStackNavigator = createStackNavigator({
@@ -224,7 +226,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Home",
-          drawerIcon: <Ionicons name='ios-home' size={30} />,
+          drawerIcon: <Ionicons name='ios-home' size={30} color='#d2b48c' />,
           title: "Login",
           headerStyle: {
             backgroundColor: "#52AEA0",
@@ -242,7 +244,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "SignIn",
-          drawerIcon: <Ionicons name='ios-key' size={30} />,
+          drawerIcon: <Ionicons name='ios-key' size={30} color={"#d2b48c"} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
@@ -265,11 +267,13 @@ const AppDrawerNavigator = createDrawerNavigator(
       }
     },
     SignUp: {
-      screen: SignStackNavigator,
+      screen: LoginStackNavigator,
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "SignUp",
-          drawerIcon: <Ionicons name='ios-person-add' size={30} />,
+          drawerIcon: (
+            <Ionicons name='ios-person-add' size={30} color={"#d2b48c"} />
+          ),
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
@@ -296,7 +300,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Favorites",
-          drawerIcon: <Ionicons name='ios-heart' size={30} />,
+          drawerIcon: <Ionicons name='ios-heart' size={30} color={"#d2b48c"} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
@@ -311,7 +315,7 @@ const AppDrawerNavigator = createDrawerNavigator(
             backgroundColor: "#52AEA0",
             elevation: 0
           },
-          headerTintColor: "#fff",
+          headerTintColor: "#d2b48c",
           headerTitleStyle: {
             fontWeight: "bold"
           }

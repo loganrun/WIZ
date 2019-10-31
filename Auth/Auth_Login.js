@@ -7,7 +7,8 @@ import {
   TextInput,
   ActivityIndicator,
   KeyboardAvoidingView,
-  Platform
+  Platform,
+  AsyncStorage
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -49,8 +50,19 @@ class AuthLogin extends Component {
           firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
+            .then(function(cred) {
+              //console.log(cred);
+              let user = firebase.auth().currentUser;
+              //console.log(user);
+              if (!user.emailVerified) {
+                user.sendEmailVerification();
+                AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
+              }
+              AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
+            })
             .then(cred => this.props.navigation.navigate("Main"))
             .catch(function(error) {
+              //console.log(error);
               var errorCode = error.code;
               var errorMessage = error.message;
               if (errorCode == "auth/user-not-found") {

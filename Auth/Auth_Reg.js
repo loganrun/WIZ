@@ -6,11 +6,13 @@ import {
   TextInput,
   ActivityIndicator,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  AsyncStorage
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
+import axios from "axios";
 
 class AuthReg extends Component {
   static navigationOptions = {
@@ -26,6 +28,49 @@ class AuthReg extends Component {
   };
 
   render() {
+    // const user = axios.create({
+    //   baseURL: "https://whizzit.herokuapp.com/api/users",
+    //   timeout: 40000,
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json"
+    //   }
+    // });
+
+    // const createUser = async ({ value, user }) => {
+    //   try {
+    //     axios({
+    //       method: "post",
+    //       baseURL: "https://whizzit.herokuapp.com/api/users",
+    //       timeout: 40000,
+    //       headers: {
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json"
+    //       },
+    //       data: {
+    //         email: value.email,
+    //         firstName: value.firstName,
+    //         lastName: value.lastName,
+    //         userName: value.userName,
+    //         service: value.service,
+    //         userId: user.uid
+    //       }
+    //     });
+    //     // let params = {
+    //     //   email: value.email,
+    //     //   firstName: value.firstName,
+    //     //   lastName: value.lastName,
+    //     //   userName: value.userName,
+    //     //   service:  value.service,
+    //     //   userId: user.uid
+
+    //     // };
+
+    //     // let response = await restApi.get("/by_location", { params });
+    //   } catch (e) {
+    //     console.log("error", e.message);
+    //   }
+    // };
     const validationSchema = yup.object().shape({
       email: yup
         .string()
@@ -69,6 +114,32 @@ class AuthReg extends Component {
           firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
+            .then(function(cred) {
+              let user = firebase.auth().currentUser;
+              user.sendEmailVerification();
+              AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
+              //createUser(value, user);
+            })
+            .then(function(cred) {
+              let user = firebase.auth().currentUser;
+              axios({
+                method: "post",
+                baseURL: "https://whizzit.herokuapp.com/api/users",
+                timeout: 40000,
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json"
+                },
+                data: {
+                  email: value.email,
+                  firstName: value.firstName,
+                  lastName: value.lastName,
+                  userName: value.userName,
+                  service: value.service,
+                  userId: user.uid
+                }
+              });
+            })
             .then(cred => this.props.navigation.navigate("Main"))
             .catch(function(error) {
               var errorCode = error.code;

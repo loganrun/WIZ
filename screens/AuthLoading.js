@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import {
   ActivityIndicator,
   AsyncStorage,
   StatusBar,
   StyleSheet,
-  View,
-} from 'react-native';
-import firebase from 'firebase'
+  View
+} from "react-native";
+import firebase from "firebase";
 
 export default class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -17,17 +17,18 @@ export default class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
     // firebase.auth().onAuthStateChanged(function(user) {
-    //     if (user != null) {
-    //       this.props.navigation.navigate("Main")
-    //     } else {
-    //       this.props.navigation.navigate("Auth")
-    //     }
-    //   });
+    //   if (user) {
+    //     this.props.navigation.navigate("Main");
+    //   } else {
+    //     this.props.navigation.navigate("Auth");
+    //   }
+    //   //console.log(user);
+    // });
 
-    //const userToken = await AsyncStorage.getItem('userToken');
-    firebase.auth().currentUser
-
-    this.props.navigation.navigate(false ? 'Main' : 'Auth');
+    const userToken = await AsyncStorage.getItem("userToken");
+    firebase.auth().onAuthStateChanged(user => {
+      this.props.navigation.navigate(user ? "Main" : "Auth");
+    });
   };
 
   // Render any loading content that you like here
@@ -35,7 +36,7 @@ export default class AuthLoadingScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ActivityIndicator />
-        <StatusBar barStyle="default" />
+        <StatusBar barStyle='default' />
       </View>
     );
   }
@@ -44,9 +45,9 @@ export default class AuthLoadingScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     marginHorizontal: 50,
-    paddingTop: '50%',
-    alignItems: 'center',
-  },
+    paddingTop: "50%",
+    alignItems: "center"
+  }
 });
