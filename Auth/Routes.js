@@ -19,6 +19,7 @@ import BathMap from "../screens/BathMap";
 import AuthHome from "./Auth_Home";
 import Reset from "../Auth/Auth_Reset";
 import SignUp from "../Auth/Auth_Reg";
+import AddBath from "../screens/AddBath";
 
 const Width = Dimensions.get("window").width;
 const DrawerConfig = {
@@ -91,7 +92,34 @@ const LoginStackNavigator = createStackNavigator({
   },
   Reset: Reset
 });
-
+const AddBathStackNavigator = createStackNavigator({
+  AddBath: {
+    screen: AddBath,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name='md-menu'
+            size={30}
+            color={"#fff"}
+          />
+        ),
+        title: "Add Bathrooom",
+        headerStyle: {
+          backgroundColor: "#52AEA0",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+      };
+    }
+  },
+  Reset: Reset
+});
 const SignStackNavigator = createStackNavigator({
   SignUp: {
     screen: SignUp,
@@ -228,6 +256,26 @@ const AppDrawerNavigator = createDrawerNavigator(
           drawerLabel: "Home",
           drawerIcon: <Ionicons name='ios-home' size={30} color='#d2b48c' />,
           title: "Login",
+          headerStyle: {
+            backgroundColor: "#52AEA0",
+            elevation: 0
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
+        };
+      }
+    },
+    AddBath: {
+      screen: AddBathStackNavigator,
+      navigationOptions: ({ navigation }) => {
+        return {
+          drawerLabel: "Add Bathroom",
+          drawerIcon: (
+            <Ionicons name='ios-business' size={30} color='#d2b48c' />
+          ),
+          title: "Add Bathroom",
           headerStyle: {
             backgroundColor: "#52AEA0",
             elevation: 0
