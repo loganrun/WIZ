@@ -68,6 +68,7 @@ class Pee extends Component {
     //   transform: this.animation.getTranslateTransform()
     // };
     let item = this.props.navigation.getParam("item");
+    console.log(item)
     let curLat = this.props.navigation.getParam("currentLat");
     let curLon = this.props.navigation.getParam("currentLon");
     //console.log(curLat);

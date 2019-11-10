@@ -34,6 +34,7 @@ import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
 var bathIcon = require("../assets/bath3.png");
+var restRoom= require("../assets/restroom-orange.png")
 var button5 = require("../assets/button.png")
 //import ContentArea from "../components/ContentArea";
 //var ad = require("../assets/ad.png");
@@ -83,14 +84,14 @@ constructor(props) {
     this.setState({mapMargin: 0});
   }
 
-  static navigationOptions = ({ navigation }) => {
-    //const { navigate } = this.props.navigation;
-    return {
-      headerRight: (
-        <Ionicons style={{padding:10}} name='ios-list' size={30} color={"#fff"}/>
-      ),
-    };
-  };
+  // static navigationOptions = ({ navigation }) => {
+  //   //const { navigate } = this.props.navigation;
+  //   return {
+  //     headerRight: (
+  //       <Ionicons style={{padding:10}} name='ios-list' size={30} color={"#fff"}/>
+  //     ),
+  //   };
+  // };
 
   // static navigationOptions = {
   //   // title: "WHIZZ",
@@ -184,26 +185,10 @@ constructor(props) {
     this.loadBathroom()
   }
 
-  // markerClick = () =>{
-  //   console.log("click")
-  // }
-
-  
-
   createMarkers= () => {
     const { navigate } = this.props.navigation;
 
     return this.state.bathroom.map((item, i) => {
-      // colorPick = () => {
-      //   this.setState({
-      //     pick: this.state.color[Math.floor(Math.random()*this.state.color.length)]
-      //   })
-
-      //   console.log(this.state.pick)
-        
-      // }
-      // //const color = this.colorPick()
-      // //console.log(color)
       return (
         <MapView.Marker
         key= {item.id}
@@ -223,19 +208,29 @@ constructor(props) {
           })}}
         
         >
-          <MapView.Callout tooltip={true}>
-                <Card style={{flexDirection: 'row'}}>
+          <MapView.Callout>
+                <Card transparent style={{flexDirection: 'row'}}>
                   <Left style={{paddingLeft: 10}}>
-                    <View>
-                      <Button style={{width: 50, height: 50, backgroundColor: '#13DE25'}}>
+                    
+                      {/* <Button style={{width: 50, height: 50, backgroundColor: '#13DE25'}}>
                         <Text style={{fontWeight:'bold', fontSize: 35, color: 'white', paddingLeft: 15}}>5</Text>
-                        </Button>
-                        </View>
-                        </Left>
+        </Button>*/} 
+        <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={restRoom}style={{width: 50, height: 50}}/></Text>
+                        
+                      
+        </Left> 
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
                       <Text style={{fontWeight: 'bold'}}>{item.name}</Text>
                       <Text>{item.street}</Text>
+                      <StarRating
+                  disabled={true}
+                  maxStars={5}
+                  rating={4}
+                  starSize={12}
+                  fullStarColor={"orange"}
+                  emptyStarColor={"orange"}
+                />
                     </Right>
                   </CardItem>
                 </Card>
