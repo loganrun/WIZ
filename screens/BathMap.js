@@ -211,22 +211,16 @@ constructor(props) {
           <MapView.Callout>
                 <Card transparent style={{flexDirection: 'row'}}>
                   <Left style={{paddingLeft: 10}}>
-                    
-                      {/* <Button style={{width: 50, height: 50, backgroundColor: '#13DE25'}}>
-                        <Text style={{fontWeight:'bold', fontSize: 35, color: 'white', paddingLeft: 15}}>5</Text>
-        </Button>*/} 
-        <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={restRoom}style={{width: 50, height: 50}}/></Text>
-                        
-                      
+        <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={restRoom}style={{width: 50, height: 50}}/></Text>                  
         </Left> 
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
-                      <Text style={{fontWeight: 'bold'}}>{item.name}</Text>
+                      <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: 'blue', fontSize: 17}}>{item.name}</Text>
                       <Text>{item.street}</Text>
                       <StarRating
                   disabled={true}
                   maxStars={5}
-                  rating={4}
+                  rating={4.5}
                   starSize={12}
                   fullStarColor={"orange"}
                   emptyStarColor={"orange"}
