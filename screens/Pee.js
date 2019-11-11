@@ -33,6 +33,7 @@ import Maps from "../components/Maps";
 //let ad = require("../assets/ad.png");
 //let bathicon = require('../assets/bath3.png')
 import Ad from "../components/Ads";
+import Ratings from "../components/Rating"
 //var vid = require("../assets/donut.mp4")
 
 //const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -83,7 +84,7 @@ class Pee extends Component {
         <ScrollView style={{ flex: 1 }}>
           <View
             style={{
-              height: 1000,
+              height: 1500,
               backgroundColor: "#fff"
             }}
           />
@@ -189,7 +190,7 @@ class ContentArea extends React.Component {
                   paddingHorizontal: 10
                 }}
               >
-                <Text style={{ fontWeight: "bold", fontSize: 20 }}>{name}</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 20, textTransform: 'capitalize'}}>{name}</Text>
                 <Text>{address}</Text>
                 <Text>{city}</Text>
                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>
@@ -216,31 +217,10 @@ class ContentArea extends React.Component {
             </CardItem>
           </Card>
         </TouchableOpacity>
+
+      <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE RESTROOM</Text>
+      <Ratings/>
         <Ad />
-        {/* <View
-          style={{
-            marginTop: 20,
-            flex: 1,
-            flexDirection: "row"
-          }}
-        >
-          <View style={{ flex: 0.2 }} />
-          <Card
-            style={{
-              flex: 1,
-              height: 300,
-              //margin: 30,
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Image source={ad} style={{ height: 320, width: 320 }} />
-            {/* <Video
-            source={vid} rate={1.0} isMuted={false} resizeMode="cover" shouldPlay isLooping style={{with: 320, height:320}}/> */}
-        {/* </Card>
-          <View style={{ flex: 0.2 }} />
-        </View> */}
-        
         <View
           style={{
             paddingTop: 10,
@@ -294,6 +274,6 @@ const styles = StyleSheet.create({
   },
   Card: {
     flex: 1,
-    backgroundColor: "#fff" //"#F5F5F5"
+    backgroundColor:  "#fff"//"#f5f5f5"
   }
 });

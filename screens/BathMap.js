@@ -209,6 +209,7 @@ constructor(props) {
         
         >
           <MapView.Callout>
+            <View>
                 <Card transparent style={{flexDirection: 'row'}}>
                   <Left style={{paddingLeft: 10}}>
         <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={restRoom}style={{width: 50, height: 50}}/></Text>                  
@@ -228,6 +229,7 @@ constructor(props) {
                     </Right>
                   </CardItem>
                 </Card>
+                </View>
           </MapView.Callout>
         </MapView.Marker>
       );
