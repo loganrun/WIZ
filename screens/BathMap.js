@@ -208,7 +208,7 @@ constructor(props) {
           })}}
         
         >
-          <MapView.Callout>
+          <MapView.Callout toolTip>
             <View>
                 <Card transparent style={{flexDirection: 'row'}}>
                   <Left style={{paddingLeft: 10}}>
