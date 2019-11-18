@@ -69,7 +69,7 @@ class Pee extends Component {
     //   transform: this.animation.getTranslateTransform()
     // };
     let item = this.props.navigation.getParam("item");
-    console.log(item)
+    //console.log(item)
     let curLat = this.props.navigation.getParam("currentLat");
     let curLon = this.props.navigation.getParam("currentLon");
     //console.log(curLat);
@@ -219,7 +219,7 @@ class ContentArea extends React.Component {
         </TouchableOpacity>
 
       <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE RESTROOM</Text>
-      <Ratings/>
+      <Ratings item={this.props.item}/>
         <Ad />
         <View
           style={{

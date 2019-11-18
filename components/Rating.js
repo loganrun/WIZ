@@ -1,19 +1,85 @@
 import React, { Component } from 'react';
-import { Image, Text,TouchableOpacity } from 'react-native';
+import { Image, Text,TouchableOpacity, StyleSheet } from 'react-native';
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
+import { number } from 'yup';
 let horrible = require('../assets/Omg_Emoji.png')
 let bad = require('../assets/Very_Sad_Emoji.png')
 let ok = require('../assets/Neutral_Face_Emoji.png')
 let good = require('../assets/Slightly_Smiling_Face.png')
 let great = require('../assets/Smiling_with_Eyes_Opened.png')
-export default class Ratings extends Component {
 
-    addOne = () =>{
-        console.log("press")
+class Ratings extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      latitude: 0,
+      rate: 0,
+      longitude:  0,
+      name: "",
+      street: "",
+      state:  "",
+      id: "",
+      city: "",
+      changing_table: false
+    };
+  }
+
+  componentDidMount() {
+    this.setReview()
+  }
+
+  setReview=()=>{
+    let item = this.props.item;
+    let latitude = item.latitude;
+    let longitude = item.longitude
+    let name = item.name
+    let street = item.street
+    let state = item.state
+    let id = item.id
+    let city = item.city
+    let table = item.changing_table
+    this.setState({latitude: latitude})
+    this.setState({longitude: longitude})
+    this.setState({name:  name})
+    this.setState({street: street})
+    this.setState({state: state})
+    this.setState({city: city})
+    this.setState({id: id})
+    this.setState({table: table})
+    
     }
 
-  render() {
+    addOne = () =>{
+      console.log('press')
+        this.setState({rate: 1}, ()=>{
+        console.log(this.state.rate)})
+    }
 
+    addTwo = () =>{
+      console.log('press')
+        this.setState({rate: 2}, ()=>{
+        console.log(this.state.rate)})
+    }
+
+    addThree = () =>{
+      console.log('press')
+        this.setState({rate: 3}, ()=>{
+        console.log(this.state.rate)})
+    }
+
+    addFour = () =>{
+      console.log('press')
+        this.setState({rate: 4}, ()=>{
+        console.log(this.state.rate)})
+    }
+    addFive = () =>{
+        this.setState({rate: 5})
+    }
+
+    
+
+  render() {
+    
     
     return (
           <Card style={{flex: 0}}>
@@ -24,11 +90,11 @@ export default class Ratings extends Component {
                 }}>
                 <Text style={{marginBottom: 10, fontWeight: "bold", fontSize: 16}}>How Was Your Visit?</Text>
                 <CardItem style={{flexDirection: 'row'}}>
-                <Button transparent style={{height: 40, width: 40, marginRight: 25, marginLeft: 20}} onPress={this.addOne}><Image source={horrible} style={{height: 40, width: 40}}/></Button>
-                <Button transparent style={{height: 40, width: 40, marginRight: 25}}><Image source={bad} style={{height: 40, width: 40}}/></Button>
-                <Button transparent style={{height: 40, width: 40, marginRight: 25}}><Image source={ok} style={{height: 40, width: 40}}/></Button>
-                <Button transparent style={{height: 40, width: 40, marginRight: 25}}><Image source={good} style={{height: 40, width: 40}}/></Button>
-                <Button transparent style={{height: 40, width: 40, marginRight: 25}}><Image source={great} style={{height: 40, width: 40}}/></Button>
+                <Button transparent style={styles.button1} onPress={this.addOne}><Image source={horrible} style={styles.image}/></Button>
+                <Button transparent style={styles.button} onPress={this.addTwo}><Image source={bad} style={styles.image}/></Button>
+                <Button transparent style={styles.button} onPress={this.addThree}><Image source={ok} style={styles.image}/></Button>
+                <Button transparent style={styles.button} onPress={this.addFour}><Image source={good} style={styles.image}/></Button>
+                <Button transparent style={styles.button} onPress={this.addFive}><Image source={great} style={styles.image}/></Button>
                 </CardItem>
               </Body>
             
@@ -54,4 +120,50 @@ export default class Ratings extends Component {
           </Card>
     );
   }
-}
+  
+} export default Ratings
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignSelf: "stretch",
+    justifyContent: "center"
+  },
+  image: {
+    height: 40, 
+    width: 40
+  },
+  text: {
+    fontSize: 24,
+    color: "orange",
+    marginBottom: 10,
+    borderBottomColor: "black",
+    borderBottomWidth: 3,
+    marginRight: 40,
+    marginLeft: 20
+  },
+  textInput: {
+    alignSelf: "stretch",
+    height: 40,
+    marginTop: 20,
+    color: "black",
+    borderBottomColor: "black",
+    borderBottomWidth: 2,
+    marginRight: 20,
+    marginLeft: 20
+  },
+  button1: {
+    height: 40, 
+    width: 40, 
+    marginRight: 25, 
+    marginLeft: 20
+  },
+  button: {
+    height: 40, 
+    width: 40, 
+    marginRight: 25
+  },
+  switch: {
+    marginTop: 20
+  }
+});
