@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Text,TouchableOpacity, StyleSheet } from 'react-native';
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
-import { number } from 'yup';
+//import { number } from 'yup';
 let horrible = require('../assets/Omg_Emoji.png')
 let bad = require('../assets/Very_Sad_Emoji.png')
 let ok = require('../assets/Neutral_Face_Emoji.png')
@@ -50,27 +50,19 @@ class Ratings extends Component {
     }
 
     addOne = () =>{
-      console.log('press')
-        this.setState({rate: 1}, ()=>{
-        console.log(this.state.rate)})
+        this.setState({rate: 1})
     }
 
     addTwo = () =>{
-      console.log('press')
-        this.setState({rate: 2}, ()=>{
-        console.log(this.state.rate)})
+        this.setState({rate: 2})
     }
 
     addThree = () =>{
-      console.log('press')
-        this.setState({rate: 3}, ()=>{
-        console.log(this.state.rate)})
+        this.setState({rate: 3})
     }
 
     addFour = () =>{
-      console.log('press')
-        this.setState({rate: 4}, ()=>{
-        console.log(this.state.rate)})
+        this.setState({rate: 4})
     }
     addFive = () =>{
         this.setState({rate: 5})
@@ -133,25 +125,7 @@ const styles = StyleSheet.create({
     height: 40, 
     width: 40
   },
-  text: {
-    fontSize: 24,
-    color: "orange",
-    marginBottom: 10,
-    borderBottomColor: "black",
-    borderBottomWidth: 3,
-    marginRight: 40,
-    marginLeft: 20
-  },
-  textInput: {
-    alignSelf: "stretch",
-    height: 40,
-    marginTop: 20,
-    color: "black",
-    borderBottomColor: "black",
-    borderBottomWidth: 2,
-    marginRight: 20,
-    marginLeft: 20
-  },
+ 
   button1: {
     height: 40, 
     width: 40, 
@@ -162,8 +136,5 @@ const styles = StyleSheet.create({
     height: 40, 
     width: 40, 
     marginRight: 25
-  },
-  switch: {
-    marginTop: 20
   }
 });

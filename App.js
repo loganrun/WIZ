@@ -84,15 +84,15 @@ class App extends React.Component {
     }
   };
 
-  saveBusiness = async businesses => {
-    try {
-      await AsyncStorage.setItem("businesses", JSON.stringify(businesses));
-      //console.log(location);
-    } catch (error) {
-      // Error retrieving data
-      console.log(error.message);
-    }
-  };
+  // saveBusiness = async businesses => {
+  //   try {
+  //     await AsyncStorage.setItem("businesses", JSON.stringify(businesses));
+  //     //console.log(location);
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error.message);
+  //   }
+  // };
 
   saveBathroom = async bathroom => {
     try {
@@ -104,31 +104,31 @@ class App extends React.Component {
     }
   };
 
-  loadBusiness = async () => {
-    let lat = this.state.lat;
-    let lon = this.state.lon;
+  // loadBusiness = async () => {
+  //   let lat = this.state.lat;
+  //   let lon = this.state.lon;
 
-    try {
-      let params = {
-        term: this.state.search,
-        latitude: lat,
-        longitude: lon,
-        radius: 20000,
-        limit: 50
-      };
+  //   try {
+  //     let params = {
+  //       term: this.state.search,
+  //       latitude: lat,
+  //       longitude: lon,
+  //       radius: 20000,
+  //       limit: 50
+  //     };
 
-      let response = await api.get("/search", { params });
-      let { businesses } = response.data;
-      this.saveBusiness(businesses);
-      //console.log(businesses);
+  //     let response = await api.get("/search", { params });
+  //     let { businesses } = response.data;
+  //     this.saveBusiness(businesses);
+  //     //console.log(businesses);
 
-      //this.setState({ business: businesses });
-      //await this.setState({ loading: false });
-      //this.setState({ search: "" });
-    } catch (e) {
-      console.log("error", e.message);
-    }
-  };
+  //     //this.setState({ business: businesses });
+  //     //await this.setState({ loading: false });
+  //     //this.setState({ search: "" });
+  //   } catch (e) {
+  //     console.log("error", e.message);
+  //   }
+  // };
 
   loadBathroom = async () => {
     //let lat = this.state.lat;

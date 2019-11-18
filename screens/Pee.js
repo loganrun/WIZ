@@ -258,8 +258,6 @@ class ContentArea extends React.Component {
                 aliquando, no sea homero altera. Sonet molestiae est et, et
                 dicat adipisci eam.
               </Text>
-              <Text>{address}</Text>
-              <Text>{city}</Text>
             </Right>
           </CardItem>
         </Card>
