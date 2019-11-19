@@ -84,7 +84,7 @@ class Pee extends Component {
         <ScrollView style={{ flex: 1 }}>
           <View
             style={{
-              height: 1500,
+              height: 1200,
               backgroundColor: "#fff"
             }}
           />
@@ -221,7 +221,7 @@ class ContentArea extends React.Component {
       <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE RESTROOM</Text>
       <Ratings item={this.props.item}/>
         <Ad />
-        <View
+        {/* <View
           style={{
             paddingTop: 10,
             paddingLeft: 20,
@@ -260,7 +260,7 @@ class ContentArea extends React.Component {
               </Text>
             </Right>
           </CardItem>
-        </Card>
+        </Card> */}
       </Animated.View>
     );
   }

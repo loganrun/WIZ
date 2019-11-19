@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Image, Text,TouchableOpacity, StyleSheet } from 'react-native';
+import { Image, Text,TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
+import axios from "axios";
 //import { number } from 'yup';
 let horrible = require('../assets/Omg_Emoji.png')
 let bad = require('../assets/Very_Sad_Emoji.png')
@@ -8,6 +9,7 @@ let ok = require('../assets/Neutral_Face_Emoji.png')
 let good = require('../assets/Slightly_Smiling_Face.png')
 let great = require('../assets/Smiling_with_Eyes_Opened.png')
 
+const userToken = AsyncStorage.getItem("userToken");
 class Ratings extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +48,31 @@ class Ratings extends Component {
     this.setState({city: city})
     this.setState({id: id})
     this.setState({table: table})
-    
+    //this.placeUpdate()
+    }
+
+    placeUpdate = () =>{
+      let user = userToken
+      axios({
+        method: "post",
+        baseURL: "https://whizzit.herokuapp.com/api/users",
+        timeout: 40000,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        data: {
+          latitude: this.state.latitude,
+          longitude: this.state.longitude,
+          name: this.state.name,
+          street: this.state.street,
+          state: this.state.state,
+          userId: user,
+          table:  this.state.table,
+          city: this.state.city,
+          id: this.state.id
+        }
+      });
     }
 
     addOne = () =>{
@@ -67,6 +93,8 @@ class Ratings extends Component {
     addFive = () =>{
         this.setState({rate: 5})
     }
+
+    
 
     
 
