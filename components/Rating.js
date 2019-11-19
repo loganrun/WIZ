@@ -50,21 +50,26 @@ class Ratings extends Component {
     }
 
     addOne = () =>{
+      alert('Thank You!!')
         this.setState({rate: 1})
     }
 
     addTwo = () =>{
+      alert('Thank You!!')
         this.setState({rate: 2})
     }
 
     addThree = () =>{
+      alert('Thank You!!')
         this.setState({rate: 3})
     }
 
     addFour = () =>{
+      alert('Thank You!!')
         this.setState({rate: 4})
     }
     addFive = () =>{
+      alert('Thank You!!')
         this.setState({rate: 5})
     }
 
