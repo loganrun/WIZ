@@ -22,7 +22,10 @@ class Ratings extends Component {
       state:  "",
       id: "",
       city: "",
-      changing_table: false
+      changing_table: false,
+      directions:  "",
+      accessible: true,
+      unisex: false
     };
   }
 
@@ -40,6 +43,9 @@ class Ratings extends Component {
     let id = item.id
     let city = item.city
     let table = item.changing_table
+    let directions = item.directions
+    let accessible = item.accessible
+    let unisex = item.unisex
     this.setState({latitude: latitude})
     this.setState({longitude: longitude})
     this.setState({name:  name})
@@ -48,11 +54,14 @@ class Ratings extends Component {
     this.setState({city: city})
     this.setState({id: id})
     this.setState({table: table})
+    this.setState({directions: directions})
+    this.setState({accessible: accessible})
+    this.setState({unisex:  unisex})
     //this.placeUpdate()
     }
 
     placeUpdate = () =>{
-      let user = userToken
+      //let user = userToken
       axios({
         method: "post",
         baseURL: "https://whizzit.herokuapp.com/api/users",
@@ -67,10 +76,12 @@ class Ratings extends Component {
           name: this.state.name,
           street: this.state.street,
           state: this.state.state,
-          userId: user,
           table:  this.state.table,
           city: this.state.city,
-          id: this.state.id
+          id: this.state.id,
+          direction: this.state.direction,
+          accessible: this.state.accessible,
+          unisex: this.state.unisex
         }
       });
     }
@@ -98,10 +109,6 @@ class Ratings extends Component {
       alert('Thank You!!')
         this.setState({rate: 5})
     }
-
-    
-
-    
 
   render() {
     
