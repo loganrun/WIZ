@@ -1,9 +1,9 @@
 import { INITIAL_LOCATION, INITIAL_LOCATION_ERROR } from "./types";
 
-export const initialLocation = position => dispatch => {
+export const initialLocation = location => dispatch => {
   dispatch({
     type: INITIAL_LOCATION,
-    payload: position
+    payload: location
   });
 };
 

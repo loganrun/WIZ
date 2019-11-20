@@ -33,6 +33,7 @@ import MapView from 'react-native-maps';
 import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
+import {connect} from "react-redux"
 var bathIcon = require("../assets/bath3.png");
 var restRoom= require("../assets/restroom-orange.png")
 var button5 = require("../assets/button.png")
@@ -44,7 +45,7 @@ var button5 = require("../assets/button.png")
 
 //let contentMarginTopAnim = new Animated.Value(200);
 //let mapTopMarginAnim = new Animated.Value(-250);
-
+//console.log(this.props.location)
 class BathMap extends Component {
 
 constructor(props) {
@@ -109,6 +110,7 @@ constructor(props) {
   };
 
   _getLocationAsync = async () => {
+    console.log(this.props.location.latitude)
 
     let location = await this.getLocation();
     let lat = location.coords.latitude;
@@ -165,6 +167,7 @@ constructor(props) {
     const { navigate } = this.props.navigation;
 
     return this.state.bathroom.map((item, i) => {
+      const rating = Math.floor(Math.random() * Math.floor(5))
       return (
         <MapView.Marker
         key= {item.id}
@@ -197,7 +200,7 @@ constructor(props) {
                       <StarRating
                   disabled={true}
                   maxStars={5}
-                  rating={4.5}
+                  rating={rating}
                   starSize={12}
                   fullStarColor={"orange"}
                   emptyStarColor={"orange"}
@@ -286,7 +289,13 @@ const styles = {
   }
 };
 
-export default BathMap;
+const mapStateToProps= state =>{
+return{
+  location: state.location.initlocation.loc
+}
+}
+
+export default connect(mapStateToProps)(BathMap);
 
 {/* <StarRating 
                 disabled={true}
