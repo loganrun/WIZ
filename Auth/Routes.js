@@ -42,7 +42,7 @@ const BathStackNavigator = createStackNavigator({
             color={"#fff"}
           />
         ),
-        title: "WHIZZ",
+        title: "WHIZZ (beta)",
         headerStyle: {
           backgroundColor: "#52AEA0", //"#3a455c",
           elevation: 0

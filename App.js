@@ -52,10 +52,10 @@ class App extends React.Component {
     }
     let location = await Location.getCurrentPositionAsync({});
     //console.log(location);
-    let lat = location.coords.latitude;
-    let lon = location.coords.longitude;
-    this.setState({ lat });
-    this.setState({ lon });
+    // let lat = location.coords.latitude;
+    // let lon = location.coords.longitude;
+    // this.setState({ lat });
+    // this.setState({ lon });
 
     // const saveLocation = async location => {
     //   try {
@@ -69,8 +69,8 @@ class App extends React.Component {
 
     //await this.loadBusiness();
     
-    await this.loadBathroom();
-    await this.saveLocation(location);
+    //await this.loadBathroom();
+    this.saveLocation(location);
     
 
     //console.log(this.state.lat);
@@ -80,9 +80,9 @@ class App extends React.Component {
     //console.log(this.state.isLoading);
   };
 
-  saveLocation = async location => {
+  saveLocation = location => {
     try {
-      await AsyncStorage.setItem("location", JSON.stringify(location));
+      AsyncStorage.setItem("location", JSON.stringify(location));
       //console.log(location);
     } catch (error) {
       // Error retrieving data
@@ -100,15 +100,15 @@ class App extends React.Component {
   //   }
   // };
 
-  saveBathroom = async bathroom => {
-    try {
-      await AsyncStorage.setItem("bathroom", JSON.stringify(bathroom));
-      //console.log(location);
-    } catch (error) {
-      // Error retrieving data
-      console.log(error.message);
-    }
-  };
+  // saveBathroom = async bathroom => {
+  //   try {
+  //     await AsyncStorage.setItem("bathroom", JSON.stringify(bathroom));
+  //     //console.log(location);
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error.message);
+  //   }
+  // };
 
   // loadBusiness = async () => {
   //   let lat = this.state.lat;
@@ -136,27 +136,27 @@ class App extends React.Component {
   //   }
   // };
 
-  loadBathroom = async () => {
-    //let lat = this.state.lat;
-    //let lon = this.state.lon;
+  // loadBathroom = async () => {
+  //   //let lat = this.state.lat;
+  //   //let lon = this.state.lon;
 
-    try {
-      let params = {
-        page: 1,
-        per_page: 30,
-        lat: this.state.lat,
-        lng: this.state.lon
-      };
+  //   try {
+  //     let params = {
+  //       page: 1,
+  //       per_page: 30,
+  //       lat: this.state.lat,
+  //       lng: this.state.lon
+  //     };
 
-      let response = await restApi.get("/by_location", { params });
-      let bathroom  = response.data;
+  //     let response = await restApi.get("/by_location", { params });
+  //     let bathroom  = response.data;
 
-      this.saveBathroom(bathroom);
-      //await this.setState({ loading: false });
-    } catch (e) {
-      console.log("error", e.message);
-    }
-  };
+  //     this.saveBathroom(bathroom);
+  //     //await this.setState({ loading: false });
+  //   } catch (e) {
+  //     console.log("error", e.message);
+  //   }
+  // };
   render() {
     if (this.state.isLoading === "true") {
       return (
