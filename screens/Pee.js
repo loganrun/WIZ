@@ -221,46 +221,7 @@ class ContentArea extends React.Component {
       <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE RESTROOM</Text>
       <Ratings item={this.props.item}/>
         <Ad />
-        {/* <View
-          style={{
-            paddingTop: 10,
-            paddingLeft: 20,
-            fontSize: 14,
-            fontWeight: "bold",
-            marginTop: 20
-          }}
-        >
-          <Text style={{ fontSize: 16 }}>REVIEWS</Text>
-        </View>
-        <Card
-          style={{
-            marginTop: 10,
-            flex: 1
-          }}
-        >
-          <View style={{ paddingLeft: 10, paddingTop: 10 }}>
-            <Text style={{ fontWeight: "bold", fontSize: 14 }}>{name}</Text>
-          </View>
-          <CardItem>
-            <Right
-              style={{
-                flex: 1,
-                alignItems: "flex-start",
-                height: 200,
-                paddingHorizontal: 20
-              }}
-            >
-              <Text style={{ fontWeight: "bold", fontSize: 14 }}>
-                Lorem ipsum dolor sit amet, ad sea idque populo iudicabit. Eos
-                elitr tollit ullamcorper ut, eu vis nonumy laudem accusamus. Vix
-                aliquid convenire persequeris at, doming feugiat has ei. Eu quo
-                debitis probatus, nonumes theophrastus ut usu. Pro no porro
-                aliquando, no sea homero altera. Sonet molestiae est et, et
-                dicat adipisci eam.
-              </Text>
-            </Right>
-          </CardItem>
-        </Card> */}
+        
       </Animated.View>
     );
   }

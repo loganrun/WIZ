@@ -24,7 +24,7 @@ import AddBath from "../screens/AddBath";
 const Width = Dimensions.get("window").width;
 const DrawerConfig = {
   drawerWidth: Width * 0.8,
-  drawerBackgroundColor: "#f5f5f5", //"#d2b48c", //"#fdf5e6",
+  drawerBackgroundColor: "#f5f5f5", 
   overlayColor: 0
 };
 

@@ -10,8 +10,7 @@ import firebase from "firebase";
 import {connect} from "react-redux"
 import {initialLocation} from '../store/actions'
 
-// const location =  AsyncStorage.getItem("location")
-// const newLocation = JSON.parse(location)
+
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -21,18 +20,11 @@ class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    // firebase.auth().onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     this.props.navigation.navigate("Main");
-    //   } else {
-    //     this.props.navigation.navigate("Auth");
-    //   }
-    //   //console.log(user);
-    // });
+    
     let location = await this.getLocation();
     this.props.initLocation(location)
 
-    //const userToken = await AsyncStorage.getItem("userToken");
+    
     firebase.auth().onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? "Main" : "Auth");
     });

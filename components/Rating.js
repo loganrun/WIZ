@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Image, Text,TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
 import axios from "axios";
-//import { number } from 'yup';
 let horrible = require('../assets/Omg_Emoji.png')
 let bad = require('../assets/Very_Sad_Emoji.png')
 let ok = require('../assets/Neutral_Face_Emoji.png')
@@ -79,7 +78,7 @@ class Ratings extends Component {
           table:  this.state.table,
           city: this.state.city,
           id: this.state.id,
-          direction: this.state.direction,
+          directions: this.state.directions,
           accessible: this.state.accessible,
           unisex: this.state.unisex
         }
