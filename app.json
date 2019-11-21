@@ -17,7 +17,24 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.TheWhizzApp.gotta_go",
+      "buildNumber":  "1.0.0",
+      "supportsTablet": true,
+      "config":{
+        "googleMapsApiKey": {
+          "apiKey" :"AIzaSyAGb4bJ_GV4G3UeUAAJ2cuU06P7cFKftJQ"
+        }
+      }
+    },
+    "android": {
+      "package":  "com.TheWhizzApp.gotta_go",
+      "versionCode": 1,
+      "permissions":["ACCESS_FINE_LOCATION"],
+      "config":{
+        "goolgeMaps": {
+          "apiKey" :"AIzaSyAGb4bJ_GV4G3UeUAAJ2cuU06P7cFKftJQ"
+        }
+      }
     }
   }
 }
