@@ -10,10 +10,10 @@ import Explore from "../screens/Explore";
 import Places from "../screens/Places";
 import Favorites from "../screens/Favorites";
 import { Ionicons } from "@expo/vector-icons";
-import Home from "../screens/Home";
+//import Home from "../screens/Home";
 import Login from "../Auth/Auth_Login";
-import ResSign from "../screens/ResSign";
-import Bathroom from "../screens/Bathroom";
+//import ResSign from "../screens/ResSign";
+//import Bathroom from "../screens/Bathroom";
 import Pee from "../screens/Pee";
 import BathMap from "../screens/BathMap";
 import AuthHome from "./Auth_Home";
@@ -54,8 +54,7 @@ const BathStackNavigator = createStackNavigator({
       };
     }
   },
-  Pee: Pee,
-  Bathroom: Bathroom
+  Pee: Pee
 });
 
 // const HomeStackNavigator = createStackNavigator({

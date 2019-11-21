@@ -17,7 +17,7 @@ class Favorites extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Please Sign In To Use This Feature</Text>
+        <Text>FEATURE COMING SOON</Text>
       </View>
     );
   }
