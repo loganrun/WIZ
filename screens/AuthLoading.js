@@ -32,7 +32,7 @@ class AuthLoadingScreen extends React.Component {
     let location = await this.getLocation();
     this.props.initLocation(location)
 
-    const userToken = await AsyncStorage.getItem("userToken");
+    //const userToken = await AsyncStorage.getItem("userToken");
     firebase.auth().onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? "Main" : "Auth");
     });

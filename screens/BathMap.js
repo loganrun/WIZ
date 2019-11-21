@@ -13,14 +13,9 @@ import {
   Image,AsyncStorage,ActivityIndicator
 } from "react-native";
  import {
-//   Container,
-//   Content,
-//   Header,
    Left,
   Right,
    Icon,
-//   Button,
-//   Body,
    Card,
    CardItem,
    Row,
@@ -37,15 +32,7 @@ import {connect} from "react-redux"
 var bathIcon = require("../assets/bath3.png");
 var restRoom= require("../assets/restroom-orange.png")
 var button5 = require("../assets/button.png")
-//import ContentArea from "../components/ContentArea";
-//var ad = require("../assets/ad.png");
 
-// const height = Dimensions.get("window").height;
-// const width = Dimensions.get("window").width;
-
-//let contentMarginTopAnim = new Animated.Value(200);
-//let mapTopMarginAnim = new Animated.Value(-250);
-//console.log(this.props.location)
 class BathMap extends Component {
 
 constructor(props) {
@@ -64,21 +51,14 @@ constructor(props) {
             errorMessage: null,
             search: "",
             mapMargin:  1
-            //color:  ['green', 'yellow', 'tan'], //['#13DE25','#FFFF08','#C26138'],
-            //pick: ''
+            
           };
-
-          //this.markerClick = this.markerClick.bind(this);
       }
       
-// componentWillMount() {
-//     this._getLocationAsync();
-//     this.setState({ loading: true });
-     
-//    }
+
    componentDidMount() {
-    this.initBathroom();
-    this.setState({ loading: true });
+    //this.initBathroom();
+    //this.setState({ loading: true });
   }
   
   setMargin=()=>{
@@ -86,53 +66,53 @@ constructor(props) {
   }
 
 
-  getLocation = async () => {
-    let location = "";
-    try {
-      location = await AsyncStorage.getItem("location");
-     //console.log(location)
-      //console.log(location)
-    } catch (error) {
-      // Error retrieving data
-      console.log(error.message);
-    }
-    return JSON.parse(location);
-  };
+  // getLocation = async () => {
+  //   let location = "";
+  //   try {
+  //     location = await AsyncStorage.getItem("location");
+  //    //console.log(location)
+  //     //console.log(location)
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error.message);
+  //   }
+  //   return JSON.parse(location);
+  // };
 
-  initBathroom = async () => {
-    let bathroom = await this.getBathroom();
-    this.setState({ bathroom: bathroom });
-    //console.log(this.state.bathroom)
-    this._getLocationAsync();
-    //console.log(this.state.lat)
-    //console.log(this.state.lon)
-    this.setState({ loading: false });
-  };
+  // initBathroom = async () => {
+  //   let bathroom = await this.getBathroom();
+  //   this.setState({ bathroom: bathroom });
+  //   //console.log(this.state.bathroom)
+  //   this._getLocationAsync();
+  //   //console.log(this.state.lat)
+  //   //console.log(this.state.lon)
+  //   this.setState({ loading: false });
+  // };
 
-  _getLocationAsync = async () => {
-    console.log(this.props.location.latitude)
+  // _getLocationAsync = async () => {
+    
 
-    let location = await this.getLocation();
-    let lat = location.coords.latitude;
-    let lon = location.coords.longitude;
-    this.setState({ latitude: lat });
-    this.setState({ lon });
-    //await this.loadBathroom();
-    //console.log(lat);
-    //console.log(lon);
-  };
+  //   let location = await this.getLocation();
+  //   let lat = location.coords.latitude;
+  //   let lon = location.coords.longitude;
+  //   this.setState({ latitude: lat });
+  //   this.setState({ lon });
+  //   //await this.loadBathroom();
+  //   //console.log(lat);
+  //   //console.log(lon);
+  // };
 
-  getBathroom = async () => {
-    let bathroom = "";
-    try {
-      bathroom = await AsyncStorage.getItem("bathroom");
-      //console.log(bathroom)
-    } catch (error) {
-      // Error retrieving data
-      console.log(error.message);
-    }
-    return JSON.parse(bathroom);
-  };
+  // getBathroom = async () => {
+  //   let bathroom = "";
+  //   try {
+  //     bathroom = await AsyncStorage.getItem("bathroom");
+  //     //console.log(bathroom)
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error.message);
+  //   }
+  //   return JSON.parse(bathroom);
+  // };
 
   loadBathroom = async () => {
     //let lat = this.state.lat;
@@ -151,7 +131,6 @@ constructor(props) {
       this.setState({ bathroom: bathroom });
      
       await this.setState({ loading: false });
-      //console.log(this.state.bathroom)
     } catch (e) {
       console.log("error", e.message);
     }
@@ -159,7 +138,6 @@ constructor(props) {
 
   onRegionChangeComplete = async (region) =>{
     await this.setState({region})
-    //console.log(this.state.region.latitude)
     this.loadBathroom()
   }
 
@@ -216,20 +194,7 @@ constructor(props) {
 
   }
 
-
   render() {
-    
-    // let item = this.props.navigation.getParam("item");
-    // let curLat = this.props.navigation.getParam("currentLat");
-    // let curLon = this.props.navigation.getParam("currentLon");
-    // //console.log(curLat);
-    // let longitude = item.longitude;
-    // let latitude = item.latitude;
-    // let name = item.name;
-
-    //const { navigate } = this.props.navigation;
-   
-
     
     if (this.state.loading) {
     return (
@@ -251,22 +216,17 @@ constructor(props) {
      
             <View style={styles.container}>
             <MapView
-            initialRegion={this.state.region}
+            initialRegion={{latitude: this.props.location.latitude,
+            longitude: this.props.location.longitude,
+            latitudeDelta: 0.1764,
+            longitudeDelta: 0.1236 }}
               style={{flex:1, marginTop:this.state.mapMargin}}
-              //latitude={this.state.lat}
-              //longitude={this.state.lon}
-              //latitudeDelta={0.072}//{0.022}
-              //longitudeDelta={0.070}//{0.021}
               provider="google"
               showsUserLocation={true}
               showsMyLocationButton={true}
               onMapReady={this.setMargin}
               onRegionChangeComplete={this.onRegionChangeComplete}
-             //currLat={this.state.lat}
-              //currLon={this.state.lon}
-              //name={name}
             >
-
               {this.createMarkers()}
             </MapView>
             </View>
@@ -297,166 +257,3 @@ return{
 
 export default connect(mapStateToProps)(BathMap);
 
-{/* <StarRating 
-                disabled={true}
-                maxStars={5}
-                rating={5}
-                starSize={12}
-                fullStarColor={"orange"}
-                emptyStarColor={"orange"}
-              /> */}
-// class ContentArea extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-
-//   handleDirections = props => {
-//     showLocation({
-//       latitude: this.props.item.latitude,
-//       longitude: this.props.item.longitude,
-//       title: this.props.item.name
-//     });
-//   };
-
-//   render() {
-//     let item = this.props.item;
-//     //console.log(item);
-//     //let longitude = item.longitude;
-//     //let latitude = item.latitude;
-//     let name = item.name;
-//     //let phone = item.phone;
-//     let address = item.street;
-//     let city = item.city;
-//     let comment = item.comment;
-//     let direction = item.directions;
-
-//     return (
-//       <Animated.View style={styles.Card}>
-//         <TouchableOpacity
-//           onPress={() => {
-//             Animated.timing(contentMarginTopAnim, {
-//               toValue: 200,
-//               duration: 400
-//               //useNativeDriver: true
-//             }).start();
-
-//             Animated.timing(mapTopMarginAnim, {
-//               toValue: -250,
-//               duration: 400
-//               //useNativeDriver: true
-//             }).start();
-//           }}
-//         >
-//           <Card style={{ paddingBottom: 10 }}>
-//             <CardItem>
-//               <Right
-//                 style={{
-//                   flex: 1,
-//                   alignItems: "flex-start",
-//                   height: 100,
-//                   paddingHorizontal: 20
-//                 }}
-//               >
-//                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>{name}</Text>
-//                 <Text>{address}</Text>
-//                 <Text>{city}</Text>
-//                 <Text>{comment}</Text>
-//                 <Text>{direction}</Text>
-//               </Right>
-//               <Button
-//                 style={{
-//                   marginTop: 25,
-//                   marginRight: 10,
-//                   backgroundColor: "red",
-//                   paddingRight: 10,
-//                   paddingLeft: 10
-//                 }}
-//                 onPress={this.handleDirections}
-//               >
-//                 <Text
-//                   style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}
-//                 >
-//                   Directions
-//                 </Text>
-//               </Button>
-//             </CardItem>
-//           </Card>
-//         </TouchableOpacity>
-
-//         <View
-//           style={{
-//             marginTop: 20,
-//             flex: 1,
-//             flexDirection: "row"
-//           }}
-//         >
-//           <View style={{ flex: 0.2 }} />
-//           <Card
-//             style={{
-//               flex: 1,
-//               height: 300,
-//               //margin: 30,
-//               justifyContent: "center",
-//               alignItems: "center"
-//             }}
-//           >
-//             <Image source={ad} style={{ height: 320, width: 320 }} />
-//           </Card>
-//           <View style={{ flex: 0.2 }} />
-//         </View>
-//         <View
-//           style={{
-//             paddingTop: 10,
-//             paddingLeft: 20,
-//             fontSize: 14,
-//             fontWeight: "bold",
-//             marginTop: 20
-//           }}
-//         >
-//           <Text style={{ fontSize: 16 }}>REVIEWS</Text>
-//         </View>
-//         <Card
-//           style={{
-//             marginTop: 10,
-//             flex: 1
-//           }}
-//         >
-//           <View style={{ paddingLeft: 10, paddingTop: 10 }}>
-//             <Text style={{ fontWeight: "bold", fontSize: 14 }}>{name}</Text>
-//           </View>
-//           <CardItem>
-//             <Right
-//               style={{
-//                 flex: 1,
-//                 alignItems: "flex-start",
-//                 height: 200,
-//                 paddingHorizontal: 20
-//               }}
-//             >
-//               <Text style={{ fontWeight: "bold", fontSize: 14 }}>
-//                 Lorem ipsum dolor sit amet, ad sea idque populo iudicabit. Eos
-//                 elitr tollit ullamcorper ut, eu vis nonumy laudem accusamus. Vix
-//                 aliquid convenire persequeris at, doming feugiat has ei. Eu quo
-//                 debitis probatus, nonumes theophrastus ut usu. Pro no porro
-//                 aliquando, no sea homero altera. Sonet molestiae est et, et
-//                 dicat adipisci eam.
-//               </Text>
-//               <Text>{address}</Text>
-//               <Text>{city}</Text>
-//             </Right>
-//           </CardItem>
-//         </Card>
-//       </Animated.View>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1
-//   },
-//   Card: {
-//     flex: 1,
-//     backgroundColor: "#fff" //"#F5F5F5"
-//   }
-// });
