@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Dimensions } from "react-native";
 import MapView from 'react-native-maps';
-var locationImg = require("../assets/circle_blue2.png");
+//var locationImg = require("../assets/circle_blue2.png");
 
 //const Marker = MapView.Marker;
 const width = Dimensions.get("window").width;
@@ -52,16 +52,3 @@ const styles = {
 
 export default Maps;
 
-// renderMarkers() {
-//     return this.props.places.map((place, i) =>{
-//         <Marker key={place.id} title ={place.name} coordinate={place.coords}/>>
-//     })
-// }
-// showsUserLocation
-//         showsMyLocationButton
-//       >
-//         {" "}
-//         {this.renderMarkers()
-{
-  /* <MapView style={styles.container} region={region} /> */
-}

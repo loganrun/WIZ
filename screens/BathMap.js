@@ -31,7 +31,7 @@ import restApi from "../services/restroom";
 import {connect} from "react-redux"
 var bathIcon = require("../assets/bath3.png");
 var restRoom= require("../assets/restroom-orange.png")
-var button5 = require("../assets/button.png")
+
 
 class BathMap extends Component {
 
