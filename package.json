@@ -23,7 +23,7 @@
     "react-native-maps": "^0.24.2",
     "react-native-star-rating": "^1.1.0",
     "react-navigation": "^3.0.9",
-    "react-redux": "^6.0.1",
+    "react-redux": "6.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "yup": "^0.27.0"
