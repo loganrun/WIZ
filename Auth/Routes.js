@@ -105,7 +105,7 @@ const AddBathStackNavigator = createStackNavigator({
             color={"#fff"}
           />
         ),
-        title: "Add Bathrooom",
+        title: "Add Restroom",
         headerStyle: {
           backgroundColor: "#52AEA0",
           elevation: 0
@@ -227,7 +227,7 @@ const AppTabNavigator = createBottomTabNavigator(
         let iconName = "";
         if (routeName === "Home") {
           iconName = `ios-home`;
-        } else if (routeName === "Bathroom") {
+        } else if (routeName === "Restroom") {
           iconName = `ios-search`;
         } else if (routeName === "Food") {
           iconName = `ios-restaurant`;
