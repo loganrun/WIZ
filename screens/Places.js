@@ -30,7 +30,7 @@ import StarRating from "react-native-star-rating";
 import Maps from "../components/Maps";
 import Ad from "../components/Ads"
 //import ContentArea from "../components/ContentArea";
-var ad = require("../assets/ad.png");
+//var ad = require("../assets/ad.png");
 
 //const SCREEN_HEIGHT = Dimensions.get("window").height;
 //const SCREEN_WIDTH = Dimensions.get("window").width;

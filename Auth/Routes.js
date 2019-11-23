@@ -208,7 +208,7 @@ const AppTabNavigator = createBottomTabNavigator(
     // Home: {
     //   screen: HomeStackNavigator
     // },
-    Bathroom: {
+    Restroom: {
       screen: BathStackNavigator
     },
     Food: {
@@ -270,11 +270,11 @@ const AppDrawerNavigator = createDrawerNavigator(
       screen: AddBathStackNavigator,
       navigationOptions: ({ navigation }) => {
         return {
-          drawerLabel: "Add Bathroom",
+          drawerLabel: "Add Restroom",
           drawerIcon: (
             <Ionicons name='ios-business' size={30} color='#d2b48c' />
           ),
-          title: "Add Bathroom",
+          title: "Add Restroom",
           headerStyle: {
             backgroundColor: "#52AEA0",
             elevation: 0
