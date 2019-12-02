@@ -28,49 +28,7 @@ class AuthReg extends Component {
   };
 
   render() {
-    // const user = axios.create({
-    //   baseURL: "https://whizzit.herokuapp.com/api/users",
-    //   timeout: 40000,
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json"
-    //   }
-    // });
-
-    // const createUser = async ({ value, user }) => {
-    //   try {
-    //     axios({
-    //       method: "post",
-    //       baseURL: "https://whizzit.herokuapp.com/api/users",
-    //       timeout: 40000,
-    //       headers: {
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json"
-    //       },
-    //       data: {
-    //         email: value.email,
-    //         firstName: value.firstName,
-    //         lastName: value.lastName,
-    //         userName: value.userName,
-    //         service: value.service,
-    //         userId: user.uid
-    //       }
-    //     });
-    //     // let params = {
-    //     //   email: value.email,
-    //     //   firstName: value.firstName,
-    //     //   lastName: value.lastName,
-    //     //   userName: value.userName,
-    //     //   service:  value.service,
-    //     //   userId: user.uid
-
-    //     // };
-
-    //     // let response = await restApi.get("/by_location", { params });
-    //   } catch (e) {
-    //     console.log("error", e.message);
-    //   }
-    // };
+    
     const validationSchema = yup.object().shape({
       email: yup
         .string()
@@ -160,7 +118,7 @@ class AuthReg extends Component {
       >
         {formikProps => (
           <KeyboardAvoidingView style={styles.container} behavior='padding'>
-            <Text style={styles.text}>SIGN UP</Text>
+            {/* <Text style={styles.text}>SIGN UP</Text> */}
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("firstName")}
@@ -214,25 +172,7 @@ class AuthReg extends Component {
               onBlur={formikProps.handleBlur("service")}
               placeholder='Which service do you drive for?'
             />
-            {/* <View style={{ flexDirection: "row" }}>
-              <Switch
-                style={{ marginTop: 20, marginRight: 10, marginLeft: 20 }}
-                // value={formikProps.promotions[promotions]}
-                // onValueChange={value => {
-                //   formikProps.setFieldValue(promotions, value);
-                //}}
-              />
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  marginTop: 20,
-                  marginRight: 20,
-                  fontSize: 16
-                }}
-              >
-                Would you like to receive Coupons and Promotions?
-              </Text>
-            </View> */}
+            
             {formikProps.isSubmitting ? (
               <ActivityIndicator />
             ) : (
@@ -288,7 +228,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#3a455c",
+    backgroundColor: "#52AEA0",
     marginTop: 30,
     marginLeft: 40,
     marginRight: 40

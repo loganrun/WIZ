@@ -1,11 +1,5 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-//import { Location, Permissions } from "expo";
-
-//var bathroom = require("../assets/restroom-main.png");
-//var food = require("../assets/restaurant-main.png");
-//var add = require("../assets/add-btn.png");
-
 class AuthHome extends Component {
   constructor() {
     super();
@@ -16,28 +10,8 @@ class AuthHome extends Component {
   }
 
   componentWillMount() {
-    //this._getLocationAsync();
+   
   }
-
-  // _getLocationAsync = async () => {
-  //   let { status } = await Permissions.askAsync(Permissions.LOCATION);
-  //   if (status !== "granted") {
-  //     this.setState({
-  //       errorMessage: "Permission to access location was denied"
-  //     });
-  //   }
-
-  //   let location = await Location.getCurrentPositionAsync({});
-  //   let lat = location.coords.latitude;
-  //   let lon = location.coords.longitude;
-  //   //console.log(lat);
-  //   //console.log(lon);
-  //   this.setState({ lat });
-  //   this.setState({ lon });
-  //   //await this.loadBusiness();
-  //   console.log(this.state.lat);
-  //   console.log(this.state.lon);
-  // };
 
   static navigationOptions = {
     title: "WHIZZ",
@@ -83,7 +57,7 @@ class AuthHome extends Component {
           </TouchableOpacity>
         </View>
 
-        <Text
+        {/* <Text
           style={{
             fontSize: 20,
             marginBottom: 15,
@@ -105,8 +79,8 @@ class AuthHome extends Component {
             }}
           >
             SignUp
-          </Text>
-        </TouchableOpacity>
+          </Text> 
+        </TouchableOpacity>*/}
       </View>
     );
   }
@@ -140,7 +114,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 50,
     backgroundColor: "orange",
-    marginBottom: 20,
+    marginBottom: 40,
     marginRight: 10
   },
   btn2: {

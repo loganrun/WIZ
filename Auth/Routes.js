@@ -89,7 +89,8 @@ const LoginStackNavigator = createStackNavigator({
       };
     }
   },
-  Reset: Reset
+  Reset: Reset,
+  SignUp: SignUp
 });
 const AddBathStackNavigator = createStackNavigator({
   AddBath: {
@@ -117,7 +118,6 @@ const AddBathStackNavigator = createStackNavigator({
       };
     }
   },
-  Reset: Reset
 });
 const SignStackNavigator = createStackNavigator({
   SignUp: {

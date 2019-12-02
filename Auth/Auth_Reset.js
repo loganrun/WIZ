@@ -10,12 +10,13 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
+import * as firebase from "firebase";
 
-class AuthReg extends Component {
+class AuthReset extends Component {
   static navigationOptions = {
-    title: "SIGN UP",
+    title: "ACCOUNT RESET",
     headerStyle: {
-      backgroundColor: "#3a455c",
+      backgroundColor: "#52AEA0",
       elevation: 0
     },
     headerTintColor: "#fff",
@@ -30,67 +31,43 @@ class AuthReg extends Component {
         .string()
         .email()
         .label("Email")
-        .required(),
-      password: yup
-        .string()
-        .label("Password")
-        .required()
-        .min(6)
-        .max(20),
-      firstName: yup
-        .string()
-        .label("First name")
-        .required(),
-      lastName: yup
-        .string()
-        .label("Last name")
-        .required(),
-        userName: yup
-        .string()
-        .label("User name")
         .required()
     });
     return (
       <Formik
         initialValues={{
-          firstName: "",
-          lastName: "",
-          userName: "",
           email: "",
-          password: "",
-          service: "",
-    
+
         }}
         onSubmit={(value, actions) => {
-          alert(JSON.stringify(value));
-          setTimeout(() => {
-            actions.setSubmitting(false);
-          }, 1000);
+          let email = value.email;
+          firebase
+            .auth()
+            .sendPasswordResetEmail(email)
+            .then(actions.setErrors({
+              email: "Email Sent to address on file"
+            }))
+            .then(cred => this.props.navigation.navigate("Login"))
+            .catch(function(error) {
+              console.log(error);
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              if (errorCode == "auth/user-not-found") {
+                actions.setErrors({
+                  email: "User not found.  Please try again"
+                });
+              } else if (errorCode == "auth/wrong-password") {
+                actions.setErrors({ password: "Password is incorrect" });
+              }
+
+              actions.setSubmitting(false);
+            });
         }}
         validationSchema={validationSchema}
       >
         {formikProps => (
           <KeyboardAvoidingView style={styles.container} behavior="padding">
-            <Text style={styles.text}>SIGN UP</Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("firstName")}
-              onBlur={formikProps.handleBlur("firstName")}
-              placeholder={"First Name"}
-              autoFocus
-            />
-            <Text style={{ color: "red", marginLeft: 20 }}>
-              {formikProps.touched.firstName && formikProps.errors.firstName}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("lastName")}
-              onBlur={formikProps.handleBlur("lastName")}
-              placeholder={"Last Name"}
-            />
-            <Text style={{ color: "red", marginLeft: 20 }}>
-              {formikProps.touched.lastName && formikProps.errors.lastName}
-            </Text>
+            <Text style={styles.text}>Please enter the email address associated with this account. An email will be sent with instructions to reset the account</Text>
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("email")}
@@ -100,50 +77,7 @@ class AuthReg extends Component {
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.email && formikProps.errors.email}
             </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("userName")}
-              placeholder={"Please enter a user name"}
-              onBlur={formikProps.handleBlur("userName")}
-            />
-            <Text style={{ color: "red", marginLeft: 20 }}>
-              {formikProps.touched.userName && formikProps.errors.userName}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("password")}
-              placeholder={"Password"}
-              secureTextEntry
-              onBlur={formikProps.handleBlur("password")}
-            />
-            <Text style={{ color: "red", marginLeft: 20 }}>
-              {formikProps.touched.password && formikProps.errors.password}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("service")}
-              onBlur={formikProps.handleBlur("service")}
-              placeholder="Which service do you drive for?"
-            />
-            <View style={{ flexDirection: "row" }}>
-              <Switch
-                style={{ marginTop: 20, marginRight: 10, marginLeft: 20 }}
-                // value={formikProps.promotions[promotions]}
-                // onValueChange={value => {
-                //   formikProps.setFieldValue(promotions, value);
-                //}}
-              />
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  marginTop: 20,
-                  marginRight: 20,
-                  fontSize: 16
-                }}
-              >
-                Would you like to receive Coupons and Promotions?
-              </Text>
-            </View>
+            
             <TouchableOpacity
               style={styles.button}
               onPress={formikProps.handleSubmit}
@@ -151,7 +85,7 @@ class AuthReg extends Component {
               <Text
                 style={{ fontSize: 22, color: "#ffff", fontWeight: "bold" }}
               >
-                Submit
+                Reset
               </Text>
             </TouchableOpacity>
           </KeyboardAvoidingView>
@@ -160,22 +94,20 @@ class AuthReg extends Component {
     );
   }
 }
-export default AuthReg;
+export default AuthReset;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: "stretch",
-    justifyContent: "center"
+    //justifyContent: "center"
   },
   text: {
-    fontSize: 24,
-    color: "orange",
-    marginBottom: 10,
-    borderBottomColor: "black",
-    borderBottomWidth: 3,
+    fontSize: 18,
+    marginBottom: 30,
     marginRight: 40,
-    marginLeft: 20
+    marginLeft: 20, 
+    marginTop: 100, 
   },
   textInput: {
     alignSelf: "stretch",
@@ -191,12 +123,9 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#3a455c",
+    backgroundColor: "#52AEA0",
     marginTop: 30,
     marginLeft: 40,
     marginRight: 40
-  },
-  switch: {
-    marginTop: 20
   }
 });

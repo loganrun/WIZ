@@ -41,6 +41,7 @@ class AuthLogin extends Component {
         .min(6)
         .max(20)
     });
+    const { navigate } = this.props.navigation;
     return (
       <Formik
         initialValues={{ email: "", password: "" }}
@@ -81,7 +82,7 @@ class AuthLogin extends Component {
         {formikProps => (
           <KeyboardAvoidingView style={styles.container} behavior='padding'>
             {/* <View style={styles.container}> */}
-            <Text style={styles.text}>Login</Text>
+            {/* <Text style={styles.text}>Login</Text> */}
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("email")}
@@ -117,10 +118,39 @@ class AuthLogin extends Component {
                     fontWeight: "bold"
                   }}
                 >
-                  Submit
+                  LOGIN
                 </Text>
               </TouchableOpacity>
             )}
+            <TouchableOpacity
+                style={styles.button2}
+                onPress={() => navigate("Reset")}
+                
+              >
+                <Text
+                  style={{
+                    fontSize: 20
+                    
+                  }}
+                >
+                  Forgot password?
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.button2}
+                onPress={() => navigate("SignUp")}
+                
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    marginTop: 20
+                    
+                  }}
+                >
+                  Need an account? Sign up here!
+                </Text>
+              </TouchableOpacity>
           </KeyboardAvoidingView>
         )}
       </Formik>
@@ -158,9 +188,14 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#3a455c",
+    backgroundColor: "#52AEA0",
     marginTop: 30,
     marginLeft: 40,
     marginRight: 40
+  },
+  button2: {
+    marginTop: 25,
+    fontStyle:"italic",
+    alignItems:"center"
   }
 });
