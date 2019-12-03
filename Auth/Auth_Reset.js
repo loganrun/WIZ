@@ -47,7 +47,6 @@ class AuthReset extends Component {
             .then(cred => alert("Email sent to address on file. You will be able to login after you reset your password"))
             .then(cred => this.props.navigation.navigate("Login"))
             .catch(function(error) {
-              console.log(error);
               var errorCode = error.code;
               var errorMessage = error.message;
               if (errorCode == "auth/user-not-found") {
