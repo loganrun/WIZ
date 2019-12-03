@@ -44,9 +44,7 @@ class AuthReset extends Component {
           firebase
             .auth()
             .sendPasswordResetEmail(email)
-            .then(actions.setErrors({
-              email: "Email Sent to address on file"
-            }))
+            .then(cred => alert("Email sent to address on file. You will be able to login after you reset your password"))
             .then(cred => this.props.navigation.navigate("Login"))
             .catch(function(error) {
               console.log(error);
