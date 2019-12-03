@@ -31,7 +31,7 @@
     },
     "android": {
       "package": "com.TheWhizzApp.gotta_go",
-      "versionCode": 1,
+      "versionCode": 2,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyAGb4bJ_GV4G3UeUAAJ2cuU06P7cFKftJQ"
