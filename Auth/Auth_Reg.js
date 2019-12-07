@@ -120,7 +120,7 @@ class AuthReg extends Component {
           <KeyboardAvoidingView style={styles.container} behavior='padding'>
             {/* <Text style={styles.text}>SIGN UP</Text> */}
             <TextInput
-              style={styles.textInput}
+              style={styles.textInput1}
               onChangeText={formikProps.handleChange("firstName")}
               onBlur={formikProps.handleBlur("firstName")}
               placeholder={"First Name"}
@@ -212,6 +212,16 @@ const styles = StyleSheet.create({
     borderBottomColor: "black",
     borderBottomWidth: 3,
     marginRight: 40,
+    marginLeft: 20
+  },
+  textInput1: {
+    alignSelf: "stretch",
+    height: 40,
+    marginTop: 60,
+    color: "black",
+    borderBottomColor: "black",
+    borderBottomWidth: 2,
+    marginRight: 20,
     marginLeft: 20
   },
   textInput: {
