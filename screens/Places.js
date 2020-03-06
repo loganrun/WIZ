@@ -51,7 +51,7 @@ class Places extends Component {
   static navigationOptions = {
     title: "DETAILS",
     headerStyle: {
-      backgroundColor: "#52AEA0",
+      backgroundColor: "#3480CB",//"#52AEA0",
       elevation: 0
     },
     headerTintColor: "#fff",

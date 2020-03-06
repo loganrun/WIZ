@@ -63,7 +63,7 @@ class Ratings extends Component {
       //let user = userToken
       axios({
         method: "post",
-        baseURL: "https://whizzit.herokuapp.com/api/users",
+        baseURL: "https://whizzit.herokuapp.com/api/bathrooms",
         timeout: 40000,
         headers: {
           Accept: "application/json",
