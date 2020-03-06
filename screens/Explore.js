@@ -211,14 +211,14 @@ class Explore extends Component {
       <Container>
         <Header
           style={{
-            backgroundColor: "#52AEA0",
+            backgroundColor: "#3480CB",//"#52AEA0",
             height: 100,
             borderBottomColor: "#757575"
           }}
         />
         <View
           style={{
-            backgroundColor: "#52AEA0",
+            backgroundColor: "#3480CB",//"#52AEA0",
             position: "absolute",
             flex: 1,
             left: 0,

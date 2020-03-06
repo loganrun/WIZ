@@ -44,7 +44,7 @@ const BathStackNavigator = createStackNavigator({
         ),
         title: "WHIZZ (beta)",
         headerStyle: {
-          backgroundColor: "#52AEA0", //"#3a455c",
+          backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -79,7 +79,7 @@ const LoginStackNavigator = createStackNavigator({
         ),
         title: "LOGIN",
         headerStyle: {
-          backgroundColor: "#52AEA0",
+          backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -108,7 +108,7 @@ const AddBathStackNavigator = createStackNavigator({
         ),
         title: "Add Restroom",
         headerStyle: {
-          backgroundColor: "#52AEA0",
+          backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -135,7 +135,7 @@ const SignStackNavigator = createStackNavigator({
         ),
         title: "SIGNUP",
         headerStyle: {
-          backgroundColor: "#52AEA0",
+          backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -162,7 +162,7 @@ const AppStackNavigator = createStackNavigator({
         ),
         title: "FOOD",
         headerStyle: {
-          backgroundColor: "#52AEA0",
+          backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -191,7 +191,7 @@ const FavoriteStackNavigator = createStackNavigator({
         ),
         title: "FAVORITES",
         headerStyle: {
-          backgroundColor: "#52AEA0",
+          backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0
         },
         headerTintColor: "#fff",
@@ -240,7 +240,7 @@ const AppTabNavigator = createBottomTabNavigator(
       }
     }),
     tabBarOptions: {
-      activeTintColor: "#52AEA0",
+      activeTintColor: "#3480CB",//"#52AEA0",
       inactiveTintColor: "gray"
     }
   }
@@ -256,7 +256,7 @@ const AppDrawerNavigator = createDrawerNavigator(
           drawerIcon: <Ionicons name='ios-home' size={30} color='#d2b48c' />,
           title: "Login",
           headerStyle: {
-            backgroundColor: "#52AEA0",
+            backgroundColor: "#3480CB",//"#52AEA0",
             elevation: 0
           },
           headerTintColor: "#fff",
@@ -276,7 +276,7 @@ const AppDrawerNavigator = createDrawerNavigator(
           ),
           title: "Add Restroom",
           headerStyle: {
-            backgroundColor: "#52AEA0",
+            backgroundColor: "#3480CB",//"#52AEA0",
             elevation: 0
           },
           headerTintColor: "#fff",
@@ -303,7 +303,7 @@ const AppDrawerNavigator = createDrawerNavigator(
           ),
           title: "Login",
           headerStyle: {
-            backgroundColor: "#52AEA0",
+            backgroundColor: "#3480CB",//"#52AEA0",
             elevation: 0
           },
           headerTintColor: "#fff",
@@ -332,7 +332,7 @@ const AppDrawerNavigator = createDrawerNavigator(
           ),
           title: "Sign Up",
           headerStyle: {
-            backgroundColor: "#52AEA0",
+            backgroundColor: "#3480CB",//"#52AEA0",
             elevation: 0
           },
           headerTintColor: "#fff",
@@ -359,7 +359,7 @@ const AppDrawerNavigator = createDrawerNavigator(
           ),
           title: "Sign Up",
           headerStyle: {
-            backgroundColor: "#52AEA0",
+            backgroundColor: "#3480CB",//"#52AEA0",
             elevation: 0
           },
           headerTintColor: "#d2b48c",
