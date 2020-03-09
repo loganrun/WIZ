@@ -65,55 +65,6 @@ constructor(props) {
     this.setState({mapMargin: 0});
   }
 
-
-  // getLocation = async () => {
-  //   let location = "";
-  //   try {
-  //     location = await AsyncStorage.getItem("location");
-  //    //console.log(location)
-  //     //console.log(location)
-  //   } catch (error) {
-  //     // Error retrieving data
-  //     console.log(error.message);
-  //   }
-  //   return JSON.parse(location);
-  // };
-
-  // initBathroom = async () => {
-  //   let bathroom = await this.getBathroom();
-  //   this.setState({ bathroom: bathroom });
-  //   //console.log(this.state.bathroom)
-  //   this._getLocationAsync();
-  //   //console.log(this.state.lat)
-  //   //console.log(this.state.lon)
-  //   this.setState({ loading: false });
-  // };
-
-  // _getLocationAsync = async () => {
-    
-
-  //   let location = await this.getLocation();
-  //   let lat = location.coords.latitude;
-  //   let lon = location.coords.longitude;
-  //   this.setState({ latitude: lat });
-  //   this.setState({ lon });
-  //   //await this.loadBathroom();
-  //   //console.log(lat);
-  //   //console.log(lon);
-  // };
-
-  // getBathroom = async () => {
-  //   let bathroom = "";
-  //   try {
-  //     bathroom = await AsyncStorage.getItem("bathroom");
-  //     //console.log(bathroom)
-  //   } catch (error) {
-  //     // Error retrieving data
-  //     console.log(error.message);
-  //   }
-  //   return JSON.parse(bathroom);
-  // };
-
   loadBathroom = async () => {
     //let lat = this.state.lat;
     //let lon = this.state.lon;
@@ -396,3 +347,52 @@ const mapStyles = [
 
 export default connect(mapStateToProps)(BathMap);
 
+
+
+// getLocation = async () => {
+  //   let location = "";
+  //   try {
+  //     location = await AsyncStorage.getItem("location");
+  //    //console.log(location)
+  //     //console.log(location)
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error.message);
+  //   }
+  //   return JSON.parse(location);
+  // };
+
+  // initBathroom = async () => {
+  //   let bathroom = await this.getBathroom();
+  //   this.setState({ bathroom: bathroom });
+  //   //console.log(this.state.bathroom)
+  //   this._getLocationAsync();
+  //   //console.log(this.state.lat)
+  //   //console.log(this.state.lon)
+  //   this.setState({ loading: false });
+  // };
+
+  // _getLocationAsync = async () => {
+    
+
+  //   let location = await this.getLocation();
+  //   let lat = location.coords.latitude;
+  //   let lon = location.coords.longitude;
+  //   this.setState({ latitude: lat });
+  //   this.setState({ lon });
+  //   //await this.loadBathroom();
+  //   //console.log(lat);
+  //   //console.log(lon);
+  // };
+
+  // getBathroom = async () => {
+  //   let bathroom = "";
+  //   try {
+  //     bathroom = await AsyncStorage.getItem("bathroom");
+  //     //console.log(bathroom)
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error.message);
+  //   }
+  //   return JSON.parse(bathroom);
+  // };
