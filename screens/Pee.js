@@ -217,10 +217,10 @@ class ContentArea extends React.Component {
             </CardItem>
           </Card>
         </TouchableOpacity>
-
+        <Ad />
       <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE RESTROOM</Text>
       <Ratings item={this.props.item}/>
-        <Ad />
+        
         
       </Animated.View>
     );
