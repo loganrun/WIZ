@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Intro  from '../components/Intro';
 
-const animation = require('../animations/drive.json');
+const animation = require('../animations/location-finding.json');
 // const styles = StyleSheet.create({
 //   container: {
 //     flex: 1,
