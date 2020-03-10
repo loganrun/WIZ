@@ -21,6 +21,7 @@ import Reset from "../Auth/Auth_Reset";
 import SignUp from "../Auth/Auth_Reg";
 import AddBath from "../screens/AddBath";
 
+
 const Width = Dimensions.get("window").width;
 const DrawerConfig = {
   drawerWidth: Width * 0.8,
