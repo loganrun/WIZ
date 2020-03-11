@@ -13,8 +13,8 @@ const animation = require('../animations/drive.json');
 const OnBoardOne = () => (
     <Intro
     animation={animation}
-    title="Title One"
-    body="Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    title="We All Live Busy Lives!"
+    body="When you are out and about and have to 'go', don't sweat it. Launch Whizz and click on the marker to find the restrooms in your area!"
   />
 );
 export default OnBoardOne;

@@ -13,8 +13,8 @@ const animation = require('../animations/location-finding.json');
 const OnBoardThree = () => (
     <Intro
     animation={animation}
-    title="Title two"
-    body="Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    title="Get There Now!"
+    body="For directions or restroom reviews, click on the info window.  Please consider making a purchase while you are there to thank them for letting you 'go'. Thank you and let us know what you think about our app!"
   />
 );
 export default OnBoardThree;
