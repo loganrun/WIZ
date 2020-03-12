@@ -68,7 +68,7 @@ const switchNavigator = createSwitchNavigator(
     OnBoard: OnboardTabNavigator
   },
   {
-    initialRouteName: "OnBoard"
+    initialRouteName: "Auth"
   }
 );
 

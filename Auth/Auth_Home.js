@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image } from "react-native";
+const loginPage = require("../assets/Loginbk.png");
+const signupbtn = require("../assets/loginwhite.png");
+const loginbtn = require("../assets/logintransparent.png");
 class AuthHome extends Component {
   constructor() {
     super();
@@ -16,7 +19,7 @@ class AuthHome extends Component {
   static navigationOptions = {
     title: "WHIZZ",
     headerStyle: {
-      backgroundColor: "#52AEA0"
+      backgroundColor: "#3480CB"
       //justifyContent: "center"
     },
     headerTintColor: "#fff",
@@ -28,7 +31,14 @@ class AuthHome extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <View style={{ flex: 0.25 }}>
+
+<ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
+
+<Image source={signupbtn} style={{width: 215, height: 32}}></Image>
+
+  <Image source={loginbtn} style={{width: 215, height: 32}}></Image>
+
+<View style={{ flex: 0.25 }}>
           <TouchableOpacity
             style={styles.btn1}
             onPress={() => navigate("SignUp")}
@@ -55,7 +65,36 @@ class AuthHome extends Component {
               Login
             </Text>
           </TouchableOpacity>
-        </View>
+        </View> 
+  </ImageBackground>
+        {/* <View style={{ flex: 0.25 }}>
+          <TouchableOpacity
+            style={styles.btn1}
+            onPress={() => navigate("SignUp")}
+          >
+            <Text
+              style={{
+                fontSize: 24,
+                color: "#fff" //#00BFFF
+              }}
+            >
+              SignUp
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigate("Login")}
+            style={styles.btn2}
+          >
+            <Text
+              style={{
+                fontSize: 24,
+                color: "#fff" //00BFFF
+              }}
+            >
+              Login
+            </Text>
+          </TouchableOpacity>
+        </View> */}
 
         {/* <Text
           style={{
@@ -92,7 +131,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff" //#3a455c
+    //backgroundColor: "#fff", //#3a455c
   },
   fabBtn: {
     flex: 0.25,
