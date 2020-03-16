@@ -20,6 +20,7 @@ import AuthHome from "./Auth_Home";
 import Reset from "../Auth/Auth_Reset";
 import SignUp from "../Auth/Auth_Reg";
 import AddBath from "../screens/AddBath";
+import Logo from "../components/Logo"
 
 
 const Width = Dimensions.get("window").width;
@@ -43,7 +44,8 @@ const BathStackNavigator = createStackNavigator({
             color={"#fff"}
           />
         ),
-        title: "WHIZZ (beta)",
+        // 
+        headerTitle: <Logo/>,
         headerStyle: {
           backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
           elevation: 0
@@ -78,7 +80,8 @@ const LoginStackNavigator = createStackNavigator({
             color={"#fff"}
           />
         ),
-        title: "LOGIN",
+        headerTitle: <Logo/>,
+        //title: "LOGIN",
         headerStyle: {
           backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0

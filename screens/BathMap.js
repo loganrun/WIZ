@@ -29,7 +29,7 @@ import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
 import {connect} from "react-redux"
-var bathIcon = require("../assets/regular_icon.png");
+var bathIcon = require("../assets/location_icon.png");
 var restRoom= require("../assets/restroom-orange.png")
 
 

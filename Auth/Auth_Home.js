@@ -1,8 +1,16 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image,TextInput,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  AsyncStorage } from "react-native";
 const loginPage = require("../assets/Loginbk.png");
-const signupbtn = require("../assets/loginwhite.png");
+const signupbtn = require("../assets/sign-up.png");
 const loginbtn = require("../assets/logintransparent.png");
+import Logo from "../components/Logo"
+import { Formik } from "formik";
+import * as yup from "yup";
+import * as firebase from "firebase";
+import axios from "axios";
 class AuthHome extends Component {
   constructor() {
     super();
@@ -11,13 +19,12 @@ class AuthHome extends Component {
       lat: null
     };
   }
-
   componentWillMount() {
-   
   }
 
   static navigationOptions = {
-    title: "WHIZZ",
+    //title: "WHIZZ",
+    headerTitle: <Logo style={{marginRight: 20, marginLeft: 20, paddingLeft: 20, paddingRight: 20}}/>,
     headerStyle: {
       backgroundColor: "#3480CB"
       //justifyContent: "center"
@@ -28,46 +35,266 @@ class AuthHome extends Component {
     }
   };
   render() {
+    const validationSchema = yup.object().shape({
+      email: yup
+        .string()
+        .email()
+        .label("Email")
+        .required(),
+      password: yup
+        .string()
+        .label("Password")
+        .required()
+        .min(6)
+        .max(20),
+      firstName: yup
+        .string()
+        .label("First name")
+        .required(),
+      lastName: yup
+        .string()
+        .label("Last name")
+        .required(),
+      userName: yup
+        .string()
+        .label("User name")
+        .required()
+    });
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
+        <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
+          <Formik
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          email: "",
+          userName: "",
+          password: "",
+          service: "",
+          promotions: false
+        }}
+        onSubmit={(value, actions) => {
+          let email = value.email;
+          let password = value.password;
 
-<ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
+          firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(function(cred) {
+              let user = firebase.auth().currentUser;
+              user.sendEmailVerification();
+              AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
+              //createUser(value, user);
+            })
+            .then(function(cred) {
+              let user = firebase.auth().currentUser;
+              axios({
+                method: "post",
+                baseURL: "https://whizzit.herokuapp.com/api/users",
+                timeout: 40000,
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json"
+                },
+                data: {
+                  email: value.email,
+                  firstName: value.firstName,
+                  lastName: value.lastName,
+                  userName: value.userName,
+                  service: value.service,
+                  userId: user.uid
+                }
+              });
+            })
+            .then(cred => this.props.navigation.navigate("Main"))
+            .catch(function(error) {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              if (errorCode == "auth/email-already-in-use") {
+                actions.setErrors({
+                  email:
+                    "Email already in use.  Please login or use another email address."
+                });
+              } //else if(errorCode == "auth/wrong-password") {
+              //   actions.setErrors({password: "Password is incorrect"})
+              // }
 
-<Image source={signupbtn} style={{width: 215, height: 32}}></Image>
-
-  <Image source={loginbtn} style={{width: 215, height: 32}}></Image>
-
-<View style={{ flex: 0.25 }}>
-          <TouchableOpacity
-            style={styles.btn1}
-            onPress={() => navigate("SignUp")}
-          >
-            <Text
-              style={{
-                fontSize: 24,
-                color: "#fff" //#00BFFF
-              }}
-            >
-              SignUp
+              actions.setSubmitting(false);
+            });
+        }}
+        validationSchema={validationSchema}
+      >
+        {formikProps => (
+          <KeyboardAvoidingView style={styles.container} behavior='padding'>
+            {/* <Text style={styles.text}>SIGN UP</Text> */}
+            {/* <TextInput
+              style={styles.textInput1}
+              onChangeText={formikProps.handleChange("firstName")}
+              onBlur={formikProps.handleBlur("firstName")}
+              placeholder={"First Name"}
+              autoFocus
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.firstName && formikProps.errors.firstName}
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigate("Login")}
-            style={styles.btn2}
-          >
-            <Text
-              style={{
-                fontSize: 24,
-                color: "#fff" //00BFFF
-              }}
-            >
-              Login
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("lastName")}
+              onBlur={formikProps.handleBlur("lastName")}
+              placeholder={"Last Name"}
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.lastName && formikProps.errors.lastName}
+            </Text> */}
+            <TextInput
+              style={styles.textInput1}
+              onChangeText={formikProps.handleChange("userName")}
+              placeholder={"Please enter a user name"}
+              onBlur={formikProps.handleBlur("userName")}
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.userName && formikProps.errors.userName}
             </Text>
-          </TouchableOpacity>
-        </View> 
-  </ImageBackground>
-        {/* <View style={{ flex: 0.25 }}>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("email")}
+              placeholder={"Please enter email"}
+              onBlur={formikProps.handleBlur("email")}
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.email && formikProps.errors.email}
+            </Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("password")}
+              placeholder={"Password"}
+              secureTextEntry
+              onBlur={formikProps.handleBlur("password")}
+            />
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {formikProps.touched.password && formikProps.errors.password}
+            </Text>
+            {/* <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("service")}
+              onBlur={formikProps.handleBlur("service")}
+              placeholder='Which service do you drive for?'
+            /> */}
+            
+            {formikProps.isSubmitting ? (
+              <ActivityIndicator />
+            ) : (
+              <TouchableOpacity
+                style={styles.btn1}
+                onPress={() => navigate("SignUp")}
+              >
+
+                  <Image source={signupbtn} style={{width: 300, height: 44}}></Image>
+            
+              </TouchableOpacity>
+            )}
+          </KeyboardAvoidingView>
+        )}
+      </Formik>
+
+            <View style={{ flex: 1 }}>
+              {/* <TouchableOpacity
+                style={styles.btn1}
+                onPress={() => navigate("SignUp")}
+              >
+
+                  <Image source={signupbtn} style={{width: 300, height: 44}}></Image>
+            
+              </TouchableOpacity> */}
+              <TouchableOpacity
+                onPress={() => navigate("Login")}
+                style={styles.btn2}
+              >
+
+                <Image source={loginbtn} style={{width: 300, height: 44}}></Image>
+              </TouchableOpacity>
+            </View> 
+            </ImageBackground>
+  
+        
+      
+    );
+  }
+}
+export default AuthHome;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    //backgroundColor: "#fff", //#3a455c
+  },
+  fabBtn: {
+    flex: 0.25,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    width: 150,
+    height: 90,
+    backgroundColor: "#fff"
+    //borderRadius: 50,
+    //borderColor: "black",
+    //borderWidth: 2,
+    //marginBottom: 20
+  },
+  btn1: {
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    //width: 200,
+    //height: 50,
+    //backgroundColor: "orange",
+    marginBottom: 40,
+    marginRight: 10
+  },
+  btn2: {
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    //width: 200,
+    //height: 50,
+    //backgroundColor: "orange",
+    //marginBottom: 20,
+    marginRight: 10
+  },
+  textInput1: {
+    alignSelf: "stretch",
+    height: 100,
+    marginTop: 60,
+    color: "white",
+    borderBottomColor: "white",
+    borderBottomWidth: 3,
+    marginRight: 20,
+    marginLeft: 20
+  },
+  textInput: {
+    alignSelf: "stretch",
+    height: 40,
+    marginTop: 20,
+    color: "white",
+    borderBottomColor: "white",
+    borderBottomWidth: 3,
+    marginRight: 20,
+    marginLeft: 20
+  },
+  btn3: {
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    width: 150,
+    height: 90
+    //backgroundColor: "orange"
+  }
+});
+
+
+{/* <View style={{ flex: 0.25 }}>
           <TouchableOpacity
             style={styles.btn1}
             onPress={() => navigate("SignUp")}
@@ -120,58 +347,3 @@ class AuthHome extends Component {
             SignUp
           </Text> 
         </TouchableOpacity>*/}
-      </View>
-    );
-  }
-}
-export default AuthHome;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    //backgroundColor: "#fff", //#3a455c
-  },
-  fabBtn: {
-    flex: 0.25,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    width: 150,
-    height: 90,
-    backgroundColor: "#fff"
-    //borderRadius: 50,
-    //borderColor: "black",
-    //borderWidth: 2,
-    //marginBottom: 20
-  },
-  btn1: {
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    width: 200,
-    height: 50,
-    backgroundColor: "orange",
-    marginBottom: 40,
-    marginRight: 10
-  },
-  btn2: {
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    width: 200,
-    height: 50,
-    backgroundColor: "orange",
-    //marginBottom: 20,
-    marginRight: 10
-  },
-  btn3: {
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    width: 150,
-    height: 90
-    //backgroundColor: "orange"
-  }
-});
