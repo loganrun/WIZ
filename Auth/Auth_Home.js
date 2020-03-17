@@ -24,7 +24,7 @@ class AuthHome extends Component {
 
   static navigationOptions = {
     //title: "WHIZZ",
-    headerTitle: <Logo style={{marginRight: 20, marginLeft: 20, paddingLeft: 20, paddingRight: 20}}/>,
+    headerTitle: <Logo style={{marginRight: 20, marginLeft: 40, paddingLeft: 40, paddingRight: 40}}/>,
     headerStyle: {
       backgroundColor: "#3480CB"
       //justifyContent: "center"
@@ -197,15 +197,15 @@ class AuthHome extends Component {
         )}
       </Formik>
 
-            <View style={{ flex: 1 }}>
-              {/* <TouchableOpacity
-                style={styles.btn1}
-                onPress={() => navigate("SignUp")}
-              >
+      {/* <View style={{flex: 1}}>
 
-                  <Image source={signupbtn} style={{width: 300, height: 44}}></Image>
-            
-              </TouchableOpacity> */}
+        
+
+
+      </View> */}
+
+            <View style={{ flex: 1 }}>
+            <Text style={styles.txt1}> or </Text>
               <TouchableOpacity
                 onPress={() => navigate("Login")}
                 style={styles.btn2}
@@ -213,6 +213,7 @@ class AuthHome extends Component {
 
                 <Image source={loginbtn} style={{width: 300, height: 44}}></Image>
               </TouchableOpacity>
+              <Text style={styles.txt1}> Forgot Password? </Text>
             </View> 
             </ImageBackground>
   
@@ -243,15 +244,22 @@ const styles = StyleSheet.create({
     //borderWidth: 2,
     //marginBottom: 20
   },
+  txt1: {
+    justifyContent: "center",
+    textAlign: "center",
+    position: "relative",
+    fontSize: 24,
+    color: "white",
+    //fontWeight: "bold",
+    //marginRight: 10,
+    marginTop: 20
+  },
   btn1: {
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
-    //width: 200,
-    //height: 50,
-    //backgroundColor: "orange",
-    marginBottom: 40,
-    marginRight: 10
+    marginRight: 10,
+    marginTop:20
   },
   btn2: {
     justifyContent: "center",
@@ -261,11 +269,12 @@ const styles = StyleSheet.create({
     //height: 50,
     //backgroundColor: "orange",
     //marginBottom: 20,
-    marginRight: 10
+    marginRight: 10,
+    marginTop: 20
   },
   textInput1: {
     alignSelf: "stretch",
-    height: 100,
+    height: 50,
     marginTop: 60,
     color: "white",
     borderBottomColor: "white",
@@ -275,7 +284,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     alignSelf: "stretch",
-    height: 40,
+    height: 50,
     marginTop: 20,
     color: "white",
     borderBottomColor: "white",

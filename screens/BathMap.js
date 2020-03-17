@@ -30,7 +30,7 @@ import { Ionicons } from "@expo/vector-icons";
 import restApi from "../services/restroom";
 import {connect} from "react-redux"
 var bathIcon = require("../assets/location_icon.png");
-var restRoom= require("../assets/restroom-orange.png")
+var restRoom= require("../assets/location_icon.png")
 
 
 class BathMap extends Component {

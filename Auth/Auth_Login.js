@@ -7,12 +7,14 @@ import {
   TextInput,
   ActivityIndicator,
   KeyboardAvoidingView,
-  Platform,
+  Platform,ImageBackground,Image,
   AsyncStorage
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
+const loginPage = require("../assets/Loginbk.png");
+const loginbtn = require("../assets/login_white.png");
 
 class AuthLogin extends Component {
   static navigationOptions = {
@@ -43,6 +45,7 @@ class AuthLogin extends Component {
     });
     const { navigate } = this.props.navigation;
     return (
+      <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(value, actions) => {
@@ -86,40 +89,32 @@ class AuthLogin extends Component {
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("email")}
-              placeholder={"Please enter email"}
+              placeholder={"Email"}
               onBlur={formikProps.handleBlur("email")}
               autoFocus
             />
-            <Text style={{ color: "red", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.email && formikProps.errors.email}
             </Text>
 
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("password")}
-              placeholder='Please enter password'
+              placeholder='Password'
               secureTextEntry
               onBlur={formikProps.handleBlur("password")}
             />
-            <Text style={{ color: "red", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
             {formikProps.isSubmitting ? (
               <ActivityIndicator />
             ) : (
               <TouchableOpacity
-                style={styles.button}
-                onPress={formikProps.handleSubmit}
+                //style={styles.button}
+                //onPress={formikProps.handleSubmit}
               >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    color: "#ffff",
-                    fontWeight: "bold"
-                  }}
-                >
-                  LOGIN
-                </Text>
+                <Image source={loginbtn} style={{width: 300, height: 44, alignContent:"center", marginTop: 40, alignSelf: "center"}}></Image>
               </TouchableOpacity>
             )}
             <TouchableOpacity
@@ -129,31 +124,18 @@ class AuthLogin extends Component {
               >
                 <Text
                   style={{
-                    fontSize: 20
-                    
-                  }}
-                >
-                  Forgot password?
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.button2}
-                onPress={() => navigate("SignUp")}
-                
-              >
-                <Text
-                  style={{
                     fontSize: 20,
-                    marginTop: 20
+                    color:"white"
                     
                   }}
                 >
-                  Need an account? Sign up here!
+                  Forgot Password?
                 </Text>
               </TouchableOpacity>
           </KeyboardAvoidingView>
         )}
       </Formik>
+      </ImageBackground>
     );
   }
 }
@@ -176,11 +158,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     alignSelf: "stretch",
-    height: 40,
+    height: 50,
     marginTop: 30,
-    color: "black",
-    borderBottomColor: "black",
-    borderBottomWidth: 2,
+    color: "white",
+    borderBottomColor: "white",
+    borderBottomWidth: 3,
     marginRight: 20,
     marginLeft: 20
   },
@@ -194,7 +176,7 @@ const styles = StyleSheet.create({
     marginRight: 40
   },
   button2: {
-    marginTop: 25,
+    marginTop: 35,
     fontStyle:"italic",
     alignItems:"center"
   }

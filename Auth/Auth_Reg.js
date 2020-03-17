@@ -18,7 +18,7 @@ class AuthReg extends Component {
   static navigationOptions = {
     title: "SIGN UP",
     headerStyle: {
-      backgroundColor: "#52AEA0",
+      backgroundColor:  "#3480CB",
       elevation: 0
     },
     headerTintColor: "#fff",
