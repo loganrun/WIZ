@@ -7,12 +7,14 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   KeyboardAvoidingView,
-  AsyncStorage
+  AsyncStorage, ImageBackground, Image
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
 import axios from "axios";
+const loginPage = require("../assets/Loginbk.png");
+const signupbtn = require("../assets/sign-up.png");
 
 class AuthReg extends Component {
   static navigationOptions = {
@@ -30,17 +32,7 @@ class AuthReg extends Component {
   render() {
     
     const validationSchema = yup.object().shape({
-      email: yup
-        .string()
-        .email()
-        .label("Email")
-        .required(),
-      password: yup
-        .string()
-        .label("Password")
-        .required()
-        .min(6)
-        .max(20),
+      
       firstName: yup
         .string()
         .label("First name")
@@ -49,12 +41,9 @@ class AuthReg extends Component {
         .string()
         .label("Last name")
         .required(),
-      userName: yup
-        .string()
-        .label("User name")
-        .required()
     });
     return (
+      <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}> 
       <Formik
         initialValues={{
           firstName: "",
@@ -126,7 +115,7 @@ class AuthReg extends Component {
               placeholder={"First Name"}
               autoFocus
             />
-            <Text style={{ color: "red", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.firstName && formikProps.errors.firstName}
             </Text>
             <TextInput
@@ -135,42 +124,24 @@ class AuthReg extends Component {
               onBlur={formikProps.handleBlur("lastName")}
               placeholder={"Last Name"}
             />
-            <Text style={{ color: "red", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.lastName && formikProps.errors.lastName}
             </Text>
             <TextInput
               style={styles.textInput}
-              onChangeText={formikProps.handleChange("userName")}
-              placeholder={"Please enter a user name"}
-              onBlur={formikProps.handleBlur("userName")}
-            />
-            <Text style={{ color: "red", marginLeft: 20 }}>
-              {formikProps.touched.userName && formikProps.errors.userName}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("email")}
-              placeholder={"Please enter email"}
-              onBlur={formikProps.handleBlur("email")}
-            />
-            <Text style={{ color: "red", marginLeft: 20 }}>
-              {formikProps.touched.email && formikProps.errors.email}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("password")}
-              placeholder={"Password"}
+              onChangeText={formikProps.handleChange("phone number")}
+              placeholder={"Phone Number"}
               secureTextEntry
-              onBlur={formikProps.handleBlur("password")}
+              onBlur={formikProps.handleBlur("phone")}
             />
-            <Text style={{ color: "red", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("service")}
               onBlur={formikProps.handleBlur("service")}
-              placeholder='Which service do you drive for?'
+              placeholder='Do you drive for a service?'
             />
             
             {formikProps.isSubmitting ? (
@@ -180,20 +151,13 @@ class AuthReg extends Component {
                 style={styles.button}
                 onPress={formikProps.handleSubmit}
               >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    color: "#ffff",
-                    fontWeight: "bold"
-                  }}
-                >
-                  Submit
-                </Text>
+                <Image source={signupbtn} style={{width: 300, height: 44}}></Image>
               </TouchableOpacity>
             )}
           </KeyboardAvoidingView>
         )}
       </Formik>
+      </ImageBackground>
     );
   }
 }
@@ -209,36 +173,36 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "orange",
     marginBottom: 10,
-    borderBottomColor: "black",
+    borderBottomColor: "white",
     borderBottomWidth: 3,
     marginRight: 40,
     marginLeft: 20
   },
   textInput1: {
     alignSelf: "stretch",
-    height: 40,
+    height: 50,
     marginTop: 60,
-    color: "black",
-    borderBottomColor: "black",
-    borderBottomWidth: 2,
+    color: "white",
+    borderBottomColor: "white",
+    borderBottomWidth: 3,
     marginRight: 20,
     marginLeft: 20
   },
   textInput: {
     alignSelf: "stretch",
-    height: 40,
+    height: 50,
     marginTop: 20,
-    color: "black",
-    borderBottomColor: "black",
-    borderBottomWidth: 2,
+    color: "white",
+    borderBottomColor: "white",
+    borderBottomWidth: 3,
     marginRight: 20,
     marginLeft: 20
   },
   button: {
-    alignSelf: "stretch",
+    alignSelf: "center",
     alignItems: "center",
-    padding: 20,
-    backgroundColor: "#52AEA0",
+    //padding: 20,
+    //backgroundColor: "#52AEA0",
     marginTop: 30,
     marginLeft: 40,
     marginRight: 40

@@ -149,19 +149,19 @@ class AuthHome extends Component {
             <TextInput
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("userName")}
-              placeholder={"Please enter a user name"}
+              placeholder={"Username"}
               onBlur={formikProps.handleBlur("userName")}
             />
-            <Text style={{ color: "red", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.userName && formikProps.errors.userName}
             </Text>
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("email")}
-              placeholder={"Please enter email"}
+              placeholder={"Email"}
               onBlur={formikProps.handleBlur("email")}
             />
-            <Text style={{ color: "red", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.email && formikProps.errors.email}
             </Text>
             <TextInput
@@ -171,7 +171,7 @@ class AuthHome extends Component {
               secureTextEntry
               onBlur={formikProps.handleBlur("password")}
             />
-            <Text style={{ color: "red", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
             {/* <TextInput
@@ -186,6 +186,7 @@ class AuthHome extends Component {
             ) : (
               <TouchableOpacity
                 style={styles.btn1}
+                //onPress={formikProps.handleSubmit}
                 onPress={() => navigate("SignUp")}
               >
 
@@ -196,14 +197,6 @@ class AuthHome extends Component {
           </KeyboardAvoidingView>
         )}
       </Formik>
-
-      {/* <View style={{flex: 1}}>
-
-        
-
-
-      </View> */}
-
             <View style={{ flex: 1 }}>
             <Text style={styles.txt1}> or </Text>
               <TouchableOpacity
@@ -216,9 +209,6 @@ class AuthHome extends Component {
               <Text style={styles.txt1}> Forgot Password? </Text>
             </View> 
             </ImageBackground>
-  
-        
-      
     );
   }
 }

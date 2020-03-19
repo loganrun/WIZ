@@ -72,7 +72,7 @@ constructor(props) {
     try {
       let params = {
         page: 1,
-        per_page: 50,
+        per_page: 40,
         lat: this.state.region.latitude,
         lng: this.state.region.longitude
       };
