@@ -15,8 +15,10 @@ import * as firebase from "firebase";
 import axios from "axios";
 const loginPage = require("../assets/Loginbk.png");
 const signupbtn = require("../assets/sign-up.png");
-
+// const items = navigation.getParam()
+//     console.log(items)
 class AuthReg extends Component {
+  
   static navigationOptions = {
     title: "SIGN UP",
     headerStyle: {
@@ -30,7 +32,7 @@ class AuthReg extends Component {
   };
 
   render() {
-    
+
     const validationSchema = yup.object().shape({
       
       firstName: yup
@@ -42,27 +44,31 @@ class AuthReg extends Component {
         .label("Last name")
         .required(),
     });
+    const {navigate} = this.props.navigation
+    let email = this.props.navigation.getParam("email");
+    let userName = this.props.navigation.getParam("userName");
+    let password = this.props.navigation.getParam("password")
+    //console.log(email, userName, password)
     return (
       <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}> 
       <Formik
         initialValues={{
           firstName: "",
           lastName: "",
-          email: "",
-          userName: "",
-          password: "",
           service: "",
-          promotions: false
+          phoneNum: ""
         }}
         onSubmit={(value, actions) => {
-          let email = value.email;
-          let password = value.password;
+          let firstName = value.firstName;
+          let lastName = value.lastName;
+          let service = value.service;
+          let phoneNum = value.phoneNum
 
-          firebase
+            firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then(function(cred) {
-              let user = firebase.auth().currentUser;
+              user = firebase.auth().currentUser;
               user.sendEmailVerification();
               AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
               //createUser(value, user);
@@ -79,15 +85,16 @@ class AuthReg extends Component {
                 },
                 data: {
                   email: value.email,
-                  firstName: value.firstName,
-                  lastName: value.lastName,
-                  userName: value.userName,
-                  service: value.service,
-                  userId: user.uid
+                  firstName: firstName,
+                  lastName: lastName,
+                  userName: userName,
+                  service: service,
+                  userId: user.uid,
+                  phoneNum: phoneNum
                 }
               });
             })
-            .then(cred => this.props.navigation.navigate("Main"))
+            .then(next => this.props.navigation.navigate("Main"))
             .catch(function(error) {
               var errorCode = error.code;
               var errorMessage = error.message;
@@ -151,7 +158,7 @@ class AuthReg extends Component {
                 style={styles.button}
                 onPress={formikProps.handleSubmit}
               >
-                <Image source={signupbtn} style={{width: 300, height: 44}}></Image>
+                <Image source={signupbtn} style={{width: 300, height: 44.5}}></Image>
               </TouchableOpacity>
             )}
           </KeyboardAvoidingView>
@@ -174,17 +181,17 @@ const styles = StyleSheet.create({
     color: "orange",
     marginBottom: 10,
     borderBottomColor: "white",
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     marginRight: 40,
     marginLeft: 20
   },
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: 60,
+    marginTop: 40,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     marginRight: 20,
     marginLeft: 20
   },
@@ -194,7 +201,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     marginRight: 20,
     marginLeft: 20
   },

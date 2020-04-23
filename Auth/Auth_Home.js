@@ -9,8 +9,8 @@ const loginbtn = require("../assets/logintransparent.png");
 import Logo from "../components/Logo"
 import { Formik } from "formik";
 import * as yup from "yup";
-import * as firebase from "firebase";
-import axios from "axios";
+//import * as firebase from "firebase";
+//import axios from "axios";
 class AuthHome extends Component {
   constructor() {
     super();
@@ -22,19 +22,23 @@ class AuthHome extends Component {
   componentWillMount() {
   }
 
+  
+
   static navigationOptions = {
     //title: "WHIZZ",
-    headerTitle: <Logo style={{marginRight: 20, marginLeft: 40, paddingLeft: 40, paddingRight: 40}}/>,
-    headerStyle: {
-      backgroundColor: "#3480CB"
-      //justifyContent: "center"
-    },
+    headerTitle: ()=><Logo/>,
+    // headerStyle: {
+    //   backgroundColor: "#3480CB"
+    //   //justifyContent: "center"
+    // },
     headerTintColor: "#fff",
     headerTitleStyle: {
       fontWeight: "bold"
-    }
+    },
+    
   };
   render() {
+    
     const validationSchema = yup.object().shape({
       email: yup
         .string()
@@ -47,14 +51,6 @@ class AuthHome extends Component {
         .required()
         .min(6)
         .max(20),
-      firstName: yup
-        .string()
-        .label("First name")
-        .required(),
-      lastName: yup
-        .string()
-        .label("Last name")
-        .required(),
       userName: yup
         .string()
         .label("User name")
@@ -64,63 +60,63 @@ class AuthHome extends Component {
     return (
         <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
           <Formik
-        initialValues={{
-          firstName: "",
-          lastName: "",
-          email: "",
-          userName: "",
-          password: "",
-          service: "",
-          promotions: false
+        initialValues={{ email: "", password: "", userName: ""
+          
         }}
         onSubmit={(value, actions) => {
-          let email = value.email;
-          let password = value.password;
+          this.props.navigation.navigate("SignUp",{
+           email: value.email,
+            userName: value.userName,
+          password: value.password})
+         //let email = value.email;
+         //let password = value.password;
+         
+          // firebase
+          //   .auth()
+          //   .createUserWithEmailAndPassword(email, password)
+          //   .then(function(cred) {
+          //     user = firebase.auth().currentUser;
+          //     user.sendEmailVerification();
+          //     //AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
+          //     //createUser(value, user);
+          //   })
+          //   .then(function(cred) {
+          //     let user = firebase.auth().currentUser;
+          //     axios({
+          //       method: "post",
+          //       baseURL: "https://whizzit.herokuapp.com/api/users",
+          //       timeout: 40000,
+          //       headers: {
+          //         Accept: "application/json",
+          //         "Content-Type": "application/json"
+          //       },
+          //       data: {
+          //         email: value.email,
+          //         firstName: value.firstName,
+          //         lastName: value.lastName,
+          //         userName: value.userName,
+          //         service: value.service,
+          //         userId: user.uid
+          //       }
+          //     });
+          //   })
+          //   .then(next => this.props.navigation.navigate("SignUp",{
+          //   email: value.email,
+          //   userName: value.userName}))
+          //   .catch(function(error) {
+          //     var errorCode = error.code;
+          //     var errorMessage = error.message;
+          //     if (errorCode == "auth/email-already-in-use") {
+          //       actions.setErrors({
+          //         email:
+          //           "Email already in use.  Please login or use another email address."
+          //       });
+          //     } //else if(errorCode == "auth/wrong-password") {
+          //     //   actions.setErrors({password: "Password is incorrect"})
+          //     // }
 
-          firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then(function(cred) {
-              let user = firebase.auth().currentUser;
-              user.sendEmailVerification();
-              AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
-              //createUser(value, user);
-            })
-            .then(function(cred) {
-              let user = firebase.auth().currentUser;
-              axios({
-                method: "post",
-                baseURL: "https://whizzit.herokuapp.com/api/users",
-                timeout: 40000,
-                headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json"
-                },
-                data: {
-                  email: value.email,
-                  firstName: value.firstName,
-                  lastName: value.lastName,
-                  userName: value.userName,
-                  service: value.service,
-                  userId: user.uid
-                }
-              });
-            })
-            .then(cred => this.props.navigation.navigate("Main"))
-            .catch(function(error) {
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              if (errorCode == "auth/email-already-in-use") {
-                actions.setErrors({
-                  email:
-                    "Email already in use.  Please login or use another email address."
-                });
-              } //else if(errorCode == "auth/wrong-password") {
-              //   actions.setErrors({password: "Password is incorrect"})
-              // }
-
-              actions.setSubmitting(false);
-            });
+          //     actions.setSubmitting(false);
+          //   });
         }}
         validationSchema={validationSchema}
       >
@@ -146,10 +142,28 @@ class AuthHome extends Component {
             <Text style={{ color: "red", marginLeft: 20 }}>
               {formikProps.touched.lastName && formikProps.errors.lastName}
             </Text> */}
+            {/* <TextInput
+              style={styles.textInput1}
+              onChangeText={formikProps.handleChange("firstName")}
+              placeholder={"First name"}
+              onBlur={formikProps.handleBlur("firstName")}
+            />
+            <Text style={{ color: "white", marginLeft: 20 }}>
+              {formikProps.touched.firstName && formikProps.errors.firstName}
+            </Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("lastName")}
+              placeholder={"Last name"}
+              onBlur={formikProps.handleBlur("lastName")}
+            />
+            <Text style={{ color: "white", marginLeft: 20 }}>
+              {formikProps.touched.lastName && formikProps.errors.lastName}
+            </Text> */}
             <TextInput
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("userName")}
-              placeholder={"Username"}
+              placeholder={"User name"}
               onBlur={formikProps.handleBlur("userName")}
             />
             <Text style={{ color: "white", marginLeft: 20 }}>
@@ -186,28 +200,30 @@ class AuthHome extends Component {
             ) : (
               <TouchableOpacity
                 style={styles.btn1}
-                //onPress={formikProps.handleSubmit}
-                onPress={() => navigate("SignUp")}
+                onPress={formikProps.handleSubmit}
+                //onPress={() => navigate("SignUp")}
               >
 
                   <Image source={signupbtn} style={{width: 300, height: 44}}></Image>
             
               </TouchableOpacity>
             )}
-          </KeyboardAvoidingView>
-        )}
-      </Formik>
-            <View style={{ flex: 1 }}>
+             <View style={{ flex: 1 }}>
             <Text style={styles.txt1}> or </Text>
               <TouchableOpacity
                 onPress={() => navigate("Login")}
                 style={styles.btn2}
               >
 
-                <Image source={loginbtn} style={{width: 300, height: 44}}></Image>
+                <Image source={loginbtn} style={{width: 300, height: 44.5}}></Image>
               </TouchableOpacity>
-              <Text style={styles.txt1}> Forgot Password? </Text>
+              <Text style={styles.txt2}> Forgot Password? </Text>
             </View> 
+          </KeyboardAvoidingView>
+          
+        )}
+      </Formik>
+           
             </ImageBackground>
     );
   }
@@ -238,7 +254,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     position: "relative",
-    fontSize: 24,
+    fontSize: 18,
+    color: "white",
+    //fontWeight: "bold",
+    //marginRight: 10,
+    //marginTop: 20,
+    //marginBottom: 20
+  },
+  txt2: {
+    justifyContent: "center",
+    textAlign: "center",
+    position: "relative",
+    fontSize: 18,
     color: "white",
     //fontWeight: "bold",
     //marginRight: 10,
@@ -249,7 +276,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
     marginRight: 10,
-    marginTop:20
+    marginTop:40,
+    marginBottom: 20
   },
   btn2: {
     justifyContent: "center",
@@ -268,17 +296,28 @@ const styles = StyleSheet.create({
     marginTop: 60,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     marginRight: 20,
     marginLeft: 20
   },
   textInput: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: 20,
+    marginTop: 10,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
+    marginRight: 20,
+    marginLeft: 20
+  },
+  textInput2: {
+    alignSelf: "stretch",
+    height: 50,
+    marginTop: 10,
+    marginBottom: 20,
+    color: "white",
+    borderBottomColor: "white",
+    borderBottomWidth: 2,
     marginRight: 20,
     marginLeft: 20
   },

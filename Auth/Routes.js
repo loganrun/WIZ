@@ -45,15 +45,15 @@ const BathStackNavigator = createStackNavigator({
           />
         ),
         // 
-        headerTitle: <Logo/>,
-        headerStyle: {
-          backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
-          elevation: 0
-        },
+        headerTitle: ()=><Logo/>,
+        // headerStyle: {
+        //   backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
+        //   elevation: 0
+        // },
         headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold"
-        }
+        // headerTitleStyle: {
+        //   fontWeight: "bold"
+        // }
       };
     }
   },
@@ -80,16 +80,16 @@ const LoginStackNavigator = createStackNavigator({
             color={"#fff"}
           />
         ),
-        headerTitle: <Logo/>,
+        headerTitle: ()=><Logo/>,
         //title: "LOGIN",
-        headerStyle: {
-          backgroundColor: "#3480CB",//"#52AEA0",
-          elevation: 0
-        },
+        // headerStyle: {
+        //   backgroundColor: "#3480CB",//"#52AEA0",
+        //   elevation: 0
+        // },
         headerTintColor: "#fff",
-        headerTitleStyle: {
-          fontWeight: "bold"
-        }
+        // headerTitleStyle: {
+        //   fontWeight: "bold"
+        // }
       };
     }
   },

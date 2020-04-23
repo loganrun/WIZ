@@ -23,15 +23,27 @@ const AuthStackNavigator = createStackNavigator({
   SignUp: SignUp
 });
 
-const OnboardTabNavigator = createBottomTabNavigator(
+
+const OnBoardStackNavigator = createStackNavigator({
+  Board1: OnBoard1,
+  Board2: OnBoard2,
+  Board3: OnBoard3
+});
+const OnBoardTabNavigator = createBottomTabNavigator(
   {
     
-    Board1: OnBoard1,
-    Board2: OnBoard2,
-    Board3: OnBoard3
+    Page1: {
+      screen: OnBoardStackNavigator
+    },
+    Page2: {
+      screen: OnBoard2
+    },
+    Page3: {
+      screen: OnBoard3
+    }
   },
 
-  options
+//   options
 
 //   // {
 //   //   defaultNavigationOptions: ({ navigation }) => ({
@@ -65,7 +77,7 @@ const switchNavigator = createSwitchNavigator(
     AuthLoading: AuthLoading,
     Main: Routes,
     Auth: AuthStackNavigator,
-    OnBoard: OnboardTabNavigator
+    OnBoard: OnBoardTabNavigator
   },
   {
     initialRouteName: "AuthLoading"
