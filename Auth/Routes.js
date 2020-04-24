@@ -35,22 +35,22 @@ const BathStackNavigator = createStackNavigator({
     screen: BathMap,
     navigationOptions: ({ navigation }) => {
       return {
-        headerLeft: (
-          <Ionicons
-            style={{ padding: 10 }}
-            onPress={() => navigation.openDrawer()}
-            name='md-menu'
-            size={30}
-            color={"#fff"}
-          />
-        ),
+        // headerLeft: (
+        //   <Ionicons
+        //     style={{ padding: 10 }}
+        //     onPress={() => navigation.openDrawer()}
+        //     name='md-menu'
+        //     size={30}
+        //     color={"#fff"}
+        //   />
+        // ),
         // 
-        headerTitle: ()=><Logo/>,
+        headerTitle: ()=><Logo navigation={navigation}/>,
         // headerStyle: {
-        //   backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
+          backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
         //   elevation: 0
         // },
-        headerTintColor: "#fff",
+        // headerTintColor: "#fff",
         // headerTitleStyle: {
         //   fontWeight: "bold"
         // }

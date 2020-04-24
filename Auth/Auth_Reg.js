@@ -48,7 +48,7 @@ class AuthReg extends Component {
     let email = this.props.navigation.getParam("email");
     let userName = this.props.navigation.getParam("userName");
     let password = this.props.navigation.getParam("password")
-    //console.log(email, userName, password)
+    console.log(email, userName, password)
     return (
       <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}> 
       <Formik
@@ -63,6 +63,7 @@ class AuthReg extends Component {
           let lastName = value.lastName;
           let service = value.service;
           let phoneNum = value.phoneNum
+          //this.props.navigation.navigate("OnBoard")
 
             firebase
             .auth()
@@ -73,28 +74,28 @@ class AuthReg extends Component {
               AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
               //createUser(value, user);
             })
-            .then(function(cred) {
-              let user = firebase.auth().currentUser;
-              axios({
-                method: "post",
-                baseURL: "https://whizzit.herokuapp.com/api/users",
-                timeout: 40000,
-                headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json"
-                },
-                data: {
-                  email: value.email,
-                  firstName: firstName,
-                  lastName: lastName,
-                  userName: userName,
-                  service: service,
-                  userId: user.uid,
-                  phoneNum: phoneNum
-                }
-              });
-            })
-            .then(next => this.props.navigation.navigate("Main"))
+            // .then(function(cred) {
+            //   let user = firebase.auth().currentUser;
+            //   axios({
+            //     method: "post",
+            //     baseURL: "https://whizzit.herokuapp.com/api/users",
+            //     timeout: 40000,
+            //     headers: {
+            //       Accept: "application/json",
+            //       "Content-Type": "application/json"
+            //     },
+            //     data: {
+            //       email: value.email,
+            //       firstName: firstName,
+            //       lastName: lastName,
+            //       userName: userName,
+            //       service: service,
+            //       userId: user.uid,
+            //       phoneNum: phoneNum
+            //     }
+            //   });
+            // })
+            //.then(next => this.props.navigation.navigate("OnBoard"))
             .catch(function(error) {
               var errorCode = error.code;
               var errorMessage = error.message;

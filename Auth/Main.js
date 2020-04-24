@@ -77,7 +77,7 @@ const switchNavigator = createSwitchNavigator(
     AuthLoading: AuthLoading,
     Main: Routes,
     Auth: AuthStackNavigator,
-    OnBoard: OnBoardTabNavigator
+    //OnBoard: OnBoardTabNavigator
   },
   {
     initialRouteName: "AuthLoading"
