@@ -28,7 +28,7 @@ class AuthHome extends Component {
     //title: "WHIZZ",
     headerTitle: ()=><Logo/>,
     // headerStyle: {
-    //   backgroundColor: "#3480CB"
+       backgroundColor: "#3480CB",
     //   //justifyContent: "center"
     // },
     headerTintColor: "#fff",
