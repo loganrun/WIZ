@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
     marginRight: 10,
-    marginTop:40,
+    marginTop:20,
     marginBottom: 20
   },
   btn2: {
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: 60,
+    marginTop: 70,
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 2,

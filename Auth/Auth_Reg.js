@@ -145,12 +145,12 @@ class AuthReg extends Component {
             <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
-            <TextInput
+            {/* <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("service")}
               onBlur={formikProps.handleBlur("service")}
               placeholder='Do you drive for a service?'
-            />
+            /> */}
             
             {formikProps.isSubmitting ? (
               <ActivityIndicator />
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: 40,
+    marginTop: 80,
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 2,

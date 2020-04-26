@@ -17,7 +17,7 @@ class LogoTitle extends React.Component {
           />
         <Image
           source={require('../assets/rectangle_logo.png')}
-          style={{height: 60, width: 100}}
+          style={{height: 60, width: 100, paddingTop: 10}}
         />
         </View>
       );
@@ -33,6 +33,8 @@ class LogoTitle extends React.Component {
       flexDirection:  "row",
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: "#3480CB"
+      backgroundColor: "#3480CB",
+      paddingTop: 10,
+      paddingBottom:5
     }
   })
