@@ -24,24 +24,24 @@ const AuthStackNavigator = createStackNavigator({
 });
 
 
-// const OnBoardStackNavigator = createStackNavigator({
-//   Board1: OnBoard1,
-//   Board2: OnBoard2,
-//   Board3: OnBoard3
-// });
-// const OnBoardTabNavigator = createBottomTabNavigator(
-//   {
+const OnBoardStackNavigator = createStackNavigator({
+  Board1: OnBoard1,
+  Board2: OnBoard2,
+  Board3: OnBoard3
+});
+const OnBoardTabNavigator = createBottomTabNavigator(
+  {
     
-//     Page1: {
-//       screen: OnBoardStackNavigator
-//     },
-//     Page2: {
-//       screen: OnBoard2
-//     },
-//     Page3: {
-//       screen: OnBoard3
-//     }
-//   },
+    Page1: {
+      screen: OnBoardStackNavigator
+    },
+    Page2: {
+      screen: OnBoard2
+    },
+    Page3: {
+      screen: OnBoard3
+    }
+  },
 
 //   options
 
@@ -70,14 +70,14 @@ const AuthStackNavigator = createStackNavigator({
 //   //     inactiveTintColor: "gray"
 //   //   }
 //   // }
- //);
+ );
 
 const switchNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoading,
     Main: Routes,
     Auth: AuthStackNavigator,
-    //OnBoard: OnBoardTabNavigator
+    OnBoard: OnBoardTabNavigator
   },
   {
     initialRouteName: "AuthLoading"

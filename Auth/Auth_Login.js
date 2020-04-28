@@ -83,11 +83,11 @@ class AuthLogin extends Component {
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView style={styles.container} behavior='padding'>
+          <KeyboardAvoidingView style={styles.container} behavior='height'>
             {/* <View style={styles.container}> */}
             {/* <Text style={styles.text}>Login</Text> */}
             <TextInput
-              style={styles.textInput}
+              style={styles.textInput1}
               onChangeText={formikProps.handleChange("email")}
               placeholder={"Email"}
               onBlur={formikProps.handleBlur("email")}
@@ -113,7 +113,7 @@ class AuthLogin extends Component {
             ) : (
               <TouchableOpacity
                 //style={styles.button}
-                //onPress={formikProps.handleSubmit}
+                onPress={formikProps.handleSubmit}
               >
                 <Image source={loginbtn} style={{width: 300, height: 44, alignContent:"center", marginTop: 40, alignSelf: "center"}}></Image>
               </TouchableOpacity>
@@ -157,13 +157,23 @@ const styles = StyleSheet.create({
     marginRight: 40,
     marginLeft: 20
   },
+  textInput1: {
+    alignSelf: "stretch",
+    height: 50,
+    marginTop: 100,
+    color: "white",
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
+    marginRight: 20,
+    marginLeft: 20
+  },
   textInput: {
     alignSelf: "stretch",
     height: 50,
     marginTop: 30,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 3,
+    borderBottomWidth: 1,
     marginRight: 20,
     marginLeft: 20
   },
@@ -179,6 +189,7 @@ const styles = StyleSheet.create({
   button2: {
     marginTop: 35,
     fontStyle:"italic",
-    alignItems:"center"
+    alignItems:"center",
+    marginBottom: 20
   }
 });

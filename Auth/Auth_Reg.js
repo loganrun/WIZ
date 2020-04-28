@@ -63,16 +63,16 @@ class AuthReg extends Component {
           let lastName = value.lastName;
           let service = value.service;
           let phoneNum = value.phoneNum
-          //this.props.navigation.navigate("OnBoard")
-
+          
             firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
+            
             .then(function(cred) {
               user = firebase.auth().currentUser;
               user.sendEmailVerification();
               AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
-              //createUser(value, user);
+              createUser(value, user);
             })
             .then(function(cred) {
               let user = firebase.auth().currentUser;
