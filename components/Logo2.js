@@ -8,16 +8,16 @@ class LogoTitle extends React.Component {
       const openMenu = () => navigation.openDrawer()
       return (
         <View style={styles.header}>
-          {/* <Ionicons
+          <Ionicons
             style={{ position: 'absolute', left: 16 }}
             onPress={openMenu}
             name='md-menu'
             size={30}
             color={"#fff"}
-          /> */}
+          />
         <Image
-          source={require('../assets/rectangle_logo.png')}
-          style={{height: 60, width: 100, paddingTop: 10}}
+          source={require('../assets/whizz_logo2.png')}
+          style={{height: 50, width: 50}}
         />
         </View>
       );
@@ -29,7 +29,7 @@ class LogoTitle extends React.Component {
   const styles = StyleSheet.create({
     header:{
       width:  '100%',
-      height: 70,
+      height: 75,
       flexDirection:  "row",
       alignItems: 'center',
       justifyContent: 'center',

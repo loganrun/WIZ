@@ -64,6 +64,7 @@ class AuthHome extends Component {
           
         }}
         onSubmit={(value, actions) => {
+          actions.setSubmitting(false);
           this.props.navigation.navigate("SignUp",{
            email: value.email,
             userName: value.userName,
@@ -121,7 +122,7 @@ class AuthHome extends Component {
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView style={styles.container} behavior='padding'>
+          <KeyboardAvoidingView style={styles.container} behavior='height'>
             {/* <Text style={styles.text}>SIGN UP</Text> */}
             {/* <TextInput
               style={styles.textInput1}
@@ -201,28 +202,43 @@ class AuthHome extends Component {
               <TouchableOpacity
                 style={styles.btn1}
                 onPress={formikProps.handleSubmit}
-                //onPress={() => navigate("SignUp")}
               >
-
                   <Image source={signupbtn} style={{width: 300, height: 44}}></Image>
-            
               </TouchableOpacity>
-            )}
-             <View style={{ flex: 1 }}>
-            <Text style={styles.txt1}> or </Text>
-              <TouchableOpacity
+              // <Text style={styles.txt1}> or </Text>
+              
+              
+            )
+            
+              }
+        
+            <TouchableOpacity
                 onPress={() => navigate("Login")}
                 style={styles.btn2}
               >
 
                 <Image source={loginbtn} style={{width: 300, height: 44.5}}></Image>
-              </TouchableOpacity>
+              </TouchableOpacity> 
+        
+             
+       {/* <TouchableOpacity  onPress={() => navigate("Reset")}>
               <Text style={styles.txt2}> Forgot Password? </Text>
-            </View> 
+      </TouchableOpacity>  
+      </View>  */}
+             
           </KeyboardAvoidingView>
           
         )}
       </Formik>
+      
+        {/* <Text style={styles.txt1}> or </Text> */}
+              
+             
+             
+       {/* <TouchableOpacity  onPress={() => navigate("Reset")}>
+              <Text style={styles.txt2}> Forgot Password? </Text>
+      </TouchableOpacity>  */}
+       
            
             </ImageBackground>
     );
@@ -258,7 +274,7 @@ const styles = StyleSheet.create({
     color: "white",
     //fontWeight: "bold",
     //marginRight: 10,
-    //marginTop: 20,
+    marginTop: 100,
     //marginBottom: 20
   },
   txt2: {
@@ -277,26 +293,28 @@ const styles = StyleSheet.create({
     position: "relative",
     marginRight: 10,
     marginTop:20,
-    marginBottom: 20
+    //marginBottom: 20
   },
   btn2: {
     justifyContent: "center",
     alignItems: "center",
-    position: "relative",
+    position: "absolute",
+    bottom: 20,
     //width: 200,
     //height: 50,
     //backgroundColor: "orange",
     //marginBottom: 20,
     marginRight: 10,
-    marginTop: 20
+    marginLeft: 35
+    //marginTop: 120
   },
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: 70,
+    marginTop: 30,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     marginRight: 20,
     marginLeft: 20
   },
@@ -306,7 +324,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     marginRight: 20,
     marginLeft: 20
   },
@@ -317,7 +335,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     marginRight: 20,
     marginLeft: 20
   },

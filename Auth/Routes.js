@@ -21,6 +21,7 @@ import Reset from "../Auth/Auth_Reset";
 import SignUp from "../Auth/Auth_Reg";
 import AddBath from "../screens/AddBath";
 import Logo from "../components/Logo"
+import Logo2 from "../components/Logo2"
 
 
 const Width = Dimensions.get("window").width;
@@ -45,7 +46,7 @@ const BathStackNavigator = createStackNavigator({
         //   />
         // ),
         // 
-        headerTitle: ()=><Logo navigation={navigation}/>,
+        headerTitle: ()=><Logo2 navigation={navigation}/>,
         // headerStyle: {
         //  backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
         //   elevation: 0

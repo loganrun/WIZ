@@ -107,6 +107,7 @@ class AuthLogin extends Component {
             <Text style={{ color: "white", marginLeft: 20 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
+            
             {formikProps.isSubmitting ? (
               <ActivityIndicator />
             ) : (
@@ -117,24 +118,24 @@ class AuthLogin extends Component {
                 <Image source={loginbtn} style={{width: 300, height: 44, alignContent:"center", marginTop: 40, alignSelf: "center"}}></Image>
               </TouchableOpacity>
             )}
-            <TouchableOpacity
+            </KeyboardAvoidingView>
+            
+        )}
+      </Formik>
+      <TouchableOpacity
                 style={styles.button2}
                 onPress={() => navigate("Reset")}
-                
               >
                 <Text
                   style={{
                     fontSize: 20,
                     color:"white"
-                    
                   }}
                 >
                   Forgot Password?
                 </Text>
               </TouchableOpacity>
-          </KeyboardAvoidingView>
-        )}
-      </Formik>
+          
       </ImageBackground>
     );
   }

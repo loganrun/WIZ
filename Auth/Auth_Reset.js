@@ -16,7 +16,7 @@ class AuthReset extends Component {
   static navigationOptions = {
     title: "ACCOUNT RESET",
     headerStyle: {
-      backgroundColor: "#52AEA0",
+      backgroundColor: "#3480CB",//"#52AEA0",
       elevation: 0
     },
     headerTintColor: "#fff",
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#52AEA0",
+    backgroundColor: "#3480CB",
     marginTop: 30,
     marginLeft: 40,
     marginRight: 40

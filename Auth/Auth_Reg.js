@@ -114,7 +114,7 @@ class AuthReg extends Component {
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView style={styles.container} behavior='padding'>
+          <KeyboardAvoidingView style={styles.container} behavior='height'>
             {/* <Text style={styles.text}>SIGN UP</Text> */}
             <TextInput
               style={styles.textInput1}
@@ -182,17 +182,17 @@ const styles = StyleSheet.create({
     color: "orange",
     marginBottom: 10,
     borderBottomColor: "white",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     marginRight: 40,
     marginLeft: 20
   },
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: 80,
+    marginTop: 45,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     marginRight: 20,
     marginLeft: 20
   },
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "white",
     borderBottomColor: "white",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     marginRight: 20,
     marginLeft: 20
   },
