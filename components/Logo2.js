@@ -35,6 +35,6 @@ class LogoTitle extends React.Component {
       justifyContent: 'center',
       backgroundColor: "#3480CB",
       paddingTop: 10,
-      paddingBottom:5
+      //paddingBottom:5
     }
   })

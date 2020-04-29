@@ -32,7 +32,6 @@ import {connect} from "react-redux"
 var bathIcon = require("../assets/location_icon.png");
 var restRoom= require("../assets/location_icon.png")
 
-
 class BathMap extends Component {
 
 constructor(props) {
@@ -50,7 +49,8 @@ constructor(props) {
             lon: null,
             errorMessage: null,
             search: "",
-            mapMargin:  1
+            mapMargin:  1,
+            newUser: false
             
           };
       }
@@ -59,8 +59,14 @@ constructor(props) {
    componentDidMount() {
     //this.initBathroom();
     //this.setState({ loading: true });
+    this.useCheck()
   }
+
+  useCheck = async () =>{
+  newUser = this.props.user
+  await this.setState({ newUser: newUser })
   
+  }
   setMargin=()=>{
     this.setState({mapMargin: 0});
   }
@@ -146,6 +152,7 @@ constructor(props) {
   }
 
   render() {
+    console.log(this.state.newUser)
     
     if (this.state.loading) {
     return (
@@ -202,8 +209,10 @@ const styles = {
 };
 
 const mapStateToProps= state =>{
+  console.log(state)
 return{
-  location: state.location.initlocation.loc
+  location: state.location.initlocation.loc,
+  user: state.user.newUser.payload
 }
 }
 

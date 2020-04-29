@@ -13,6 +13,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
 import axios from "axios";
+import {connect} from 'react-redux'
+import {newUser} from '../store/actions'
 const loginPage = require("../assets/Loginbk.png");
 const signupbtn = require("../assets/sign-up.png");
 // const items = navigation.getParam()
@@ -63,6 +65,7 @@ class AuthReg extends Component {
           let lastName = value.lastName;
           let service = value.service;
           let phoneNum = value.phoneNum
+          this.props.newUser(true)
           
             firebase
             .auth()
@@ -70,9 +73,10 @@ class AuthReg extends Component {
             
             .then(function(cred) {
               user = firebase.auth().currentUser;
-              user.sendEmailVerification();
+              //user.sendEmailVerification();
               AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
-              createUser(value, user);
+              //createUser(value, user);
+              
             })
             .then(function(cred) {
               let user = firebase.auth().currentUser;
@@ -95,13 +99,13 @@ class AuthReg extends Component {
                 }
               });
             })
-            .then(next => this.props.navigation.navigate("OnBoard"))
+            .then(next => this.props.navigation.navigate("Main"))
             .catch(function(error) {
               var errorCode = error.code;
               var errorMessage = error.message;
               if (errorCode == "auth/email-already-in-use") {
                 actions.setErrors({
-                  email:
+                  firstName:
                     "Email already in use.  Please login or use another email address."
                 });
               } //else if(errorCode == "auth/wrong-password") {
@@ -169,7 +173,18 @@ class AuthReg extends Component {
     );
   }
 }
-export default AuthReg;
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+    newUser: (user)=> {
+      dispatch(newUser(user))
+    }
+  }
+
+}
+
+export default connect(null, mapDispatchToProps)(AuthReg);
 
 const styles = StyleSheet.create({
   container: {

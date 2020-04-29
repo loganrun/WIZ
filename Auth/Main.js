@@ -33,7 +33,7 @@ const OnBoardTabNavigator = createBottomTabNavigator(
   {
     
     Page1: {
-      screen: OnBoardStackNavigator
+      screen: OnBoard1
     },
     Page2: {
       screen: OnBoard2
