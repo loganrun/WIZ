@@ -29,8 +29,13 @@ import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
 import {connect} from "react-redux"
+import Intro from '../components/Slider'
+//import OnBoard from './onboard1'
+import Over from '../components/Modal'
 var bathIcon = require("../assets/location_icon.png");
 var restRoom= require("../assets/location_icon.png")
+
+
 
 class BathMap extends Component {
 
@@ -50,7 +55,7 @@ constructor(props) {
             errorMessage: null,
             search: "",
             mapMargin:  1,
-            newUser: false
+            newUser: true
             
           };
       }
@@ -59,7 +64,7 @@ constructor(props) {
    componentDidMount() {
     //this.initBathroom();
     //this.setState({ loading: true });
-    this.useCheck()
+    //this.useCheck()
   }
 
   useCheck = async () =>{
@@ -67,8 +72,23 @@ constructor(props) {
   await this.setState({ newUser: newUser })
   
   }
+  // onDoneAllSlides = () => {
+  //   this.setState({ newUser: false });
+  // };
+  // onSkipSlides = () => {
+  //   this.setState({ newUsher: false });
+  // };
   setMargin=()=>{
     this.setState({mapMargin: 0});
+  }
+
+  _renderItem = ({ item }) => {
+    return (
+      <View style={styles.slide}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.text}>{item.text}</Text>
+      </View>
+    );
   }
 
   loadBathroom = async () => {
@@ -152,9 +172,17 @@ constructor(props) {
   }
 
   render() {
-    console.log(this.state.newUser)
+   
     
-    if (this.state.loading) {
+    if (this.state.newUser){
+      return(
+
+        <Over closeModal= { () => 
+             this.setState({ newUser: false })
+           }/>
+      )
+
+    } else if (this.state.loading){
     return (
       <View style={{ flex: 1 }}>
               <ActivityIndicator
@@ -209,7 +237,6 @@ const styles = {
 };
 
 const mapStateToProps= state =>{
-  console.log(state)
 return{
   location: state.location.initlocation.loc,
   user: state.user.newUser.payload
