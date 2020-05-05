@@ -55,7 +55,7 @@ constructor(props) {
             errorMessage: null,
             search: "",
             mapMargin:  1,
-            newUser: false
+            newUser: true
             
           };
       }
@@ -64,7 +64,7 @@ constructor(props) {
    componentDidMount() {
     //this.initBathroom();
     //this.setState({ loading: true });
-    this.useCheck()
+    //this.useCheck()
   }
 
   useCheck = async () =>{

@@ -1,6 +1,7 @@
 import React from 'react'
 import AppIntroSlider from 'react-native-app-intro-slider'
 import { StyleSheet, View, Image,Text } from 'react-native';
+import {RFPercentage} from 'react-native-responsive-fontsize'
 
 
 
@@ -14,8 +15,8 @@ const slides = [
     },
     {
       key: "2",
-      title: 'DELIVERY WORKERS!!!!!',
-      text: 'You guys are saving lives!!!!  Your hard work allows us to stay home and slow the spread of the virus.\n\n So Whizz is partnering with our good friends at Waba Grill to take care of you. How are we going to do that? How about a nice discount on their amazing food and exclusive access to their restrooms!!!',
+      title: 'DELIVERY WORKERS!',
+      text: 'You guys are saving lives! Your hard work allows us to stay home and slow the spread of the virus.\n\n So Whizz is partnering with our good friends at Waba Grill to take care of you. How are we going to do that? How about a nice discount on their amazing food and exclusive access to their restrooms!!!',
       image: require('../assets/maskDeliv.jpg'),
       backgroundColor: '#22bcb5'//'#59b2ab',
     },
@@ -29,7 +30,7 @@ const slides = [
    {
       key: "4",
       title: 'BE SAFE!!!',
-      text: 'Please remember to wear your mask at all times, especially in the restaurant.  Be safe out their!!!\n\n The Whizz Team. \n\nIf you know of any restaurant that wants to join, they can reach is at Whizzzit@gmail.com',
+      text: 'Please remember to wear your mask at all times, especially in the restaurant.  Be safe out there!\n\n The Whizz Team. \n\nIf you know of any restaurant that wants to join, they can reach us at Whizzzit@gmail.com',
       image: require('../assets/mask2.jpg'),
       backgroundColor: '#22bcb5',
     } 
@@ -41,13 +42,14 @@ const slides = [
       resizeMode: 'cover',
     },
     image: {
-        width: 300,
+        width: '90%',
         height: 300,
+        resizeMode:'contain'
         
       },
     text: {
       color: '#333',
-      marginTop: 92,
+      marginTop: '10%',
       textAlign: 'center',
     },
   });
@@ -55,11 +57,11 @@ const slides = [
   _renderItem = ({ item }) => {
     return (
       <View style={{flex:1, backgroundColor: item.backgroundColor}}>
-        <View style={{alignContent:"center",alignItems: "center", marginTop: 20, marginBottom: 20}}>
+        <View style={{alignContent:"center",alignItems: "center", marginTop: '10%'}}>
         <Image source={item.image} style ={styles.image} />
         </View>
-        <Text style={{fontSize:18, alignSelf:"center", marginBottom:5}}>{item.title}</Text>
-        <Text style= {{marginLeft: 10, marginRight:10}}>{item.text}</Text>
+        <Text style={{fontSize:RFPercentage(5), alignSelf:"center"}}>{item.title}</Text>
+        <Text style= {{marginLeft: 40, marginRight:40, marginTop: '5%',fontSize:RFPercentage(2.5)}}>{item.text}</Text>
       </View>
     );
   }

@@ -93,7 +93,7 @@ class AuthLogin extends Component {
               onBlur={formikProps.handleBlur("email")}
               autoFocus
             />
-            <Text style={{ color: "white", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.email && formikProps.errors.email}
             </Text>
 
@@ -104,7 +104,7 @@ class AuthLogin extends Component {
               secureTextEntry
               onBlur={formikProps.handleBlur("password")}
             />
-            <Text style={{ color: "white", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
             
@@ -118,12 +118,10 @@ class AuthLogin extends Component {
                 <Image source={loginbtn} style={{width: 300, height: 44, alignContent:"center", marginTop: 40, alignSelf: "center"}}></Image>
               </TouchableOpacity>
             )}
-            </KeyboardAvoidingView>
-            
-        )}
-      </Formik>
+
+      <View style={styles.button2}>
       <TouchableOpacity
-                style={styles.button2}
+                
                 onPress={() => navigate("Reset")}
               >
                 <Text
@@ -135,6 +133,13 @@ class AuthLogin extends Component {
                   Forgot Password?
                 </Text>
               </TouchableOpacity>
+      </View>
+            </KeyboardAvoidingView>
+            
+        )}
+      </Formik>
+      
+      
           
       </ImageBackground>
     );
@@ -160,12 +165,12 @@ const styles = StyleSheet.create({
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: 100,
+    marginTop: '30%',
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,
-    marginRight: 20,
-    marginLeft: 20
+    marginRight: 40,
+    marginLeft: 40
   },
   textInput: {
     alignSelf: "stretch",
@@ -174,8 +179,8 @@ const styles = StyleSheet.create({
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,
-    marginRight: 20,
-    marginLeft: 20
+    marginRight: 40,
+    marginLeft: 40
   },
   button: {
     alignSelf: "stretch",
@@ -188,8 +193,7 @@ const styles = StyleSheet.create({
   },
   button2: {
     marginTop: 35,
-    fontStyle:"italic",
+    //fontStyle:"italic",
     alignItems:"center",
-    marginBottom: 20
   }
 });

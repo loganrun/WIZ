@@ -16,7 +16,7 @@ import axios from "axios";
 import {connect} from 'react-redux'
 import {newUser} from '../store/actions'
 const loginPage = require("../assets/Loginbk.png");
-const signupbtn = require("../assets/sign-up.png");
+const nextbtn = require("../assets/nzxt_button.png");
 // const items = navigation.getParam()
 //     console.log(items)
 class AuthReg extends Component {
@@ -118,7 +118,7 @@ class AuthReg extends Component {
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView style={styles.container} behavior='height'>
+          <KeyboardAvoidingView behavior='height'>
             {/* <Text style={styles.text}>SIGN UP</Text> */}
             <TextInput
               style={styles.textInput1}
@@ -127,7 +127,7 @@ class AuthReg extends Component {
               placeholder={"First Name"}
               autoFocus
             />
-            <Text style={{ color: "white", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.firstName && formikProps.errors.firstName}
             </Text>
             <TextInput
@@ -136,7 +136,7 @@ class AuthReg extends Component {
               onBlur={formikProps.handleBlur("lastName")}
               placeholder={"Last Name"}
             />
-            <Text style={{ color: "white", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.lastName && formikProps.errors.lastName}
             </Text>
             <TextInput
@@ -146,7 +146,7 @@ class AuthReg extends Component {
               secureTextEntry
               onBlur={formikProps.handleBlur("phone")}
             />
-            <Text style={{ color: "white", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
             {/* <TextInput
@@ -163,7 +163,7 @@ class AuthReg extends Component {
                 style={styles.button}
                 onPress={formikProps.handleSubmit}
               >
-                <Image source={signupbtn} style={{width: 300, height: 44.5}}></Image>
+                <Image source={nextbtn} style={{width: 300, height: 44.5}}></Image>
               </TouchableOpacity>
             )}
           </KeyboardAvoidingView>
@@ -204,12 +204,12 @@ const styles = StyleSheet.create({
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: 45,
+    marginTop: '30%',
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,
-    marginRight: 20,
-    marginLeft: 20
+    marginRight: 40,
+    marginLeft: 40
   },
   textInput: {
     alignSelf: "stretch",
@@ -218,8 +218,8 @@ const styles = StyleSheet.create({
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,
-    marginRight: 20,
-    marginLeft: 20
+    marginRight: 40,
+    marginLeft: 40
   },
   button: {
     alignSelf: "center",

@@ -6,11 +6,13 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
+  ImageBackground,
   Switch
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
+const loginPage = require("../assets/Loginbk.png");
 
 class AuthReset extends Component {
   static navigationOptions = {
@@ -34,6 +36,7 @@ class AuthReset extends Component {
         .required()
     });
     return (
+      <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
       <Formik
         initialValues={{
           email: "",
@@ -71,7 +74,7 @@ class AuthReset extends Component {
               placeholder={"Please enter email"}
               onBlur={formikProps.handleBlur("email")}
             />
-            <Text style={{ color: "red", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.email && formikProps.errors.email}
             </Text>
             
@@ -88,6 +91,8 @@ class AuthReset extends Component {
           </KeyboardAvoidingView>
         )}
       </Formik>
+
+      </ImageBackground>
     );
   }
 }
@@ -103,18 +108,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 30,
     marginRight: 40,
-    marginLeft: 20, 
-    marginTop: 100, 
+    marginLeft: 40, 
+    marginTop: '40%', 
+    color:'white',
+    alignSelf:'center'
   },
   textInput: {
     alignSelf: "stretch",
     height: 40,
     marginTop: 20,
-    color: "black",
-    borderBottomColor: "black",
-    borderBottomWidth: 2,
-    marginRight: 20,
-    marginLeft: 20
+    color: "white",
+    borderBottomColor: "white",
+    borderBottomWidth: 1,
+    marginRight: 40,
+    marginLeft: 40
   },
   button: {
     alignSelf: "stretch",
@@ -123,6 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#3480CB",
     marginTop: 30,
     marginLeft: 40,
-    marginRight: 40
+    marginRight: 40,
+    borderRadius: 50
   }
 });

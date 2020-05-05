@@ -69,105 +69,19 @@ class AuthHome extends Component {
            email: value.email,
             userName: value.userName,
           password: value.password})
-         //let email = value.email;
-         //let password = value.password;
-         
-          // firebase
-          //   .auth()
-          //   .createUserWithEmailAndPassword(email, password)
-          //   .then(function(cred) {
-          //     user = firebase.auth().currentUser;
-          //     user.sendEmailVerification();
-          //     //AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
-          //     //createUser(value, user);
-          //   })
-          //   .then(function(cred) {
-          //     let user = firebase.auth().currentUser;
-          //     axios({
-          //       method: "post",
-          //       baseURL: "https://whizzit.herokuapp.com/api/users",
-          //       timeout: 40000,
-          //       headers: {
-          //         Accept: "application/json",
-          //         "Content-Type": "application/json"
-          //       },
-          //       data: {
-          //         email: value.email,
-          //         firstName: value.firstName,
-          //         lastName: value.lastName,
-          //         userName: value.userName,
-          //         service: value.service,
-          //         userId: user.uid
-          //       }
-          //     });
-          //   })
-          //   .then(next => this.props.navigation.navigate("SignUp",{
-          //   email: value.email,
-          //   userName: value.userName}))
-          //   .catch(function(error) {
-          //     var errorCode = error.code;
-          //     var errorMessage = error.message;
-          //     if (errorCode == "auth/email-already-in-use") {
-          //       actions.setErrors({
-          //         email:
-          //           "Email already in use.  Please login or use another email address."
-          //       });
-          //     } //else if(errorCode == "auth/wrong-password") {
-          //     //   actions.setErrors({password: "Password is incorrect"})
-          //     // }
-
-          //     actions.setSubmitting(false);
-          //   });
         }}
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView style={styles.container} behavior='height'>
-            {/* <Text style={styles.text}>SIGN UP</Text> */}
-            {/* <TextInput
-              style={styles.textInput1}
-              onChangeText={formikProps.handleChange("firstName")}
-              onBlur={formikProps.handleBlur("firstName")}
-              placeholder={"First Name"}
-              autoFocus
-            />
-            <Text style={{ color: "red", marginLeft: 20 }}>
-              {formikProps.touched.firstName && formikProps.errors.firstName}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("lastName")}
-              onBlur={formikProps.handleBlur("lastName")}
-              placeholder={"Last Name"}
-            />
-            <Text style={{ color: "red", marginLeft: 20 }}>
-              {formikProps.touched.lastName && formikProps.errors.lastName}
-            </Text> */}
-            {/* <TextInput
-              style={styles.textInput1}
-              onChangeText={formikProps.handleChange("firstName")}
-              placeholder={"First name"}
-              onBlur={formikProps.handleBlur("firstName")}
-            />
-            <Text style={{ color: "white", marginLeft: 20 }}>
-              {formikProps.touched.firstName && formikProps.errors.firstName}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("lastName")}
-              placeholder={"Last name"}
-              onBlur={formikProps.handleBlur("lastName")}
-            />
-            <Text style={{ color: "white", marginLeft: 20 }}>
-              {formikProps.touched.lastName && formikProps.errors.lastName}
-            </Text> */}
+          <KeyboardAvoidingView behavior='padding'>
+           
             <TextInput
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("userName")}
               placeholder={"User name"}
               onBlur={formikProps.handleBlur("userName")}
             />
-            <Text style={{ color: "white", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.userName && formikProps.errors.userName}
             </Text>
             <TextInput
@@ -176,7 +90,7 @@ class AuthHome extends Component {
               placeholder={"Email"}
               onBlur={formikProps.handleBlur("email")}
             />
-            <Text style={{ color: "white", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.email && formikProps.errors.email}
             </Text>
             <TextInput
@@ -186,7 +100,7 @@ class AuthHome extends Component {
               secureTextEntry
               onBlur={formikProps.handleBlur("password")}
             />
-            <Text style={{ color: "white", marginLeft: 20 }}>
+            <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
             {/* <TextInput
@@ -211,16 +125,16 @@ class AuthHome extends Component {
             )
             
               }
-        
+        <View style={styles.btn2}>
             <TouchableOpacity
                 onPress={() => navigate("Login")}
-                style={styles.btn2}
+                
               >
 
                 <Image source={loginbtn} style={{width: 300, height: 44.5}}></Image>
               </TouchableOpacity> 
         
-             
+        </View>
        {/* <TouchableOpacity  onPress={() => navigate("Reset")}>
               <Text style={styles.txt2}> Forgot Password? </Text>
       </TouchableOpacity>  
@@ -298,25 +212,18 @@ const styles = StyleSheet.create({
   btn2: {
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-    bottom: 20,
-    //width: 200,
-    //height: 50,
-    //backgroundColor: "orange",
-    //marginBottom: 20,
-    marginRight: 10,
-    marginLeft: 35
-    //marginTop: 120
+    position: "relative",
+    marginTop: '10%'
   },
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: 30,
+    marginTop: '40%',
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,
-    marginRight: 20,
-    marginLeft: 20
+    marginRight: 40,
+    marginLeft: 40
   },
   textInput: {
     alignSelf: "stretch",
@@ -325,8 +232,8 @@ const styles = StyleSheet.create({
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,
-    marginRight: 20,
-    marginLeft: 20
+    marginRight: 40,
+    marginLeft: 40
   },
   textInput2: {
     alignSelf: "stretch",
