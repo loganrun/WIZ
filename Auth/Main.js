@@ -11,10 +11,7 @@ import Reset from "./Auth_Reset";
 import SignUp from "./Auth_Reg";
 import Routes from "./Routes";
 import AuthLoading from "../screens/AuthLoading";
-import OnBoard1 from "../screens/onboard1";
-import OnBoard2 from "../screens/onboard2";
-import OnBoard3 from "../screens/onboard3";
-import options from "../components/Options"
+
 
 const AuthStackNavigator = createStackNavigator({
   Home: AuthHome,
@@ -23,25 +20,6 @@ const AuthStackNavigator = createStackNavigator({
   SignUp: SignUp
 });
 
-
-// const OnBoardStackNavigator = createStackNavigator({
-//   Board1: OnBoard1,
-//   Board2: OnBoard2,
-//   Board3: OnBoard3
-// });
-// const OnBoardTabNavigator = createBottomTabNavigator(
-//   {
-    
-//     Page1: {
-//       screen: OnBoard1
-//     },
-//     Page2: {
-//       screen: OnBoard2
-//     },
-//     Page3: {
-//       screen: OnBoard3
-//     }
-//   },
 
 //   options
 
@@ -76,8 +54,7 @@ const switchNavigator = createSwitchNavigator(
   {
     AuthLoading: AuthLoading,
     Main: Routes,
-    Auth: AuthStackNavigator,
-    //OnBoard: OnBoardTabNavigator
+    Auth: AuthStackNavigator
   },
   {
     initialRouteName: "AuthLoading"

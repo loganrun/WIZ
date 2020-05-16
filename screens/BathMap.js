@@ -32,8 +32,8 @@ import {connect} from "react-redux"
 import Intro from '../components/Slider'
 //import OnBoard from './onboard1'
 import Over from '../components/Modal'
-var bathIcon = require("../assets/location_icon.png");
-var restRoom= require("../assets/location_icon.png")
+var bathIcon = require("../assets/waba_icon_location.png");
+var restRoom= require("../assets/waba_icon_location.png")
 
 
 
@@ -55,7 +55,7 @@ constructor(props) {
             errorMessage: null,
             search: "",
             mapMargin:  1,
-            newUser: true
+            newUser: false
             
           };
       }
@@ -64,7 +64,7 @@ constructor(props) {
    componentDidMount() {
     //this.initBathroom();
     //this.setState({ loading: true });
-    //this.useCheck()
+    this.useCheck()
   }
 
   useCheck = async () =>{
@@ -97,13 +97,13 @@ constructor(props) {
 
     try {
       let params = {
-        page: 1,
-        per_page: 40,
+        //page: 1,
+        //per_page: 40,
         lat: this.state.region.latitude,
         lng: this.state.region.longitude
       };
 
-      let response = await restApi.get("/by_location", { params });
+      let response = await restApi.get('/api/bathrooms',{ params });
       let bathroom = response.data;
       this.setState({ bathroom: bathroom });
      
@@ -122,7 +122,7 @@ constructor(props) {
     const { navigate } = this.props.navigation;
 
     return this.state.bathroom.map((item, i) => {
-      const rating = Math.floor(Math.random() * Math.floor(5))
+      //const rating = Math.floor(Math.random() * Math.floor(5))
       return (
         <MapView.Marker
         key= {item.id}
@@ -155,7 +155,7 @@ constructor(props) {
                       <StarRating
                   disabled={true}
                   maxStars={5}
-                  rating={rating}
+                  rating={5}
                   starSize={12}
                   fullStarColor={"orange"}
                   emptyStarColor={"orange"}

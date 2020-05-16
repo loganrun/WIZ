@@ -202,7 +202,7 @@ class ContentArea extends React.Component {
                 style={{
                   marginTop: 25,
                   marginRight: 10,
-                  backgroundColor: "red",
+                  backgroundColor: "#3480CB",//"red",
                   paddingRight: 10,
                   paddingLeft: 10
                 }}

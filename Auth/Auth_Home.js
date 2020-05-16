@@ -73,7 +73,7 @@ class AuthHome extends Component {
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView behavior='padding'>
+          <KeyboardAvoidingView behavior='height'>
            
             <TextInput
               style={styles.textInput1}
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: '40%',
+    marginTop: '20%',
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,

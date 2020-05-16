@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Image, Text } from 'react-native';
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
 let dog = require('../assets/earl_dog.jpg')
+let waba = require('../assets/Waba_ad.png')
 export default class Ads extends Component {
   render() {
     return (
           <Card style={{flex: 0}}>
-            <CardItem>
+            {/* <CardItem>
               <Left >
                 <Body>
                   <Text style= {{fontSize: 24, fontWeight:"bold",}}>Earle's on Crenshaw</Text>
@@ -15,21 +16,21 @@ export default class Ads extends Component {
                 
                 </Body>
               </Left>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Image source={dog} style={{height: 200, width: "100%", flex: 1}}/>
-                <Text>
+            </CardItem> */}
+            <CardItem style={{margin: 0}}>
+              <Body style={{margin: 0}}>
+                <Image source={waba} style={{height: 200, width: "100%", flex: 1}}/>
+                {/* <Text>
                   Our World Famous Chilli Dog!
-                </Text>
+                </Text> */}
               </Body>
             </CardItem>
-            <CardItem>
+            {/* <CardItem>
               <Left>
                   <Text style={{fontSize: 16, fontWeight:"400"}}>We have the best food around and an atmosphere to match. Try us and you'll be convinced! Our recipes are authentic and time-tested.</Text>
                 
               </Left>
-            </CardItem>
+            </CardItem> */}
           </Card>
     );
   }

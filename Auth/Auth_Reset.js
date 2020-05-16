@@ -66,7 +66,7 @@ class AuthReset extends Component {
         validationSchema={validationSchema}
       >
         {formikProps => (
-          <KeyboardAvoidingView style={styles.container} behavior="padding">
+          <KeyboardAvoidingView behavior="height">
             <Text style={styles.text}>Please enter the email address associated with this account. An email will be sent with instructions to reset the account</Text>
             <TextInput
               style={styles.textInput}
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginRight: 40,
     marginLeft: 40, 
-    marginTop: '40%', 
+    marginTop: '20%', 
     color:'white',
     alignSelf:'center'
   },
