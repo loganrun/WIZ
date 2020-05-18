@@ -33,7 +33,7 @@ import Intro from '../components/Slider'
 //import OnBoard from './onboard1'
 import Over from '../components/Modal'
 var bathIcon = require("../assets/waba_icon_location.png");
-var restRoom= require("../assets/waba_icon_location.png")
+var restRoom= require("../assets/w_logo.png")
 
 
 
@@ -150,7 +150,7 @@ constructor(props) {
         </Left> 
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
-                      <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: 'blue', fontSize: 17}}>{item.name}</Text>
+                      <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
                       <Text>{item.street}</Text>
                       <StarRating
                   disabled={true}

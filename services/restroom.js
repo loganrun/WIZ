@@ -11,5 +11,3 @@ const restRoom = axios.create({
 
 export default restRoom;
 
-//https://www.refugerestrooms.org/api/v1/restrooms',
-//'http://localhost:5000'

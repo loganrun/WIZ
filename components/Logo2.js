@@ -16,7 +16,7 @@ class LogoTitle extends React.Component {
             color={"#fff"}
           />
         <Image
-          source={require('../assets/whizz_logo2.png')}
+          source={require('../assets/white_logo.png')}
           style={{height: 50, width: 50}}
         />
         </View>
