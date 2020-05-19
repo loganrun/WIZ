@@ -73,7 +73,7 @@ class AuthReg extends Component {
             
             .then(function(cred) {
               user = firebase.auth().currentUser;
-              //user.sendEmailVerification();
+              user.sendEmailVerification();
               AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
               //createUser(value, user);
               
