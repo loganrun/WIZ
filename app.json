@@ -10,7 +10,7 @@
     ],
     "version": "2.0.1",
     "orientation": "portrait",
-    "icon": "./assets/whizz_logo_1024.png",
+    "icon": "./assets/whizz_logo1.png",
     "splash": {
       "image": "./assets/splash1.png",
       "resizeMode": "cover"
