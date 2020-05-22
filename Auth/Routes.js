@@ -291,62 +291,62 @@ const AppDrawerNavigator = createDrawerNavigator(
         };
       }
     },
-    SignIn: {
-      screen: LoginStackNavigator,
-      navigationOptions: ({ navigation }) => {
-        return {
-          drawerLabel: "SignIn",
-          drawerIcon: <Ionicons name='ios-key' size={30} color={"#d2b48c"} />,
-          headerLeft: (
-            <Ionicons
-              style={{ padding: 10 }}
-              onPress={() => navigation.openDrawer()}
-              name='md-menu'
-              size={30}
-              color={"#fff"}
-            />
-          ),
-          title: "Login",
-          headerStyle: {
-            backgroundColor: "#3480CB",//"#52AEA0",
-            elevation: 0
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold"
-          }
-        };
-      }
-    },
-    SignUp: {
-      screen: LoginStackNavigator,
-      navigationOptions: ({ navigation }) => {
-        return {
-          drawerLabel: "SignUp",
-          drawerIcon: (
-            <Ionicons name='ios-person-add' size={30} color={"#d2b48c"} />
-          ),
-          headerLeft: (
-            <Ionicons
-              style={{ padding: 10 }}
-              onPress={() => navigation.openDrawer()}
-              name='md-menu'
-              size={30}
-              color={"#fff"}
-            />
-          ),
-          title: "Sign Up",
-          headerStyle: {
-            backgroundColor: "#3480CB",//"#52AEA0",
-            elevation: 0
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold"
-          }
-        };
-      }
-    },
+    // SignIn: {
+    //   screen: LoginStackNavigator,
+    //   navigationOptions: ({ navigation }) => {
+    //     return {
+    //       drawerLabel: "SignIn",
+    //       drawerIcon: <Ionicons name='ios-key' size={30} color={"#d2b48c"} />,
+    //       headerLeft: (
+    //         <Ionicons
+    //           style={{ padding: 10 }}
+    //           onPress={() => navigation.openDrawer()}
+    //           name='md-menu'
+    //           size={30}
+    //           color={"#fff"}
+    //         />
+    //       ),
+    //       title: "Login",
+    //       headerStyle: {
+    //         backgroundColor: "#3480CB",//"#52AEA0",
+    //         elevation: 0
+    //       },
+    //       headerTintColor: "#fff",
+    //       headerTitleStyle: {
+    //         fontWeight: "bold"
+    //       }
+    //     };
+    //   }
+    // },
+    // SignUp: {
+    //   screen: LoginStackNavigator,
+    //   navigationOptions: ({ navigation }) => {
+    //     return {
+    //       drawerLabel: "SignUp",
+    //       drawerIcon: (
+    //         <Ionicons name='ios-person-add' size={30} color={"#d2b48c"} />
+    //       ),
+    //       headerLeft: (
+    //         <Ionicons
+    //           style={{ padding: 10 }}
+    //           onPress={() => navigation.openDrawer()}
+    //           name='md-menu'
+    //           size={30}
+    //           color={"#fff"}
+    //         />
+    //       ),
+    //       title: "Sign Up",
+    //       headerStyle: {
+    //         backgroundColor: "#3480CB",//"#52AEA0",
+    //         elevation: 0
+    //       },
+    //       headerTintColor: "#fff",
+    //       headerTitleStyle: {
+    //         fontWeight: "bold"
+    //       }
+    //     };
+    //   }
+    // },
     Favorites: {
       screen: FavoriteStackNavigator,
       navigationOptions: ({ navigation }) => {

@@ -19,7 +19,7 @@ export default class Ads extends Component {
             </CardItem> */}
             <CardItem style={{margin: 0}}>
               <Body style={{margin: 0}}>
-                <Image source={waba} style={{height: 200, width: "100%", flex: 1}}/>
+                <Image source={waba} style={{height: 200, width: "100%", flex: 1, paddingLeft: 5}}/>
                 {/* <Text>
                   Our World Famous Chilli Dog!
                 </Text> */}
