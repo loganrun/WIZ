@@ -29,8 +29,8 @@ import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
 import {connect} from "react-redux"
+import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
-//import OnBoard from './onboard1'
 import Over from '../components/Modal'
 var bathIcon = require("../assets/waba_icon_location.png");
 var restRoom= require("../assets/w_logo.png")
@@ -199,13 +199,13 @@ constructor(props) {
     );
               }
     return (
-     
+      <SafeAreaView style={styles.container}>
             <View style={styles.container}>
             <MapView
             initialRegion={{latitude: this.props.location.latitude,
             longitude: this.props.location.longitude,
-            latitudeDelta: 0.1764,
-            longitudeDelta: 0.1236 }}
+            latitudeDelta: 0.5064,
+            longitudeDelta: 0.0636 }}//.1764,.1236
               style={{flex:1, marginTop:this.state.mapMargin}}
               provider="google"
               showsUserLocation={true}
@@ -217,6 +217,7 @@ constructor(props) {
               {this.createMarkers()}
             </MapView>
             </View>
+      </SafeAreaView>
           
     );
   }

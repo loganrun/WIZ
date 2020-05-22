@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Switch
 } from "react-native";
+import { SafeAreaView } from 'react-navigation';
 import { Formik } from "formik";
 import * as yup from "yup";
 
@@ -96,10 +97,11 @@ class AddBath extends Component {
         .required()
     });
     return (
-
+      <SafeAreaView style={styles.container}>
       <View  style={styles.container}>
         <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you want to add your restaurant, email us at Whizzzit@gmail.com.</Text>
       </View>
+      </SafeAreaView>
       // <Formik
       //   initialValues={{
       //     firstName: "",

@@ -15,6 +15,7 @@ import * as firebase from "firebase";
 import axios from "axios";
 import {connect} from 'react-redux'
 import {newUser} from '../store/actions'
+import { SafeAreaView } from 'react-navigation'
 const loginPage = require("../assets/Loginbk.png");
 const nextbtn = require("../assets/nzxt_button.png");
 // const items = navigation.getParam()
@@ -52,6 +53,7 @@ class AuthReg extends Component {
     let password = this.props.navigation.getParam("password")
     //console.log(email, userName, password)
     return (
+      <SafeAreaView style={styles.container}>
       <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}> 
       <Formik
         initialValues={{
@@ -170,6 +172,7 @@ class AuthReg extends Component {
         )}
       </Formik>
       </ImageBackground>
+      </SafeAreaView>
     );
   }
 }

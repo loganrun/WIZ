@@ -13,6 +13,7 @@ import {
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
+import { SafeAreaView } from 'react-navigation'
 const loginPage = require("../assets/Loginbk.png");
 const loginbtn = require("../assets/login_white.png");
 
@@ -45,6 +46,7 @@ class AuthLogin extends Component {
     });
     const { navigate } = this.props.navigation;
     return (
+      <SafeAreaView style={styles.container}>
       <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
       <Formik
         initialValues={{ email: "", password: "" }}
@@ -142,6 +144,7 @@ class AuthLogin extends Component {
       
           
       </ImageBackground>
+      </SafeAreaView>
     );
   }
 }

@@ -29,6 +29,7 @@ import { showLocation } from "react-native-map-link";
 import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
+import { SafeAreaView } from 'react-navigation'
 //import ContentArea from "../components/ContentArea";
 //let ad = require("../assets/ad.png");
 //let bathicon = require('../assets/bath3.png')
@@ -80,6 +81,7 @@ class Pee extends Component {
     const { navigate } = this.props.navigation;
 
     return (
+      <SafeAreaView style={styles.container}>
       <View style={{ flex: 1 }}>
         <ScrollView style={{ flex: 1 }}>
           <View
@@ -134,6 +136,7 @@ class Pee extends Component {
           </Animated.View>
         </ScrollView>
       </View>
+      </SafeAreaView>
     );
   }
 }

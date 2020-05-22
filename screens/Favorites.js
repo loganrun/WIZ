@@ -45,9 +45,11 @@ class Favorites extends Component {
   //   };
   render() {
     return (
+      <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <Text>FEATURE COMING SOON</Text>
       </View>
+      </SafeAreaView>
     );
   }
 }

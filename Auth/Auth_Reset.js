@@ -12,6 +12,7 @@ import {
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
+import { SafeAreaView } from 'react-navigation'
 const loginPage = require("../assets/Loginbk.png");
 
 class AuthReset extends Component {
@@ -36,6 +37,7 @@ class AuthReset extends Component {
         .required()
     });
     return (
+      <SafeAreaView style={styles.container}>
       <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
       <Formik
         initialValues={{
@@ -93,6 +95,7 @@ class AuthReset extends Component {
       </Formik>
 
       </ImageBackground>
+      </SafeAreaView>
     );
   }
 }

@@ -33,6 +33,7 @@ import {
   CardItem
 } from "native-base";
 
+
 import StarRating from "react-native-star-rating";
 
 class Explore extends Component {
@@ -208,6 +209,7 @@ class Explore extends Component {
     }
 
     return (
+      <SafeAreaView style={styles.container}>
       <Container>
         <Header
           style={{
@@ -315,6 +317,7 @@ class Explore extends Component {
           <Card>{this.recommend()}</Card>
         </Content>
       </Container>
+      </SafeAreaView>
     );
   }
 }

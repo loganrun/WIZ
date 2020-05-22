@@ -9,6 +9,7 @@ const loginbtn = require("../assets/logintransparent.png");
 import Logo from "../components/Logo"
 import { Formik } from "formik";
 import * as yup from "yup";
+import { SafeAreaView } from 'react-navigation'
 //import * as firebase from "firebase";
 //import axios from "axios";
 class AuthHome extends Component {
@@ -19,8 +20,7 @@ class AuthHome extends Component {
       lat: null
     };
   }
-  componentWillMount() {
-  }
+  
 
   
 
@@ -58,6 +58,7 @@ class AuthHome extends Component {
     });
     const { navigate } = this.props.navigation;
     return (
+      <SafeAreaView style={styles.container}>
         <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
           <Formik
         initialValues={{ email: "", password: "", userName: ""
@@ -155,6 +156,7 @@ class AuthHome extends Component {
        
            
             </ImageBackground>
+            </SafeAreaView>
     );
   }
 }

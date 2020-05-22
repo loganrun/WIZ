@@ -29,6 +29,7 @@ import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
 import Ad from "../components/Ads"
+import { SafeAreaView } from 'react-navigation'
 //import ContentArea from "../components/ContentArea";
 //var ad = require("../assets/ad.png");
 
@@ -81,6 +82,7 @@ class Places extends Component {
     const { navigate } = this.props.navigation;
 
     return (
+      <SafeAreaView style={styles.container}>
       <View style={{ flex: 1 }}>
         <ScrollView style={{ flex: 1 }}>
           <View
@@ -135,6 +137,7 @@ class Places extends Component {
           </Animated.View>
         </ScrollView>
       </View>
+      </SafeAreaView>
     );
   }
 }
