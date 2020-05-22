@@ -48,8 +48,8 @@ class Explore extends Component {
       errorMessage: null,
       search: ""
     };
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+   // this.handleSearch = this.handleSearch.bind(this);
+    //this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   // static navigationOptions = {
@@ -63,88 +63,88 @@ class Explore extends Component {
   //   }
   // };
 
-  componentDidMount() {
-    this._getLocationAsync();
-    this.setState({ loading: true });
-  }
+  // componentDidMount() {
+  //   this._getLocationAsync();
+  //   this.setState({ loading: true });
+  // }
 
-  handleSearch(search) {
-    this.setState({ search: search });
-  }
+  // handleSearch(search) {
+  //   this.setState({ search: search });
+  // }
 
-  handleSubmit() {
-    this.loadBusiness();
-    this.setState({ loading: true });
-  }
+  // handleSubmit() {
+  //   this.loadBusiness();
+  //   this.setState({ loading: true });
+  // }
 
-  getLocation = async () => {
-    let location = "";
-    try {
-      location = await AsyncStorage.getItem("location");
-    } catch (error) {
-      // Error retrieving data
-      console.log(error.message);
-    }
-    return JSON.parse(location);
-  };
+  // getLocation = async () => {
+  //   let location = "";
+  //   try {
+  //     location = await AsyncStorage.getItem("location");
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error.message);
+  //   }
+  //   return JSON.parse(location);
+  // };
 
-  getBusinesses = async () => {
-    let businesses = "";
-    try {
-      businesses = await AsyncStorage.getItem("businesses");
-    } catch (error) {
-      // Error retrieving data
-      console.log(error.message);
-    }
-    return JSON.parse(businesses);
-  };
+  // getBusinesses = async () => {
+  //   let businesses = "";
+  //   try {
+  //     businesses = await AsyncStorage.getItem("businesses");
+  //   } catch (error) {
+  //     // Error retrieving data
+  //     console.log(error.message);
+  //   }
+  //   return JSON.parse(businesses);
+  // };
 
-  _getLocationAsync = async () => {
-    // let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    // if (status !== "granted") {
-    //   this.setState({
-    //     errorMessage: "Permission to access location was denied"
-    //   });
-    // }
+  // _getLocationAsync = async () => {
+  //   // let { status } = await Permissions.askAsync(Permissions.LOCATION);
+  //   // if (status !== "granted") {
+  //   //   this.setState({
+  //   //     errorMessage: "Permission to access location was denied"
+  //   //   });
+  //   // }
 
-    let location = await this.getLocation();
-    let lat = location.coords.latitude;
-    let lon = location.coords.longitude;
-    this.setState({ lat });
-    this.setState({ lon });
-    this.loadBusiness();
-  };
+  //   let location = await this.getLocation();
+  //   let lat = location.coords.latitude;
+  //   let lon = location.coords.longitude;
+  //   this.setState({ lat });
+  //   this.setState({ lon });
+  //   this.loadBusiness();
+  // };
 
-  initBusinesses = async () => {
-    let business = await this.getBusinesses();
-    this.setState({ business: business });
-    this._getLocationAsync();
-    this.setState({ loading: false });
-  };
+  // initBusinesses = async () => {
+  //   let business = await this.getBusinesses();
+  //   this.setState({ business: business });
+  //   this._getLocationAsync();
+  //   this.setState({ loading: false });
+  // };
 
-  loadBusiness = async () => {
-    let lat = this.state.lat;
-    let lon = this.state.lon;
+  // loadBusiness = async () => {
+  //   let lat = this.state.lat;
+  //   let lon = this.state.lon;
 
-    try {
-      let params = {
-        term: this.state.search,
-        latitude: lat,
-        longitude: lon,
-        radius: 10000,
-        limit: 20
-      };
+  //   try {
+  //     let params = {
+  //       term: this.state.search,
+  //       latitude: lat,
+  //       longitude: lon,
+  //       radius: 10000,
+  //       limit: 20
+  //     };
 
-      let response = await api.get("/search", { params });
-      let { businesses } = response.data;
+  //     let response = await api.get("/search", { params });
+  //     let { businesses } = response.data;
 
-      this.setState({ business: businesses });
-      await this.setState({ loading: false });
-      this.setState({ search: "" });
-    } catch (e) {
-      console.log("error", e.message);
-    }
-  };
+  //     this.setState({ business: businesses });
+  //     await this.setState({ loading: false });
+  //     this.setState({ search: "" });
+  //   } catch (e) {
+  //     console.log("error", e.message);
+  //   }
+  // };
 
   recommend = () => {
     const { navigate } = this.props.navigation;
@@ -210,15 +210,18 @@ class Explore extends Component {
 
     return (
       <SafeAreaView style={styles.container}>
-      <Container>
-        <Header
+        {/* <Header
           style={{
             backgroundColor: "#3480CB",//"#52AEA0",
             height: 100,
             borderBottomColor: "#757575"
           }}
-        />
-        <View
+        /> */}
+
+      <View style={styles.container}>
+        <Text>FEATURE COMING SOON</Text>
+      </View>
+        {/* <View
           style={{
             backgroundColor: "#3480CB",//"#52AEA0",
             position: "absolute",
@@ -315,8 +318,7 @@ class Explore extends Component {
             )}
           </View>
           <Card>{this.recommend()}</Card>
-        </Content>
-      </Container>
+        </Content> */}
       </SafeAreaView>
     );
   }
