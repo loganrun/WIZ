@@ -5,6 +5,8 @@ import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base'
 let waba = require('../assets/Waba_ad.png')
 export default class Ads extends Component {
   render() {
+    const newAd = this.props.adInfo
+    console.log(newAd)
     return (
           <Card style={{flex: 0}}>
             {/* <CardItem>
@@ -19,7 +21,7 @@ export default class Ads extends Component {
             </CardItem> */}
             <CardItem style={{margin: 0}}>
               <Body style={{margin: 0}}>
-                <Image source={waba} style={{height: 200, width: "100%", flex: 1, paddingLeft: 5}}/>
+                <Image source={{uri: this.props.adInfo}} style={{height: 200, width: "100%", flex: 1, paddingLeft: 5}}/>
                 {/* <Text>
                   Our World Famous Chilli Dog!
                 </Text> */}

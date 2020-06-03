@@ -151,7 +151,7 @@ class ContentArea extends React.Component {
     showLocation({
       latitude: this.props.item.latitude,
       longitude: this.props.item.longitude,
-      title: this.props.item.name
+      //title: this.props.item.name
     });
   };
 
@@ -161,6 +161,7 @@ class ContentArea extends React.Component {
     //let longitude = item.longitude;
     //let latitude = item.latitude;
     let name = item.name;
+    let ad = item.ad
     //let phone = item.phone;
     let address = item.street;
     let city = item.city;
@@ -220,7 +221,7 @@ class ContentArea extends React.Component {
             </CardItem>
           </Card>
         </TouchableOpacity>
-        <Ad />
+        <Ad adInfo = {ad}/>
       <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE RESTROOM</Text>
       <Ratings item={this.props.item}/>
         

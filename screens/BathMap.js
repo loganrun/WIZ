@@ -105,6 +105,7 @@ constructor(props) {
 
       let response = await restApi.get('/api/bathrooms',{ params });
       let bathroom = response.data;
+      //console.log(bathroom)
       this.setState({ bathroom: bathroom });
      
       await this.setState({ loading: false });
@@ -123,6 +124,7 @@ constructor(props) {
 
     return this.state.bathroom.map((item, i) => {
       //const rating = Math.floor(Math.random() * Math.floor(5))
+      //const rest = require(item.icon)
       return (
         <MapView.Marker
         key= {item.id}
@@ -131,7 +133,7 @@ constructor(props) {
           longitude: item.longitude
         }}
         title={item.name}
-        image={bathIcon}
+        image={item.icon}
        // pinColor={'yellow'}
         onCalloutPress={() => {
           this.props.navigation.navigate("Pee", {
@@ -146,7 +148,7 @@ constructor(props) {
             <View>
                 <Card transparent style={{flexDirection: 'row'}}>
                   <Left style={{paddingLeft: 10}}>
-        <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={restRoom}style={{width: 50, height: 50}}/></Text>                  
+        <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
         </Left> 
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
