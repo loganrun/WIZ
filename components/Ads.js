@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Image, Text } from 'react-native';
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
 //let dog = require('../assets/earl_dog.jpg')
-let waba = require('../assets/Waba_ad.png')
+//let waba = require('../assets/Waba_ad.png')
 export default class Ads extends Component {
   render() {
     return (

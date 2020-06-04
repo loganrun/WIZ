@@ -32,8 +32,8 @@ import {connect} from "react-redux"
 import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
 import Over from '../components/Modal'
-var bathIcon = require("../assets/waba_icon_location.png");
-var restRoom= require("../assets/w_logo.png")
+//var bathIcon = require("../assets/waba_icon_location.png");
+//var restRoom= require("../assets/w_logo.png")
 
 
 
