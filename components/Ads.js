@@ -5,8 +5,6 @@ import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base'
 let waba = require('../assets/Waba_ad.png')
 export default class Ads extends Component {
   render() {
-    const newAd = this.props.adInfo
-    console.log(newAd)
     return (
           <Card style={{flex: 0}}>
             {/* <CardItem>

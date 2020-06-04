@@ -132,7 +132,7 @@ class Pee extends Component {
               zIndex: 1
             }}
           >
-            <ContentArea item={item} />
+            <ContentArea item={item} sourceLat={curLat} sourceLon={curLon} />
           </Animated.View>
         </ScrollView>
       </View>
@@ -151,7 +151,9 @@ class ContentArea extends React.Component {
     showLocation({
       latitude: this.props.item.latitude,
       longitude: this.props.item.longitude,
-      //title: this.props.item.name
+      title: this.props.item.name,
+      googleForceLatLon: true,
+      dialogTitle: "Directions to " + `${this.props.item.name}`
     });
   };
 
