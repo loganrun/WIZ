@@ -148,7 +148,7 @@ constructor(props) {
             <View>
                 <Card transparent style={{flexDirection: 'row'}}>
                   <Left style={{paddingLeft: 10}}>
-        <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.logo}}style={{width: 50, height: 50}}/></Text>                  
+        <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
         </Left> 
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
