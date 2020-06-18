@@ -42,10 +42,11 @@ class App extends React.Component {
     //this._getLocationAsync();
     try{
       await SplashScreen.preventAutoHideAsync();
+      this._getLocationAsync()
     }catch(e){
       console.warn(e)
     }
-    this._getLocationAsync
+    
   }
 
   _getLocationAsync = async () => {
@@ -56,6 +57,7 @@ class App extends React.Component {
       });
     }
     let location = await Location.getCurrentPositionAsync({});
+    console.log(location)
    
     this.saveLocation(location);
     
