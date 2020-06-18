@@ -166,6 +166,7 @@ class ContentArea extends React.Component {
     let city = item.city;
     let comment = item.comment;
     let direction = item.directions;
+    let ad = item.ad
 
     return (
       <Animated.View style={styles.Card}>
@@ -220,7 +221,7 @@ class ContentArea extends React.Component {
             </CardItem>
           </Card>
         </TouchableOpacity>
-        <Ad />
+        <Ad adInfo= {ad}/>
       <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE RESTROOM</Text>
       <Ratings item={this.props.item}/>
         

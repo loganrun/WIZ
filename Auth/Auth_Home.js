@@ -79,18 +79,22 @@ class AuthHome extends Component {
             <TextInput
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("userName")}
-              placeholder={"User name"}
               onBlur={formikProps.handleBlur("userName")}
             />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              User Name
+            </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.userName && formikProps.errors.userName}
             </Text>
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("email")}
-              placeholder={"Email"}
               onBlur={formikProps.handleBlur("email")}
             />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              Email
+            </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.email && formikProps.errors.email}
             </Text>
@@ -101,6 +105,9 @@ class AuthHome extends Component {
               secureTextEntry
               onBlur={formikProps.handleBlur("password")}
             />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              Password
+            </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>

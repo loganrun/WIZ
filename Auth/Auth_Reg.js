@@ -126,9 +126,11 @@ class AuthReg extends Component {
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("firstName")}
               onBlur={formikProps.handleBlur("firstName")}
-              placeholder={"First Name"}
               autoFocus
             />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              First Name
+            </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.firstName && formikProps.errors.firstName}
             </Text>
@@ -136,18 +138,22 @@ class AuthReg extends Component {
               style={styles.textInput}
               onChangeText={formikProps.handleChange("lastName")}
               onBlur={formikProps.handleBlur("lastName")}
-              placeholder={"Last Name"}
             />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              Last Name
+            </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.lastName && formikProps.errors.lastName}
             </Text>
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("phone number")}
-              placeholder={"Phone Number"}
               secureTextEntry
               onBlur={formikProps.handleBlur("phone")}
             />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              Phone Number
+            </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>

@@ -24,7 +24,7 @@ import {
 
 //import { showLocation } from "react-native-map-link";
 import StarRating from "react-native-star-rating";
-import MapView from 'react-native-maps';
+import MapView,{Callout} from 'react-native-maps';
 import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
@@ -32,8 +32,9 @@ import {connect} from "react-redux"
 import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
 import Over from '../components/Modal'
-var bathIcon = require("../assets/waba_icon_location.png");
-var restRoom= require("../assets/w_logo.png")
+//import { Callout } from "react-native-maps";
+//var bathIcon = require("../assets/waba_icon_location.png");
+//var restRoom= require("../assets/w_logo.png")
 
 
 
@@ -131,7 +132,7 @@ constructor(props) {
           longitude: item.longitude
         }}
         title={item.name}
-        image={bathIcon}
+        image={{uri: item.icon}}
        // pinColor={'yellow'}
         onCalloutPress={() => {
           this.props.navigation.navigate("Pee", {
@@ -142,11 +143,19 @@ constructor(props) {
           })}}
         
         >
-          <MapView.Callout toolTip>
+          <Callout onPress={() => {
+          this.props.navigation.navigate("Pee", {
+            id: item.id,
+            item,
+            currentLat: this.state.region.latitude,
+            currentLon: this.state.region.longitude
+          })}}
+        
+        >
             <View>
                 <Card transparent style={{flexDirection: 'row'}}>
                   <Left style={{paddingLeft: 10}}>
-        <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={restRoom}style={{width: 50, height: 50}}/></Text>                  
+        <Text style={{width: 50, height: 80, marginTop: 20}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
         </Left> 
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
@@ -164,7 +173,7 @@ constructor(props) {
                   </CardItem>
                 </Card>
                 </View>
-          </MapView.Callout>
+          </Callout>
         </MapView.Marker>
       );
     });
