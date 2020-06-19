@@ -23,6 +23,7 @@ class AuthLoadingScreen extends React.Component {
     
     let location = await this.getLocation();
     this.props.initLocation(location)
+    //this.props.navigation.navigate("Main");
 
     
     firebase.auth().onAuthStateChanged(user => {
@@ -38,7 +39,7 @@ class AuthLoadingScreen extends React.Component {
       //console.log(location)
     } catch (error) {
       // Error retrieving data
-      console.log(error.message);
+      console.log(error);
     }
     return JSON.parse(location);
   };

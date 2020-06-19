@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, AsyncStorage } from "react-native";
 import Main from './Auth/Main'
-import { SplashScreen, AppLoading } from "expo";
+//import { SplashScreen, AppLoading } from "expo";
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 import * as firebase from 'firebase'
@@ -11,6 +11,7 @@ import rootReducer from './store/reducers';
 import thunk from 'redux-thunk'
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import * as SplashScreen from 'expo-splash-screen'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCfx94bwaO-VnQosXn4aUIi_DKUCdAcdEA",
@@ -27,24 +28,31 @@ firebase.initializeApp(firebaseConfig);
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 class App extends React.Component {
-  constructor() {
-    super();
-    SplashScreen.preventAutoHide();
+
     state = {
-      isLoading: false,
+      appIsReady: false,
       errorMessage: " ",
       lat: "",
       lon: " ",
       search: ""
     };
-  }
-  componentWillMount() {
-    this.setState({ isLoading: "true" });
+
+  async componentDidMount() {
+    //this.setState({ isLoading: "true" });
     //this._getLocationAsync();
+    try{
+      await SplashScreen.preventAutoHideAsync();
+      this._getLocationAsync()
+    }catch(e){
+      console.log("something wrong")
+
+    }
   }
 
+
+
   _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    let { status } = await Location.requestPermissionsAsync();
     if (status !== "granted") {
       this.setState({
         errorMessage: "Permission to access location was denied"
@@ -64,19 +72,23 @@ class App extends React.Component {
       //console.log(location);
     } catch (error) {
       // Error retrieving data
-      console.log(error.message);
+      console.log("something");
     }
+    this.setState({appIsReady: true}, async () =>{
+      await SplashScreen.hideAsync()
+      
+    })
   };
 
   
   render() {
-    if (this.state.isLoading === "true") {
-      return (
-        <AppLoading
-          startAsync={this._getLocationAsync}
-          onFinish={() => this.setState({ isLoading: "false" })}
-        />
-      );
+    if (!this.state.appIsReady) {
+      return null
+        //<AppLoading
+         // startAsync={this._getLocationAsync}
+         // onFinish={() => this.setState({ isLoading: "false" })}
+        ///>
+      ;
     } else {
       return (
       <Provider store={store}>
