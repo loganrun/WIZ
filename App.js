@@ -57,8 +57,22 @@ class App extends React.Component {
       this.setState({
         errorMessage: "Permission to access location was denied"
       });
+      Alert.alert(
+        'Location Denied!',
+        'Whizz needs your location to work!',
+        [
+          { text: 'Try Again!', onPress: () => this._getLocationAsync },
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          }, 
+        ]
+      );
+      
     }
-    let location = await Location.getCurrentPositionAsync({});
+    let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
+    //console.log(location)
    
     this.saveLocation(location);
     
