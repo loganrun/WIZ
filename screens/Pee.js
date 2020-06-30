@@ -198,7 +198,7 @@ class ContentArea extends React.Component {
                 <Text>{address}</Text>
                 <Text>{city}</Text>
                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>
-                  Directions
+                  Instructions
                 </Text>
                 <Text>{direction}</Text>
               </Left>

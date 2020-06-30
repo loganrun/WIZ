@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, AsyncStorage } from "react-native";
+import { StyleSheet, Text, View, AsyncStorage,Alert } from "react-native";
 import Main from './Auth/Main'
 //import { SplashScreen, AppLoading } from "expo";
 import * as Permissions from 'expo-permissions';
@@ -12,6 +12,7 @@ import thunk from 'redux-thunk'
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import * as SplashScreen from 'expo-splash-screen'
+import * as Sentry from 'sentry-expo'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCfx94bwaO-VnQosXn4aUIi_DKUCdAcdEA",
@@ -22,6 +23,12 @@ const firebaseConfig = {
   messagingSenderId: "5680477837",
   appId: "1:5680477837:web:8bff0f0c656ab065"
 };
+
+Sentry.init({
+dsn: 'https://089403116866468aa120b8b535bbb89f@o412716.ingest.sentry.io/5291906',
+enableInExpoDevelopment: true,
+debug: true
+});
 
 firebase.initializeApp(firebaseConfig);
 
@@ -64,7 +71,7 @@ class App extends React.Component {
           { text: 'Try Again!', onPress: () => this._getLocationAsync },
           {
             text: 'Cancel',
-            onPress: () => console.log('Cancel Pressed'),
+            onPress: () => console.log('No Whizzinng for you!!'),
             style: 'cancel',
           }, 
         ]

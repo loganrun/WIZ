@@ -7,7 +7,7 @@
       "ios",
       "android"
     ],
-    "version": "3.5.3",
+    "version": "3.6.5",
     "orientation": "portrait",
     "icon": "./assets/whizz_logo1.png",
     "splash": {
@@ -22,15 +22,15 @@
     ],
     "ios": {
       "bundleIdentifier": "com.TheWhizzApp",
-      "buildNumber": "3.6.1",
+      "buildNumber": "3.7.3",
       "supportsTablet": true,
       "config": {
-        "googleMapsApiKey": "AIzaSyAGb4bJ_GV4G3UeUAAJ2cuU06P7cFKftJQ"
+        "googleMapsApiKey": "AIzaSyDutSO9RROS5389Z1laCVu6m4idanT31B8"
       }
     },
     "android": {
       "package": "com.TheWhizzApp.gotta_go",
-      "versionCode": 6,
+      "versionCode": 8,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyAGb4bJ_GV4G3UeUAAJ2cuU06P7cFKftJQ"
@@ -41,6 +41,18 @@
       ]
     },
     "description": "This is Whizz, the Essential Worker addition. All of the restaurants represented in this app have agreed to give our users exclusive access to their restrooms. You must show the app to gain access.  Our partners have also given you a discount on their food, so take full advantage. Thank you for taking care of us, and BE SAFE! ",
-    "sdkVersion": "37.0.0"
+    "sdkVersion": "37.0.0",
+    "hooks":{
+      "postPublish":[
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config":{
+            "organization":"whizz",
+            "project":"whizz",
+            "authToken":  "2f23520562824d63a6c07d06e57770b1be046864c98446dcac1355fd24e05745"
+          }
+        }
+      ]
+    }
   }
 }

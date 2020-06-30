@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Image, Text,TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native';
+import { Image, Text,TouchableOpacity, StyleSheet, AsyncStorage,Alert } from 'react-native';
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
 import axios from "axios";
+//import AlertMod  from "../components/alertModal"
 let horrible = require('../assets/Omg_Emoji.png')
 let bad = require('../assets/Very_Sad_Emoji.png')
 let ok = require('../assets/Neutral_Face_Emoji.png')
@@ -86,31 +87,30 @@ class Ratings extends Component {
     }
 
     addOne = () =>{
-      alert('Thank You!!')
-        this.setState({rate: 1})
+     Alert.alert('Your rating has been recorded! Thank You.')
+     this.setState({rate: 1})
     }
 
     addTwo = () =>{
-      alert('Thank You!!')
-        this.setState({rate: 2})
+    Alert.alert('Your rating has been recorded! Thank You.')
+    this.setState({rate: 2})
     }
 
     addThree = () =>{
-      alert('Thank You!!')
-        this.setState({rate: 3})
+    Alert.alert('Your rating has been recorded! Thank You.')
+    this.setState({rate: 3})
     }
 
     addFour = () =>{
-      alert('Thank You!!')
-        this.setState({rate: 4})
+    Alert.alert('Your rating has been recorded! Thank You.')
+    this.setState({rate: 4})
     }
     addFive = () =>{
-      alert('Thank You!!')
-        this.setState({rate: 5})
+    Alert.alert('Your rating has been recorded! Thank You.')
+    this.setState({rate: 5})
     }
 
   render() {
-    
     
     return (
           <Card style={{flex: 0}}>
@@ -129,24 +129,6 @@ class Ratings extends Component {
                 </CardItem>
               </Body>
             
-            </CardItem>
-            <CardItem>
-            <Button block
-                style={{
-                  marginTop: 25,
-                  marginRight: 10,
-                  backgroundColor: "red",
-                  paddingRight: 10,
-                  paddingLeft: 10, width: '100%'
-                }}
-                
-              >
-                <Text
-                  style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}
-                >
-                  SUBMIT RATINGS
-                </Text>
-              </Button>
             </CardItem>
           </Card>
     );
@@ -177,3 +159,21 @@ const styles = StyleSheet.create({
     marginRight: 25
   }
 });
+
+//<Button block
+  //              style={{
+    //              marginTop: 25,
+      //            marginRight: 10,
+        //          backgroundColor: "red",
+        //          paddingRight: 10,
+        //          paddingLeft: 10, 
+        //          width: '100%'
+        //        }}
+                
+          //    >
+            //    <Text
+              //    style={{ color: "#fff", fontSize: 18, fontWeight: "bold" }}
+              //  >
+              //    SUBMIT RATINGS
+              //  </Text>
+             // </Button>
