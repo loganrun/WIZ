@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, AsyncStorage,Alert } from "react-native";
+import { StyleSheet, Text, View, AsyncStorage, Alert} from "react-native";
 import Main from './Auth/Main'
 //import { SplashScreen, AppLoading } from "expo";
 import * as Permissions from 'expo-permissions';
@@ -61,22 +61,18 @@ class App extends React.Component {
   _getLocationAsync = async () => {
     let { status } = await Location.requestPermissionsAsync();
     if (status !== "granted") {
-      this.setState({
-        errorMessage: "Permission to access location was denied"
-      });
+      //this.setState({
+       // errorMessage: "Permission to access location was denied. This app needs location to work. Please allow at Settings->Privacy->Location"
+      //});
+      //await SplashScreen.hideAsync()
       Alert.alert(
-        'Location Denied!',
-        'Whizz needs your location to work!',
+        'Permission to access LOCATION was denied.',
+        'This app needs access to LOCATION services to work. Please go to SETTINGS-> PRIVACY-> LOCATION to enable.',
         [
-          { text: 'Try Again!', onPress: () => this._getLocationAsync },
-          {
-            text: 'Cancel',
-            onPress: () => console.log('No Whizzinng for you!!'),
-            style: 'cancel',
-          }, 
-        ]
+          { text: 'Ok' }
+        ],
+        { cancelable: false }
       );
-      
     }
     let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
     //console.log(location)
@@ -110,7 +106,7 @@ class App extends React.Component {
          // onFinish={() => this.setState({ isLoading: "false" })}
         ///>
       ;
-    } else {
+    }else {
       return (
       <Provider store={store}>
       <Main />
