@@ -105,6 +105,7 @@ constructor(props) {
       };
 
       let response = await restApi.get('/api/bathrooms',{ params });
+      console.log(response)
       let bathroom = response.data;
       this.setState({ bathroom: bathroom });
      
