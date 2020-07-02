@@ -61,6 +61,7 @@ class App extends React.Component {
   _getLocationAsync = async () => {
     let { status } = await Location.requestPermissionsAsync();
     if (status !== "granted") {
+      //console.log(status)
       //this.setState({
        // errorMessage: "Permission to access location was denied. This app needs location to work. Please allow at Settings->Privacy->Location"
       //});
@@ -74,10 +75,50 @@ class App extends React.Component {
         { cancelable: false }
       );
     }
-    let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
-    //console.log(location)
+
+    try{
+
+      let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
+      this.saveLocation(location)
+
+    }catch(error){
+      Alert.alert(
+        'Location services is not responding.',
+        'This app needs access to your location in order to work. Please go to SETTINGS-> PRIVACY-> LOCATION to enable.',
+        [
+          { text: 'Ok' }
+        ],
+        { cancelable: false }
+      );
+
+    }
+
+    //if(Location.getCurrentPositionAsync().Error. == "Error: Cannot obtain current location: Error Domain=kCLErrorDomain Code=0 (null)){
+     // Alert.alert(
+      //  'Permission to access LOCATION was denied.',
+      //  'This app needs access to LOCATION services to work. Please go to SETTINGS-> PRIVACY-> LOCATION to enable.',
+      //  [
+       //   { text: 'Ok' }
+       // ],
+       // { cancelable: false }
+      //);
+
+    //}else{
+    //let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
+    //console.log(Location.getCurrentPositionAsyncocation())
+    //if (Error.Code == 0) {
+      //Alert.alert(
+        //'Permission to access LOCATION was denied.',
+        //'This app needs access to LOCATION services to work. Please go to SETTINGS-> PRIVACY-> LOCATION to enable.',
+       // [
+        //  { text: 'Ok' }
+        //],
+       // { cancelable: false }
+      //);
+     // this.saveLocation(location);
+    //}
    
-    this.saveLocation(location);
+    //this.saveLocation(location);
     
 
    
