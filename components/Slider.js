@@ -6,29 +6,37 @@ import {RFPercentage} from 'react-native-responsive-fontsize'
 
 
 const slides = [
+
     {
       key: "1",
+      title: 'A FOREWORD',
+      text: 'Hello and thank you for downloading Whizz. Due to Covid-19 closures, we have removed thousands of restaurants from our map.  So, if you are not in Los Angeles, your map may be empty.  We are very sorry about this and are working hard to add more restaurants as soon as possible.\n\n If you would like to have your business added, please contact us at Whizzzit@gmail.com',
+      image: require('../assets/SanFran.png'),
+      backgroundColor: '#22bcb5'//'#8b0000'//'#daa520'//''// //#febe29',
+    },
+    {
+      key: "2",
       title: 'WELCOME TO WHIZZ \n Quarantine Edition ',
       text: 'The Whizz Team would like to thank all of our Essential Workers for taking care of us during these challenging times.\n\nBut we especially want to thank the unsung heroes...',
       image: require('../assets/essWorker.png'),
       backgroundColor: '#ff8c00'//'#8b0000'//'#daa520'//''// //#febe29',
     },
     {
-      key: "2",
+      key: "3",
       title: 'DELIVERY WORKERS!',
       text: 'You guys are saving lives! Your hard work allows us to stay home and slow the spread of the virus.\n\n So Whizz is partnering with our good friends at Waba Grill to take care of you. How are we going to do that? How about a nice discount on their amazing food and exclusive access to their restrooms!!!',
       image: require('../assets/maskDeliv.jpg'),
       backgroundColor: '#22bcb5'//'#59b2ab',
     },
     {
-        key: "3",
+        key: "4",
         title: 'WELCOME',
         text: 'This offer is available at participating Waba Grills.  Open the Whizz map and click on the icon. Select the popup to get directions. To gain access to the restroom and the exclusive discount, show the app to the manager.',
         image: require('../assets/waba.jpg'),
         backgroundColor: '#ff8c00'//'#22bcb5',
       },
    {
-      key: "4",
+      key: "5",
       title: 'BE SAFE!!!',
       text: 'Please remember to wear your mask at all times, especially in the restaurant.  Be safe out there!\n\n The Whizz Team. \n\nIf you know of any restaurant that wants to join, they can reach us at Whizzzit@gmail.com',
       image: require('../assets/mask2.jpg'),

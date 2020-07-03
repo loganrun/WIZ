@@ -83,7 +83,7 @@ class App extends React.Component {
 
     }catch(error){
       Alert.alert(
-        'Location services is not responding.',
+        'Location services are not responding.',
         'This app needs access to your location in order to work. Please go to SETTINGS-> PRIVACY-> LOCATION to enable.',
         [
           { text: 'Ok' }

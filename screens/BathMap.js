@@ -95,8 +95,9 @@ constructor(props) {
   loadBathroom = async () => {
     //let lat = this.state.lat;
     //let lon = this.state.lon;
+    try{
 
-    try {
+    
       let params = {
         //page: 1,
         //per_page: 40,
@@ -105,7 +106,8 @@ constructor(props) {
       };
 
       let response = await restApi.get('/api/bathrooms',{ params });
-      console.log(response)
+    
+        
       let bathroom = response.data;
       this.setState({ bathroom: bathroom });
      
@@ -114,6 +116,8 @@ constructor(props) {
       console.log("error", e.message);
     }
   };
+    
+  
 
   onRegionChangeComplete = async (region) =>{
     await this.setState({region})
