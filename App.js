@@ -57,7 +57,6 @@ class App extends React.Component {
       });
     }
     let location = await Location.getCurrentPositionAsync({});
-    console.log(location)
    
     this.saveLocation(location);
     

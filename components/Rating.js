@@ -157,8 +157,8 @@ class Ratings extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignSelf: "stretch",
-    justifyContent: "center"
+    //alignSelf: "stretch",
+    //justifyContent: "center"
   },
   image: {
     height: 40, 
