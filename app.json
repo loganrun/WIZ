@@ -7,7 +7,7 @@
       "ios",
       "android"
     ],
-    "version": "3.6.5",
+    "version": "3.6.6",
     "orientation": "portrait",
     "icon": "./assets/whizz_logo1.png",
     "splash": {
@@ -22,7 +22,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.TheWhizzApp",
-      "buildNumber": "3.7.3",
+      "buildNumber": "3.7.4",
       "supportsTablet": true,
       "config": {
         "googleMapsApiKey": "AIzaSyDutSO9RROS5389Z1laCVu6m4idanT31B8"
