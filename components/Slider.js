@@ -10,13 +10,13 @@ const slides = [
     {
       key: "1",
       title: 'A FOREWORD',
-      text: 'Hello and thank you for downloading Whizz. Due to Covid-19 closures, we have removed thousands of restaurants from our map.  So, if you are not in Los Angeles, your map may be empty.  We are very sorry about this and are working hard to add more restaurants as soon as possible.\n\n If you would like to have your business added, please contact us at Whizzzit@gmail.com',
+      text: 'Hello and thank you for downloading Whizz. Due to current events, we have removed thousands of restaurants from our map.  So, if you are not in Los Angeles, your map may be empty.  We are very sorry about this and are working hard to add more restaurants as soon as possible.\n\n If you would like to have your business added, please contact us at Whizzzit@gmail.com',
       image: require('../assets/SanFran.png'),
       backgroundColor: '#22bcb5'//'#8b0000'//'#daa520'//''// //#febe29',
     },
     {
       key: "2",
-      title: 'WELCOME TO WHIZZ \n Quarantine Edition ',
+      title: 'WELCOME TO WHIZZ',
       text: 'The Whizz Team would like to thank all of our Essential Workers for taking care of us during these challenging times.\n\nBut we especially want to thank the unsung heroes...',
       image: require('../assets/essWorker.png'),
       backgroundColor: '#ff8c00'//'#8b0000'//'#daa520'//''// //#febe29',

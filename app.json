@@ -7,7 +7,7 @@
       "ios",
       "android"
     ],
-    "version": "3.6.6",
+    "version": "3.6.7",
     "orientation": "portrait",
     "icon": "./assets/whizz_logo1.png",
     "splash": {
@@ -22,10 +22,13 @@
     ],
     "ios": {
       "bundleIdentifier": "com.TheWhizzApp",
-      "buildNumber": "3.7.4",
+      "buildNumber": "3.7.5",
       "supportsTablet": true,
       "config": {
         "googleMapsApiKey": "AIzaSyDutSO9RROS5389Z1laCVu6m4idanT31B8"
+      },
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Whizz requires your location in order to recommend open restrooms in your vicinity"
       }
     },
     "android": {
