@@ -22,6 +22,7 @@ import SignUp from "../Auth/Auth_Reg";
 import AddBath from "../screens/AddBath";
 import Logo from "../components/Logo"
 import Logo2 from "../components/Logo2"
+import Logo3 from "../components/Logo3"
 
 
 const Width = Dimensions.get("window").width;
@@ -35,6 +36,8 @@ const BathStackNavigator = createStackNavigator({
   BathMap: {
     screen: BathMap,
     navigationOptions: ({ navigation }) => {
+
+      if(Platform.OS === "ios"){
       return {
         // headerLeft: (
         //   <Ionicons
@@ -56,6 +59,31 @@ const BathStackNavigator = createStackNavigator({
         //   fontWeight: "bold"
         // }
       };
+    }else{
+      return {
+        // headerLeft: (
+        //   <Ionicons
+        //     style={{ padding: 10 }}
+        //     onPress={() => navigation.openDrawer()}
+        //     name='md-menu'
+        //     size={30}
+        //     color={"#fff"}
+        //   />
+        // ),
+        // 
+        headerTitle: ()=><Logo3 navigation={navigation}/>,
+        // headerStyle: {
+        //  backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
+        //   elevation: 0
+        // },
+        // headerTintColor: "#fff",
+        // headerTitleStyle: {
+        //   fontWeight: "bold"
+        // }
+      };
+
+
+    }
     }
   },
   Pee: Pee

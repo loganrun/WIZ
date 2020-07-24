@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import {
   View,
+  Platform,
   Text,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  Animated,
-  PanResponder,
-  Slider,
-  TouchableHighlight,
-  TouchableOpacity,
-  Image,AsyncStorage,ActivityIndicator
+  Image,ActivityIndicator
 } from "react-native";
  import {
    Left,
@@ -129,6 +122,7 @@ constructor(props) {
 
     return this.state.bathroom.map((item, i) => {
       //const rating = Math.floor(Math.random() * Math.floor(5))
+      if(Platform.OS === 'ios'){
       return (
         <MapView.Marker
         key= {item.id}
@@ -157,10 +151,11 @@ constructor(props) {
           })}}
         
         >
+        
             <View>
                 <Card transparent style={{flexDirection: 'row'}}>
                   <Left style={{paddingLeft: 10}}>
-        <Text style={{width: 50, height: 80, marginTop: 20}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
+        <Text style={{width: 50, height: 80, marginTop: 15}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
         </Left> 
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
@@ -181,6 +176,61 @@ constructor(props) {
           </Callout>
         </MapView.Marker>
       );
+        }else{
+          return (
+            <MapView.Marker
+            key= {item.id}
+            coordinate={{
+              latitude: item.latitude,
+              longitude: item.longitude
+            }}
+            title={item.name}
+            image={{uri: item.icon}}
+           // pinColor={'yellow'}
+            onCalloutPress={() => {
+              this.props.navigation.navigate("Pee", {
+                id: item.id,
+                item,
+                currentLat: this.state.region.latitude,
+                currentLon: this.state.region.longitude
+              })}}
+            
+            >
+              <Callout onPress={() => {
+              this.props.navigation.navigate("Pee", {
+                id: item.id,
+                item,
+                currentLat: this.state.region.latitude,
+                currentLon: this.state.region.longitude
+              })}}
+            
+            >
+            
+                <View>
+                    <Card transparent style={{flexDirection: 'row'}}>
+                      <Left style={{paddingLeft: 10}}>
+            <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
+            </Left> 
+                      <CardItem style={{flexDirection: 'column'}}>
+                        <Right style={{flex:1, alignItems: 'flex-start'}}>
+                          <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
+                          <Text>{item.street}</Text>
+                          <StarRating
+                      disabled={true}
+                      maxStars={5}
+                      rating={5}
+                      starSize={12}
+                      fullStarColor={"orange"}
+                      emptyStarColor={"orange"}
+                    />
+                        </Right>
+                      </CardItem>
+                    </Card>
+                    </View>
+              </Callout>
+            </MapView.Marker>
+          );
+        }
     });
 
   }

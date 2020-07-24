@@ -151,7 +151,8 @@ class ContentArea extends React.Component {
     showLocation({
       latitude: this.props.item.latitude,
       longitude: this.props.item.longitude,
-      title: this.props.item.name
+      title: this.props.item.name,
+      googleForceLatLon: true
     });
   };
 
@@ -222,7 +223,7 @@ class ContentArea extends React.Component {
           </Card>
         </TouchableOpacity>
         <Ad adInfo= {ad}/>
-      <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE RESTROOM</Text>
+      <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE THE RESTROOM</Text>
       <Ratings item={this.props.item}/>
         
         
