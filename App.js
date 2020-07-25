@@ -21,7 +21,8 @@ const firebaseConfig = {
   projectId: "wizusers",
   storageBucket: "wizusers.appspot.com",
   messagingSenderId: "5680477837",
-  appId: "1:5680477837:web:8bff0f0c656ab065"
+  appId: "1:5680477837:web:8bff0f0c656ab065",
+  measurementId: "G-FQN5Y3BVZD" 
 };
 
 Sentry.init({
