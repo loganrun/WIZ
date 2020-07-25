@@ -39,47 +39,15 @@ const BathStackNavigator = createStackNavigator({
 
       if(Platform.OS === "ios"){
       return {
-        // headerLeft: (
-        //   <Ionicons
-        //     style={{ padding: 10 }}
-        //     onPress={() => navigation.openDrawer()}
-        //     name='md-menu'
-        //     size={30}
-        //     color={"#fff"}
-        //   />
-        // ),
-        // 
+        
         headerTitle: ()=><Logo2 navigation={navigation}/>,
-        // headerStyle: {
-        //  backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
-        //   elevation: 0
-        // },
-        // headerTintColor: "#fff",
-        // headerTitleStyle: {
-        //   fontWeight: "bold"
-        // }
+        
       };
     }else{
       return {
-        // headerLeft: (
-        //   <Ionicons
-        //     style={{ padding: 10 }}
-        //     onPress={() => navigation.openDrawer()}
-        //     name='md-menu'
-        //     size={30}
-        //     color={"#fff"}
-        //   />
-        // ),
-        // 
+         
         headerTitle: ()=><Logo3 navigation={navigation}/>,
-        // headerStyle: {
-        //  backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
-        //   elevation: 0
-        // },
-        // headerTintColor: "#fff",
-        // headerTitleStyle: {
-        //   fontWeight: "bold"
-        // }
+    
       };
 
 
