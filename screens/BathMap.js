@@ -25,6 +25,7 @@ import {connect} from "react-redux"
 import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
 import Over from '../components/Modal'
+var tprating = require("../assets/TPratings_5Stars.png")
 //import { Callout } from "react-native-maps";
 //var bathIcon = require("../assets/waba_icon_location.png");
 //var restRoom= require("../assets/w_logo.png")
@@ -161,14 +162,8 @@ constructor(props) {
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
                       <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
                       <Text>{item.street}</Text>
-                      <StarRating
-                  disabled={true}
-                  maxStars={5}
-                  rating={5}
-                  starSize={12}
-                  fullStarColor={"orange"}
-                  emptyStarColor={"orange"}
-                />
+                      
+                <Text style={{width: 110, height: 25, marginTop: 5}}><Image resizeMode={'cover'} source={tprating}style={{width:110, height: 23}}/></Text>
                     </Right>
                   </CardItem>
                 </Card>
@@ -497,3 +492,11 @@ export default connect(mapStateToProps)(BathMap);
   //   }
   //   return JSON.parse(bathroom);
   // };
+  //<StarRating
+                  //disabled={true}
+                  //maxStars={5}
+                  //rating={5}
+                  //starSize={12}
+                  //fullStarColor={"orange"}
+                  //emptyStarColor={"orange"}
+                ///>//
