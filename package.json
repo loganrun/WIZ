@@ -10,6 +10,7 @@
     "@expo/vector-icons": "^10.0.0",
     "axios": "^0.18.0",
     "expo": "^37.0.12",
+    "expo-analytics-amplitude": "~8.1.0",
     "expo-cli": "^3.3.0",
     "expo-firebase-analytics": "~2.1.1",
     "expo-location": "~8.1.0",

@@ -3,11 +3,11 @@ import { Image, Text,TouchableOpacity, StyleSheet, AsyncStorage,Alert } from 're
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
 import axios from "axios";
 //import AlertMod  from "../components/alertModal"
-let horrible = require('../assets/Omg_Emoji.png')
-let bad = require('../assets/Very_Sad_Emoji.png')
-let ok = require('../assets/Neutral_Face_Emoji.png')
-let good = require('../assets/Slightly_Smiling_Face.png')
-let great = require('../assets/Smiling_with_Eyes_Opened.png')
+let horrible = require('../assets/TP-ratingsno!!!.png')
+let bad = require('../assets/TP-ratingsgross.png')
+let ok = require('../assets/TP-ratingsmeh.png')
+let good = require('../assets/TP-ratingsclean.png')
+let great = require('../assets/TP-ratingsfresh.png')
 
 const userToken = AsyncStorage.getItem("userToken");
 class Ratings extends Component {
@@ -143,8 +143,10 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   image: {
-    height: 40, 
-    width: 40
+    height: 80, 
+    width: 45,
+    marginTop: 5
+  
   },
  
   button1: {
