@@ -124,8 +124,8 @@ class Ratings extends Component {
                 <Button transparent style={styles.button1} onPress={this.addOne}><Image source={horrible} style={styles.image}/></Button>
                 <Button transparent style={styles.button} onPress={this.addTwo}><Image source={bad} style={styles.image}/></Button>
                 <Button transparent style={styles.button} onPress={this.addThree}><Image source={ok} style={styles.image}/></Button>
-                <Button transparent style={styles.button} onPress={this.addFour}><Image source={good} style={styles.image}/></Button>
-                <Button transparent style={styles.button} onPress={this.addFive}><Image source={great} style={styles.image}/></Button>
+                <Button transparent style={styles.button} onPress={this.addFour}><Image source={good} style={styles.image1}/></Button>
+                <Button transparent style={styles.button} onPress={this.addFive}><Image source={great} style={styles.image2}/></Button>
                 </CardItem>
               </Body>
             
@@ -145,6 +145,18 @@ const styles = StyleSheet.create({
   image: {
     height: 80, 
     width: 45,
+    marginTop: 5
+  
+  },
+  image1: {
+    height: 80, 
+    width: 47,
+    marginTop: 5
+  
+  },
+  image2: {
+    height: 90, 
+    width: 60,
     marginTop: 5
   
   },
