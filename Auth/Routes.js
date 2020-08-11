@@ -108,7 +108,7 @@ const AddBathStackNavigator = createStackNavigator({
             color={"#fff"}
           />
         ),
-        title: "Contact Us",
+        title: "Add Restroom",
         headerStyle: {
           backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0
@@ -299,11 +299,11 @@ const AppDrawerNavigator = createDrawerNavigator(
       screen: AddBathStackNavigator,
       navigationOptions: ({ navigation }) => {
         return {
-          drawerLabel: "Contact Us",
+          drawerLabel: "Add Restroom",
           drawerIcon: (
             <Ionicons name='ios-business' size={30} color='#d2b48c' />
           ),
-          title: "Contact Us",
+          title: "Add Restroom",
           headerStyle: {
             backgroundColor: "#3480CB",//"#52AEA0",
             elevation: 0
