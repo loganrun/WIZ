@@ -26,7 +26,7 @@ import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
 import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
-import * as Analytics from 'expo-firebase-analytics'
+//import * as Analytics from 'expo-firebase-analytics'
 import * as Amplitude from 'expo-analytics-amplitude'
 //import { Callout } from "react-native-maps";
 //var bathIcon = require("../assets/waba_icon_location.png");
