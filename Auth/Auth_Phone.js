@@ -180,24 +180,4 @@ export default Auth_Phone = () => {
       },
   });
 
-  //const phoneProvider = new firebase.auth.PhoneAuthProvider();
-    //  phoneProvider
-      //  .verifyPhoneNumber(phoneNumber, recaptchaVerifier.current)
-        //.then(Alert.alert(
-          //  'Verification code has been sent to your phone',
-        
-            //[
-              //{ text: 'Ok' }
-            //],
-            //{ cancelable: false }
-         // ))
-        //.catch(err =>{
-          //  Alert.alert(
-            //    `Error: ${err.message}`
-            //
-              //  [
-                //  { text: 'Ok' }
-               // ],
-               // { cancelable: false }
-             // )
-        //})
+  
