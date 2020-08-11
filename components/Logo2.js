@@ -29,7 +29,7 @@ class LogoTitle extends React.Component {
   const styles = StyleSheet.create({
     header:{
       width:  '100%',
-      height: 75,
+      height: '305%',
       flexDirection:  "row",
       alignItems: 'center',
       justifyContent: 'center',

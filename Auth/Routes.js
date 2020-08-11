@@ -20,8 +20,10 @@ import AuthHome from "./Auth_Home";
 import Reset from "../Auth/Auth_Reset";
 import SignUp from "../Auth/Auth_Reg";
 import AddBath from "../screens/AddBath";
+import Contact from "../screens/ContactUs"
 import Logo from "../components/Logo"
 import Logo2 from "../components/Logo2"
+import Logo3 from "../components/Logo3"
 
 
 const Width = Dimensions.get("window").width;
@@ -35,27 +37,22 @@ const BathStackNavigator = createStackNavigator({
   BathMap: {
     screen: BathMap,
     navigationOptions: ({ navigation }) => {
+
+      if(Platform.OS === "ios"){
       return {
-        // headerLeft: (
-        //   <Ionicons
-        //     style={{ padding: 10 }}
-        //     onPress={() => navigation.openDrawer()}
-        //     name='md-menu'
-        //     size={30}
-        //     color={"#fff"}
-        //   />
-        // ),
-        // 
+        
         headerTitle: ()=><Logo2 navigation={navigation}/>,
-        // headerStyle: {
-        //  backgroundColor: "#3480CB",//"#52AEA0", //"#3a455c",
-        //   elevation: 0
-        // },
-        // headerTintColor: "#fff",
-        // headerTitleStyle: {
-        //   fontWeight: "bold"
-        // }
+        
       };
+    }else{
+      return {
+         
+        headerTitle: ()=><Logo3 navigation={navigation}/>,
+    
+      };
+
+
+    }
     }
   },
   Pee: Pee
@@ -112,6 +109,33 @@ const AddBathStackNavigator = createStackNavigator({
           />
         ),
         title: "Add Restroom",
+        headerStyle: {
+          backgroundColor: "#3480CB",//"#52AEA0",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+      };
+    }
+  },
+});
+const ContactStackNavigator = createStackNavigator({
+  Contact: {
+    screen: Contact,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name='md-menu'
+            size={30}
+            color={"#fff"}
+          />
+        ),
+        title: "Contact Us",
         headerStyle: {
           backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0
@@ -363,6 +387,33 @@ const AppDrawerNavigator = createDrawerNavigator(
             />
           ),
           title: "Sign Up",
+          headerStyle: {
+            backgroundColor: "#3480CB",//"#52AEA0",
+            elevation: 0
+          },
+          headerTintColor: "#d2b48c",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
+        };
+      }
+    },
+    Contact: {
+      screen: ContactStackNavigator,
+      navigationOptions: ({ navigation }) => {
+        return {
+          drawerLabel: "Contact Us",
+          drawerIcon: <Ionicons name='ios-contact' size={30} color={"#d2b48c"} />,
+          headerLeft: (
+            <Ionicons
+              style={{ padding: 10 }}
+              onPress={() => navigation.openDrawer()}
+              name='md-menu'
+              size={30}
+              color={"#fff"}
+            />
+          ),
+          title: "Contact Us",
           headerStyle: {
             backgroundColor: "#3480CB",//"#52AEA0",
             elevation: 0

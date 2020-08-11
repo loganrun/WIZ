@@ -9,6 +9,7 @@ import {
 import firebase from "firebase";
 import {connect} from "react-redux"
 import {initialLocation} from '../store/actions'
+import * as Amplitude from 'expo-analytics-amplitude'
 
 
 
@@ -23,10 +24,12 @@ class AuthLoadingScreen extends React.Component {
     
     let location = await this.getLocation();
     this.props.initLocation(location)
+    //this.props.navigation.navigate("Main");
 
     
     firebase.auth().onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? "Main" : "Auth");
+      Amplitude.logEvent("sign in")
     });
   };
 
@@ -38,7 +41,7 @@ class AuthLoadingScreen extends React.Component {
       //console.log(location)
     } catch (error) {
       // Error retrieving data
-      console.log(error.message);
+      console.log(error);
     }
     return JSON.parse(location);
   };

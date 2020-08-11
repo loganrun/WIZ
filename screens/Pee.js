@@ -152,8 +152,7 @@ class ContentArea extends React.Component {
       latitude: this.props.item.latitude,
       longitude: this.props.item.longitude,
       title: this.props.item.name,
-      googleForceLatLon: true,
-      dialogTitle: "Directions to " + `${this.props.item.name}`
+      googleForceLatLon: true
     });
   };
 
@@ -169,6 +168,7 @@ class ContentArea extends React.Component {
     let city = item.city;
     let comment = item.comment;
     let direction = item.directions;
+    let ad = item.ad
 
     return (
       <Animated.View style={styles.Card}>
@@ -200,7 +200,7 @@ class ContentArea extends React.Component {
                 <Text>{address}</Text>
                 <Text>{city}</Text>
                 <Text style={{ fontWeight: "bold", fontSize: 14 }}>
-                  Directions
+                  Instructions
                 </Text>
                 <Text>{direction}</Text>
               </Left>
@@ -223,8 +223,8 @@ class ContentArea extends React.Component {
             </CardItem>
           </Card>
         </TouchableOpacity>
-        <Ad adInfo = {ad}/>
-      <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE RESTROOM</Text>
+        <Ad adInfo= {ad}/>
+      <Text style={{marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: "bold", marginLeft: 25}}>RATE THE RESTROOM</Text>
       <Ratings item={this.props.item}/>
         
         

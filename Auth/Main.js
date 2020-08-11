@@ -11,13 +11,15 @@ import Reset from "./Auth_Reset";
 import SignUp from "./Auth_Reg";
 import Routes from "./Routes";
 import AuthLoading from "../screens/AuthLoading";
+import Phone from "./Auth_Phone"
 
 
 const AuthStackNavigator = createStackNavigator({
   Home: AuthHome,
   Login: Login,
   Reset: Reset,
-  SignUp: SignUp
+  SignUp: SignUp,
+  Phone: Phone
 });
 
 

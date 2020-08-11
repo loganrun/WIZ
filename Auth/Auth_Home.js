@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image,TextInput,
   ActivityIndicator,
-  KeyboardAvoidingView,
+  KeyboardAvoidingView, Button,
   AsyncStorage } from "react-native";
+  import { MaterialIcons } from '@expo/vector-icons';
 const loginPage = require("../assets/Loginbk.png");
 const signupbtn = require("../assets/sign-up.png");
 const loginbtn = require("../assets/logintransparent.png");
@@ -79,28 +80,34 @@ class AuthHome extends Component {
             <TextInput
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("userName")}
-              placeholder={"User name"}
               onBlur={formikProps.handleBlur("userName")}
             />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              User Name
+            </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.userName && formikProps.errors.userName}
             </Text>
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("email")}
-              placeholder={"Email"}
               onBlur={formikProps.handleBlur("email")}
             />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              Email
+            </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.email && formikProps.errors.email}
             </Text>
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("password")}
-              placeholder={"Password"}
               secureTextEntry
               onBlur={formikProps.handleBlur("password")}
             />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              Password
+            </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
@@ -133,6 +140,20 @@ class AuthHome extends Component {
               >
 
                 <Image source={loginbtn} style={{width: 300, height: 44.5}}></Image>
+              </TouchableOpacity> 
+        
+        </View>
+
+        <View style={styles.btn2}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => navigate("Phone")}
+                
+            >
+                <Text style={styles.txt3}>Sign in with</Text>
+
+                
+                <MaterialIcons name="local-phone" size={24} color="#3480CB" style = {{marginLeft: 10}}/>
               </TouchableOpacity> 
         
         </View>
@@ -170,14 +191,15 @@ const styles = StyleSheet.create({
     //backgroundColor: "#fff", //#3a455c
   },
   fabBtn: {
-    flex: 0.25,
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     position: "relative",
-    width: 150,
-    height: 90,
-    backgroundColor: "#fff"
-    //borderRadius: 50,
+    width: 300,
+    height: 44.5,
+    backgroundColor: "#fff",
+    marginRight: 10,
+    borderRadius: 90,
     //borderColor: "black",
     //borderWidth: 2,
     //marginBottom: 20
@@ -236,6 +258,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginRight: 40,
     marginLeft: 40
+  },
+  txt3: {
+    justifyContent: "center",
+    textAlign: "center",
+    position: "relative",
+  
+    fontSize: 24,
+    color: "#3480CB",
+    //fontWeight: "bold",
+    //marginRight: 10,
+  
   },
   textInput2: {
     alignSelf: "stretch",
@@ -312,3 +345,4 @@ const styles = StyleSheet.create({
             SignUp
           </Text> 
         </TouchableOpacity>*/}
+        //<Image source={loginbtn} style={{width: 300, height: 44.5}}></Image>
