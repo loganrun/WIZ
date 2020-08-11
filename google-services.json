@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "5680477837",
+    "firebase_url": "https://wizusers.firebaseio.com",
+    "project_id": "wizusers",
+    "storage_bucket": "wizusers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5680477837:android:0d9524b6fa7b04f62214c4",
+        "android_client_info": {
+          "package_name": "com.TheWhizzApp.gotta_go"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5680477837-68h1hpgmdksljard5iemr7ec043q8cr5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPskexGmsstRFt-tiSnpu4VIEFfzLLLWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5680477837-68h1hpgmdksljard5iemr7ec043q8cr5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "5680477837-1j6dfu5lhp5iu3hhoac181i3hnkcen24.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.TheWhizzApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

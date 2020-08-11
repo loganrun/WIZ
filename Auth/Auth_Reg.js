@@ -16,6 +16,7 @@ import axios from "axios";
 import {connect} from 'react-redux'
 import {newUser} from '../store/actions'
 import { SafeAreaView } from 'react-navigation'
+import * as Amplitude from 'expo-analytics-amplitude'
 const loginPage = require("../assets/Loginbk.png");
 const nextbtn = require("../assets/nzxt_button.png");
 // const items = navigation.getParam()

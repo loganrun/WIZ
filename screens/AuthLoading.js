@@ -9,6 +9,7 @@ import {
 import firebase from "firebase";
 import {connect} from "react-redux"
 import {initialLocation} from '../store/actions'
+import * as Amplitude from 'expo-analytics-amplitude'
 
 
 
@@ -28,6 +29,7 @@ class AuthLoadingScreen extends React.Component {
     
     firebase.auth().onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? "Main" : "Auth");
+      Amplitude.logEvent("sign in")
     });
   };
 

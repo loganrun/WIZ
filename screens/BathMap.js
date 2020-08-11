@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import {
   View,
+  Platform,
   Text,
-  StyleSheet,
-  ScrollView,
-  Dimensions,
-  Animated,
-  PanResponder,
-  Slider,
-  TouchableHighlight,
-  TouchableOpacity,
-  Image,AsyncStorage,ActivityIndicator
+  Image,ActivityIndicator
 } from "react-native";
  import {
    Left,
@@ -32,6 +25,9 @@ import {connect} from "react-redux"
 import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
 import Over from '../components/Modal'
+var tprating = require("../assets/TPratings_5Stars.png")
+//import * as Analytics from 'expo-firebase-analytics'
+import * as Amplitude from 'expo-analytics-amplitude'
 //import { Callout } from "react-native-maps";
 //var bathIcon = require("../assets/waba_icon_location.png");
 //var restRoom= require("../assets/w_logo.png")
@@ -120,6 +116,7 @@ constructor(props) {
   
 
   onRegionChangeComplete = async (region) =>{
+    Amplitude.logEvent("MAP_MOVED")
     await this.setState({region})
     this.loadBathroom()
   }
@@ -129,6 +126,8 @@ constructor(props) {
 
     return this.state.bathroom.map((item, i) => {
       //const rating = Math.floor(Math.random() * Math.floor(5))
+      
+      if(Platform.OS === 'ios'){
       return (
         <MapView.Marker
         key= {item.id}
@@ -138,17 +137,29 @@ constructor(props) {
         }}
         title={item.name}
         image={{uri: item.icon}}
-       // pinColor={'yellow'}
-        onCalloutPress={() => {
-          this.props.navigation.navigate("Pee", {
-            id: item.id,
-            item,
-            currentLat: this.state.region.latitude,
-            currentLon: this.state.region.longitude
-          })}}
+        onPress={() => {
+          const markerProp = {
+          id: item.id,
+          name: item.name,
+          street: item.street,
+          city: item.city,
+          dist: item.dist.calculated,
+
+          }
+          Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+          
+        }}
         
         >
           <Callout onPress={() => {
+            const eventProp = {
+              id: item.id,
+              name: item.name,
+              street: item.street,
+              city: item.city,
+              dist: item.dist.calculated
+            }
+            Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
           this.props.navigation.navigate("Pee", {
             id: item.id,
             item,
@@ -157,23 +168,18 @@ constructor(props) {
           })}}
         
         >
+        
             <View>
                 <Card transparent style={{flexDirection: 'row'}}>
                   <Left style={{paddingLeft: 10}}>
-        <Text style={{width: 50, height: 80, marginTop: 20}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
+        <Text style={{width: 50, height: 80, marginTop: 15}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
         </Left> 
                   <CardItem style={{flexDirection: 'column'}}>
                     <Right style={{flex:1, alignItems: 'flex-start'}}>
                       <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
                       <Text>{item.street}</Text>
-                      <StarRating
-                  disabled={true}
-                  maxStars={5}
-                  rating={5}
-                  starSize={12}
-                  fullStarColor={"orange"}
-                  emptyStarColor={"orange"}
-                />
+                      
+                <Text style={{width: 110, height: 25, marginTop: 5}}><Image resizeMode={'cover'} source={tprating}style={{width:110, height: 23}}/></Text>
                     </Right>
                   </CardItem>
                 </Card>
@@ -181,6 +187,66 @@ constructor(props) {
           </Callout>
         </MapView.Marker>
       );
+        }else{
+          return (
+            <MapView.Marker
+            key= {item.id}
+            coordinate={{
+              latitude: item.latitude,
+              longitude: item.longitude
+            }}
+            title={item.name}
+            image={{uri: item.icon}}
+           // pinColor={'yellow'}
+            onPress={() => {
+              const markerProp = {
+              id: item.id,
+              name: item.name,
+              street: item.street,
+              dist: item.dist.calculated,
+
+              }
+              Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+              }}
+            
+            >
+              <Callout onPress={() => {
+              const eventProp = {
+                id: item.id,
+                name: item.name,
+                street: item.street,
+                dist: item.dist.calculated
+              }
+              
+              Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
+              this.props.navigation.navigate("Pee", {
+                id: item.id,
+                item,
+                currentLat: this.state.region.latitude,
+                currentLon: this.state.region.longitude
+              })}}
+            
+            >
+            
+                <View>
+                    <Card transparent style={{flexDirection: 'row'}}>
+                      <Left style={{paddingLeft: 10}}>
+            <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
+            </Left> 
+                      <CardItem style={{flexDirection: 'column'}}>
+                        <Right style={{flex:1, alignItems: 'flex-start'}}>
+                          <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
+                          <Text>{item.street}</Text>
+                          <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
+                          
+                        </Right>
+                      </CardItem>
+                    </Card>
+                    </View>
+              </Callout>
+            </MapView.Marker>
+          );
+        }
     });
 
   }
@@ -447,3 +513,11 @@ export default connect(mapStateToProps)(BathMap);
   //   }
   //   return JSON.parse(bathroom);
   // };
+  //<StarRating
+                  //disabled={true}
+                  //maxStars={5}
+                  //rating={5}
+                  //starSize={12}
+                  //fullStarColor={"orange"}
+                  //emptyStarColor={"orange"}
+                ///>//
