@@ -168,7 +168,6 @@ class ContentArea extends React.Component {
     let city = item.city;
     let comment = item.comment;
     let direction = item.directions;
-    let ad = item.ad
 
     return (
       <Animated.View style={styles.Card}>

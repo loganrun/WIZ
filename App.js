@@ -1,11 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, AsyncStorage, Alert} from "react-native";
 import Main from './Auth/Main'
-<<<<<<< HEAD
-import {AppLoading } from "expo";
-=======
 //import { SplashScreen, AppLoading } from "expo";
->>>>>>> f05d4fea9033f213022f9839d379e7fd9fb4c1b2
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 import * as firebase from 'firebase'
@@ -16,11 +12,8 @@ import thunk from 'redux-thunk'
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import * as SplashScreen from 'expo-splash-screen'
-<<<<<<< HEAD
-=======
 import * as Sentry from 'sentry-expo'
 import * as Amplitude from 'expo-analytics-amplitude'
->>>>>>> f05d4fea9033f213022f9839d379e7fd9fb4c1b2
 
 const firebaseConfig = {
   apiKey: "AIzaSyCfx94bwaO-VnQosXn4aUIi_DKUCdAcdEA",
@@ -44,11 +37,6 @@ firebase.initializeApp(firebaseConfig);
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 class App extends React.Component {
-<<<<<<< HEAD
-    //SplashScreen.preventAutoHide();
-=======
-
->>>>>>> f05d4fea9033f213022f9839d379e7fd9fb4c1b2
     state = {
       appIsReady: false,
       errorMessage: " ",
@@ -60,15 +48,6 @@ class App extends React.Component {
   async componentDidMount() {
     //this.setState({ isLoading: "true" });
     //this._getLocationAsync();
-<<<<<<< HEAD
-    try{
-      await SplashScreen.preventAutoHideAsync();
-      this._getLocationAsync()
-    }catch(e){
-      console.warn(e)
-    }
-    
-=======
     Amplitude.initialize('f463257f8d5dd8a6670eeae43c08a54a')
     try{
       
@@ -78,7 +57,6 @@ class App extends React.Component {
       console.log("something wrong")
 
     }
->>>>>>> f05d4fea9033f213022f9839d379e7fd9fb4c1b2
   }
 
 
@@ -129,14 +107,9 @@ class App extends React.Component {
       // Error retrieving data
       console.log("something");
     }
-<<<<<<< HEAD
-    this.setState({appIsReady: true}, async ()=>{
-      await SplashScreen.hideAsync()
-=======
     this.setState({appIsReady: true}, async () =>{
       await SplashScreen.hideAsync()
       
->>>>>>> f05d4fea9033f213022f9839d379e7fd9fb4c1b2
     })
   };
 
@@ -144,22 +117,12 @@ class App extends React.Component {
   render() {
     if (!this.state.appIsReady) {
       return null
-<<<<<<< HEAD
-      // (
-      //   <AppLoading
-      //     startAsync={this._getLocationAsync}
-      //     onFinish={() => this.setState({ isLoading: "false" })}
-      //   />
-      // );
-    } else {
-=======
         //<AppLoading
          // startAsync={this._getLocationAsync}
          // onFinish={() => this.setState({ isLoading: "false" })}
         ///>
       ;
     }else {
->>>>>>> f05d4fea9033f213022f9839d379e7fd9fb4c1b2
       return (
       <Provider store={store}>
       <Main />

@@ -15,6 +15,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
 import { SafeAreaView } from 'react-navigation'
+import axios from "axios";
+import * as Amplitude from 'expo-analytics-amplitude'
 const loginPage = require("../assets/Loginbk.png");
 //const loginbtn = require("../assets/login_white.png");
 const firebaseConfig = {
@@ -40,6 +42,7 @@ export default Auth_Phone = () => {
 
   
     const sendVerification = async () => {
+      Amplitude.logEvent("SUBMIT_PHONE#")
         try {
             const phoneProvider = new firebase.auth.PhoneAuthProvider();
             const verificationId = await phoneProvider.verifyPhoneNumber(
@@ -55,6 +58,7 @@ export default Auth_Phone = () => {
 
   
     const confirmCode = () => {
+      Amplitude.logEvent("COMPLETE_PHONE_SIGNUP")
       const credential = firebase.auth.PhoneAuthProvider.credential(
         verificationId,
         code
@@ -63,7 +67,23 @@ export default Auth_Phone = () => {
         .auth()
         .signInWithCredential(credential)
         .then((result) => {
-          console.log(result);
+          let logger = result
+          let user = logger.user.uid
+        
+          axios({
+            method: "post",
+            baseURL: "http://prototypeapp-env.pafwfr7hjt.us-west-2.elasticbeanstalk.com/api/users",
+            timeout: 40000,
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            data: {
+              userId: logger.user.uid,
+              phoneNum: logger.user.phoneNumber
+            }
+          });
+          Amplitude.setUserId(user)
         });
     };
   
@@ -115,7 +135,7 @@ export default Auth_Phone = () => {
   };
 
   Auth_Phone['navigationOptions'] = screenProps => ({
-    title: 'SIGN IN WITH PHONE',
+    title: 'SIGN IN WITH PHONE NUMBER',
     headerStyle: {
         backgroundColor: "#3480CB",
         elevation: 0

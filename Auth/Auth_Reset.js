@@ -13,6 +13,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
 import { SafeAreaView } from 'react-navigation'
+import * as Amplitude from "expo-analytics-amplitude"
 const loginPage = require("../assets/Loginbk.png");
 
 class AuthReset extends Component {
@@ -45,6 +46,7 @@ class AuthReset extends Component {
 
         }}
         onSubmit={(value, actions) => {
+          Amplitude.logEvent("BEGIN_RESET")
           let email = value.email;
           firebase
             .auth()

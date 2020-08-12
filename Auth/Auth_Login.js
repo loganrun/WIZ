@@ -14,6 +14,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
 import { SafeAreaView } from 'react-navigation'
+import * as Amplitude from "expo-analytics-amplitude"
 const loginPage = require("../assets/Loginbk.png");
 const loginbtn = require("../assets/login_white.png");
 
@@ -51,6 +52,7 @@ class AuthLogin extends Component {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(value, actions) => {
+          Amplitude.logEvent("COMPLETE_LOGIN")
           let email = value.email;
           let password = value.password;
           firebase
@@ -130,6 +132,7 @@ class AuthLogin extends Component {
                 
                 onPress={() => navigate("Reset")}
               >
+                
                 <Text
                   style={{
                     fontSize: 20,

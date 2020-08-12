@@ -62,6 +62,7 @@ constructor(props) {
     //this.initBathroom();
     //this.setState({ loading: true });
     this.useCheck()
+    Amplitude.logEvent("MAP_OPENED")
   }
 
   useCheck = async () =>{

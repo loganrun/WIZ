@@ -3,11 +3,12 @@ import { Image, Text,TouchableOpacity, StyleSheet, AsyncStorage,Alert } from 're
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
 import axios from "axios";
 //import AlertMod  from "../components/alertModal"
-let horrible = require('../assets/TP-ratingsno!!!.png')
-let bad = require('../assets/TP-ratingsgross.png')
-let ok = require('../assets/TP-ratingsmeh.png')
-let good = require('../assets/TP-ratingsclean.png')
-let great = require('../assets/TP-ratingsfresh.png')
+//let horrible = require('../assets/TP-ratingsno!!!.png')
+//let bad = require('../assets/TP-ratingsgross.png')
+//let ok = require('../assets/TP-ratingsmeh.png')
+//let good = require('../assets/TP-ratingsclean.png')
+//let great = require('../assets/TP-ratingsfresh.png')
+let ranking = require('../assets/tprate.png')
 
 const userToken = AsyncStorage.getItem("userToken");
 class Ratings extends Component {
@@ -120,13 +121,9 @@ class Ratings extends Component {
                   marginTop: 20
                 }}>
                 <Text style={{marginBottom: 10, fontWeight: "bold", fontSize: 16}}>How Was Your Visit?</Text>
-                <CardItem style={{flexDirection: 'row'}}>
-                <Button transparent style={styles.button} onPress={this.addOne}><Image source={horrible} style={styles.image}/></Button>
-                <Button transparent style={styles.button} onPress={this.addTwo}><Image source={bad} style={styles.image}/></Button>
-                <Button transparent style={styles.button} onPress={this.addThree}><Image source={ok} style={styles.image}/></Button>
-                <Button transparent style={styles.button} onPress={this.addFour}><Image source={good} style={styles.image1}/></Button>
-                <Button transparent style={styles.button} onPress={this.addFive}><Image source={great} style={styles.image2}/></Button>
-                </CardItem>
+                <TouchableOpacity onPress={this.addTwo}>
+                <Image source={ranking} style={styles.image}/>
+                </TouchableOpacity>
               </Body>
             
             </CardItem>
@@ -143,9 +140,10 @@ const styles = StyleSheet.create({
     //justifyContent: "center"
   },
   image: {
-    height: 80, 
-    width: 45,
-    marginTop: 5
+    height: 71,//71, 
+    width: 327, //327,
+    marginTop: 20,
+    marginRight: 20
   
   },
   image1: {
@@ -158,7 +156,7 @@ const styles = StyleSheet.create({
     height: 90, 
     width: 60,
     marginTop: 5,
-    marginRight: 20
+    //marginRight:20
   
   },
   image1: {
@@ -197,3 +195,8 @@ const styles = StyleSheet.create({
               //    SUBMIT RATINGS
               //  </Text>
              // </Button>
+             //<Button transparent style={styles.button} onPress={this.addOne}><Image source={horrible} style={styles.image}/></Button>
+               // <Button transparent style={styles.button} onPress={this.addTwo}><Image source={bad} style={styles.image}/></Button>
+                //<Button transparent style={styles.button} onPress={this.addThree}><Image source={ok} style={styles.image}/></Button>
+                //<Button transparent style={styles.button} onPress={this.addFour}><Image source={good} style={styles.image1}/></Button>
+                //<Button transparent style={styles.button} onPress={this.addFive}><Image source={great} style={styles.image2}/></Button>

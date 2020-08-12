@@ -11,6 +11,7 @@ import Logo from "../components/Logo"
 import { Formik } from "formik";
 import * as yup from "yup";
 import { SafeAreaView } from 'react-navigation'
+import * as Amplitude from 'expo-analytics-amplitude'
 //import * as firebase from "firebase";
 //import axios from "axios";
 class AuthHome extends Component {
@@ -66,6 +67,7 @@ class AuthHome extends Component {
           
         }}
         onSubmit={(value, actions) => {
+          Amplitude.logEvent("BEGIN_SIGNUP")
           actions.setSubmitting(false);
           this.props.navigation.navigate("SignUp",{
            email: value.email,
@@ -135,11 +137,12 @@ class AuthHome extends Component {
               }
         <View style={styles.btn2}>
             <TouchableOpacity
-                onPress={() => navigate("Login")}
+                onPress={() => navigate("Login") }
                 
               >
 
                 <Image source={loginbtn} style={{width: 300, height: 44.5}}></Image>
+                
               </TouchableOpacity> 
         
         </View>
@@ -150,6 +153,7 @@ class AuthHome extends Component {
             onPress={() => navigate("Phone")}
                 
             >
+              
                 <Text style={styles.txt3}>Sign in with</Text>
 
                 
