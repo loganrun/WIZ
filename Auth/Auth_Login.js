@@ -35,6 +35,7 @@ class AuthLogin extends Component {
     const validationSchema = yup.object().shape({
       email: yup
         .string()
+        .trim()
         .email()
         .label("Email")
         .required(),
