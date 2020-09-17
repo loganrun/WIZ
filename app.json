@@ -46,7 +46,7 @@
       ]
     },
     "web": {
-      "config":{
+      "config": {
         "firebase": {
           "apiKey": "AIzaSyCfx94bwaO-VnQosXn4aUIi_DKUCdAcdEA",
           "authDomain": "wizusers.firebaseapp.com",
@@ -55,21 +55,19 @@
           "storageBucket": "wizusers.appspot.com",
           "messagingSenderId": "5680477837",
           "appId": "1:5680477837:web:8bff0f0c656ab065",
-          "measurementId": "G-FQN5Y3BVZD" 
+          "measurementId": "G-FQN5Y3BVZD"
         }
       }
-
     },
     "description": "This is Whizz, the Essential Worker addition. All of the restaurants represented in this app have agreed to give our users exclusive access to their restrooms. You must show the app to gain access.  Our partners have also given you a discount on their food, so take full advantage. Thank you for taking care of us, and BE SAFE! ",
-    "sdkVersion": "37.0.0",
-    "hooks":{
-      "postPublish":[
+    "hooks": {
+      "postPublish": [
         {
           "file": "sentry-expo/upload-sourcemaps",
-          "config":{
-            "organization":"whizz",
-            "project":"whizz",
-            "authToken":  "2f23520562824d63a6c07d06e57770b1be046864c98446dcac1355fd24e05745"
+          "config": {
+            "organization": "whizz",
+            "project": "whizz",
+            "authToken": "2f23520562824d63a6c07d06e57770b1be046864c98446dcac1355fd24e05745"
           }
         }
       ]

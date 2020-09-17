@@ -99,7 +99,7 @@ class ContactUs extends Component {
     return (
       <SafeAreaView style={styles.container}>
       <View  style={styles.container}>
-        <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you want to add your restaurant, email us at Whizzzit@gmail.com.</Text>
+        <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you want to add your restaurant, email us at RobertL@Thewhizzapp.com .</Text>
       </View>
       </SafeAreaView>
       // <Formik
