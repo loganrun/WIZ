@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image,TextInput,
   ActivityIndicator,
-  KeyboardAvoidingView, Button,
+  KeyboardAvoidingView, Platform, Button,
   AsyncStorage } from "react-native";
-  import { MaterialIcons } from '@expo/vector-icons';
+  import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 const loginPage = require("../assets/Loginbk.png");
 const signupbtn = require("../assets/sign-up.png");
 const loginbtn = require("../assets/logintransparent.png");
@@ -12,6 +12,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { SafeAreaView } from 'react-navigation'
 import * as Amplitude from 'expo-analytics-amplitude'
+
+const gbutton = require("../assets/googlebtn1.png")
 //import * as firebase from "firebase";
 //import axios from "axios";
 class AuthHome extends Component {
@@ -60,6 +62,7 @@ class AuthHome extends Component {
         .required()
     });
     const { navigate } = this.props.navigation;
+    if(Platform.OS === 'ios'){
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
@@ -185,6 +188,82 @@ class AuthHome extends Component {
             </SafeAreaView>
     );
   }
+else{
+  return(
+    <SafeAreaView style={styles.container}>
+      <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
+        
+        <View style={styles.btn1}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => navigate("Phone")}   
+            >
+              <Image source={gbutton} style={{height: 44, width: 44, marginRight: 10}}/>
+              
+                <Text style={styles.txt3}>Sign in with Google</Text>
+                
+              </TouchableOpacity> 
+        </View>
+        <View style={styles.btn2}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => navigate("Phone")}   
+            >
+              <FontAwesome5 name="facebook" size={28} color="blue" style= {{marginRight: 10}}/>
+              
+                <Text style={styles.txt3}>Sign in with Facebook</Text>
+                
+              </TouchableOpacity> 
+        </View>
+        <View style={styles.btn2}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => navigate("Phone")}
+                
+            >
+              
+                <Text style={styles.txt3}>Sign in with Email</Text>
+
+                
+                <MaterialIcons name="email" size={24} color="#3480CB" style = {{marginLeft: 20}} />
+              </TouchableOpacity> 
+        
+        </View>
+        <View style={styles.btn2}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => navigate("Phone")}
+                
+            >
+              
+                <Text style={styles.txt3}>Sign in with Phone</Text>
+
+                
+                <MaterialIcons name="local-phone" size={24} color="#3480CB" style = {{marginLeft: 20}}/>
+              </TouchableOpacity> 
+        
+        </View>
+        
+        <View style={styles.btn2}>
+            <TouchableOpacity
+                onPress={() => navigate("Login") }
+                
+              >
+
+                <Image source={loginbtn} style={{width: 300, height: 44.5}}></Image>
+                
+              </TouchableOpacity> 
+        
+        </View>
+
+        
+
+      </ImageBackground>
+
+    </SafeAreaView>
+  )
+}
+}
 }
 export default AuthHome;
 
@@ -235,7 +314,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
     marginRight: 10,
-    marginTop:20,
+    marginTop:120,
     //marginBottom: 20
   },
   btn2: {
