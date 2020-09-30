@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image,TextInput,
   ActivityIndicator,
-  KeyboardAvoidingView, Platform, Button,
+  KeyboardAvoidingView, Platform, Alert, Button,
   AsyncStorage } from "react-native";
   import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 const loginPage = require("../assets/Loginbk.png");
@@ -12,6 +12,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { SafeAreaView } from 'react-navigation'
 import * as Amplitude from 'expo-analytics-amplitude'
+import * as Facebook from 'expo-facebook'
 
 const gbutton = require("../assets/googlebtn1.png")
 //import * as firebase from "firebase";
@@ -42,6 +43,31 @@ class AuthHome extends Component {
     
   };
   render() {
+
+    const faceBookLogin = async () => {
+      try {
+        await Facebook.initializeAsync('746838002533627');
+        const {
+          type,
+          token,
+          expires,
+          permissions,
+          declinedPermissions,
+        } = await Facebook.logInWithReadPermissionsAsync({
+          permissions: ['public_profile'],
+        });
+        if (type === 'success') {
+          // Get the user's name using Facebook's Graph API
+          const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+          
+          Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+        } else {
+          // type === 'cancel'
+        }
+      } catch ({ message }) {
+        alert(`Facebook Login Error: ${message}`);
+      }
+    }
     
     const validationSchema = yup.object().shape({
       email: yup
@@ -207,7 +233,7 @@ else{
         <View style={styles.btn2}>
             <TouchableOpacity
             style={styles.fabBtn}
-            onPress={() => navigate("Phone")}   
+            onPress={() => faceBookLogin()}   
             >
               <FontAwesome5 name="facebook" size={28} color="blue" style= {{marginRight: 10}}/>
               
