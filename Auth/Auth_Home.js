@@ -28,17 +28,11 @@ class AuthHome extends Component {
     };
   }
   
-  componentDidMount(){
-    this.initAsync();
-  }
+  //componentDidMount(){
+  //  this.initAsync();
+  //}
 
-  initAsync = async () => {
-    await GoogleSignIn.initAsync({
-      // You may ommit the clientId when the firebase `googleServicesFile` is configured
-      clientId: '<YOUR_IOS_CLIENT_ID>',
-    });
-    this._syncUserWithStateAsync();
-  };
+  
 
   
 
@@ -105,14 +99,22 @@ class AuthHome extends Component {
         alert('login: Error:' + message);
       }
     };
-  
-    const googleSign = () => {
-      if (this.state.user) {
-        signOutAsync();
-      } else {
-        signInAsync();
-      }
+
+    const initAsync = async () => {
+      await GoogleSignIn.initAsync({
+        // You may ommit the clientId when the firebase `googleServicesFile` is configured
+        clientId: '<YOUR_IOS_CLIENT_ID>',
+      });
+      this._syncUserWithStateAsync();
     };
+  
+    //const googleSign = () => {
+      //if (this.state.user) {
+        //signOutAsync();
+      //} else {
+       // signInAsync();
+     // }
+    //};
 
     const { navigate } = this.props.navigation;
 
@@ -170,7 +172,7 @@ else{
         <View style={styles.btn1}>
             <TouchableOpacity
             style={styles.fabBtn}
-            onPress={googleSign()}   
+            onPress={initAsync() }   
             >
               <Image source={gbutton} style={{height: 44, width: 44, marginRight: 10}}/>
               
