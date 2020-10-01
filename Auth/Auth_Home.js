@@ -145,7 +145,7 @@ class AuthHome extends Component {
             style={styles.fabBtn}
             onPress={() => navigate("Phone")}    
             >
-                <Text style={styles.txt3}>Sign up with Phone #</Text>   
+                <Text style={styles.txt3}>Sign up with Phone </Text>   
                 <MaterialIcons name="local-phone" size={24} color="#3480CB" style = {{marginLeft: 10}}/>
               </TouchableOpacity> 
         </View>
@@ -208,7 +208,7 @@ else{
                 
             >
               
-                <Text style={styles.txt3}>Sign up with Phone #</Text>
+                <Text style={styles.txt3}>Sign up with Phone </Text>
 
                 
                 <MaterialIcons name="local-phone" size={24} color="#3480CB" style = {{marginLeft: 20}}/>
