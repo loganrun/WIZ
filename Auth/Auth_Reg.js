@@ -38,7 +38,22 @@ class AuthReg extends Component {
   render() {
 
     const validationSchema = yup.object().shape({
-      
+      email: yup
+        .string()
+        .trim()
+        .email()
+        .label("Email")
+        .required(),
+      password: yup
+        .string()
+        .label("Password")
+        .required()
+        .min(6)
+        .max(20),
+      userName: yup
+        .string()
+        .label("User name")
+        .required(),
       firstName: yup
         .string()
         .label("First name")
@@ -58,6 +73,9 @@ class AuthReg extends Component {
       <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}> 
       <Formik
         initialValues={{
+          email: "", 
+          password: "", 
+          userName: "",
           firstName: "",
           lastName: "",
           service: "",
@@ -68,7 +86,10 @@ class AuthReg extends Component {
           let firstName = value.firstName;
           let lastName = value.lastName;
           let service = value.service;
-          let phoneNum = value.phoneNum
+          let phoneNum = value.phoneNum;
+          let email = value.email;
+          let password =  value.password;
+          let userName = value.userName
           this.props.newUser(true)
           
             firebase
@@ -123,7 +144,6 @@ class AuthReg extends Component {
       >
         {formikProps => (
           <KeyboardAvoidingView behavior='height'>
-            {/* <Text style={styles.text}>SIGN UP</Text> */}
             <TextInput
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("firstName")}
@@ -149,6 +169,41 @@ class AuthReg extends Component {
             </Text>
             <TextInput
               style={styles.textInput}
+              onChangeText={formikProps.handleChange("userName")}
+              onBlur={formikProps.handleBlur("userName")}
+            />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              User Name
+            </Text>
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              {formikProps.touched.userName && formikProps.errors.userName}
+            </Text>
+            
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("email")}
+              onBlur={formikProps.handleBlur("email")}
+            />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              Email
+            </Text>
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              {formikProps.touched.email && formikProps.errors.email}
+            </Text>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={formikProps.handleChange("password")}
+              secureTextEntry
+              onBlur={formikProps.handleBlur("password")}
+            />
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              Password
+            </Text>
+            <Text style={{ color: "white", marginLeft: 40 }}>
+              {formikProps.touched.password && formikProps.errors.password}
+            </Text>
+            <TextInput
+              style={styles.textInput}
               onChangeText={formikProps.handleChange("phone number")}
               secureTextEntry
               onBlur={formikProps.handleBlur("phone")}
@@ -170,11 +225,13 @@ class AuthReg extends Component {
               <ActivityIndicator />
             ) : (
               <TouchableOpacity
-                style={styles.button}
-                onPress={formikProps.handleSubmit}
+              style={styles.fabBtn}
+              onPress={formikProps.handleSubmit}  
               >
-                <Image source={nextbtn} style={{width: 300, height: 44.5}}></Image>
-              </TouchableOpacity>
+                
+                  <Text style={styles.txt3}>Sign up</Text>
+  
+                </TouchableOpacity> 
             )}
           </KeyboardAvoidingView>
         )}
@@ -214,8 +271,8 @@ const styles = StyleSheet.create({
   },
   textInput1: {
     alignSelf: "stretch",
-    height: 50,
-    marginTop: '30%',
+    height: 30,
+    marginTop: '10%',
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,
@@ -224,8 +281,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     alignSelf: "stretch",
-    height: 50,
-    marginTop: 20,
+    height: 30,
+    marginTop: 10,
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,
@@ -243,5 +300,32 @@ const styles = StyleSheet.create({
   },
   switch: {
     marginTop: 20
-  }
+  },
+  fabBtn: {
+    //flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    //position: "relative",
+    width: 300,
+    height: 44.5,
+    backgroundColor: "#fff",
+    marginRight: 40,
+    marginLeft:60,
+    borderRadius: 90,
+    marginTop: 30
+    //borderColor: "black",
+    //borderWidth: 2,
+    //marginBottom: 20
+  },
+  txt3: {
+    justifyContent: "center",
+    textAlign: "center",
+    position: "relative",
+  
+    fontSize: 24,
+    color: "#3480CB",
+    //fontWeight: "bold",
+    //marginRight: 10,
+  
+  },
 });

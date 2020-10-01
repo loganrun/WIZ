@@ -26,7 +26,10 @@
       "buildNumber": "3.8.1",
       "supportsTablet": true,
       "config": {
-        "googleMapsApiKey": "AIzaSyDutSO9RROS5389Z1laCVu6m4idanT31B8"
+        "googleMapsApiKey": "AIzaSyDutSO9RROS5389Z1laCVu6m4idanT31B8",
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.5680477837-1j6dfu5lhp5iu3hhoac181i3hnkcen24"
+        }
       },
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Whizz requires your location in order to recommend open restrooms in your vicinity"
