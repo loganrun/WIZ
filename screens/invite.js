@@ -33,7 +33,7 @@ class Invite extends Component {
           });
           if (result.action === Share.sharedAction) {
             if (result.activityType) {
-              // shared with activity type of result.activityType
+            //shared with activity type of result.activityType
             } else {
               // shared
             }
