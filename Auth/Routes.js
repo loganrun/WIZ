@@ -24,6 +24,7 @@ import Contact from "../screens/ContactUs"
 import Logo from "../components/Logo"
 import Logo2 from "../components/Logo2"
 import Logo3 from "../components/Logo3"
+import Invite from "../screens/invite"
 
 
 const Width = Dimensions.get("window").width;
@@ -136,6 +137,33 @@ const ContactStackNavigator = createStackNavigator({
           />
         ),
         title: "Contact Us",
+        headerStyle: {
+          backgroundColor: "#3480CB",//"#52AEA0",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+      };
+    }
+  },
+});
+const InviteStackNavigator = createStackNavigator({
+  Invite: {
+    screen: Invite,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name='md-menu'
+            size={30}
+            color={"#fff"}
+          />
+        ),
+        title: "Invite a Friend",
         headerStyle: {
           backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0
@@ -414,6 +442,33 @@ const AppDrawerNavigator = createDrawerNavigator(
             />
           ),
           title: "Contact Us",
+          headerStyle: {
+            backgroundColor: "#3480CB",//"#52AEA0",
+            elevation: 0
+          },
+          headerTintColor: "#d2b48c",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
+        };
+      }
+    },
+    Invite: {
+      screen: InviteStackNavigator,
+      navigationOptions: ({ navigation }) => {
+        return {
+          drawerLabel: "Invite a Friend",
+          drawerIcon: <Ionicons name='md-share' size={30} color={"#d2b48c"} />,
+          headerLeft: (
+            <Ionicons
+              style={{ padding: 10 }}
+              onPress={() => navigation.openDrawer()}
+              name='md-menu'
+              size={30}
+              color={"#fff"}
+            />
+          ),
+          title: "Invite a Friend",
           headerStyle: {
             backgroundColor: "#3480CB",//"#52AEA0",
             elevation: 0

@@ -66,7 +66,7 @@ class AuthHome extends Component {
         if (type === 'success') {
           // Get the user's name using Facebook's Graph API
           const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-          
+          console.log(response)
           Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
         } else {
           // type === 'cancel'
@@ -169,7 +169,7 @@ else{
     <SafeAreaView style={styles.container}>
       <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
         
-        <View style={styles.btn1}>
+        {/*<View style={styles.btn1}>
             <TouchableOpacity
             style={styles.fabBtn}
             onPress={initAsync() }   
@@ -179,8 +179,8 @@ else{
                 <Text style={styles.txt3}>Sign in with Google</Text>
                 
               </TouchableOpacity> 
-        </View>
-        <View style={styles.btn2}>
+  </View> */}
+        <View style={styles.btn1}>
             <TouchableOpacity
             style={styles.fabBtn}
             onPress={() => faceBookLogin()}   
