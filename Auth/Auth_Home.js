@@ -8,8 +8,6 @@ const loginPage = require("../assets/Loginbk.png");
 const signupbtn = require("../assets/sign-up.png");
 const loginbtn = require("../assets/logintransparent.png");
 import Logo from "../components/Logo"
-import { Formik } from "formik";
-import * as yup from "yup";
 import { SafeAreaView } from 'react-navigation'
 import * as Amplitude from 'expo-analytics-amplitude'
 import * as Facebook from 'expo-facebook'
@@ -51,6 +49,7 @@ class AuthHome extends Component {
   };
   render() {
 
+    const {navigate} = this.props.navigation
     const faceBookLogin = async () => {
       try {
         await Facebook.initializeAsync('746838002533627');
@@ -61,13 +60,16 @@ class AuthHome extends Component {
           permissions,
           declinedPermissions,
         } = await Facebook.logInWithReadPermissionsAsync({
-          permissions: ['public_profile'],
+          permissions: ['public_profile', 'email'],
         });
         if (type === 'success') {
           // Get the user's name using Facebook's Graph API
-          const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-          console.log(response)
-          Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+          fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id, name, email, picture`)
+          .then(response => response.json())
+          .then(data => console.log(data))
+          //console.log(response)
+          //.then(Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`))
+          .then(this.props.navigation.navigate("Main"))
         } else {
           // type === 'cancel'
         }
@@ -116,7 +118,7 @@ class AuthHome extends Component {
      // }
     //};
 
-    const { navigate } = this.props.navigation;
+    //const { navigate } = this.props.navigation;
 
     const onSubmit= () => {
       Amplitude.logEvent("BEGIN_SIGNUP")
@@ -184,10 +186,10 @@ else{
             <TouchableOpacity
             style={styles.fabBtn}
             onPress={() => faceBookLogin()}   
-            >
-              <FontAwesome5 name="facebook" size={28} color="blue" style= {{marginRight: 10}}/>
-              
+            > 
                 <Text style={styles.txt3}>Sign in with Facebook</Text>
+
+                <FontAwesome5 name="facebook" size={28} color="blue" style= {{marginLeft: 10}}/>
                 
               </TouchableOpacity> 
         </View>

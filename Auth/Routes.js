@@ -310,7 +310,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Home",
-          drawerIcon: <Ionicons name='ios-home' size={30} color='#d2b48c' />,
+          drawerIcon: <Ionicons name='ios-home' size={30} color= "#3480CB" />,
           title: "Login",
           headerStyle: {
             backgroundColor: "#3480CB",//"#52AEA0",
@@ -329,7 +329,7 @@ const AppDrawerNavigator = createDrawerNavigator(
         return {
           drawerLabel: "Add Restroom",
           drawerIcon: (
-            <Ionicons name='ios-business' size={30} color='#d2b48c' />
+            <Ionicons name='ios-business' size={30} color="#3480CB" />
           ),
           title: "Add Restroom",
           headerStyle: {
@@ -404,7 +404,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Favorites",
-          drawerIcon: <Ionicons name='ios-heart' size={30} color={"#d2b48c"} />,
+          drawerIcon: <Ionicons name='ios-heart' size={30} color={"#3480CB"} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
@@ -431,7 +431,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Contact Us",
-          drawerIcon: <Ionicons name='ios-contact' size={30} color={"#d2b48c"} />,
+          drawerIcon: <Ionicons name='ios-contact' size={30} color={"#3480CB"} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
@@ -458,7 +458,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Invite a Friend",
-          drawerIcon: <Ionicons name='md-share' size={30} color={"#d2b48c"} />,
+          drawerIcon: <Ionicons name='md-share' size={30} color={"#3480CB"} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}

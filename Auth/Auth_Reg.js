@@ -64,9 +64,9 @@ class AuthReg extends Component {
         .required(),
     });
     const {navigate} = this.props.navigation
-    let email = this.props.navigation.getParam("email");
-    let userName = this.props.navigation.getParam("userName");
-    let password = this.props.navigation.getParam("password")
+    //let email = this.props.navigation.getParam("email");
+    //let userName = this.props.navigation.getParam("userName");
+    //let password = this.props.navigation.getParam("password")
     //console.log(email, userName, password)
     return (
       <SafeAreaView style={styles.container}>
