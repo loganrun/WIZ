@@ -29,7 +29,7 @@ class Invite extends Component {
     const onShare = async () => {
         try {
           const result = await Share.share({
-            message: 'You should definitely checkout the Whizz App @ https://www.TheWhizzApp.com ',
+            message: 'You should definitely checkout the Whizz App @ www.TheWhizzApp.com ',
           });
           if (result.action === Share.sharedAction) {
             if (result.activityType) {

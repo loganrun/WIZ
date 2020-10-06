@@ -98,8 +98,8 @@ class ContactUs extends Component {
     });
     return (
       <SafeAreaView style={styles.container}>
-      <View  style={styles.container}>
-        <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you want to add your restaurant, email Tim Montes at TimM@Thewhizzapp.com </Text>
+      <View  style={styles.info}>
+        <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you would like to add your restaurant, email us at Enroll@TheWhizzapp.com </Text>
       </View>
       </SafeAreaView>
       // <Formik
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: "center",
-    justifyContent: "center"
+    //justifyContent: "center"
   },
   text: {
     fontSize: 24,
@@ -300,5 +300,9 @@ const styles = StyleSheet.create({
   },
   switch: {
     marginTop: 20
+  },
+  info:{
+    marginTop: "40%"
+
   }
 });
