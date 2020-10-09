@@ -202,7 +202,7 @@ class AuthReg extends Component {
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
-            <TextInput
+            {/* <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("phone number")}
               secureTextEntry
@@ -214,7 +214,7 @@ class AuthReg extends Component {
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
-            {/* <TextInput
+            <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("service")}
               onBlur={formikProps.handleBlur("service")}

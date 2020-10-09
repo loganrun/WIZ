@@ -27,28 +27,11 @@ class Problem extends Component {
   };
 
   render() {
-    const onShare = async () => {
-        try {
-          const result = await Share.share({
-            message: 'You should definitely checkout the Whizz App @ www.TheWhizzApp.com ',
-          });
-          if (result.action === Share.sharedAction) {
-            if (result.activityType) {
-            //shared with activity type of result.activityType
-            } else {
-              // shared
-            }
-          } else if (result.action === Share.dismissedAction) {
-            // dismissed
-          }
-        } catch (error) {
-          alert(error.message);
-        }
-      };
+    
 
       const onProblem = async ()=>{
         MailComposer.composeAsync({
-            recipients: ["RobertL@TheWhizzApp.com"],
+            recipients: ["Tech@TheWhizzApp.com"],
             subject: "Feedback About Your App",
             body: " ",
             isHtml: false,

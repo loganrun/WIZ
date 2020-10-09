@@ -181,7 +181,7 @@ else{
                 <Text style={styles.txt3}>Sign in with Google</Text>
                 
               </TouchableOpacity> 
-  </View> */}
+  </View> 
         <View style={styles.btn1}>
             <TouchableOpacity
             style={styles.fabBtn}
@@ -192,8 +192,8 @@ else{
                 <FontAwesome5 name="facebook" size={28} color="blue" style= {{marginLeft: 10}}/>
                 
               </TouchableOpacity> 
-        </View>
-        <View style={styles.btn2}>
+        </View>*/}
+        <View style={styles.btn1}>
             <TouchableOpacity
             style={styles.fabBtn}
             onPress={() => onSubmit()}  
