@@ -2,15 +2,13 @@ import React, {Component } from "react";
 import {
   View,
   Text,
-  StyleSheet,Share,Button,
-  TextInput,
-  ActivityIndicator,
+  StyleSheet,
   TouchableOpacity,
-  KeyboardAvoidingView,
-  Switch
+  Platform, Linking
 } from "react-native";
 import { SafeAreaView } from 'react-navigation';
 import * as MailComposer from "expo-mail-composer"
+//import * as Linking from "expo-linking"
 
 class Problem extends Component {
   static navigationOptions = {
@@ -37,7 +35,11 @@ class Problem extends Component {
             isHtml: false,
           });
       }
-    
+
+      const iosProblem = async ()=>{
+        Linking.openURL('mailto:Enroll@thewhizzapp.com')
+      }
+    if (Platform.OS === "ios"){
     return (
       <SafeAreaView style={styles.container}>
       <View style={styles.btn1}>
@@ -48,7 +50,7 @@ class Problem extends Component {
       <View style={styles.btn2}>
             <TouchableOpacity
             style={styles.fabBtn}
-            onPress={() => onProblem()}    
+            onPress={() => iosProblem()}    
             >
                 <Text style={styles.txt3}>REPORT A PROBLEM </Text>   
                 
@@ -61,6 +63,31 @@ class Problem extends Component {
       
       
     );
+    } else {
+      return (
+        <SafeAreaView style={styles.container}>
+        <View style={styles.btn1}>
+        <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If there is a problem(restaurant not honoring a coupon) please let us know and we will make it right!  Thank You!</Text>
+  
+        </View>
+      
+        <View style={styles.btn2}>
+              <TouchableOpacity
+              style={styles.fabBtn}
+              onPress={() => onProblem()}    
+              >
+                  <Text style={styles.txt3}>REPORT A PROBLEM </Text>   
+                  
+                </TouchableOpacity> 
+          </View>
+          
+          
+        
+        </SafeAreaView>
+        
+        
+      );
+    }
   }
 }
 export default Problem;
