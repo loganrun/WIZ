@@ -12,6 +12,7 @@ import {
 import { SafeAreaView } from 'react-navigation';
 import { Formik } from "formik";
 import * as yup from "yup";
+import * as MailComposer from "expo-mail-composer"
 
 class AddBath extends Component {
   static navigationOptions = {
@@ -28,238 +29,67 @@ class AddBath extends Component {
   };
 
   render() {
-    // const user = axios.create({
-    //   baseURL: "https://whizzit.herokuapp.com/api/users",
-    //   timeout: 40000,
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json"
-    //   }
-    // });
+    const onBusiness = async ()=>{
+      MailComposer.composeAsync({
+          recipients: ["Enroll@TheWhizzApp.com"],
+          subject: "Feedback About Your App",
+          body: " ",
+          isHtml: false,
+        });
+    }
 
-    // const createUser = async ({ value, user }) => {
-    //   try {
-    //     axios({
-    //       method: "post",
-    //       baseURL: "https://whizzit.herokuapp.com/api/users",
-    //       timeout: 40000,
-    //       headers: {
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json"
-    //       },
-    //       data: {
-    //         email: value.email,
-    //         firstName: value.firstName,
-    //         lastName: value.lastName,
-    //         userName: value.userName,
-    //         service: value.service,
-    //         userId: user.uid
-    //       }
-    //     });
-    //     // let params = {
-    //     //   email: value.email,
-    //     //   firstName: value.firstName,
-    //     //   lastName: value.lastName,
-    //     //   userName: value.userName,
-    //     //   service:  value.service,
-    //     //   userId: user.uid
+    const iosBusiness = async ()=>{
+      Linking.openURL('mailto:Enroll@thewhizzapp.com')
+    }
+  if (Platform.OS === "ios"){
+  return (
+    <SafeAreaView style={styles.container}>
+    <View style={styles.btn1}>
+    <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you'd like to add your restaurant to the Whizz family or suggest your favorite "watering" hole, drop us a line.  We are always interested in adding more businesses to our map.  Thank You!</Text>
 
-    //     // };
-
-    //     // let response = await restApi.get("/by_location", { params });
-    //   } catch (e) {
-    //     console.log("error", e.message);
-    //   }
-    // };
-    const validationSchema = yup.object().shape({
-      email: yup
-        .string()
-        .email()
-        .label("Email")
-        .required(),
-      password: yup
-        .string()
-        .label("Password")
-        .required()
-        .min(6)
-        .max(20),
-      firstName: yup
-        .string()
-        .label("First name")
-        .required(),
-      lastName: yup
-        .string()
-        .label("Last name")
-        .required(),
-      userName: yup
-        .string()
-        .label("User name")
-        .required()
-    });
+    </View>
+  
+    <View style={styles.btn2}>
+          <TouchableOpacity
+          style={styles.fabBtn}
+          onPress={() => iosBusiness()}    
+          >
+              <Text style={styles.txt3}>ADD A BUSINESS</Text>   
+              
+            </TouchableOpacity> 
+      </View>
+      
+      
+    
+    </SafeAreaView>
+    
+    
+  );
+  } else {
     return (
       <SafeAreaView style={styles.container}>
-      <View  style={styles.info}>
-        <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you would like to add your restaurant, email us at Enroll@TheWhizzapp.com</Text>
+      <View style={styles.btn1}>
+      <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you'd like to add your restaurant to the Whizz family, or suggest your favorite "watering" hole, drop us a line.  We are always interested in adding more businesses to our map.  Thank You!</Text>
+
       </View>
+    
+      <View style={styles.btn2}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => onBusiness()}    
+            >
+                <Text style={styles.txt3}>ADD A BUSINESS</Text>   
+                
+              </TouchableOpacity> 
+        </View>
+        
+        
+      
       </SafeAreaView>
-      // <Formik
-      //   initialValues={{
-      //     firstName: "",
-      //     lastName: "",
-      //     email: "",
-      //     userName: "",
-      //     password: "",
-      //     service: "",
-      //     promotions: false
-      //   }}
-      //   onSubmit={(value, actions) => {
-      //     let email = value.email;
-      //     let password = value.password;
-
-      //     firebase
-      //       .auth()
-      //       .createUserWithEmailAndPassword(email, password)
-      //       .then(function(cred) {
-      //         let user = firebase.auth().currentUser;
-      //         user.sendEmailVerification();
-      //         AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
-      //         //createUser(value, user);
-      //       })
-      //       .then(function(cred) {
-      //         let user = firebase.auth().currentUser;
-      //         axios({
-      //           method: "post",
-      //           baseURL: "https://whizzit.herokuapp.com/api/users",
-      //           timeout: 40000,
-      //           headers: {
-      //             Accept: "application/json",
-      //             "Content-Type": "application/json"
-      //           },
-      //           data: {
-      //             email: value.email,
-      //             firstName: value.firstName,
-      //             lastName: value.lastName,
-      //             userName: value.userName,
-      //             service: value.service,
-      //             userId: user.uid
-      //           }
-      //         });
-      //       })
-      //       .then(cred => this.props.navigation.navigate("Main"))
-      //       .catch(function(error) {
-      //         var errorCode = error.code;
-      //         var errorMessage = error.message;
-      //         if (errorCode == "auth/email-already-in-use") {
-      //           actions.setErrors({
-      //             email:
-      //               "Email already in use.  Please login or use another email address."
-      //           });
-      //         } //else if(errorCode == "auth/wrong-password") {
-      //         //   actions.setErrors({password: "Password is incorrect"})
-      //         // }
-
-      //         actions.setSubmitting(false);
-      //       });
-      //   }}
-      //   validationSchema={validationSchema}
-      // >
-      //   {formikProps => (
-      //     //<Text style={styles.text}>SIGN UP</Text>
-      //     <KeyboardAvoidingView style={styles.container} behavior='padding'>
-      //       <TextInput
-      //         style={styles.textInput}
-      //         onChangeText={formikProps.handleChange("firstName")}
-      //         onBlur={formikProps.handleBlur("firstName")}
-      //         placeholder={"First Name"}
-      //         autoFocus
-      //       />
-      //       <Text style={{ color: "red", marginLeft: 20 }}>
-      //         {formikProps.touched.firstName && formikProps.errors.firstName}
-      //       </Text>
-      //       <TextInput
-      //         style={styles.textInput}
-      //         onChangeText={formikProps.handleChange("lastName")}
-      //         onBlur={formikProps.handleBlur("lastName")}
-      //         placeholder={"Last Name"}
-      //       />
-      //       <Text style={{ color: "red", marginLeft: 20 }}>
-      //         {formikProps.touched.lastName && formikProps.errors.lastName}
-      //       </Text>
-      //       <TextInput
-      //         style={styles.textInput}
-      //         onChangeText={formikProps.handleChange("userName")}
-      //         placeholder={"Please enter a user name"}
-      //         onBlur={formikProps.handleBlur("userName")}
-      //       />
-      //       <Text style={{ color: "red", marginLeft: 20 }}>
-      //         {formikProps.touched.userName && formikProps.errors.userName}
-      //       </Text>
-      //       <TextInput
-      //         style={styles.textInput}
-      //         onChangeText={formikProps.handleChange("email")}
-      //         placeholder={"Please enter email"}
-      //         onBlur={formikProps.handleBlur("email")}
-      //       />
-      //       <Text style={{ color: "red", marginLeft: 20 }}>
-      //         {formikProps.touched.email && formikProps.errors.email}
-      //       </Text>
-      //       <TextInput
-      //         style={styles.textInput}
-      //         onChangeText={formikProps.handleChange("password")}
-      //         placeholder={"Password"}
-      //         secureTextEntry
-      //         onBlur={formikProps.handleBlur("password")}
-      //       />
-      //       <Text style={{ color: "red", marginLeft: 20 }}>
-      //         {formikProps.touched.password && formikProps.errors.password}
-      //       </Text>
-      //       <TextInput
-      //         style={styles.textInput}
-      //         onChangeText={formikProps.handleChange("service")}
-      //         onBlur={formikProps.handleBlur("service")}
-      //         placeholder='Which service do you drive for?'
-      //       />
-      //       <View style={{ flexDirection: "row" }}>
-      //         <Switch
-      //           style={{ marginTop: 20, marginRight: 10, marginLeft: 20 }}
-      //           // value={formikProps.promotions[promotions]}
-      //           // onValueChange={value => {
-      //           //   formikProps.setFieldValue(promotions, value);
-      //           //}}
-      //         />
-      //         <Text
-      //           style={{
-      //             fontWeight: "bold",
-      //             marginTop: 20,
-      //             marginRight: 20,
-      //             fontSize: 16
-      //           }}
-      //         >
-      //           Would you like to receive Coupons and Promotions?
-      //         </Text>
-      //       </View>
-      //       {formikProps.isSubmitting ? (
-      //         <ActivityIndicator />
-      //       ) : (
-      //         <TouchableOpacity
-      //           style={styles.button}
-      //           onPress={formikProps.handleSubmit}
-      //         >
-      //           <Text
-      //             style={{
-      //               fontSize: 22,
-      //               color: "#ffff",
-      //               fontWeight: "bold"
-      //             }}
-      //           >
-      //             Submit
-      //           </Text>
-      //         </TouchableOpacity>
-      //       )}
-      //     </KeyboardAvoidingView>
-      //   )}
-      // </Formik>
+      
+      
     );
+  }
   }
 }
 export default AddBath;
@@ -304,5 +134,46 @@ const styles = StyleSheet.create({
   info:{
     marginTop: "40%"
 
-  }
+  },
+  fabBtn: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    width: 300,
+    height: 44.5,
+    backgroundColor: "#3480CB",
+    marginRight: 40,
+    marginLeft: 40,
+    borderRadius: 90,
+    marginTop: 20
+    //borderColor: "black",
+    //borderWidth: 2,
+    //marginBottom: 20
+  },
+  btn2: {
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    marginTop: '10%'
+  },
+  btn1: {
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    marginRight: 10,
+    marginLeft: 40,
+    marginTop:"30%",
+    //marginBottom: 20
+  },txt3: {
+    justifyContent: "center",
+    textAlign: "center",
+    position: "relative",
+  
+    fontSize: 24,
+    color: "#FFF",
+    //fontWeight: "bold",
+    //marginRight: 10,
+  
+  },
 });
