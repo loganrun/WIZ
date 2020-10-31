@@ -3,15 +3,13 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
-  ActivityIndicator,
   TouchableOpacity,
-  KeyboardAvoidingView,
-  Switch
+  Platform,
+  Linking
 } from "react-native";
 import { SafeAreaView } from 'react-navigation';
-import { Formik } from "formik";
-import * as yup from "yup";
+//import { Formik } from "formik";
+//import * as yup from "yup";
 import * as MailComposer from "expo-mail-composer"
 
 class ContactUs extends Component {
@@ -39,7 +37,7 @@ class ContactUs extends Component {
     }
 
     const iosContact = async ()=>{
-      Linking.openURL('mailto:Enroll@thewhizzapp.com')
+      Linking.openURL('mailto:Tech@thewhizzapp.com')
     }
   if (Platform.OS === "ios"){
   return (

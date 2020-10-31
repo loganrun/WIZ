@@ -37,13 +37,13 @@ class Problem extends Component {
       }
 
       const iosProblem = async ()=>{
-        Linking.openURL('mailto:Enroll@thewhizzapp.com')
+        Linking.openURL('mailto:Tech@thewhizzapp.com')
       }
     if (Platform.OS === "ios"){
     return (
       <SafeAreaView style={styles.container}>
       <View style={styles.btn1}>
-      <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If there is a problem(restaurant not honoring a coupon) please let us know and we will make it right!  Thank You!</Text>
+      <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If there is a problem (restaurant not honoring a coupon) please let us know and we will make it right!  Thank You!</Text>
 
       </View>
     

@@ -3,15 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
-  ActivityIndicator,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Switch
+  Platform,
+  Linking,
+  TouchableOpacity
 } from "react-native";
 import { SafeAreaView } from 'react-navigation';
-import { Formik } from "formik";
-import * as yup from "yup";
 import * as MailComposer from "expo-mail-composer"
 
 class AddBath extends Component {
