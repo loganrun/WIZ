@@ -7,8 +7,9 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   KeyboardAvoidingView,
-  AsyncStorage, ImageBackground, Image
+  ImageBackground, Image
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image,TextInput,
   ActivityIndicator,
-  KeyboardAvoidingView, Platform, Alert, Button,
-  AsyncStorage } from "react-native";
+  KeyboardAvoidingView, Platform, Alert, Button} from "react-native";
   import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const loginPage = require("../assets/Loginbk.png");
 const signupbtn = require("../assets/sign-up.png");
 const loginbtn = require("../assets/logintransparent.png");
