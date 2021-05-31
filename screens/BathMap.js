@@ -153,7 +153,7 @@ constructor(props) {
         }}
         
         >
-          <Callout onPress={() => {
+          {/* <Callout onPress={() => {
             const eventProp = {
               id: item.id,
               name: item.name,
@@ -186,7 +186,7 @@ constructor(props) {
                   </CardItem>
                 </Card>
                 </View>
-          </Callout>
+          </Callout> */}
         </MapView.Marker>
       );
         }else{
