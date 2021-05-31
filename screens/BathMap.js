@@ -3,7 +3,7 @@ import {
   View,
   Platform,
   Text,
-  Image,ActivityIndicator
+  Image,ActivityIndicator, ScrollView, StyleSheet,Dimensions, TouchableOpacity, Animated
 } from "react-native";
  import {
    Left,
@@ -31,8 +31,10 @@ import * as Amplitude from 'expo-analytics-amplitude'
 //import { Callout } from "react-native-maps";
 //var bathIcon = require("../assets/waba_icon_location.png");
 //var restRoom= require("../assets/w_logo.png")
-
-
+const { width, height } = Dimensions.get("window");
+const CARD_HEIGHT = 150;
+const CARD_WIDTH = width * 0.8;
+const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 class BathMap extends Component {
 
@@ -298,6 +300,43 @@ constructor(props) {
             >
               {this.createMarkers()}
             </MapView>
+            <View>
+          <Animated.ScrollView
+          horizontal
+          scrollEventThrottle={1}
+          showsHorizontalScrollIndicator={false}
+          style={styles.scrollView}
+          >
+            {
+              this.state.bathroom.map((marker, index) =>(
+            
+                /* <View style={styles.card} key={index}>
+                  <Text numberOfLines={1} style={styles.cardtitle}>{marker.name}</Text>
+                  <Text numberOfLines={1} style={styles.cardtitle}>{marker.street}</Text>
+
+                </View>  */
+                <View>
+                    <Card key={index} style={{flexDirection: 'row'}}>
+                      <Left style={{paddingLeft: 10}}>
+            <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: marker.icon}}style={{width: 50, height: 55}}/></Text>                  
+            </Left> 
+                      <CardItem style={{flexDirection: 'column'}}>
+                        <Right style={{flex:1, alignItems: 'flex-start'}}>
+                          <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{marker.name}</Text>
+                          <Text>{marker.street}</Text>
+                          <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
+                          
+                        </Right>
+                      </CardItem>
+                    </Card>
+                    </View>
+              ))
+              
+            }
+          
+
+          </Animated.ScrollView> 
+          </View>
             </View>
       </SafeAreaView>
           
@@ -305,19 +344,6 @@ constructor(props) {
   }
 }
 
-const styles = {
-  container: {
-    flex: 1,
-    //width,
-    //height
-  },
-  tool:{
-    width: 250,
-    height: 75,
-    backgroundColor: '#fff',
-    borderRadius: 10
-  }
-};
 
 const mapStateToProps= state =>{
 return{
@@ -325,7 +351,123 @@ return{
   user: state.user.newUser.payload
 }
 }
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  tool:{
+    width: 250,
+    height: 75,
+    backgroundColor: '#fff',
+    borderRadius: 10
+  },
+  searchBox: {
+    position:'absolute', 
+    marginTop: Platform.OS === 'ios' ? 40 : 20, 
+    flexDirection:"row",
+    backgroundColor: '#fff',
+    width: '90%',
+    alignSelf:'center',
+    borderRadius: 5,
+    padding: 10,
+    shadowColor: '#ccc',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10,
+  },
+  chipsScrollView: {
+    position:'absolute', 
+    top:Platform.OS === 'ios' ? 90 : 80, 
+    paddingHorizontal:10
+  },
+  chipsIcon: {
+    marginRight: 5,
+  },
+  chipsItem: {
+    flexDirection:"row",
+    backgroundColor:'#fff', 
+    borderRadius:20,
+    padding:8,
+    paddingHorizontal:20, 
+    marginHorizontal:10,
+    height:35,
+    shadowColor: '#ccc',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10,
+  },
+  scrollView: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: 10,
+  },
+  endPadding: {
+    paddingRight: width - CARD_WIDTH,
+  },
+  card: {
+    // padding: 10,
+    elevation: 2,
+    backgroundColor: "#FFF",
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    marginHorizontal: 10,
+    shadowColor: "#000",
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x: 2, y: -2 },
+    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
+    overflow: "hidden",
+  },
+  cardImage: {
+    flex: 3,
+    width: "100%",
+    height: "100%",
+    alignSelf: "center",
+  },
+  textContent: {
+    flex: 2,
+    padding: 10,
+  },
+  cardtitle: {
+    fontSize: 12,
+    // marginTop: 5,
+    fontWeight: "bold",
+  },
+  cardDescription: {
+    fontSize: 12,
+    color: "#444",
+  },
+  markerWrap: {
+    alignItems: "center",
+    justifyContent: "center",
+    width:50,
+    height:50,
+  },
+  marker: {
+    width: 30,
+    height: 30,
+  },
+  button: {
+    alignItems: 'center',
+    marginTop: 5
+  },
+  signIn: {
+      width: '100%',
+      padding:5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 3
+  },
+  textSign: {
+      fontSize: 14,
+      fontWeight: 'bold'
+  }
+});
 const mapStyles = [
     {
         "featureType": "administrative",
