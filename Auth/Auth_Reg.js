@@ -82,7 +82,7 @@ class AuthReg extends Component {
           phoneNum: ""
         }}
         onSubmit={(value, actions) => {
-          Amplitude.logEvent("FINISH_EMAIL_SIGNUP")
+          // Amplitude.logvent("FINISH_EMAIL_SIGNUP")
           let firstName = value.firstName;
           let lastName = value.lastName;
           let service = value.service;
@@ -99,7 +99,7 @@ class AuthReg extends Component {
             .then(function(cred) {
               user = firebase.auth().currentUser;
               user.sendEmailVerification();
-              AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
+              AsyncStorage.setItem("userToken", user.uid);
               //createUser(value, user);
               
             })

@@ -1,44 +1,40 @@
-import React from "react";
+import React from 'react';
 import {
   ActivityIndicator,
   AsyncStorage,
   StatusBar,
   StyleSheet,
-  View
-} from "react-native";
-import firebase from "firebase";
-import {connect} from "react-redux"
-import {initialLocation} from '../store/actions'
-import * as Amplitude from 'expo-analytics-amplitude'
-
-
+  View,
+} from 'react-native';
+import firebase from 'firebase';
+import { connect } from 'react-redux';
+import * as Amplitude from 'expo-analytics-amplitude';
+import { initialLocation } from '../store/actions';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
-    this._bootstrapAsync();
+    this.bootstrapAsync();
   }
 
   // Fetch the token from storage then navigate to our appropriate place
-  _bootstrapAsync = async () => {
-    
-    let location = await this.getLocation();
-    this.props.initLocation(location)
-    //this.props.navigation.navigate("Main");
+  bootstrapAsync = async () => {
+    const location = await this.getLocation();
+    this.props.initLocation(location);
+    // this.props.navigation.navigate("Main");
 
-    
-    firebase.auth().onAuthStateChanged(user => {
-      this.props.navigation.navigate(user ? "Main" : "Auth");
-      Amplitude.logEvent("APP_OPENED")
+    firebase.auth().onAuthStateChanged((user) => {
+      this.props.navigation.navigate(user ? 'Main' : 'Auth');
+      // Amplitude.logvent("APP_OPENED")
     });
   };
 
   getLocation = async () => {
-    let location = "";
+    let location = '';
     try {
-      location = await AsyncStorage.getItem("location");
-     //console.log(location)
-      //console.log(location)
+      location = await AsyncStorage.getItem('location');
+      // console.log(location)
+      // console.log(location)
     } catch (error) {
       // Error retrieving data
       console.log(error);
@@ -51,32 +47,26 @@ class AuthLoadingScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ActivityIndicator />
-        <StatusBar barStyle='default' />
+        <StatusBar barStyle="default" />
       </View>
     );
   }
-
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => ({
+  initLocation: (location) => {
+    dispatch(initialLocation(location));
+  },
+});
 
-  return {
-    initLocation: (location)=> {
-      dispatch(initialLocation(location))
-    }
-  }
-
-}
-
-export default connect(null, mapDispatchToProps)(AuthLoadingScreen)
-
+export default connect(null, mapDispatchToProps)(AuthLoadingScreen);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     marginHorizontal: 50,
-    paddingTop: "50%",
-    alignItems: "center"
-  }
+    paddingTop: '50%',
+    alignItems: 'center',
+  },
 });
