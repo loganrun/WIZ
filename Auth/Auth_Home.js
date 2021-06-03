@@ -121,7 +121,7 @@ class AuthHome extends Component {
     //const { navigate } = this.props.navigation;
 
     const onSubmit= () => {
-      Amplitude.logEvent("BEGIN_SIGNUP")
+      // Amplitude.logvent("BEGIN_SIGNUP")
       this.props.navigation.navigate("SignUp")
     }
     if(Platform.OS === 'ios'){
