@@ -32,8 +32,8 @@ import * as Amplitude from 'expo-analytics-amplitude'
 //var bathIcon = require("../assets/waba_icon_location.png");
 //var restRoom= require("../assets/w_logo.png")
 const { width, height } = Dimensions.get("window");
-const CARD_HEIGHT = 150;
-const CARD_WIDTH = width * 0.8;
+const CARD_HEIGHT = 180;
+const CARD_WIDTH = width * 0.80;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 class BathMap extends Component {
@@ -43,8 +43,8 @@ constructor(props) {
         this.state = {
             bathroom: [],
             region: {
-              longitude: -118.39,
-              latitude: 34.022,
+              longitude: null,
+              latitude: null,
               latitudeDelta: 0.072,//{0.022},
               longitudeDelta: 0.070,//{0.021}
             },
@@ -61,23 +61,27 @@ constructor(props) {
       
 
    componentDidMount() {
-    //this.initBathroom();
+    this.initBathroom();
     //this.setState({ loading: true });
     this.useCheck()
     Amplitude.logEvent("MAP_OPENED")
   }
+
+
+  initBathroom = async () => {
+    location = this.props.location
+    await this.setState({longitude: location.longitude})
+    await this.setState({latitude: location.latitude})
+    this.loadBathroom()
+    
+  };
 
   useCheck = async () =>{
   newUser = this.props.user
   await this.setState({ newUser: newUser })
   
   }
-  // onDoneAllSlides = () => {
-  //   this.setState({ newUser: false });
-  // };
-  // onSkipSlides = () => {
-  //   this.setState({ newUsher: false });
-  // };
+  
   setMargin=()=>{
     this.setState({mapMargin: 0});
   }
@@ -155,7 +159,7 @@ constructor(props) {
         }}
         
         >
-          {/* <Callout onPress={() => {
+           <Callout onPress={() => {
             const eventProp = {
               id: item.id,
               name: item.name,
@@ -188,7 +192,7 @@ constructor(props) {
                   </CardItem>
                 </Card>
                 </View>
-          </Callout> */}
+          </Callout> 
         </MapView.Marker>
       );
         }else{
@@ -286,6 +290,7 @@ constructor(props) {
       <SafeAreaView style={styles.container}>
             <View style={styles.container}>
             <MapView
+            ref={map => this.map = map}
             initialRegion={{latitude: this.props.location.latitude,
             longitude: this.props.location.longitude,
             latitudeDelta: 0.5064,
@@ -306,6 +311,30 @@ constructor(props) {
           scrollEventThrottle={1}
           showsHorizontalScrollIndicator={false}
           style={styles.scrollView}
+          pagingEnabled
+          snapToInterval={CARD_WIDTH + 20}
+          snapToAlignment="center"
+          contentInset={{
+            top: 0,
+            left: SPACING_FOR_CARD_INSET,
+            bottom: 0,
+            right: SPACING_FOR_CARD_INSET
+          }}
+          contentContainerStyle={{
+            paddingHorizontal: Platform.OS === 'android' ? SPACING_FOR_CARD_INSET : 0
+          }}
+          // onScroll={Animated.event(
+          //   [
+          //     {
+          //       nativeEvent: {
+          //         contentOffset: {
+          //           x: mapAnimation,
+          //         }
+          //       }
+          //     }
+          //   ],
+          //   {useNativeDriver:true}
+          // )}
           >
             {
               this.state.bathroom.map((marker, index) =>(
@@ -316,7 +345,7 @@ constructor(props) {
 
                 </View>  */
                 <View>
-                    <Card key={index} style={{flexDirection: 'row'}}>
+                    <Card key={index} style={styles.card}>
                       <Left style={{paddingLeft: 10}}>
             <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: marker.icon}}style={{width: 50, height: 55}}/></Text>                  
             </Left> 
@@ -410,6 +439,7 @@ const styles = StyleSheet.create({
   },
   card: {
     // padding: 10,
+    flexDirection: "row",
     elevation: 2,
     backgroundColor: "#FFF",
     borderTopLeftRadius: 5,

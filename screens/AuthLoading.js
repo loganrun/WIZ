@@ -1,13 +1,13 @@
 import React from "react";
 import {
   ActivityIndicator,
-  AsyncStorage,
   StatusBar,
   StyleSheet,
   View
 } from "react-native";
 import firebase from "firebase";
 import {connect} from "react-redux"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {initialLocation} from '../store/actions'
 import * as Amplitude from 'expo-analytics-amplitude'
 
