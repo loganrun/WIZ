@@ -3,7 +3,7 @@ import {
   View,
   Platform,
   Text,
-  Image,ActivityIndicator, ScrollView, StyleSheet,Dimensions, TouchableOpacity, Animated
+  Image,ActivityIndicator, ScrollView, StyleSheet,Dimensions, TouchableOpacity, Animated, FlatList
 } from "react-native";
  import {
    Left,
@@ -132,13 +132,13 @@ constructor(props) {
   createMarkers= () => {
     const { navigate } = this.props.navigation;
 
-    return this.state.bathroom.map((item, i) => {
+    return this.state.bathroom.map((item, index) => {
       //const rating = Math.floor(Math.random() * Math.floor(5))
       
       if(Platform.OS === 'ios'){
       return (
         <MapView.Marker
-        key= {item.id}
+        key= {index}
         coordinate={{
           latitude: item.latitude,
           longitude: item.longitude
@@ -198,7 +198,7 @@ constructor(props) {
         }else{
           return (
             <MapView.Marker
-            key= {item.id}
+            key= {index}
             coordinate={{
               latitude: item.latitude,
               longitude: item.longitude
