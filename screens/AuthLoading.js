@@ -23,6 +23,7 @@ class AuthLoadingScreen extends React.Component {
   _bootstrapAsync = async () => {
     
     let location = await this.getLocation();
+    //console.log(location)
     this.props.initLocation(location)
     //this.props.navigation.navigate("Main");
 

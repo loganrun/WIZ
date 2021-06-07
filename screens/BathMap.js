@@ -43,11 +43,13 @@ constructor(props) {
         this.state = {
             bathroom: [],
             region: {
-              longitude: null,
-              latitude: null,
+              longitude: this.props.location.longitude,
+              latitude: this.props.location.latitude,
               latitudeDelta: 0.072,//{0.022},
               longitudeDelta: 0.070,//{0.021}
             },
+            longitude: "",
+            latitude: null,
             loading: false,
             lat: null,
             lon: null,
@@ -57,21 +59,39 @@ constructor(props) {
             newUser: false
             
           };
+          this.flatListRef = null
       }
       
 
    componentDidMount() {
+    //console.log(this.props.location)
+    //this.setState({region:{ ...this.state.region, longitude: this.props.location.longitude}})
+    //this.setState({region:{ ...this.state.region, latitude: this.props.location.latitude}})
+    this.setState({longitude: this.props.location.longitude})
     this.initBathroom();
     //this.setState({ loading: true });
-    this.useCheck()
+    this.useCheck();
+    
     Amplitude.logEvent("MAP_OPENED")
   }
 
 
   initBathroom = async () => {
-    location = this.props.location
-    await this.setState({longitude: location.longitude})
-    await this.setState({latitude: location.latitude})
+    let region = {...this.state.region}
+    region.latitude = this.props.location.latitude
+    this.setState({region})
+    //this.setState({region:{ ...this.state.region, longitude: this.props.location.longitude}})
+    //this.setState({region:{ ...this.state.region, latitude: this.props.location.latitude}})
+    //location = this.props.location
+    //this.setState({longitude: location.longitude})
+    //this.setState({latitude: location.latitude})
+    //this.loadBathroom()
+    console.log(this.state.longitude)
+      
+      
+  
+    
+    
     this.loadBathroom()
     
   };
@@ -86,18 +106,33 @@ constructor(props) {
     this.setState({mapMargin: 0});
   }
 
-  _renderItem = ({ item }) => {
+  renderItem = ({ item }) => {
     return (
-      <View style={styles.slide}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.text}>{item.text}</Text>
+      <View>
+        <Card style={styles.card}>
+          <Left style={{paddingLeft: 10}}>
+            <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
+          </Left> 
+            <CardItem style={{flexDirection: 'column'}}>
+            <Right style={{flex:1, alignItems: 'flex-start'}}>
+              <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
+              <Text>{item.street}</Text>
+              <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
+            </Right>
+            </CardItem>
+        </Card>
       </View>
-    );
+  )
+  }
+
+  getItemLayout(data, index){
+    return { length: styles.card.width, offset: styles.card.width * index, index}
   }
 
   loadBathroom = async () => {
     //let lat = this.state.lat;
     //let lon = this.state.lon;
+    console.log(this.state.region)
     try{
 
     
@@ -121,13 +156,17 @@ constructor(props) {
     }
   };
     
-  
 
   onRegionChangeComplete = async (region) =>{
     Amplitude.logEvent("MAP_MOVED")
     await this.setState({region})
-    this.loadBathroom()
+    //this.loadBathroom()
   }
+
+  // scrollToIndex = (index) =>{
+  //   this.flatListRef.scrollToIndex({animated: true, index: index})
+  // }
+
 
   createMarkers= () => {
     const { navigate } = this.props.navigation;
@@ -155,6 +194,7 @@ constructor(props) {
 
           }
           Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+          this.flatListRef.scrollToIndex({animated: true, index: index})
           
         }}
         
@@ -203,9 +243,12 @@ constructor(props) {
               latitude: item.latitude,
               longitude: item.longitude
             }}
-            title={item.name}
+            //title={item.name}
             image={{uri: item.icon}}
            // pinColor={'yellow'}
+          //  onPress={() => {
+          //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
+          //    }}
             onPress={() => {
               const markerProp = {
               id: item.id,
@@ -215,10 +258,11 @@ constructor(props) {
 
               }
               Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+              this.flatListRef.scrollToIndex({animated: true, index: index})
               }}
             
             >
-              <Callout onPress={() => {
+              {/* <Callout onPress={() => {
               const eventProp = {
                 id: item.id,
                 name: item.name,
@@ -234,9 +278,9 @@ constructor(props) {
                 currentLon: this.state.region.longitude
               })}}
             
-            >
+            > */}
             
-                <View>
+                {/* <View>
                     <Card transparent style={{flexDirection: 'row'}}>
                       <Left style={{paddingLeft: 10}}>
             <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
@@ -250,8 +294,8 @@ constructor(props) {
                         </Right>
                       </CardItem>
                     </Card>
-                    </View>
-              </Callout>
+                    </View> 
+              </Callout> */}
             </MapView.Marker>
           );
         }
@@ -260,7 +304,6 @@ constructor(props) {
   }
 
   render() {
-   
     
     if (this.state.newUser){
       return(
@@ -306,65 +349,16 @@ constructor(props) {
               {this.createMarkers()}
             </MapView>
             <View>
-          <Animated.ScrollView
+            <FlatList
+          ref={(ref) => this.flatListRef = ref}
+          data={this.state.bathroom}
           horizontal
-          scrollEventThrottle={1}
-          showsHorizontalScrollIndicator={false}
           style={styles.scrollView}
-          pagingEnabled
           snapToInterval={CARD_WIDTH + 20}
           snapToAlignment="center"
-          contentInset={{
-            top: 0,
-            left: SPACING_FOR_CARD_INSET,
-            bottom: 0,
-            right: SPACING_FOR_CARD_INSET
-          }}
-          contentContainerStyle={{
-            paddingHorizontal: Platform.OS === 'android' ? SPACING_FOR_CARD_INSET : 0
-          }}
-          // onScroll={Animated.event(
-          //   [
-          //     {
-          //       nativeEvent: {
-          //         contentOffset: {
-          //           x: mapAnimation,
-          //         }
-          //       }
-          //     }
-          //   ],
-          //   {useNativeDriver:true}
-          // )}
-          >
-            {
-              this.state.bathroom.map((marker, index) =>(
-            
-                /* <View style={styles.card} key={index}>
-                  <Text numberOfLines={1} style={styles.cardtitle}>{marker.name}</Text>
-                  <Text numberOfLines={1} style={styles.cardtitle}>{marker.street}</Text>
-
-                </View>  */
-                <View>
-                    <Card key={index} style={styles.card}>
-                      <Left style={{paddingLeft: 10}}>
-            <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: marker.icon}}style={{width: 50, height: 55}}/></Text>                  
-            </Left> 
-                      <CardItem style={{flexDirection: 'column'}}>
-                        <Right style={{flex:1, alignItems: 'flex-start'}}>
-                          <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{marker.name}</Text>
-                          <Text>{marker.street}</Text>
-                          <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
-                          
-                        </Right>
-                      </CardItem>
-                    </Card>
-                    </View>
-              ))
-              
-            }
-          
-
-          </Animated.ScrollView> 
+          renderItem={this.renderItem.bind(this)}
+          keyExtractor={(item) => item.id}
+          getItemLayout={this.getItemLayout.bind(this)} />
           </View>
             </View>
       </SafeAreaView>
