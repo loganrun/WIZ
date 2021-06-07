@@ -1,20 +1,21 @@
+import { INITIAL_LOCATION, INITIAL_LOCATION_ERROR } from '../actions/types';
 
-import { INITIAL_LOCATION, INITIAL_LOCATION_ERROR } from "../actions/types";
 const initialState = {
   initlocation: {},
-  error: null
+  error: null,
 };
 
-export default function(state = initialState, action) {
-    const { type, payload } = action;
+export default (state = initialState, action) => {
+  const { type, payload } = action;
+  let loc;
   switch (type) {
     case INITIAL_LOCATION:
-        //console.log(payload.coords)
-        const loc = payload.coords
-      return { ...state, initlocation: {...state.initlocation, loc} };
+      // console.log(payload.coords)
+      loc = payload.coords;
+      return { ...state, initlocation: { ...state.initlocation, loc } };
     case INITIAL_LOCATION_ERROR:
-      return { ...state, error: {...state.error, payload} };
+      return { ...state, error: { ...state.error, payload } };
     default:
       return state;
   }
-}
+};

@@ -42,7 +42,7 @@ export default Auth_Phone = () => {
 
   
     const sendVerification = async () => {
-      Amplitude.logEvent("SUBMIT_PHONE#")
+      // Amplitude.logvent("SUBMIT_PHONE#")
         try {
             const phoneProvider = new firebase.auth.PhoneAuthProvider();
             const verificationId = await phoneProvider.verifyPhoneNumber(
@@ -58,7 +58,7 @@ export default Auth_Phone = () => {
 
   
     const confirmCode = () => {
-      Amplitude.logEvent("COMPLETE_PHONE_SIGNUP")
+      // Amplitude.logvent("COMPLETE_PHONE_SIGNUP")
       const credential = firebase.auth.PhoneAuthProvider.credential(
         verificationId,
         code

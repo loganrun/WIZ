@@ -9,5 +9,15 @@ const restRoom = axios.create({
   }
 });
 
+const refugeeApi = axios.create({
+  baseURL: 'https://www.refugerestrooms.org/api/v1/restrooms',
+  timeout: 40000,
+  headers: {
+    "Accept": "application/json",
+    "Content-Type": "application/json"
+  }
+});
+
+export { refugeeApi };
 export default restRoom;
 

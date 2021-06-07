@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, AsyncStorage, Alert} from "react-native";
 import Main from './Auth/Main'
 //import { SplashScreen, AppLoading } from "expo";
+import { RootSiblingParent } from 'react-native-root-siblings';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
 import * as firebase from 'firebase'
@@ -58,7 +59,6 @@ class App extends React.Component {
 
     }
   }
-
 
 
   _getLocationAsync = async () => {
@@ -124,9 +124,11 @@ class App extends React.Component {
       ;
     }else {
       return (
-      <Provider store={store}>
-      <Main />
-      </Provider>
+      <RootSiblingParent>
+        <Provider store={store}>
+          <Main />
+        </Provider>
+      </RootSiblingParent>
       )
     }
     //return <Routes />;
