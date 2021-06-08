@@ -67,8 +67,8 @@ constructor(props) {
     //console.log(this.props.location)
     //this.setState({region:{ ...this.state.region, longitude: this.props.location.longitude}})
     //this.setState({region:{ ...this.state.region, latitude: this.props.location.latitude}})
-    this.setState({longitude: this.props.location.longitude})
-    this.initBathroom();
+    //this.setState({longitude: this.props.location.longitude})
+    this.loadBathroom();
     //this.setState({ loading: true });
     this.useCheck();
     
@@ -77,22 +77,22 @@ constructor(props) {
 
 
   initBathroom = async () => {
-    let region = {...this.state.region}
-    region.latitude = this.props.location.latitude
-    this.setState({region})
+    //let region = {...this.state.region}
+    //region.latitude = this.props.location.latitude
+    //this.setState({region})
     //this.setState({region:{ ...this.state.region, longitude: this.props.location.longitude}})
     //this.setState({region:{ ...this.state.region, latitude: this.props.location.latitude}})
     //location = this.props.location
     //this.setState({longitude: location.longitude})
     //this.setState({latitude: location.latitude})
     //this.loadBathroom()
-    console.log(this.state.longitude)
+    //console.log(this.state.longitude)
       
       
   
     
     
-    this.loadBathroom()
+    //this.loadBathroom()
     
   };
 
@@ -348,6 +348,11 @@ constructor(props) {
             >
               {this.createMarkers()}
             </MapView>
+            <View style={styles.chipsItem}>
+              <TouchableOpacity>
+            <Text style={styles.textSign}>Search this area</Text>
+            </TouchableOpacity>
+            </View> 
             <View>
             <FlatList
           ref={(ref) => this.flatListRef = ref}
@@ -408,7 +413,11 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   chipsItem: {
+    position:'absolute', 
+    top:Platform.OS === 'ios' ? 90 : 30, 
+    paddingHorizontal:10,
     flexDirection:"row",
+    alignSelf:'center',
     backgroundColor:'#fff', 
     borderRadius:20,
     padding:8,
@@ -488,8 +497,10 @@ const styles = StyleSheet.create({
       borderRadius: 3
   },
   textSign: {
-      fontSize: 14,
-      fontWeight: 'bold'
+      fontSize: 15,
+      fontWeight: 'bold',
+      color: '#173E81'
+      
   }
 });
 const mapStyles = [
