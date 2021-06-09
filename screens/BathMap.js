@@ -36,6 +36,8 @@ const CARD_HEIGHT = 180;
 const CARD_WIDTH = width * 0.80;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
+
+
 class BathMap extends Component {
 
 constructor(props) {
@@ -56,7 +58,8 @@ constructor(props) {
             errorMessage: null,
             search: "",
             mapMargin:  1,
-            newUser: false
+            newUser: false,
+            newSearch: true
             
           };
           this.flatListRef = null
@@ -69,7 +72,7 @@ constructor(props) {
     //this.setState({region:{ ...this.state.region, latitude: this.props.location.latitude}})
     //this.setState({longitude: this.props.location.longitude})
     this.loadBathroom();
-    //this.setState({ loading: true });
+    this.setState({ loading: true });
     this.useCheck();
     
     Amplitude.logEvent("MAP_OPENED")
@@ -98,7 +101,7 @@ constructor(props) {
 
   useCheck = async () =>{
   newUser = this.props.user
-  await this.setState({ newUser: newUser })
+  this.setState({ newUser: newUser })
   
   }
   
@@ -150,7 +153,7 @@ constructor(props) {
       //console.log(bathroom)
       this.setState({ bathroom: bathroom });
      
-      await this.setState({ loading: false });
+      this.setState({ loading: false });
     } catch (e) {
       console.log("error", e.message);
     }
@@ -170,7 +173,7 @@ constructor(props) {
 
   createMarkers= () => {
     const { navigate } = this.props.navigation;
-
+    
     return this.state.bathroom.map((item, index) => {
       //const rating = Math.floor(Math.random() * Math.floor(5))
       
@@ -304,7 +307,7 @@ constructor(props) {
   }
 
   render() {
-    
+    const newSearch =  this.state.newSearch
     if (this.state.newUser){
       return(
 
@@ -348,11 +351,18 @@ constructor(props) {
             >
               {this.createMarkers()}
             </MapView>
+            <View>
+              {
+                newSearch ? (
             <View style={styles.chipsItem}>
               <TouchableOpacity>
-            <Text style={styles.textSign}>Search this area</Text>
-            </TouchableOpacity>
+              <Text style={styles.textSign}>Search this area</Text>
+              </TouchableOpacity>
             </View> 
+                ) : null
+              }
+            </View>
+            
             <View>
             <FlatList
           ref={(ref) => this.flatListRef = ref}
@@ -428,7 +438,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
     shadowRadius: 5,
-    elevation: 10,
+    elevation: 10
+    
   },
   scrollView: {
     position: "absolute",
