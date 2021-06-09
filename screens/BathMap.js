@@ -59,7 +59,7 @@ constructor(props) {
             search: "",
             mapMargin:  1,
             newUser: false,
-            newSearch: true
+            newSearch: false
             
           };
           this.flatListRef = null
@@ -112,6 +112,23 @@ constructor(props) {
   renderItem = ({ item }) => {
     return (
       <View>
+        <TouchableOpacity 
+        onPress={() => {
+          const eventProp = {
+            id: item.id,
+            name: item.name,
+            street: item.street,
+            city: item.city,
+            dist: item.dist.calculated
+          }
+          Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
+        this.props.navigation.navigate("Pee", {
+          id: item.id,
+          item,
+          currentLat: this.state.region.latitude,
+          currentLon: this.state.region.longitude
+        })}}
+        >
         <Card style={styles.card}>
           <Left style={{paddingLeft: 10}}>
             <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
@@ -124,6 +141,7 @@ constructor(props) {
             </Right>
             </CardItem>
         </Card>
+        </TouchableOpacity>
       </View>
   )
   }
@@ -162,13 +180,26 @@ constructor(props) {
 
   onRegionChangeComplete = async (region) =>{
     Amplitude.logEvent("MAP_MOVED")
-    await this.setState({region})
+    this.setState({region})
+    this.setState({newSearch: true})
     //this.loadBathroom()
   }
 
   // scrollToIndex = (index) =>{
   //   this.flatListRef.scrollToIndex({animated: true, index: index})
   // }
+
+  newSearch = ()=>{
+    if(this.state.newSearch)
+    return (
+      <View style={styles.chipsItem}>
+          <TouchableOpacity>
+          <Text style={styles.textSign}>Search this area</Text>
+          </TouchableOpacity>
+      </View> 
+    )
+
+  }
 
 
   createMarkers= () => {
@@ -307,7 +338,7 @@ constructor(props) {
   }
 
   render() {
-    const newSearch =  this.state.newSearch
+
     if (this.state.newUser){
       return(
 
@@ -351,18 +382,7 @@ constructor(props) {
             >
               {this.createMarkers()}
             </MapView>
-            <View>
-              {
-                newSearch ? (
-            <View style={styles.chipsItem}>
-              <TouchableOpacity>
-              <Text style={styles.textSign}>Search this area</Text>
-              </TouchableOpacity>
-            </View> 
-                ) : null
-              }
-            </View>
-            
+            {this.newSearch()}
             <View>
             <FlatList
           ref={(ref) => this.flatListRef = ref}
