@@ -36,7 +36,7 @@
     "react-native-responsive-fontsize": "^0.4.3",
     "react-native-screens": "~2.9.0",
     "react-native-star-rating": "^1.1.0",
-    "react-native-webview": "^11.4.4",
+    "react-native-webview": "9.4.0",
     "react-navigation": "^3.0.9",
     "react-redux": "6.0.1",
     "redux": "^4.0.4",

@@ -21,6 +21,7 @@ import MapView,{Callout} from 'react-native-maps';
 import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
+import refugeeApi from '../services/refugee'
 import {connect} from "react-redux"
 import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
@@ -28,6 +29,7 @@ import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
 //import * as Analytics from 'expo-firebase-analytics'
 import * as Amplitude from 'expo-analytics-amplitude'
+import axios from 'axios'
 //import { Callout } from "react-native-maps";
 //var bathIcon = require("../assets/waba_icon_location.png");
 //var restRoom= require("../assets/w_logo.png")
@@ -153,22 +155,36 @@ constructor(props) {
   loadBathroom = async () => {
     //let lat = this.state.lat;
     //let lon = this.state.lon;
-    console.log(this.state.region)
+    //console.log(this.state.region)
     try{
 
     
       let params = {
-        //page: 1,
-        //per_page: 40,
         lat: this.state.region.latitude,
         lng: this.state.region.longitude
       };
+      
 
-      let response = await restApi.get('/api/bathrooms',{ params });
-    
+      const results = await axios.all([
+        refugeeApi.get('/v1/restrooms/by_location',{params}),
+        restApi.get('/api/bathrooms',{ params })
         
-      let bathroom = response.data;
-      //console.log(bathroom)
+       //restApi.get('/api/unverified',{ params })
+        
+      ]).then(axios.spread((...responses) =>{
+         let response1 = responses[0].data;
+        let response2 = responses[1].data;
+        let prelim = response1.concat(response2);
+
+        return prelim
+      })).catch(err =>{
+        console.log("error", err.message);
+      })
+
+       const  bathroom = await results.map(result =>
+         result
+        
+      )
       this.setState({ bathroom: bathroom });
      
       this.setState({ loading: false });
@@ -182,12 +198,7 @@ constructor(props) {
     Amplitude.logEvent("MAP_MOVED")
     this.setState({region})
     this.setState({newSearch: true})
-    //this.loadBathroom()
   }
-
-  // scrollToIndex = (index) =>{
-  //   this.flatListRef.scrollToIndex({animated: true, index: index})
-  // }
 
   newSearch = ()=>{
     if(this.state.newSearch)
@@ -206,7 +217,7 @@ constructor(props) {
     const { navigate } = this.props.navigation;
     
     return this.state.bathroom.map((item, index) => {
-      //const rating = Math.floor(Math.random() * Math.floor(5))
+      
       
       if(Platform.OS === 'ios'){
       return (
@@ -216,16 +227,14 @@ constructor(props) {
           latitude: item.latitude,
           longitude: item.longitude
         }}
-        title={item.name}
-        image={{uri: item.icon}}
+        //title={item.name}
+        //image={{uri: item.icon}}
         onPress={() => {
           const markerProp = {
           id: item.id,
           name: item.name,
           street: item.street,
-          city: item.city,
-          dist: item.dist.calculated,
-
+          city: item.city
           }
           Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
           this.flatListRef.scrollToIndex({animated: true, index: index})
@@ -233,7 +242,7 @@ constructor(props) {
         }}
         
         >
-           <Callout onPress={() => {
+           {/* <Callout onPress={() => {
             const eventProp = {
               id: item.id,
               name: item.name,
@@ -266,7 +275,7 @@ constructor(props) {
                   </CardItem>
                 </Card>
                 </View>
-          </Callout> 
+          </Callout>  */}
         </MapView.Marker>
       );
         }else{
@@ -278,7 +287,7 @@ constructor(props) {
               longitude: item.longitude
             }}
             //title={item.name}
-            image={{uri: item.icon}}
+            //image={{uri: item.icon}}
            // pinColor={'yellow'}
           //  onPress={() => {
           //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
@@ -287,9 +296,7 @@ constructor(props) {
               const markerProp = {
               id: item.id,
               name: item.name,
-              street: item.street,
-              dist: item.dist.calculated,
-
+              street: item.street
               }
               Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
               this.flatListRef.scrollToIndex({animated: true, index: index})
@@ -392,7 +399,7 @@ constructor(props) {
           snapToInterval={CARD_WIDTH + 20}
           snapToAlignment="center"
           renderItem={this.renderItem.bind(this)}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item, index) => item.id}
           getItemLayout={this.getItemLayout.bind(this)} />
           </View>
             </View>
