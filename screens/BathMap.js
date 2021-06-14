@@ -69,10 +69,7 @@ constructor(props) {
       
 
    componentDidMount() {
-    //console.log(this.props.location)
-    //this.setState({region:{ ...this.state.region, longitude: this.props.location.longitude}})
-    //this.setState({region:{ ...this.state.region, latitude: this.props.location.latitude}})
-    //this.setState({longitude: this.props.location.longitude})
+    
     this.loadBathroom();
     this.setState({ loading: true });
     this.useCheck();
@@ -81,25 +78,25 @@ constructor(props) {
   }
 
 
-  initBathroom = async () => {
-    //let region = {...this.state.region}
-    //region.latitude = this.props.location.latitude
-    //this.setState({region})
-    //this.setState({region:{ ...this.state.region, longitude: this.props.location.longitude}})
-    //this.setState({region:{ ...this.state.region, latitude: this.props.location.latitude}})
-    //location = this.props.location
-    //this.setState({longitude: location.longitude})
-    //this.setState({latitude: location.latitude})
-    //this.loadBathroom()
-    //console.log(this.state.longitude)
+  // initBathroom = async () => {
+  //   //let region = {...this.state.region}
+  //   //region.latitude = this.props.location.latitude
+  //   //this.setState({region})
+  //   //this.setState({region:{ ...this.state.region, longitude: this.props.location.longitude}})
+  //   //this.setState({region:{ ...this.state.region, latitude: this.props.location.latitude}})
+  //   //location = this.props.location
+  //   //this.setState({longitude: location.longitude})
+  //   //this.setState({latitude: location.latitude})
+  //   //this.loadBathroom()
+  //   //console.log(this.state.longitude)
       
       
   
     
     
-    //this.loadBathroom()
+  //   //this.loadBathroom()
     
-  };
+  // };
 
   useCheck = async () =>{
   newUser = this.props.user
@@ -121,7 +118,6 @@ constructor(props) {
             name: item.name,
             street: item.street,
             city: item.city,
-            dist: item.dist.calculated
           }
           Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
         this.props.navigation.navigate("Pee", {
@@ -153,9 +149,7 @@ constructor(props) {
   }
 
   loadBathroom = async () => {
-    //let lat = this.state.lat;
-    //let lon = this.state.lon;
-    //console.log(this.state.region)
+    
     try{
 
     
@@ -168,8 +162,6 @@ constructor(props) {
       const results = await axios.all([
         refugeeApi.get('/v1/restrooms/by_location',{params}),
         restApi.get('/api/bathrooms',{ params })
-        
-       //restApi.get('/api/unverified',{ params })
         
       ]).then(axios.spread((...responses) =>{
          let response1 = responses[0].data;
@@ -204,7 +196,9 @@ constructor(props) {
     if(this.state.newSearch)
     return (
       <View style={styles.chipsItem}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{
+            this.loadBathroom()
+          }}>
           <Text style={styles.textSign}>Search this area</Text>
           </TouchableOpacity>
       </View> 
@@ -219,7 +213,7 @@ constructor(props) {
     return this.state.bathroom.map((item, index) => {
       
       
-      if(Platform.OS === 'ios'){
+      if(Platform.OS === 'ios' && item.icon){
       return (
         <MapView.Marker
         key= {index}
@@ -228,7 +222,7 @@ constructor(props) {
           longitude: item.longitude
         }}
         //title={item.name}
-        //image={{uri: item.icon}}
+        image={{uri: item.icon}}
         onPress={() => {
           const markerProp = {
           id: item.id,
@@ -242,43 +236,9 @@ constructor(props) {
         }}
         
         >
-           {/* <Callout onPress={() => {
-            const eventProp = {
-              id: item.id,
-              name: item.name,
-              street: item.street,
-              city: item.city,
-              dist: item.dist.calculated
-            }
-            Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
-          this.props.navigation.navigate("Pee", {
-            id: item.id,
-            item,
-            currentLat: this.state.region.latitude,
-            currentLon: this.state.region.longitude
-          })}}
-        
-        >
-        
-            <View>
-                <Card transparent style={{flexDirection: 'row'}}>
-                  <Left style={{paddingLeft: 10}}>
-        <Text style={{width: 50, height: 80, marginTop: 15}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
-        </Left> 
-                  <CardItem style={{flexDirection: 'column'}}>
-                    <Right style={{flex:1, alignItems: 'flex-start'}}>
-                      <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
-                      <Text>{item.street}</Text>
-                      
-                <Text style={{width: 110, height: 25, marginTop: 5}}><Image resizeMode={'cover'} source={tprating}style={{width:110, height: 23}}/></Text>
-                    </Right>
-                  </CardItem>
-                </Card>
-                </View>
-          </Callout>  */}
         </MapView.Marker>
-      );
-        }else{
+      ) ;
+        }if(!item.icon){
           return (
             <MapView.Marker
             key= {index}
@@ -287,7 +247,35 @@ constructor(props) {
               longitude: item.longitude
             }}
             //title={item.name}
-            //image={{uri: item.icon}}
+            image={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
+            onPress={() => {
+              const markerProp = {
+              id: item.id,
+              name: item.name,
+              street: item.street,
+              city: item.city
+              }
+              Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+              this.flatListRef.scrollToIndex({animated: true, index: index})
+              
+            }}
+            
+            >
+               
+            </MapView.Marker>
+          )
+
+        }else{
+          if(item.icon){
+          return (
+            <MapView.Marker
+            key= {index}
+            coordinate={{
+              latitude: item.latitude,
+              longitude: item.longitude
+            }}
+            //title={item.name}
+            image={{uri: item.icon}}
            // pinColor={'yellow'}
           //  onPress={() => {
           //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
@@ -303,42 +291,38 @@ constructor(props) {
               }}
             
             >
-              {/* <Callout onPress={() => {
-              const eventProp = {
+              
+            </MapView.Marker>
+          )}else{
+            return (
+              <MapView.Marker
+              key= {index}
+              coordinate={{
+                latitude: item.latitude,
+                longitude: item.longitude
+              }}
+              //title={item.name}
+              image={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
+             // pinColor={'yellow'}
+            //  onPress={() => {
+            //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
+            //    }}
+              onPress={() => {
+                const markerProp = {
                 id: item.id,
                 name: item.name,
-                street: item.street,
-                dist: item.dist.calculated
-              }
+                street: item.street
+                }
+                Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+                this.flatListRef.scrollToIndex({animated: true, index: index})
+                }}
               
-              Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
-              this.props.navigation.navigate("Pee", {
-                id: item.id,
-                item,
-                currentLat: this.state.region.latitude,
-                currentLon: this.state.region.longitude
-              })}}
-            
-            > */}
-            
-                {/* <View>
-                    <Card transparent style={{flexDirection: 'row'}}>
-                      <Left style={{paddingLeft: 10}}>
-            <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
-            </Left> 
-                      <CardItem style={{flexDirection: 'column'}}>
-                        <Right style={{flex:1, alignItems: 'flex-start'}}>
-                          <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
-                          <Text>{item.street}</Text>
-                          <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
-                          
-                        </Right>
-                      </CardItem>
-                    </Card>
-                    </View> 
-              </Callout> */}
-            </MapView.Marker>
-          );
+              >
+                
+              </MapView.Marker>
+            )
+
+          }
         }
     });
 
@@ -377,8 +361,8 @@ constructor(props) {
             ref={map => this.map = map}
             initialRegion={{latitude: this.props.location.latitude,
             longitude: this.props.location.longitude,
-            latitudeDelta: 0.5064,
-            longitudeDelta: 0.0636 }}//.1764,.1236
+            latitudeDelta: 0.1564,
+            longitudeDelta: 0.0636 }}//.1764,.1236,.0636,.5064
               style={{flex:1, marginTop:this.state.mapMargin}}
               provider="google"
               showsUserLocation={true}
@@ -396,7 +380,7 @@ constructor(props) {
           data={this.state.bathroom}
           horizontal
           style={styles.scrollView}
-          snapToInterval={CARD_WIDTH + 20}
+          snapToInterval={CARD_WIDTH}
           snapToAlignment="center"
           renderItem={this.renderItem.bind(this)}
           keyExtractor={(item, index) => item.id}
