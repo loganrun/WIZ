@@ -38,7 +38,7 @@
     "react-native-star-rating": "^1.1.0",
     "react-native-webview": "9.4.0",
     "react-navigation": "^3.0.9",
-    "react-redux": "6.0.1",
+    "react-redux": "^7.2.4",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "sentry-expo": "^2.1.2",

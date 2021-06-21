@@ -30,6 +30,7 @@ var tprating = require("../assets/TPratings_5Stars.png")
 //import * as Analytics from 'expo-firebase-analytics'
 import * as Amplitude from 'expo-analytics-amplitude'
 import axios from 'axios'
+import { Extrapolate } from "react-native-reanimated";
 //import { Callout } from "react-native-maps";
 //var bathIcon = require("../assets/waba_icon_location.png");
 //var restRoom= require("../assets/w_logo.png")
@@ -37,6 +38,9 @@ const { width, height } = Dimensions.get("window");
 const CARD_HEIGHT = 180;
 const CARD_WIDTH = width * 0.80;
 const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
+//let newAn = scrollX(new Animated.Value(0)).current;
+//console.log(scrollX)
+let mapIndex = 0
 
 
 
@@ -44,6 +48,8 @@ class BathMap extends Component {
 
 constructor(props) {
         super(props);
+        //this.index = 0;
+        //this.animation = new Animated.Value(0);
         this.state = {
             bathroom: [],
             region: {
@@ -61,42 +67,29 @@ constructor(props) {
             search: "",
             mapMargin:  1,
             newUser: false,
-            newSearch: false
+            newSearch: false,
+            selectedItem: null
             
           };
           this.flatListRef = null
+          //this.scrollX = React.createRef()
       }
-      
+  
 
    componentDidMount() {
+     
     
     this.loadBathroom();
     this.setState({ loading: true });
     this.useCheck();
+    //this.index = 0;
+    //this.animation = new Animated.Value(0);
     
     Amplitude.logEvent("MAP_OPENED")
   }
 
 
-  // initBathroom = async () => {
-  //   //let region = {...this.state.region}
-  //   //region.latitude = this.props.location.latitude
-  //   //this.setState({region})
-  //   //this.setState({region:{ ...this.state.region, longitude: this.props.location.longitude}})
-  //   //this.setState({region:{ ...this.state.region, latitude: this.props.location.latitude}})
-  //   //location = this.props.location
-  //   //this.setState({longitude: location.longitude})
-  //   //this.setState({latitude: location.latitude})
-  //   //this.loadBathroom()
-  //   //console.log(this.state.longitude)
-      
-      
-  
-    
-    
-  //   //this.loadBathroom()
-    
-  // };
+
 
   useCheck = async () =>{
   newUser = this.props.user
@@ -109,6 +102,9 @@ constructor(props) {
   }
 
   renderItem = ({ item }) => {
+
+    const distance = item.distance.toString().slice(0, 4)
+    
     return (
       <View>
         <TouchableOpacity 
@@ -118,11 +114,13 @@ constructor(props) {
             name: item.name,
             street: item.street,
             city: item.city,
+            distance: distance
           }
           Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
         this.props.navigation.navigate("Pee", {
           id: item.id,
           item,
+          distance: distance,
           currentLat: this.state.region.latitude,
           currentLon: this.state.region.longitude
         })}}
@@ -136,6 +134,7 @@ constructor(props) {
               <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
               <Text>{item.street}</Text>
               <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
+              <Text>Distance: {distance} miles</Text>
             </Right>
             </CardItem>
         </Card>
@@ -167,6 +166,7 @@ constructor(props) {
          let response1 = responses[0].data;
         let response2 = responses[1].data;
         let prelim = response1.concat(response2);
+        //console.log(prelim)
 
         return prelim
       })).catch(err =>{
@@ -185,11 +185,11 @@ constructor(props) {
     }
   };
     
-
   onRegionChangeComplete = async (region) =>{
     Amplitude.logEvent("MAP_MOVED")
     this.setState({region})
     this.setState({newSearch: true})
+    //this.loadBathroom()
   }
 
   newSearch = ()=>{
@@ -206,11 +206,56 @@ constructor(props) {
 
   }
 
-
   createMarkers= () => {
     const { navigate } = this.props.navigation;
+    //const markAnimation = scrollX(new Animated.Value(0)).current
+
+    //const scrolling = React.createRef(new Animated.Value(0)).current;
+    //console.log(scrolling)
+
+    // const inputRange = [
+    //        (index -1) * CARD_WIDTH,
+    //        index * CARD_WIDTH,
+    //        (index + 1) * CARD_WIDTH
+    //      ]
+    
+    // const interpolations = this.state.bathroom.map((marker, index)=>{
+    //   const inputRange = [
+    //     (index -1) * CARD_WIDTH,
+    //     index * CARD_WIDTH,
+    //     (index + 1) * CARD_WIDTH
+    //   ];
+    //   const scale = markAnimation.interpolate({
+    //     inputRange,
+    //     outputRange: [1, 2.5, 1],
+    //     Extrapolate: "clamp"
+    //   })
+    //   return {scale}
+    // })
+
+    
     
     return this.state.bathroom.map((item, index) => {
+      // const scaleStyle = {
+      //   transform:[
+      //     {
+      //       scale: interpolations[index].scale,
+      //     },
+      //   ]
+      // }
+
+      // const inputRange = [
+      //   (index -1) * CARD_WIDTH,
+      //   index * CARD_WIDTH,
+      //   (index + 1) * CARD_WIDTH
+      // ];
+      // const scale = scrollX.interpolate({
+      //   inputRange,
+      //   outputRange: [1, 2.5, 1],
+      //   Extrapolate: "clamp"
+      // })
+      
+
       
       
       if(Platform.OS === 'ios' && item.icon){
@@ -228,7 +273,8 @@ constructor(props) {
           id: item.id,
           name: item.name,
           street: item.street,
-          city: item.city
+          city: item.city,
+          distance: item.distance
           }
           Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
           this.flatListRef.scrollToIndex({animated: true, index: index})
@@ -253,7 +299,8 @@ constructor(props) {
               id: item.id,
               name: item.name,
               street: item.street,
-              city: item.city
+              city: item.city,
+              distance: item.distance
               }
               Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
               this.flatListRef.scrollToIndex({animated: true, index: index})
@@ -284,7 +331,9 @@ constructor(props) {
               const markerProp = {
               id: item.id,
               name: item.name,
-              street: item.street
+              street: item.street,
+              city: item.city,
+              distance: item.distance
               }
               Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
               this.flatListRef.scrollToIndex({animated: true, index: index})
@@ -302,7 +351,7 @@ constructor(props) {
                 longitude: item.longitude
               }}
               //title={item.name}
-              image={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
+              //image={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
              // pinColor={'yellow'}
             //  onPress={() => {
             //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
@@ -311,13 +360,23 @@ constructor(props) {
                 const markerProp = {
                 id: item.id,
                 name: item.name,
-                street: item.street
+                street: item.street,
+                city: item.city,
+                distance: item.distance
                 }
                 Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
                 this.flatListRef.scrollToIndex({animated: true, index: index})
                 }}
               
               >
+                <Animated.View>
+                  <Animated.Image
+                  style={[styles.marker, scaleStyle]}
+                  source={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
+                  resizeMode="cover"
+                  />
+
+                </Animated.View>
                 
               </MapView.Marker>
             )
@@ -329,6 +388,19 @@ constructor(props) {
   }
 
   render() {
+    // const interpolations = this.state.bathroom.map((marker, index)=>{
+    //   const inputRange = [
+    //     (index -1) * CARD_WIDTH,
+    //     index * CARD_WIDTH,
+    //     (index + 1) * CARD_WIDTH
+    //   ];
+    //   const scale = this.animation.interpolate({
+    //     inputRange,
+    //     outputRange: [1, 2.5, 1],
+    //     Extrapolate: "clamp"
+    //   })
+    //   return scale
+    // })
 
     if (this.state.newUser){
       return(
@@ -375,16 +447,33 @@ constructor(props) {
             </MapView>
             {this.newSearch()}
             <View>
-            <FlatList
+            <Animated.FlatList
           ref={(ref) => this.flatListRef = ref}
           data={this.state.bathroom}
           horizontal
+          pagingEnabled
+          scrollEnabled
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{justifyContent: "center"}}
+          scrollEventThrottle={16}
+          decelerationRate = "fast"
           style={styles.scrollView}
           snapToInterval={CARD_WIDTH}
           snapToAlignment="center"
+          // onScroll = {Animated.event([
+          //   {
+          //     nativeEvent: {
+          //       //x: this.animation}}
+          //       contentOffset: {
+          //         x: scrollX
+          //       }}}
+              
+          // ], {useNativeDriver: true})}
           renderItem={this.renderItem.bind(this)}
-          keyExtractor={(item, index) => item.id}
-          getItemLayout={this.getItemLayout.bind(this)} />
+          keyExtractor={(item, index) => `${item.id}`}
+          //extraData={this.state.bathroom}
+          getItemLayout={this.getItemLayout.bind(this)} /> 
+          
           </View>
             </View>
       </SafeAreaView>
@@ -519,7 +608,7 @@ const styles = StyleSheet.create({
       borderRadius: 3
   },
   textSign: {
-      fontSize: 15,
+      fontSize: 16,
       fontWeight: 'bold',
       color: '#173E81'
       
