@@ -53,7 +53,7 @@ class AuthLogin extends Component {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(value, actions) => {
-          Amplitude.logEvent("COMPLETE_LOGIN")
+          Amplitude.logEventAsync("COMPLETE_LOGIN")
           let email = value.email;
           let password = value.password;
           firebase

@@ -46,7 +46,7 @@ class AuthReset extends Component {
 
         }}
         onSubmit={(value, actions) => {
-          Amplitude.logEvent("BEGIN_RESET")
+          Amplitude.logEventAsync("BEGIN_RESET")
           let email = value.email;
           firebase
             .auth()

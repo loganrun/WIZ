@@ -30,7 +30,7 @@ class AuthLoadingScreen extends React.Component {
     
     firebase.auth().onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? "Main" : "Auth");
-      Amplitude.logEvent("APP_OPENED")
+      Amplitude.logEventAsync("APP_OPENED")
     });
   };
 

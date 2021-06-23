@@ -83,7 +83,7 @@ class AuthReg extends Component {
           phoneNum: ""
         }}
         onSubmit={(value, actions) => {
-          Amplitude.logEvent("FINISH_EMAIL_SIGNUP")
+          Amplitude.logEventAsync("FINISH_EMAIL_SIGNUP")
           let firstName = value.firstName;
           let lastName = value.lastName;
           let service = value.service;

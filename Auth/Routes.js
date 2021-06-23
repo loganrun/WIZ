@@ -460,7 +460,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Contact Us",
-          drawerIcon: <Ionicons name='ios-contact' size={30} color={"#3480CB"} />,
+          drawerIcon: <Ionicons name='phone-portrait' size={30} color={"#3480CB"} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}

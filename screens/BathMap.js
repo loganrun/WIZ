@@ -85,7 +85,7 @@ constructor(props) {
     //this.index = 0;
     //this.animation = new Animated.Value(0);
     
-    Amplitude.logEvent("MAP_OPENED")
+    Amplitude.logEventAsync("MAP_OPENED")
   }
 
 
@@ -116,7 +116,7 @@ constructor(props) {
             city: item.city,
             distance: distance
           }
-          Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
+          Amplitude.logEventWithPropertiesAsync("RESTAURANT_SELECT", eventProp)
         this.props.navigation.navigate("Pee", {
           id: item.id,
           item,
@@ -186,7 +186,7 @@ constructor(props) {
   };
     
   onRegionChangeComplete = async (region) =>{
-    Amplitude.logEvent("MAP_MOVED")
+    Amplitude.logEventAsync("MAP_MOVED")
     this.setState({region})
     this.setState({newSearch: true})
     //this.loadBathroom()
@@ -276,7 +276,7 @@ constructor(props) {
           city: item.city,
           distance: item.distance
           }
-          Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+          Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
           this.flatListRef.scrollToIndex({animated: true, index: index})
           
         }}
@@ -302,7 +302,7 @@ constructor(props) {
               city: item.city,
               distance: item.distance
               }
-              Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+              Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
               this.flatListRef.scrollToIndex({animated: true, index: index})
               
             }}
@@ -335,7 +335,7 @@ constructor(props) {
               city: item.city,
               distance: item.distance
               }
-              Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+              Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
               this.flatListRef.scrollToIndex({animated: true, index: index})
               }}
             
@@ -364,7 +364,7 @@ constructor(props) {
                 city: item.city,
                 distance: item.distance
                 }
-                Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+                Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
                 this.flatListRef.scrollToIndex({animated: true, index: index})
                 }}
               

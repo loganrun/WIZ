@@ -8,8 +8,9 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,ImageBackground,Image,
-  AsyncStorage, Alert
+  Alert
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {FirebaseRecaptchaVerifierModal} from 'expo-firebase-recaptcha'
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -42,7 +43,7 @@ export default Auth_Phone = () => {
 
   
     const sendVerification = async () => {
-      Amplitude.logEvent("SUBMIT_PHONE#")
+      Amplitude.logEventAsync("SUBMIT_PHONE#")
         try {
             const phoneProvider = new firebase.auth.PhoneAuthProvider();
             const verificationId = await phoneProvider.verifyPhoneNumber(
@@ -58,7 +59,7 @@ export default Auth_Phone = () => {
 
   
     const confirmCode = () => {
-      Amplitude.logEvent("COMPLETE_PHONE_SIGNUP")
+      Amplitude.logEventAsync("COMPLETE_PHONE_SIGNUP")
       const credential = firebase.auth.PhoneAuthProvider.credential(
         verificationId,
         code
@@ -83,7 +84,7 @@ export default Auth_Phone = () => {
               phoneNum: logger.user.phoneNumber
             }
           });
-          Amplitude.setUserId(user)
+          Amplitude.getInstance().setUserId(user)
         });
     };
   

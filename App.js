@@ -49,7 +49,7 @@ class App extends React.Component {
   async componentDidMount() {
     //this.setState({ isLoading: "true" });
     //this._getLocationAsync();
-    Amplitude.initialize('f463257f8d5dd8a6670eeae43c08a54a')
+    Amplitude.initializeAsync('f463257f8d5dd8a6670eeae43c08a54a')
     try{
       
       await SplashScreen.preventAutoHideAsync();
