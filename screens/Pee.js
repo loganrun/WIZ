@@ -35,6 +35,7 @@ import { SafeAreaView } from 'react-navigation'
 //let bathicon = require('../assets/bath3.png')
 import Ad from "../components/Ads";
 import Ratings from "../components/Rating"
+import Checkin from "../components/Checkin"
 //var vid = require("../assets/donut.mp4")
 
 //const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -132,7 +133,7 @@ class Pee extends Component {
               zIndex: 1
             }}
           >
-            <ContentArea item={item} sourceLat={curLat} sourceLon={curLon} />
+            <Checkin item={item} sourceLat={curLat} sourceLon={curLon} />
           </Animated.View>
         </ScrollView>
       </View>

@@ -1,3 +1,3 @@
 export { initialLocation } from "./location";
 export { loadBathrooms } from "./bathrooms";
-export {newUser} from './user';
+export {newUser, storeProfileName} from './user';
