@@ -51,8 +51,136 @@ class Pee extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      showProfileInput: false,
+      reviewModal: false,
+      rating: 3,
+      reviewContent: '',
+    }
     // this.handleDirections = this.handleDirections.bind(this);
   }
+
+  storeCheckedIn = async () => {
+    try {
+      const uID = await this.getUserId();
+      const response = await restApi.post('/api/users/checkin', {
+        userId: uID,
+      });
+      if (response.data) {
+        Toast.show(response.data, {
+          duration: Toast.durations.LONG,
+        });
+      }
+    } catch (e) {
+      console.log(e.response);
+      // console.log(e.response);
+    }
+  }
+
+  leaveReview = async() => {
+    const { profileName } = this.props;
+    if (profileName === '') {
+      Toast.show('Your profile name is empty, Please click Check In', {
+        duration: Toast.durations.LONG,
+      });
+    } else {
+      this.setState({
+        reviewModal: true,
+      })
+    }
+  }
+
+  saveReview = async() => {
+    const { navigation } = this.props;
+    const bathroomId = navigation.getParam('item')['_id'];
+    const userId = await this.getUserId();
+    const { rating } = this.state;
+    const review = this.state.reviewContent;
+    console.log(bathroomId);
+    try {
+      const response = await restApi.post('/api/bathReview', {
+        bathroomId, userId, rating, review,
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (response.data) {
+        Toast.show(response.data, {
+          duration: Toast.durations.LONG,
+        });
+      }
+    } catch (e) {
+      Toast.show(e.response.data.errors[0].msg, {
+        duration: Toast.durations.LONG,
+      });
+    }
+    this.setState({
+      reviewModal: false,
+    });
+  }
+
+  doCheckIn = async () => {
+    const { profileName } = this.props;
+    if (profileName === '') {
+      const uID = await this.getUserId();
+      try {
+        const response = await restApi.get('/api/users', {
+          params: {
+            userId: uID
+          }
+        });
+        if (response.data) {
+          this.props.saveProfileName(response.data);
+          this.setState({
+            showProfileInput: false
+          });
+          this.storeCheckedIn();
+        } else {
+          this.setState({
+            showProfileInput: true
+          });
+        }
+      } catch (e) {
+        // console.log(e.response);
+        this.setState({
+          showProfileInput: true
+        });
+      }
+    } else {
+      this.storeCheckedIn();
+    }
+  }
+
+  getUserId = async () => {
+    return await AsyncStorage.getItem("userToken");
+  }
+
+  submitProfileName = async (pname) => {
+    const { navigation } = this.props;
+    const uID = await this.getUserId();
+    try {
+      const response = await restApi.patch(`/api/users/${uID}`, {
+        userName: pname,
+      });
+      this.props.saveProfileName(response.data);
+      this.setState({
+        showProfileInput: false,
+      });
+      this.doCheckIn();
+    } catch (e) {
+      if (e.response.data.errors) {
+        this.setState({
+          showProfileInput: false,
+        });
+        Toast.show(e.response.data.errors[0].msg, {
+          duration: Toast.durations.LONG,
+        });
+      }
+    }
+  }
+
+
 
   static navigationOptions = {
     title: "DETAILS",

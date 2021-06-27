@@ -105,6 +105,46 @@ constructor(props) {
 
     const distance = item.distance.toString().slice(0, 4)
     
+    if(item.icon){
+      return (
+        <View>
+          <TouchableOpacity 
+          onPress={() => {
+            const eventProp = {
+              id: item.id,
+              name: item.name,
+              street: item.street,
+              city: item.city,
+              distance: distance
+            }
+            Amplitude.logEventWithPropertiesAsync("RESTAURANT_SELECT", eventProp)
+          this.props.navigation.navigate("Pee", {
+            id: item.id,
+            item,
+            distance: distance,
+            currentLat: this.state.region.latitude,
+            currentLon: this.state.region.longitude
+          })}}
+          >
+          <Card style={styles.card}>
+            <Left style={{paddingLeft: 10}}>
+              <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
+            </Left> 
+              <CardItem style={{flexDirection: 'column'}}>
+              <Right style={{flex:1, alignItems: 'flex-start'}}>
+                <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
+                <Text>{item.street}</Text>
+                <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
+                <Text>Distance: {distance} miles</Text>
+              </Right>
+              </CardItem>
+          </Card>
+          </TouchableOpacity>
+        </View>
+    )
+
+    }else{
+    
     return (
       <View>
         <TouchableOpacity 
@@ -141,6 +181,7 @@ constructor(props) {
         </TouchableOpacity>
       </View>
   )
+      }
   }
 
   getItemLayout(data, index){
