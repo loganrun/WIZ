@@ -9,7 +9,7 @@ import {
 import Explore from "../screens/Explore";
 import Places from "../screens/Places";
 import Favorites from "../screens/Favorites";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 //import Home from "../screens/Home";
 import Login from "../Auth/Auth_Login";
 //import ResSign from "../screens/ResSign";
@@ -24,6 +24,9 @@ import Contact from "../screens/ContactUs"
 import Logo from "../components/Logo"
 import Logo2 from "../components/Logo2"
 import Logo3 from "../components/Logo3"
+import Invite from "../screens/invite"
+import Problem from "../screens/Problem"
+
 
 
 const Width = Dimensions.get("window").width;
@@ -136,6 +139,60 @@ const ContactStackNavigator = createStackNavigator({
           />
         ),
         title: "Contact Us",
+        headerStyle: {
+          backgroundColor: "#3480CB",//"#52AEA0",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+      };
+    }
+  },
+});
+const InviteStackNavigator = createStackNavigator({
+  Invite: {
+    screen: Invite,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name='md-menu'
+            size={30}
+            color={"#fff"}
+          />
+        ),
+        title: "Invite a Friend",
+        headerStyle: {
+          backgroundColor: "#3480CB",//"#52AEA0",
+          elevation: 0
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+      };
+    }
+  },
+});
+const ProblemStackNavigator = createStackNavigator({
+  Problem: {
+    screen: Problem,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerLeft: (
+          <Ionicons
+            style={{ padding: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name='md-menu'
+            size={30}
+            color={"#fff"}
+          />
+        ),
+        title: "Report a Problem",
         headerStyle: {
           backgroundColor: "#3480CB",//"#52AEA0",
           elevation: 0
@@ -282,7 +339,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Home",
-          drawerIcon: <Ionicons name='ios-home' size={30} color='#d2b48c' />,
+          drawerIcon: <Ionicons name='ios-home' size={30} color= "#3480CB" />,
           title: "Login",
           headerStyle: {
             backgroundColor: "#3480CB",//"#52AEA0",
@@ -301,7 +358,7 @@ const AppDrawerNavigator = createDrawerNavigator(
         return {
           drawerLabel: "Add Restroom",
           drawerIcon: (
-            <Ionicons name='ios-business' size={30} color='#d2b48c' />
+            <Ionicons name='ios-business' size={30} color="#3480CB" />
           ),
           title: "Add Restroom",
           headerStyle: {
@@ -376,7 +433,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Favorites",
-          drawerIcon: <Ionicons name='ios-heart' size={30} color={"#d2b48c"} />,
+          drawerIcon: <Ionicons name='ios-heart' size={30} color={"#3480CB"} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
@@ -403,7 +460,7 @@ const AppDrawerNavigator = createDrawerNavigator(
       navigationOptions: ({ navigation }) => {
         return {
           drawerLabel: "Contact Us",
-          drawerIcon: <Ionicons name='ios-contact' size={30} color={"#d2b48c"} />,
+          drawerIcon: <Ionicons name='phone-portrait' size={30} color={"#3480CB"} />,
           headerLeft: (
             <Ionicons
               style={{ padding: 10 }}
@@ -414,6 +471,60 @@ const AppDrawerNavigator = createDrawerNavigator(
             />
           ),
           title: "Contact Us",
+          headerStyle: {
+            backgroundColor: "#3480CB",//"#52AEA0",
+            elevation: 0
+          },
+          headerTintColor: "#d2b48c",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
+        };
+      }
+    },
+    Invite: {
+      screen: InviteStackNavigator,
+      navigationOptions: ({ navigation }) => {
+        return {
+          drawerLabel: "Invite a Friend",
+          drawerIcon: <Ionicons name='md-share' size={30} color={"#3480CB"} />,
+          headerLeft: (
+            <Ionicons
+              style={{ padding: 10 }}
+              onPress={() => navigation.openDrawer()}
+              name='md-menu'
+              size={30}
+              color={"#fff"}
+            />
+          ),
+          title: "Invite a Friend",
+          headerStyle: {
+            backgroundColor: "#3480CB",//"#52AEA0",
+            elevation: 0
+          },
+          headerTintColor: "#d2b48c",
+          headerTitleStyle: {
+            fontWeight: "bold"
+          }
+        };
+      }
+    },
+    Problem: {
+      screen: ProblemStackNavigator,
+      navigationOptions: ({ navigation }) => {
+        return {
+          drawerLabel: "Report A Problem",
+          drawerIcon: <MaterialIcons name="report-problem" size={24} color={"#3480cb"} />,
+          headerLeft: (
+            <Ionicons
+              style={{ padding: 10 }}
+              onPress={() => navigation.openDrawer()}
+              name='md-menu'
+              size={30}
+              color={"#fff"}
+            />
+          ),
+          title: "Invite a Friend",
           headerStyle: {
             backgroundColor: "#3480CB",//"#52AEA0",
             elevation: 0

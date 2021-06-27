@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import {
   View,
   Text,
-  StyleSheet,
+  StyleSheet,Share,Button,
+  TextInput,
+  ActivityIndicator,
   TouchableOpacity,
-  Platform,
-  Linking
+  KeyboardAvoidingView,
+  Switch
 } from "react-native";
 import { SafeAreaView } from 'react-navigation';
-//import { Formik } from "formik";
-//import * as yup from "yup";
-import * as MailComposer from "expo-mail-composer"
 
-class ContactUs extends Component {
+class Invite extends Component {
   static navigationOptions = {
     title: "Add Bathroom",
     headerStyle: {
@@ -27,56 +26,38 @@ class ContactUs extends Component {
   };
 
   render() {
-    const onContact = async ()=>{
-      MailComposer.composeAsync({
-          recipients: ["Tech@TheWhizzApp.com"],
-          subject: "Feedback About Your App",
-          body: " ",
-          isHtml: false,
-        });
-    }
-
-    const iosContact = async ()=>{
-      Linking.openURL('mailto:Tech@thewhizzapp.com')
-    }
-  if (Platform.OS === "ios"){
-  return (
-    <SafeAreaView style={styles.container}>
-    <View style={styles.btn1}>
-    <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you have any questions, concerns, suggestions or just want to say "Hi", hit the button and drop us a line!  Thank You!</Text>
-
-    </View>
-  
-    <View style={styles.btn2}>
-          <TouchableOpacity
-          style={styles.fabBtn}
-          onPress={() => iosContact()}    
-          >
-              <Text style={styles.txt3}>CONTACT US</Text>   
-              
-            </TouchableOpacity> 
-      </View>
-      
-      
+    const onShare = async () => {
+        try {
+          const result = await Share.share({
+            message: 'You should definitely checkout the Whizz App @ www.TheWhizzApp.com ',
+          });
+          if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+            //shared with activity type of result.activityType
+            } else {
+              // shared
+            }
+          } else if (result.action === Share.dismissedAction) {
+            // dismissed
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      };
     
-    </SafeAreaView>
-    
-    
-  );
-  } else {
     return (
       <SafeAreaView style={styles.container}>
       <View style={styles.btn1}>
-      <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>If you have any questions, concerns, suggestions or just want to say "Hi", hit the button and drop us a line.  We'd love to hear from you! Thank You!</Text>
+      <Text style={{fontSize: 20, fontWeight: "bold", marginLeft: 20, marginRight: 20}}>This app was created by Drivers for Drivers.  Spread The Word!!!</Text>
 
       </View>
     
       <View style={styles.btn2}>
             <TouchableOpacity
             style={styles.fabBtn}
-            onPress={() => onContact()}    
+            onPress={() => onShare()}    
             >
-                <Text style={styles.txt3}>CONTACT US</Text>   
+                <Text style={styles.txt3}>INVITE A FRIEND </Text>   
                 
               </TouchableOpacity> 
         </View>
@@ -88,14 +69,13 @@ class ContactUs extends Component {
       
     );
   }
-  }
 }
-export default ContactUs;
+export default Invite;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignSelf: "center",
+    //alignSelf: "center",
     //justifyContent: "center"
   },
   text: {
@@ -123,15 +103,22 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#3a455c",
     marginTop: 30,
-    marginLeft: 40,
+    marginLeft: 50,
     marginRight: 40
   },
   switch: {
     marginTop: 20
   },
-  info:{
-    marginTop: "40%"
-
+  txt3: {
+    justifyContent: "center",
+    textAlign: "center",
+    position: "relative",
+  
+    fontSize: 24,
+    color: "#FFF",
+    //fontWeight: "bold",
+    //marginRight: 10,
+  
   },
   fabBtn: {
     flexDirection: "row",
@@ -164,15 +151,4 @@ const styles = StyleSheet.create({
     marginTop:"30%",
     //marginBottom: 20
   },
-  txt3: {
-    justifyContent: "center",
-    textAlign: "center",
-    position: "relative",
-  
-    fontSize: 24,
-    color: "#FFF",
-    //fontWeight: "bold",
-    //marginRight: 10,
-  
-  }
 });

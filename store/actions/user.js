@@ -1,6 +1,7 @@
 import { NEW_USER, NEW_USER_ERROR } from "./types";
 
 export const newUser = user => dispatch => {
+  console.log(user)
   dispatch({
     type: NEW_USER,
     payload: user

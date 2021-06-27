@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, AsyncStorage, Alert} from "react-native";
+import { StyleSheet, Text, View, Alert} from "react-native";
 import Main from './Auth/Main'
 //import { SplashScreen, AppLoading } from "expo";
 import * as Permissions from 'expo-permissions';
@@ -14,6 +14,7 @@ import {Provider} from 'react-redux';
 import * as SplashScreen from 'expo-splash-screen'
 import * as Sentry from 'sentry-expo'
 import * as Amplitude from 'expo-analytics-amplitude'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCfx94bwaO-VnQosXn4aUIi_DKUCdAcdEA",
@@ -48,7 +49,7 @@ class App extends React.Component {
   async componentDidMount() {
     //this.setState({ isLoading: "true" });
     //this._getLocationAsync();
-    Amplitude.initialize('f463257f8d5dd8a6670eeae43c08a54a')
+    Amplitude.initializeAsync('f463257f8d5dd8a6670eeae43c08a54a')
     try{
       
       await SplashScreen.preventAutoHideAsync();

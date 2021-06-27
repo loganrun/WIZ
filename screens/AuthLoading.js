@@ -1,13 +1,13 @@
 import React from "react";
 import {
   ActivityIndicator,
-  AsyncStorage,
   StatusBar,
   StyleSheet,
   View
 } from "react-native";
 import firebase from "firebase";
 import {connect} from "react-redux"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import {initialLocation} from '../store/actions'
 import * as Amplitude from 'expo-analytics-amplitude'
 
@@ -23,13 +23,14 @@ class AuthLoadingScreen extends React.Component {
   _bootstrapAsync = async () => {
     
     let location = await this.getLocation();
+    //console.log(location)
     this.props.initLocation(location)
     //this.props.navigation.navigate("Main");
 
     
     firebase.auth().onAuthStateChanged(user => {
       this.props.navigation.navigate(user ? "Main" : "Auth");
-      Amplitude.logEvent("APP_OPENED")
+      Amplitude.logEventAsync("APP_OPENED")
     });
   };
 

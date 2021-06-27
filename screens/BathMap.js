@@ -3,7 +3,7 @@ import {
   View,
   Platform,
   Text,
-  Image,ActivityIndicator
+  Image,ActivityIndicator, ScrollView, StyleSheet,Dimensions, TouchableOpacity, Animated, FlatList
 } from "react-native";
  import {
    Left,
@@ -21,6 +21,7 @@ import MapView,{Callout} from 'react-native-maps';
 import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
+import refugeeApi from '../services/refugee'
 import {connect} from "react-redux"
 import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
@@ -28,9 +29,18 @@ import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
 //import * as Analytics from 'expo-firebase-analytics'
 import * as Amplitude from 'expo-analytics-amplitude'
+import axios from 'axios'
+import { Extrapolate } from "react-native-reanimated";
 //import { Callout } from "react-native-maps";
 //var bathIcon = require("../assets/waba_icon_location.png");
 //var restRoom= require("../assets/w_logo.png")
+const { width, height } = Dimensions.get("window");
+const CARD_HEIGHT = 180;
+const CARD_WIDTH = width * 0.80;
+const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
+//let newAn = scrollX(new Animated.Value(0)).current;
+//console.log(scrollX)
+let mapIndex = 0
 
 
 
@@ -38,106 +48,265 @@ class BathMap extends Component {
 
 constructor(props) {
         super(props);
+        //this.index = 0;
+        //this.animation = new Animated.Value(0);
         this.state = {
             bathroom: [],
             region: {
-              longitude: -118.39,
-              latitude: 34.022,
+              longitude: this.props.location.longitude,
+              latitude: this.props.location.latitude,
               latitudeDelta: 0.072,//{0.022},
               longitudeDelta: 0.070,//{0.021}
             },
+            longitude: "",
+            latitude: null,
             loading: false,
             lat: null,
             lon: null,
             errorMessage: null,
             search: "",
             mapMargin:  1,
-            newUser: false
+            newUser: false,
+            newSearch: false,
+            selectedItem: null
             
           };
+          this.flatListRef = null
+          //this.scrollX = React.createRef()
       }
-      
+  
 
    componentDidMount() {
-    //this.initBathroom();
-    //this.setState({ loading: true });
-    this.useCheck()
-    Amplitude.logEvent("MAP_OPENED")
+     
+    
+    this.loadBathroom();
+    this.setState({ loading: true });
+    this.useCheck();
+    //this.index = 0;
+    //this.animation = new Animated.Value(0);
+    
+    Amplitude.logEventAsync("MAP_OPENED")
   }
+
+
+
 
   useCheck = async () =>{
   newUser = this.props.user
-  await this.setState({ newUser: newUser })
+  this.setState({ newUser: newUser })
   
   }
-  // onDoneAllSlides = () => {
-  //   this.setState({ newUser: false });
-  // };
-  // onSkipSlides = () => {
-  //   this.setState({ newUsher: false });
-  // };
+  
   setMargin=()=>{
     this.setState({mapMargin: 0});
   }
 
-  _renderItem = ({ item }) => {
+  renderItem = ({ item }) => {
+
+    const distance = item.distance.toString().slice(0, 4)
+    if(item.icon){
+      return (
+        <View>
+          <TouchableOpacity 
+          onPress={() => {
+            const eventProp = {
+              id: item.id,
+              name: item.name,
+              street: item.street,
+              city: item.city,
+              distance: distance
+            }
+            Amplitude.logEventWithPropertiesAsync("RESTAURANT_SELECT", eventProp)
+          this.props.navigation.navigate("Pee", {
+            id: item.id,
+            item,
+            distance: distance,
+            currentLat: this.state.region.latitude,
+            currentLon: this.state.region.longitude
+          })}}
+          >
+          <Card style={styles.card}>
+            <Left style={{paddingLeft: 10}}>
+              <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
+            </Left> 
+              <CardItem style={{flexDirection: 'column'}}>
+              <Right style={{flex:1, alignItems: 'flex-start'}}>
+                <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
+                <Text>{item.street}</Text>
+                <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
+                <Text>Distance: {distance} miles</Text>
+              </Right>
+              </CardItem>
+          </Card>
+          </TouchableOpacity>
+        </View>
+    )
+
+    }else{
+    
     return (
-      <View style={styles.slide}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.text}>{item.text}</Text>
+      <View>
+        <TouchableOpacity 
+        onPress={() => {
+          const eventProp = {
+            id: item.id,
+            name: item.name,
+            street: item.street,
+            city: item.city,
+            distance: distance
+          }
+          Amplitude.logEventWithPropertiesAsync("RESTAURANT_SELECT", eventProp)
+        this.props.navigation.navigate("Pee", {
+          id: item.id,
+          item,
+          distance: distance,
+          currentLat: this.state.region.latitude,
+          currentLon: this.state.region.longitude
+        })}}
+        >
+        <Card style={styles.card}>
+          <Left style={{paddingLeft: 10}}>
+            <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
+          </Left> 
+            <CardItem style={{flexDirection: 'column'}}>
+            <Right style={{flex:1, alignItems: 'flex-start'}}>
+              <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
+              <Text>{item.street}</Text>
+              <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
+              <Text>Distance: {distance} miles</Text>
+            </Right>
+            </CardItem>
+        </Card>
+        </TouchableOpacity>
       </View>
-    );
+  )
+      }
+  }
+
+  getItemLayout(data, index){
+    return { length: styles.card.width, offset: styles.card.width * index, index}
   }
 
   loadBathroom = async () => {
-    //let lat = this.state.lat;
-    //let lon = this.state.lon;
+    
     try{
 
     
       let params = {
-        //page: 1,
-        //per_page: 40,
         lat: this.state.region.latitude,
         lng: this.state.region.longitude
       };
+      
 
-      let response = await restApi.get('/api/bathrooms',{ params });
-    
+      const results = await axios.all([
+        refugeeApi.get('/v1/restrooms/by_location',{params}),
+        restApi.get('/api/bathrooms',{ params })
         
-      let bathroom = response.data;
-      //console.log(bathroom)
+      ]).then(axios.spread((...responses) =>{
+         let response1 = responses[0].data;
+        let response2 = responses[1].data;
+        let prelim = response1.concat(response2);
+        //console.log(prelim)
+
+        return prelim
+      })).catch(err =>{
+        console.log("error", err.message);
+      })
+
+       const  bathroom = await results.map(result =>
+         result
+        
+      )
       this.setState({ bathroom: bathroom });
      
-      await this.setState({ loading: false });
+      this.setState({ loading: false });
     } catch (e) {
       console.log("error", e.message);
     }
   };
     
-  
-
   onRegionChangeComplete = async (region) =>{
-    Amplitude.logEvent("MAP_MOVED")
-    await this.setState({region})
-    this.loadBathroom()
+    Amplitude.logEventAsync("MAP_MOVED")
+    this.setState({region})
+    this.setState({newSearch: true})
+    //this.loadBathroom()
+  }
+
+  newSearch = ()=>{
+    if(this.state.newSearch)
+    return (
+      <View style={styles.chipsItem}>
+          <TouchableOpacity onPress={()=>{
+            this.loadBathroom()
+          }}>
+          <Text style={styles.textSign}>Search this area</Text>
+          </TouchableOpacity>
+      </View> 
+    )
+
   }
 
   createMarkers= () => {
     const { navigate } = this.props.navigation;
+    //const markAnimation = scrollX(new Animated.Value(0)).current
 
-    return this.state.bathroom.map((item, i) => {
-      //const rating = Math.floor(Math.random() * Math.floor(5))
+    //const scrolling = React.createRef(new Animated.Value(0)).current;
+    //console.log(scrolling)
+
+    // const inputRange = [
+    //        (index -1) * CARD_WIDTH,
+    //        index * CARD_WIDTH,
+    //        (index + 1) * CARD_WIDTH
+    //      ]
+    
+    // const interpolations = this.state.bathroom.map((marker, index)=>{
+    //   const inputRange = [
+    //     (index -1) * CARD_WIDTH,
+    //     index * CARD_WIDTH,
+    //     (index + 1) * CARD_WIDTH
+    //   ];
+    //   const scale = markAnimation.interpolate({
+    //     inputRange,
+    //     outputRange: [1, 2.5, 1],
+    //     Extrapolate: "clamp"
+    //   })
+    //   return {scale}
+    // })
+
+    
+    
+    return this.state.bathroom.map((item, index) => {
+      // const scaleStyle = {
+      //   transform:[
+      //     {
+      //       scale: interpolations[index].scale,
+      //     },
+      //   ]
+      // }
+
+      // const inputRange = [
+      //   (index -1) * CARD_WIDTH,
+      //   index * CARD_WIDTH,
+      //   (index + 1) * CARD_WIDTH
+      // ];
+      // const scale = scrollX.interpolate({
+      //   inputRange,
+      //   outputRange: [1, 2.5, 1],
+      //   Extrapolate: "clamp"
+      // })
       
-      if(Platform.OS === 'ios'){
+
+      
+      
+      if(Platform.OS === 'ios' && item.icon){
       return (
         <MapView.Marker
-        key= {item.id}
+        key= {index}
         coordinate={{
           latitude: item.latitude,
           longitude: item.longitude
         }}
-        title={item.name}
+        //title={item.name}
         image={{uri: item.icon}}
         onPress={() => {
           const markerProp = {
@@ -145,117 +314,134 @@ constructor(props) {
           name: item.name,
           street: item.street,
           city: item.city,
-          dist: item.dist.calculated,
-
+          distance: item.distance
           }
-          Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+          Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
+          this.flatListRef.scrollToIndex({animated: true, index: index})
           
         }}
         
         >
-          <Callout onPress={() => {
-            const eventProp = {
-              id: item.id,
-              name: item.name,
-              street: item.street,
-              city: item.city,
-              dist: item.dist.calculated
-            }
-            Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
-          this.props.navigation.navigate("Pee", {
-            id: item.id,
-            item,
-            currentLat: this.state.region.latitude,
-            currentLon: this.state.region.longitude
-          })}}
-        
-        >
-        
-            <View>
-                <Card transparent style={{flexDirection: 'row'}}>
-                  <Left style={{paddingLeft: 10}}>
-        <Text style={{width: 50, height: 80, marginTop: 15}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 50}}/></Text>                  
-        </Left> 
-                  <CardItem style={{flexDirection: 'column'}}>
-                    <Right style={{flex:1, alignItems: 'flex-start'}}>
-                      <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
-                      <Text>{item.street}</Text>
-                      
-                <Text style={{width: 110, height: 25, marginTop: 5}}><Image resizeMode={'cover'} source={tprating}style={{width:110, height: 23}}/></Text>
-                    </Right>
-                  </CardItem>
-                </Card>
-                </View>
-          </Callout>
         </MapView.Marker>
-      );
-        }else{
+      ) ;
+        }if(!item.icon){
           return (
             <MapView.Marker
-            key= {item.id}
+            key= {index}
             coordinate={{
               latitude: item.latitude,
               longitude: item.longitude
             }}
-            title={item.name}
-            image={{uri: item.icon}}
-           // pinColor={'yellow'}
+            //title={item.name}
+            image={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
             onPress={() => {
               const markerProp = {
               id: item.id,
               name: item.name,
               street: item.street,
-              dist: item.dist.calculated,
-
+              city: item.city,
+              distance: item.distance
               }
-              Amplitude.logEventWithProperties("MARKER_SELECT", markerProp)
+              Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
+              this.flatListRef.scrollToIndex({animated: true, index: index})
+              
+            }}
+            
+            >
+               
+            </MapView.Marker>
+          )
+
+        }else{
+          if(item.icon){
+          return (
+            <MapView.Marker
+            key= {index}
+            coordinate={{
+              latitude: item.latitude,
+              longitude: item.longitude
+            }}
+            //title={item.name}
+            image={{uri: item.icon}}
+           // pinColor={'yellow'}
+          //  onPress={() => {
+          //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
+          //    }}
+            onPress={() => {
+              const markerProp = {
+              id: item.id,
+              name: item.name,
+              street: item.street,
+              city: item.city,
+              distance: item.distance
+              }
+              Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
+              this.flatListRef.scrollToIndex({animated: true, index: index})
               }}
             
             >
-              <Callout onPress={() => {
-              const eventProp = {
+              
+            </MapView.Marker>
+          )}else{
+            return (
+              <MapView.Marker
+              key= {index}
+              coordinate={{
+                latitude: item.latitude,
+                longitude: item.longitude
+              }}
+              //title={item.name}
+              //image={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
+             // pinColor={'yellow'}
+            //  onPress={() => {
+            //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
+            //    }}
+              onPress={() => {
+                const markerProp = {
                 id: item.id,
                 name: item.name,
                 street: item.street,
-                dist: item.dist.calculated
-              }
+                city: item.city,
+                distance: item.distance
+                }
+                Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
+                this.flatListRef.scrollToIndex({animated: true, index: index})
+                }}
               
-              Amplitude.logEventWithProperties("RESTAURANT_SELECT", eventProp)
-              this.props.navigation.navigate("Pee", {
-                id: item.id,
-                item,
-                currentLat: this.state.region.latitude,
-                currentLon: this.state.region.longitude
-              })}}
-            
-            >
-            
-                <View>
-                    <Card transparent style={{flexDirection: 'row'}}>
-                      <Left style={{paddingLeft: 10}}>
-            <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
-            </Left> 
-                      <CardItem style={{flexDirection: 'column'}}>
-                        <Right style={{flex:1, alignItems: 'flex-start'}}>
-                          <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
-                          <Text>{item.street}</Text>
-                          <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
-                          
-                        </Right>
-                      </CardItem>
-                    </Card>
-                    </View>
-              </Callout>
-            </MapView.Marker>
-          );
+              >
+                <Animated.View>
+                  <Animated.Image
+                  style={[styles.marker, scaleStyle]}
+                  source={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
+                  resizeMode="cover"
+                  />
+
+                </Animated.View>
+                
+              </MapView.Marker>
+            )
+
+          }
         }
     });
 
   }
 
   render() {
-   
-    
+    // const interpolations = this.state.bathroom.map((marker, index)=>{
+    //   const inputRange = [
+    //     (index -1) * CARD_WIDTH,
+    //     index * CARD_WIDTH,
+    //     (index + 1) * CARD_WIDTH
+    //   ];
+    //   const scale = this.animation.interpolate({
+    //     inputRange,
+    //     outputRange: [1, 2.5, 1],
+    //     Extrapolate: "clamp"
+    //   })
+    //   return scale
+    // })
+
     if (this.state.newUser){
       return(
 
@@ -284,10 +470,11 @@ constructor(props) {
       <SafeAreaView style={styles.container}>
             <View style={styles.container}>
             <MapView
+            ref={map => this.map = map}
             initialRegion={{latitude: this.props.location.latitude,
             longitude: this.props.location.longitude,
-            latitudeDelta: 0.5064,
-            longitudeDelta: 0.0636 }}//.1764,.1236
+            latitudeDelta: 0.1564,
+            longitudeDelta: 0.0636 }}//.1764,.1236,.0636,.5064
               style={{flex:1, marginTop:this.state.mapMargin}}
               provider="google"
               showsUserLocation={true}
@@ -298,6 +485,36 @@ constructor(props) {
             >
               {this.createMarkers()}
             </MapView>
+            {this.newSearch()}
+            <View>
+            <Animated.FlatList
+          ref={(ref) => this.flatListRef = ref}
+          data={this.state.bathroom}
+          horizontal
+          pagingEnabled
+          scrollEnabled
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{justifyContent: "center"}}
+          scrollEventThrottle={16}
+          decelerationRate = "fast"
+          style={styles.scrollView}
+          snapToInterval={CARD_WIDTH}
+          snapToAlignment="center"
+          // onScroll = {Animated.event([
+          //   {
+          //     nativeEvent: {
+          //       //x: this.animation}}
+          //       contentOffset: {
+          //         x: scrollX
+          //       }}}
+              
+          // ], {useNativeDriver: true})}
+          renderItem={this.renderItem.bind(this)}
+          keyExtractor={(item, index) => `${item.id}`}
+          //extraData={this.state.bathroom}
+          getItemLayout={this.getItemLayout.bind(this)} /> 
+          
+          </View>
             </View>
       </SafeAreaView>
           
@@ -305,19 +522,6 @@ constructor(props) {
   }
 }
 
-const styles = {
-  container: {
-    flex: 1,
-    //width,
-    //height
-  },
-  tool:{
-    width: 250,
-    height: 75,
-    backgroundColor: '#fff',
-    borderRadius: 10
-  }
-};
 
 const mapStateToProps= state =>{
 return{
@@ -325,7 +529,131 @@ return{
   user: state.user.newUser.payload
 }
 }
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  tool:{
+    width: 250,
+    height: 75,
+    backgroundColor: '#fff',
+    borderRadius: 10
+  },
+  searchBox: {
+    position:'absolute', 
+    marginTop: Platform.OS === 'ios' ? 40 : 20, 
+    flexDirection:"row",
+    backgroundColor: '#fff',
+    width: '90%',
+    alignSelf:'center',
+    borderRadius: 5,
+    padding: 10,
+    shadowColor: '#ccc',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10,
+  },
+  chipsScrollView: {
+    position:'absolute', 
+    top:Platform.OS === 'ios' ? 90 : 80, 
+    paddingHorizontal:10
+  },
+  chipsIcon: {
+    marginRight: 5,
+  },
+  chipsItem: {
+    position:'absolute', 
+    top:Platform.OS === 'ios' ? 90 : 30, 
+    paddingHorizontal:10,
+    flexDirection:"row",
+    alignSelf:'center',
+    backgroundColor:'#fff', 
+    borderRadius:20,
+    padding:8,
+    paddingHorizontal:20, 
+    marginHorizontal:10,
+    height:35,
+    shadowColor: '#ccc',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10
+    
+  },
+  scrollView: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: 10,
+  },
+  endPadding: {
+    paddingRight: width - CARD_WIDTH,
+  },
+  card: {
+    // padding: 10,
+    flexDirection: "row",
+    elevation: 2,
+    backgroundColor: "#FFF",
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    marginHorizontal: 10,
+    shadowColor: "#000",
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x: 2, y: -2 },
+    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
+    overflow: "hidden",
+  },
+  cardImage: {
+    flex: 3,
+    width: "100%",
+    height: "100%",
+    alignSelf: "center",
+  },
+  textContent: {
+    flex: 2,
+    padding: 10,
+  },
+  cardtitle: {
+    fontSize: 12,
+    // marginTop: 5,
+    fontWeight: "bold",
+  },
+  cardDescription: {
+    fontSize: 12,
+    color: "#444",
+  },
+  markerWrap: {
+    alignItems: "center",
+    justifyContent: "center",
+    width:50,
+    height:50,
+  },
+  marker: {
+    width: 30,
+    height: 30,
+  },
+  button: {
+    alignItems: 'center',
+    marginTop: 5
+  },
+  signIn: {
+      width: '100%',
+      padding:5,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 3
+  },
+  textSign: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#173E81'
+      
+  }
+});
 const mapStyles = [
     {
         "featureType": "administrative",

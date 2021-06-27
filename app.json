@@ -7,7 +7,7 @@
       "ios",
       "android"
     ],
-    "version": "3.7.1",
+    "version": "3.7.8",
     "orientation": "portrait",
     "icon": "./assets/whizz_logo1.png",
     "splash": {
@@ -23,10 +23,13 @@
     "ios": {
       "bundleIdentifier": "com.TheWhizzApp",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "3.8.1",
+      "buildNumber": "3.8.5",
       "supportsTablet": true,
       "config": {
-        "googleMapsApiKey": "AIzaSyDutSO9RROS5389Z1laCVu6m4idanT31B8"
+        "googleMapsApiKey": "AIzaSyDutSO9RROS5389Z1laCVu6m4idanT31B8",
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.5680477837-1j6dfu5lhp5iu3hhoac181i3hnkcen24"
+        }
       },
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Whizz requires your location in order to recommend open restrooms in your vicinity"
@@ -35,7 +38,7 @@
     "android": {
       "package": "com.TheWhizzApp.gotta_go",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 11,
+      "versionCode": 13,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyAGb4bJ_GV4G3UeUAAJ2cuU06P7cFKftJQ"
@@ -46,7 +49,7 @@
       ]
     },
     "web": {
-      "config":{
+      "config": {
         "firebase": {
           "apiKey": "AIzaSyCfx94bwaO-VnQosXn4aUIi_DKUCdAcdEA",
           "authDomain": "wizusers.firebaseapp.com",
@@ -55,21 +58,19 @@
           "storageBucket": "wizusers.appspot.com",
           "messagingSenderId": "5680477837",
           "appId": "1:5680477837:web:8bff0f0c656ab065",
-          "measurementId": "G-FQN5Y3BVZD" 
+          "measurementId": "G-FQN5Y3BVZD"
         }
       }
-
     },
     "description": "This is Whizz, the Essential Worker addition. All of the restaurants represented in this app have agreed to give our users exclusive access to their restrooms. You must show the app to gain access.  Our partners have also given you a discount on their food, so take full advantage. Thank you for taking care of us, and BE SAFE! ",
-    "sdkVersion": "37.0.0",
-    "hooks":{
-      "postPublish":[
+    "hooks": {
+      "postPublish": [
         {
           "file": "sentry-expo/upload-sourcemaps",
-          "config":{
-            "organization":"whizz",
-            "project":"whizz",
-            "authToken":  "2f23520562824d63a6c07d06e57770b1be046864c98446dcac1355fd24e05745"
+          "config": {
+            "organization": "whizz",
+            "project": "whizz",
+            "authToken": "2f23520562824d63a6c07d06e57770b1be046864c98446dcac1355fd24e05745"
           }
         }
       ]

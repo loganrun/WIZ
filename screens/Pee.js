@@ -152,7 +152,8 @@ class ContentArea extends React.Component {
       latitude: this.props.item.latitude,
       longitude: this.props.item.longitude,
       title: this.props.item.name,
-      googleForceLatLon: true
+      googleForceLatLon: true,
+      alwaysIncludeGoogle: true
     });
   };
 
@@ -175,14 +176,14 @@ class ContentArea extends React.Component {
           onPress={() => {
             Animated.timing(contentMarginTopAnim, {
               toValue: 200,
-              duration: 400
-              //useNativeDriver: true
+              duration: 400,
+              useNativeDriver: true
             }).start();
 
             Animated.timing(mapTopMarginAnim, {
               toValue: -250,
-              duration: 400
-              //useNativeDriver: true
+              duration: 400,
+              useNativeDriver: true
             }).start();
           }}
         >

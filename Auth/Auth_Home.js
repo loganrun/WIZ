@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image,TextInput,
   ActivityIndicator,
-  KeyboardAvoidingView, Button,
-  AsyncStorage } from "react-native";
-  import { MaterialIcons } from '@expo/vector-icons';
+  KeyboardAvoidingView, Platform, Alert, Button} from "react-native";
+  import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const loginPage = require("../assets/Loginbk.png");
 const signupbtn = require("../assets/sign-up.png");
 const loginbtn = require("../assets/logintransparent.png");
 import Logo from "../components/Logo"
-import { Formik } from "formik";
-import * as yup from "yup";
 import { SafeAreaView } from 'react-navigation'
 import * as Amplitude from 'expo-analytics-amplitude'
+import * as Facebook from 'expo-facebook'
+import * as GoogleSignIn from "expo-google-sign-in"
+
+const gbutton = require("../assets/googlebtn1.png")
 //import * as firebase from "firebase";
 //import axios from "axios";
 class AuthHome extends Component {
@@ -19,9 +21,15 @@ class AuthHome extends Component {
     super();
     this.state = {
       lon: null,
-      lat: null
+      lat: null,
+      user: null
     };
   }
+  
+  //componentDidMount(){
+  //  this.initAsync();
+  //}
+
   
 
   
@@ -40,102 +48,178 @@ class AuthHome extends Component {
     
   };
   render() {
+
+    const {navigate} = this.props.navigation
+    const faceBookLogin = async () => {
+      try {
+        await Facebook.initializeAsync('746838002533627');
+        const {
+          type,
+          token,
+          expires,
+          permissions,
+          declinedPermissions,
+        } = await Facebook.logInWithReadPermissionsAsync({
+          permissions: ['public_profile', 'email'],
+        });
+        if (type === 'success') {
+          // Get the user's name using Facebook's Graph API
+          fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id, name, email, picture`)
+          .then(response => response.json())
+          .then(data => console.log(data))
+          //console.log(response)
+          //.then(Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`))
+          .then(this.props.navigation.navigate("Main"))
+        } else {
+          // type === 'cancel'
+        }
+      } catch ({ message }) {
+        alert(`Facebook Login Error: ${message}`);
+      }
+    }
+
     
-    const validationSchema = yup.object().shape({
-      email: yup
-        .string()
-        .trim()
-        .email()
-        .label("Email")
-        .required(),
-      password: yup
-        .string()
-        .label("Password")
-        .required()
-        .min(6)
-        .max(20),
-      userName: yup
-        .string()
-        .label("User name")
-        .required()
-    });
-    const { navigate } = this.props.navigation;
+  
+    const _syncUserWithStateAsync = async () => {
+      const user = await GoogleSignIn.signInSilentlyAsync();
+      this.setState({ user });
+    };
+  
+    const signOutAsync = async () => {
+      await GoogleSignIn.signOutAsync();
+      this.setState({ user: null });
+    };
+  
+    const signInAsync = async () => {
+      try {
+        await GoogleSignIn.askForPlayServicesAsync();
+        const { type, user } = await GoogleSignIn.signInAsync();
+        if (type === 'success') {
+          _syncUserWithStateAsync();
+        }
+      } catch ({ message }) {
+        alert('login: Error:' + message);
+      }
+    };
+
+    const initAsync = async () => {
+      await GoogleSignIn.initAsync({
+        // You may ommit the clientId when the firebase `googleServicesFile` is configured
+        clientId: '<YOUR_IOS_CLIENT_ID>',
+      });
+      this._syncUserWithStateAsync();
+    };
+  
+    //const googleSign = () => {
+      //if (this.state.user) {
+        //signOutAsync();
+      //} else {
+       // signInAsync();
+     // }
+    //};
+
+    //const { navigate } = this.props.navigation;
+
+    const onSubmit= () => {
+      Amplitude.logEventAsync("BEGIN_SIGNUP")
+      this.props.navigation.navigate("SignUp")
+    }
+    if(Platform.OS === 'ios'){
     return (
       <SafeAreaView style={styles.container}>
         <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
-          <Formik
-        initialValues={{ email: "", password: "", userName: ""
-          
-        }}
-        onSubmit={(value, actions) => {
-          Amplitude.logEvent("BEGIN_SIGNUP")
-          actions.setSubmitting(false);
-          this.props.navigation.navigate("SignUp",{
-           email: value.email,
-            userName: value.userName,
-          password: value.password})
-        }}
-        validationSchema={validationSchema}
-      >
-        {formikProps => (
-          <KeyboardAvoidingView behavior='height'>
-           
-            <TextInput
-              style={styles.textInput1}
-              onChangeText={formikProps.handleChange("userName")}
-              onBlur={formikProps.handleBlur("userName")}
-            />
-            <Text style={{ color: "white", marginLeft: 40 }}>
-              User Name
-            </Text>
-            <Text style={{ color: "white", marginLeft: 40 }}>
-              {formikProps.touched.userName && formikProps.errors.userName}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("email")}
-              onBlur={formikProps.handleBlur("email")}
-            />
-            <Text style={{ color: "white", marginLeft: 40 }}>
-              Email
-            </Text>
-            <Text style={{ color: "white", marginLeft: 40 }}>
-              {formikProps.touched.email && formikProps.errors.email}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("password")}
-              secureTextEntry
-              onBlur={formikProps.handleBlur("password")}
-            />
-            <Text style={{ color: "white", marginLeft: 40 }}>
-              Password
-            </Text>
-            <Text style={{ color: "white", marginLeft: 40 }}>
-              {formikProps.touched.password && formikProps.errors.password}
-            </Text>
-            {/* <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("service")}
-              onBlur={formikProps.handleBlur("service")}
-              placeholder='Which service do you drive for?'
-            /> */}
-            
-            {formikProps.isSubmitting ? (
-              <ActivityIndicator />
-            ) : (
-              <TouchableOpacity
-                style={styles.btn1}
-                onPress={formikProps.handleSubmit}
-              >
-                  <Image source={signupbtn} style={{width: 300, height: 44}}></Image>
-              </TouchableOpacity>
-              // <Text style={styles.txt1}> or </Text>
+      
+              <View style={styles.btn1}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => onSubmit()}
+                
+            >
               
+                <Text style={styles.txt3}>Sign up with Email</Text>
+
+                
+                <MaterialIcons name="email" size={24} color="#3480CB" style = {{marginLeft: 20}} />
+              </TouchableOpacity> 
+        
+        </View>
               
-            )
-            
-              }
+        <View style={styles.btn2}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => navigate("Phone")}    
+            >
+                <Text style={styles.txt3}>Sign up with Phone </Text>   
+                <MaterialIcons name="local-phone" size={24} color="#3480CB" style = {{marginLeft: 10}}/>
+              </TouchableOpacity> 
+        </View>
+        <View style={styles.btn2}>
+            <TouchableOpacity onPress={() => navigate("Login") }>
+
+                <Image source={loginbtn} style={{width: 300, height: 44.5}}></Image>
+                
+            </TouchableOpacity> 
+        
+        </View>
+                
+            </ImageBackground>
+            </SafeAreaView>
+    );
+  }
+else{
+  return(
+    <SafeAreaView style={styles.container}>
+      <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
+        
+        {/*<View style={styles.btn1}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={initAsync() }   
+            >
+              <Image source={gbutton} style={{height: 44, width: 44, marginRight: 10}}/>
+              
+                <Text style={styles.txt3}>Sign in with Google</Text>
+                
+              </TouchableOpacity> 
+  </View> 
+        <View style={styles.btn1}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => faceBookLogin()}   
+            > 
+                <Text style={styles.txt3}>Sign in with Facebook</Text>
+
+                <FontAwesome5 name="facebook" size={28} color="blue" style= {{marginLeft: 10}}/>
+                
+              </TouchableOpacity> 
+        </View>*/}
+        <View style={styles.btn1}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => onSubmit()}  
+            >
+              
+                <Text style={styles.txt3}>Sign up with Email</Text>
+
+                <MaterialIcons name="email" size={24} color="#3480CB" style = {{marginLeft: 20}} />
+              </TouchableOpacity> 
+        
+        </View>
+        <View style={styles.btn2}>
+            <TouchableOpacity
+            style={styles.fabBtn}
+            onPress={() => navigate("Phone")}
+                
+            >
+              
+                <Text style={styles.txt3}>Sign up with Phone </Text>
+
+                
+                <MaterialIcons name="local-phone" size={24} color="#3480CB" style = {{marginLeft: 20}}/>
+              </TouchableOpacity> 
+        
+        </View>
+        
         <View style={styles.btn2}>
             <TouchableOpacity
                 onPress={() => navigate("Login") }
@@ -148,43 +232,14 @@ class AuthHome extends Component {
         
         </View>
 
-        <View style={styles.btn2}>
-            <TouchableOpacity
-            style={styles.fabBtn}
-            onPress={() => navigate("Phone")}
-                
-            >
-              
-                <Text style={styles.txt3}>Sign in with</Text>
-
-                
-                <MaterialIcons name="local-phone" size={24} color="#3480CB" style = {{marginLeft: 10}}/>
-              </TouchableOpacity> 
         
-        </View>
-       {/* <TouchableOpacity  onPress={() => navigate("Reset")}>
-              <Text style={styles.txt2}> Forgot Password? </Text>
-      </TouchableOpacity>  
-      </View>  */}
-             
-          </KeyboardAvoidingView>
-          
-        )}
-      </Formik>
-      
-        {/* <Text style={styles.txt1}> or </Text> */}
-              
-             
-             
-       {/* <TouchableOpacity  onPress={() => navigate("Reset")}>
-              <Text style={styles.txt2}> Forgot Password? </Text>
-      </TouchableOpacity>  */}
-       
-           
-            </ImageBackground>
-            </SafeAreaView>
-    );
-  }
+
+      </ImageBackground>
+
+    </SafeAreaView>
+  )
+}
+}
 }
 export default AuthHome;
 
@@ -235,7 +290,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
     marginRight: 10,
-    marginTop:20,
+    marginTop:"30%",
     //marginBottom: 20
   },
   btn2: {

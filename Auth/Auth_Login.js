@@ -7,9 +7,9 @@ import {
   TextInput,
   ActivityIndicator,
   KeyboardAvoidingView,
-  Platform,ImageBackground,Image,
-  AsyncStorage
+  Platform,ImageBackground,Image
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
@@ -53,7 +53,7 @@ class AuthLogin extends Component {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(value, actions) => {
-          Amplitude.logEvent("COMPLETE_LOGIN")
+          Amplitude.logEventAsync("COMPLETE_LOGIN")
           let email = value.email;
           let password = value.password;
           firebase
