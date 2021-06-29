@@ -9,6 +9,7 @@ import {
 // import {Video} from 'expo-av';
 import {
   Left,
+  Right,
   Button,
   Card,
   CardItem,
@@ -130,24 +131,24 @@ class Checkin extends React.Component {
         >
           <Card style={{ paddingBottom: 10 }}>
             <CardItem>
-              <Left
+              <Left 
                 style={{
                   flexDirection: 'column',
                   alignItems: 'flex-start',
-                  paddingHorizontal: 10,
+                  //paddingHorizontal: 10,
                 }}
               >
                 <Text style={{ fontWeight: 'bold', fontSize: 20, textTransform: 'capitalize' }}>{name}</Text>
                 <Text>{address}</Text>
-                <Text>{city}</Text>
                 <Text style={{ fontWeight: 'bold', fontSize: 14 }}>
                   Instructions
                 </Text>
                 <Text>{direction}</Text>
               </Left>
+              <Right style={{flexDirection: 'column', alignItems: 'flex-end'}}>
               <Button
                 style={{
-                  marginTop: 25,
+                  //marginTop: 5,
                   marginRight: 10,
                   backgroundColor: '#3480CB', // "red",
                   paddingRight: 10,
@@ -156,26 +157,62 @@ class Checkin extends React.Component {
                 onPress={this.handleDirections}
               >
                 <Text
-                  style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}
+                  style={{ color: '#fff', fontSize: 18, fontWeight: 'bold', textAlign:'center',width: '100%' }}
                 >
                   Directions
                 </Text>
               </Button>
+              <Button 
+            style={this.state.checkInAvailable ? {
+              marginTop: 10,
+              backgroundColor: '#3480CB',
+              paddingRight: 10,
+              paddingLeft: 10,
+              //width: 130
+            } : {
+              marginTop: 10,
+              backgroundColor: '#ddd',
+              paddingRight: 10,
+              paddingLeft: 10,
+              //width: 130
+            }}
+            onPress={() => {
+              if (this.state.checkInAvailable) {
+                this.props.doCheckIn();
+              }
+            }}
+          >
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: 18,
+                fontWeight: 'bold',
+                textAlign:'center',
+                width: '100%'
+              }}
+            >
+            Check In
+          </Text>
+        </Button>
+              </Right>
+              
             </CardItem>
           </Card>
         </TouchableOpacity>
         <Ad adInfo={ad} /> 
-        <Button
+        <Button 
             style={this.state.checkInAvailable ? {
               margin: 10,
               backgroundColor: '#3480CB',
               paddingRight: 10,
               paddingLeft: 10,
+              width: 130
             } : {
               margin: 10,
               backgroundColor: '#ddd',
               paddingRight: 10,
               paddingLeft: 10,
+              width: 130
             }}
             onPress={() => {
               if (this.state.checkInAvailable) {
@@ -197,12 +234,12 @@ class Checkin extends React.Component {
         </Button>
         <Button
             style={this.state.checkInAvailable ? {
-              margin: 10,
+              //margin: 10,
               backgroundColor: '#3480CB',
               paddingRight: 10,
               paddingLeft: 10,
             } : {
-              margin: 10,
+              //margin: 10,
               backgroundColor: '#ddd',
               paddingRight: 10,
               paddingLeft: 10,
