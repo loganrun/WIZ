@@ -27,6 +27,12 @@ import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
 import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
+var genericFood = require('../assets/foodsidecard.png')
+var unverified = require('../assets/mascot-01-unverified-349x161.png')
+var verified = require('../assets/mascot-01-verified-329x161.png')
+var waba = require('../assets/lower-card-img-waba.png')
+var earle = require('../assets/lower-card-img-earles.png')
+var premicon = require('../assets/icon_premium.png')
 //import * as Analytics from 'expo-firebase-analytics'
 import * as Amplitude from 'expo-analytics-amplitude'
 import axios from 'axios'
@@ -126,18 +132,19 @@ constructor(props) {
           })}}
           >
           <Card style={styles.card}>
-            <Left style={{paddingLeft: 10}}>
-              <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
-            </Left> 
-              <CardItem style={{flexDirection: 'column'}}>
-              <Right style={{flex:1, alignItems: 'flex-start'}}>
-                <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
-                <Text>{item.street}</Text>
-                <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
-                <Text>Distance: {distance} miles</Text>
-              </Right>
-              </CardItem>
-          </Card>
+          <Left style={{paddingLeft: 2}}>
+            <Image resizeMode={'cover'} source={earle}style={{width: 145, height: 155,flex:1}}/>
+          </Left> 
+            <CardItem style={{flexDirection: 'column', width: 180}}>
+            <Right style={{alignItems: 'flex-end',}}>
+              <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 15}}>{item.name}</Text>
+              <Text style={{fontSize:13}}>{item.street}</Text>
+              <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
+              <Text>Distance: {distance} miles</Text>
+              <Image resizeMode={'cover'} source={verified}style={{width: 160, height: 75}}/>
+            </Right>
+            </CardItem>
+        </Card>
           </TouchableOpacity>
         </View>
     )
@@ -165,15 +172,16 @@ constructor(props) {
         })}}
         >
         <Card style={styles.card}>
-          <Left style={{paddingLeft: 10}}>
-            <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
-          </Left> 
-            <CardItem style={{flexDirection: 'column'}}>
-            <Right style={{flex:1, alignItems: 'flex-start'}}>
-              <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
-              <Text>{item.street}</Text>
+          <Left style={{paddingLeft: 2}}>
+          <Image resizeMode={'cover'} source={genericFood}style={{width: 145, height: 155,flex:1}}/>
+          </Left>  
+            <CardItem style={{flexDirection: 'column', width: 180}}>
+            <Right style={{alignItems: 'flex-end',}}>
+              <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 15}}>{item.name}</Text>
+              <Text style={{fontSize:13}}>{item.street}</Text>
               <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
               <Text>Distance: {distance} miles</Text>
+              <Image resizeMode={'cover'} source={unverified}style={{width: 160, height: 75}}/> 
             </Right>
             </CardItem>
         </Card>
@@ -307,7 +315,7 @@ constructor(props) {
           longitude: item.longitude
         }}
         //title={item.name}
-        image={{uri: item.icon}}
+        image={premicon}
         onPress={() => {
           const markerProp = {
           id: item.id,
@@ -362,7 +370,7 @@ constructor(props) {
               longitude: item.longitude
             }}
             //title={item.name}
-            image={{uri: item.icon}}
+            image={premicon}
            // pinColor={'yellow'}
           //  onPress={() => {
           //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
@@ -606,6 +614,7 @@ const styles = StyleSheet.create({
     height: CARD_HEIGHT,
     width: CARD_WIDTH,
     overflow: "hidden",
+    padding: 0
   },
   cardImage: {
     flex: 3,
