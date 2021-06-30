@@ -8,11 +8,10 @@ import {
   Dimensions,
   Animated,
   PanResponder,
-  Modal,
+  Modal,Alert,
   TouchableOpacity,
   Image
 } from "react-native";
-//import {Video} from 'expo-av';
 import {
   Container,
   Content,
@@ -33,9 +32,6 @@ import {connect} from 'react-redux'
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
 import { SafeAreaView } from 'react-navigation'
-//import ContentArea from "../components/ContentArea";
-//let ad = require("../assets/ad.png");
-//let bathicon = require('../assets/bath3.png')
 import Ad from "../components/Ads";
 import restApi from '../services/restroom';
 import Ratings from "../components/Rating"
@@ -85,16 +81,17 @@ class Pee extends Component {
   }
 
   leaveReview = async() => {
-    const { profileName } = this.props;
-    if (profileName === '') {
-      Toast.show('Your profile name is empty, Please click Check In', {
-        duration: Toast.durations.LONG,
-      });
-    } else {
-      this.setState({
-        reviewModal: true,
-      })
-    }
+    this.setState({reviewModal:true})
+    // const { profileName } = this.props;
+    // if (profileName === '') {
+    //   Toast.show('Your profile name is empty, Please click Check In', {
+    //     duration: Toast.durations.LONG,
+    //   });
+    // } else {
+    //   this.setState({
+    //     reviewModal: true,
+    //   })
+    // }
   }
 
   saveReview = async() => {
@@ -103,7 +100,7 @@ class Pee extends Component {
     const userId = await this.getUserId();
     const { rating } = this.state;
     const review = this.state.reviewContent;
-    //console.log(bathroomId);
+    
     try {
       const response = await restApi.post('/api/bathReview', {
         bathroomId, userId, rating, review,
@@ -269,6 +266,7 @@ class Pee extends Component {
             }}
           >
             <Checkin item={item} sourceLat={curLat} sourceLon={curLon} doCheckIn={this.doCheckIn} leaveReview={this.leaveReview} />
+             <Ratings item={this.props.item} leaveReview={this.leaveReview}/>  
           </Animated.View>
         </ScrollView>
       </View>
@@ -285,7 +283,7 @@ class Pee extends Component {
         <Modal
           animationType="slide"
           visible={this.state.reviewModal}
-          presentationStyle='formSheet'
+          presentationStyle='fullScreen'
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}
@@ -299,11 +297,7 @@ class Pee extends Component {
               alignItems: 'center',
             }}
           >
-            <StarRating
-              onRatingChange={(rate) => this.setState({
-                rating: rate,
-              })}
-            />
+            
             <View
             style={{
               backgroundColor: '#ddd',
@@ -315,7 +309,33 @@ class Pee extends Component {
               <TextInput
                 multiline
                 editable
-                numberOfLines={8}
+                numberOfLines={1}
+                placeholder={"How was your visit? Any Pro tips?"}
+                placeholderTextColor={'#3480CB'}
+                style={{
+                  fontSize: 16,
+                  padding: 10,
+                }}
+                value={this.state.reviewContent}
+                onChangeText={text => this.setState({
+                  reviewContent: text,
+                })}
+              />
+            </View>
+            <View
+            style={{
+              backgroundColor: '#ddd',
+              borderBottomColor: '#000000',
+              borderBottomWidth: 1,
+              marginTop: 30,
+              width: 300,
+            }}>
+              <TextInput
+                multiline
+                editable
+                numberOfLines={1}
+                placeholder={"Your rating from 1-5"}
+                placeholderTextColor={'#3480CB'}
                 style={{
                   fontSize: 16,
                   padding: 10,

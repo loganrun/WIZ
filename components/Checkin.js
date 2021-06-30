@@ -4,7 +4,7 @@ import {
   Animated,
   TouchableOpacity,
   StyleSheet,
-  AppState,
+  AppState, View
 } from 'react-native';
 // import {Video} from 'expo-av';
 import {
@@ -12,7 +12,7 @@ import {
   Right,
   Button,
   Card,
-  CardItem,
+  CardItem,Body, Image
 } from 'native-base';
 
 import { showLocation } from 'react-native-map-link';
@@ -22,6 +22,7 @@ import { connect } from 'react-redux';
 import { getDistance, getPreciseDistance } from 'geolib';
 import Ad from './Ads';
 import Ratings from './Rating';
+let ranking = require('../assets/tprate.png')
 // const SCREEN_HEIGHT = Dimensions.get("window").height;
 // const SCREEN_WIDTH = Dimensions.get("window").width;
 
@@ -36,13 +37,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff', // "#f5f5f5"
   },
+  image: {
+    height: 71,//71, 
+    width: 327, //327,
+    marginTop: 20,
+    marginRight: 20
+  
+  },
 });
 
 class Checkin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkInAvailable: false,
+      checkInAvailable: true,
       ctlat: 0,
       ctlng: 0,
       rslat: 0,
@@ -87,6 +95,16 @@ class Checkin extends React.Component {
       rslng: longitude,
       dd: distance,
     });
+
+    this.updateDistance()
+  }
+
+  updateDistance = () =>{
+    if(!this.state.checkInAvailable){
+      setTimeout(this.checkRestroomDistance, 60000)
+    }else{
+      return
+    }
   }
 
   handleDirections = (props) => {
@@ -200,75 +218,17 @@ class Checkin extends React.Component {
           </Card>
         </TouchableOpacity>
         <Ad adInfo={ad} /> 
-        <Button 
-            style={this.state.checkInAvailable ? {
-              margin: 10,
-              backgroundColor: '#3480CB',
-              paddingRight: 10,
-              paddingLeft: 10,
-              width: 130
-            } : {
-              margin: 10,
-              backgroundColor: '#ddd',
-              paddingRight: 10,
-              paddingLeft: 10,
-              width: 130
-            }}
-            onPress={() => {
-              if (this.state.checkInAvailable) {
-                this.props.doCheckIn();
-              }
-            }}
-          >
-            <Text
-              style={{
-                color: '#fff',
-                fontSize: 18,
-                fontWeight: 'bold',
-                textAlign:'center',
-                width: '100%'
-              }}
-            >
-            Check In
-          </Text>
-        </Button>
-        <Button
-            style={this.state.checkInAvailable ? {
-              //margin: 10,
-              backgroundColor: '#3480CB',
-              paddingRight: 10,
-              paddingLeft: 10,
-            } : {
-              //margin: 10,
-              backgroundColor: '#ddd',
-              paddingRight: 10,
-              paddingLeft: 10,
-            }}
-            onPress={() => {
-              if (this.state.checkInAvailable) {
-                this.props.leaveReview();
-              }
-            }}
-          >
-            <Text
-              style={{
-                color: '#fff',
-                fontSize: 18,
-                fontWeight: 'bold',
-                textAlign:'center',
-                width: '100%'
-              }}
-            >
-            Leave a Review
-          </Text>
-        </Button>
+        
         <Text style={{
           marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: 'bold', marginLeft: 25,
         }}
         >
           RATE THE RESTROOM
         </Text>
-        <Ratings item={this.props.item} />
+
+        
+        
+        
       </Animated.View>
     );
   }

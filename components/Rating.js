@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Image, Text,TouchableOpacity, StyleSheet, AsyncStorage,Alert } from 'react-native';
+import { Image, Text,TouchableOpacity, StyleSheet,Alert, Modal } from 'react-native';
 import { Card, CardItem, Thumbnail,Button,Left, Body, Right } from 'native-base';
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 //import AlertMod  from "../components/alertModal"
 //let horrible = require('../assets/TP-ratingsno!!!.png')
 //let bad = require('../assets/TP-ratingsgross.png')
@@ -31,35 +32,35 @@ class Ratings extends Component {
   }
 
   componentDidMount() {
-    this.setReview()
+    //this.setReview()
   }
 
-  setReview=()=>{
-    let item = this.props.item;
-    let latitude = item.latitude;
-    let longitude = item.longitude
-    let name = item.name
-    let street = item.street
-    let state = item.state
-    let id = item.id
-    let city = item.city
-    let table = item.changing_table
-    let directions = item.directions
-    let accessible = item.accessible
-    let unisex = item.unisex
-    this.setState({latitude: latitude})
-    this.setState({longitude: longitude})
-    this.setState({name:  name})
-    this.setState({street: street})
-    this.setState({state: state})
-    this.setState({city: city})
-    this.setState({id: id})
-    this.setState({table: table})
-    this.setState({directions: directions})
-    this.setState({accessible: accessible})
-    this.setState({unisex:  unisex})
-    //this.placeUpdate()
-    }
+  // setReview=()=>{
+  //   let item = this.props.item;
+  //   let latitude = item.latitude;
+  //   let longitude = item.longitude
+  //   let name = item.name
+  //   let street = item.street
+  //   let state = item.state
+  //   let id = item.id
+  //   let city = item.city
+  //   let table = item.changing_table
+  //   let directions = item.directions
+  //   let accessible = item.accessible
+  //   let unisex = item.unisex
+  //   this.setState({latitude: latitude})
+  //   this.setState({longitude: longitude})
+  //   this.setState({name:  name})
+  //   this.setState({street: street})
+  //   this.setState({state: state})
+  //   this.setState({city: city})
+  //   this.setState({id: id})
+  //   this.setState({table: table})
+  //   this.setState({directions: directions})
+  //   this.setState({accessible: accessible})
+  //   this.setState({unisex:  unisex})
+  //   //this.placeUpdate()
+  //   }
 
     placeUpdate = () =>{
       //let user = userToken
@@ -93,13 +94,33 @@ class Ratings extends Component {
     }
 
     addTwo = () =>{
-    Alert.alert('Your rating has been recorded! Thank You.')
-    this.setState({rate: 2})
-    }
+    // Alert.alert('Your rating has been recorded! Thank You.')
+    // this.setState({rate: 2})
+    <Modal
+          animationType="slide"
+          visible={this.state.reviewModal}
+          presentationStyle='overFullScreen'
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}
+        >
+          <Text>This is the rating system</Text>
+          </Modal>
+     }
 
     addThree = () =>{
-    Alert.alert('Your rating has been recorded! Thank You.')
-    this.setState({rate: 3})
+    // Alert.alert('Your rating has been recorded! Thank You.')
+    // this.setState({rate: 3})
+      <Modal
+          animationType="slide"
+          visible={this.state.reviewModal}
+          presentationStyle='overFullScreen'
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+          }}
+        >
+          <Text>This is the rating system</Text>
+          </Modal>
     }
 
     addFour = () =>{
@@ -121,13 +142,17 @@ class Ratings extends Component {
                   marginTop: 20
                 }}>
                 <Text style={{marginBottom: 10, fontWeight: "bold", fontSize: 16}}>How Was Your Visit?</Text>
-                <TouchableOpacity onPress={this.addTwo}>
+                <TouchableOpacity onPress={()=>{
+                  this.props.leaveReview()
+                }}>
                 <Image source={ranking} style={styles.image}/>
                 </TouchableOpacity>
               </Body>
             
             </CardItem>
           </Card>
+        
+          
     );
   }
   
