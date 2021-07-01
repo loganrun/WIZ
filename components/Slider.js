@@ -9,10 +9,10 @@ const slides = [
 
     {
       key: "1",
-      title: 'A FOREWORD',
-      text: 'Hello and thank you for downloading Whizz. Due to current events, we have removed thousands of restaurants from our map.  So, if you are not in Los Angeles, your map may be empty.  We are very sorry about this and are working hard to add more restaurants as soon as possible.\n\n If you would like to have your business added, please contact us at Whizzzit@gmail.com',
-      image: require('../assets/SanFran.png'),
-      backgroundColor: '#22bcb5'//'#8b0000'//'#daa520'//''// //#febe29',
+      title: 'WELCOME TO Whizz',
+      text: 'Hello fellow Whizzards',
+      image: require('../assets/onboard-welcome.png'),
+      backgroundColor: '#fff'//'#8b0000'//'#daa520'//''// //#febe29',
     },
     {
       key: "2",

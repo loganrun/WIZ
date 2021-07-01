@@ -27,12 +27,11 @@ import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
 import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
-var genericFood = require('../assets/foodsidecard.png')
+var genericFood = require('../assets/SEARCH-lower-card-generic-img-1.png')
 var unverified = require('../assets/mascot-01-unverified-349x161.png')
 var verified = require('../assets/mascot-01-verified-329x161.png')
-var waba = require('../assets/lower-card-img-waba.png')
-var earle = require('../assets/lower-card-img-earles.png')
-var premicon = require('../assets/icon_premium.png')
+var premicon = require('../assets/pin-verified.png')
+var regIcon = require('../assets/pin-unverified.png')
 //import * as Analytics from 'expo-firebase-analytics'
 import * as Amplitude from 'expo-analytics-amplitude'
 import axios from 'axios'
@@ -99,7 +98,7 @@ constructor(props) {
 
   useCheck = async () =>{
   newUser = this.props.user
-  this.setState({ newUser: newUser })
+  this.setState({ newUser: true })
   
   }
   
@@ -110,7 +109,7 @@ constructor(props) {
   renderItem = ({ item }) => {
 
     const distance = item.distance.toString().slice(0, 4)
-    if(item.icon){
+    if(item.lowerCard){
       return (
         <View>
           <TouchableOpacity 
@@ -133,7 +132,7 @@ constructor(props) {
           >
           <Card style={styles.card}>
           <Left style={{paddingLeft: 2}}>
-            <Image resizeMode={'cover'} source={earle}style={{width: 145, height: 155,flex:1}}/>
+            <Image resizeMode={'cover'} source={{uri:item.lowerCard}} style={{width: 145, height: 155,flex:1}}/>
           </Left> 
             <CardItem style={{flexDirection: 'column', width: 180}}>
             <Right style={{alignItems: 'flex-end',}}>
@@ -145,46 +144,6 @@ constructor(props) {
             </Right>
             </CardItem>
         </Card>
-          </TouchableOpacity>
-        </View>
-    )
-
-    }else{
-    
-    if(item.icon){
-      return (
-        <View>
-          <TouchableOpacity 
-          onPress={() => {
-            const eventProp = {
-              id: item.id,
-              name: item.name,
-              street: item.street,
-              city: item.city,
-              distance: distance
-            }
-            Amplitude.logEventWithPropertiesAsync("RESTAURANT_SELECT", eventProp)
-          this.props.navigation.navigate("Pee", {
-            id: item.id,
-            item,
-            distance: distance,
-            currentLat: this.state.region.latitude,
-            currentLon: this.state.region.longitude
-          })}}
-          >
-          <Card style={styles.card}>
-            <Left style={{paddingLeft: 10}}>
-              <Text style={{width: 50, height: 80}}><Image resizeMode={'cover'} source={{uri: item.icon}}style={{width: 50, height: 55}}/></Text>                  
-            </Left> 
-              <CardItem style={{flexDirection: 'column'}}>
-              <Right style={{flex:1, alignItems: 'flex-start'}}>
-                <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 17}}>{item.name}</Text>
-                <Text>{item.street}</Text>
-                <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
-                <Text>Distance: {distance} miles</Text>
-              </Right>
-              </CardItem>
-          </Card>
           </TouchableOpacity>
         </View>
     )
@@ -381,7 +340,7 @@ constructor(props) {
               longitude: item.longitude
             }}
             //title={item.name}
-            image={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
+            image={regIcon}
             onPress={() => {
               const markerProp = {
               id: item.id,
@@ -439,7 +398,7 @@ constructor(props) {
                 longitude: item.longitude
               }}
               //title={item.name}
-              //image={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
+              image={regIcon}
              // pinColor={'yellow'}
             //  onPress={() => {
             //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
@@ -460,7 +419,7 @@ constructor(props) {
                 <Animated.View>
                   <Animated.Image
                   style={[styles.marker, scaleStyle]}
-                  source={{uri:"https://storage.googleapis.com/whizz_pics/717114454-generic-location_icon.png"}}
+                  source={regIcon}
                   resizeMode="cover"
                   />
 
@@ -842,61 +801,3 @@ const mapStyles = [
 ]
 
 export default connect(mapStateToProps)(BathMap);
-
-
-
-// getLocation = async () => {
-  //   let location = "";
-  //   try {
-  //     location = await AsyncStorage.getItem("location");
-  //    //console.log(location)
-  //     //console.log(location)
-  //   } catch (error) {
-  //     // Error retrieving data
-  //     console.log(error.message);
-  //   }
-  //   return JSON.parse(location);
-  // };
-
-  // initBathroom = async () => {
-  //   let bathroom = await this.getBathroom();
-  //   this.setState({ bathroom: bathroom });
-  //   //console.log(this.state.bathroom)
-  //   this._getLocationAsync();
-  //   //console.log(this.state.lat)
-  //   //console.log(this.state.lon)
-  //   this.setState({ loading: false });
-  // };
-
-  // _getLocationAsync = async () => {
-    
-
-  //   let location = await this.getLocation();
-  //   let lat = location.coords.latitude;
-  //   let lon = location.coords.longitude;
-  //   this.setState({ latitude: lat });
-  //   this.setState({ lon });
-  //   //await this.loadBathroom();
-  //   //console.log(lat);
-  //   //console.log(lon);
-  // };
-
-  // getBathroom = async () => {
-  //   let bathroom = "";
-  //   try {
-  //     bathroom = await AsyncStorage.getItem("bathroom");
-  //     //console.log(bathroom)
-  //   } catch (error) {
-  //     // Error retrieving data
-  //     console.log(error.message);
-  //   }
-  //   return JSON.parse(bathroom);
-  // };
-  //<StarRating
-                  //disabled={true}
-                  //maxStars={5}
-                  //rating={5}
-                  //starSize={12}
-                  //fullStarColor={"orange"}
-                  //emptyStarColor={"orange"}
-                ///>//
