@@ -109,7 +109,7 @@ constructor(props) {
   renderItem = ({ item }) => {
 
     const distance = item.distance.toString().slice(0, 4)
-    if(item.lowerCard){
+    if(item.verified){
       return (
         <View>
           <TouchableOpacity 
@@ -305,7 +305,7 @@ constructor(props) {
 
       
       
-      if(Platform.OS === 'ios' && item.icon){
+      if(Platform.OS === 'ios' && item.verified){
       return (
         <MapView.Marker
         key= {index}
@@ -331,7 +331,7 @@ constructor(props) {
         >
         </MapView.Marker>
       ) ;
-        }if(!item.icon){
+        }if(!item.verified){
           return (
             <MapView.Marker
             key= {index}
@@ -360,7 +360,7 @@ constructor(props) {
           )
 
         }else{
-          if(item.icon){
+          if(item.verified){
           return (
             <MapView.Marker
             key= {index}

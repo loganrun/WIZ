@@ -59,8 +59,19 @@ class Pee extends Component {
       reviewModal: false,
       rating: 3,
       reviewContent: '',
+      latitude: null,
+      rate: null,
+      longitude:  null,
+      name: "",
+      street: "",
+      state:  "",
+      city: "",
+      changing_table: null,
+      directions:  "",
+      accessible: true,
+      unisex: false
     }
-    // this.handleDirections = this.handleDirections.bind(this);
+    
   }
 
   storeCheckedIn = async () => {
@@ -153,6 +164,89 @@ class Pee extends Component {
       }
     } else {
       this.storeCheckedIn();
+    }
+  }
+
+  doCheckIn1 = async () => {
+    const { profileName } = this.props;
+    if (profileName === '') {
+      const uID = await this.getUserId();
+      try {
+        const response = await restApi.get('/api/users', {
+          params: {
+            userId: uID
+          }
+        });
+        if (response.data) {
+          this.props.saveProfileName(response.data);
+          this.setState({
+            showProfileInput: false
+          });
+          this.storeCheckedIn();
+          this.addVerify()
+        } else {
+          this.setState({
+            showProfileInput: true
+          });
+        }
+      } catch (e) {
+        // console.log(e.response);
+        this.setState({
+          showProfileInput: true
+        });
+      }
+    } else {
+      this.storeCheckedIn();
+      this.addVerify()
+    }
+  }
+
+  addVerify = async () => {
+    let item = this.props.item;
+    let latitude = item.latitude;
+    let longitude = item.longitude
+    let name = item.name
+    let street = item.street
+    let state = item.state
+    let city = item.city
+    let table = item.changing_table
+    let directions = item.directions
+    let accessible = item.accessible
+    let unisex = item.unisex
+    this.setState({latitude: latitude})
+    this.setState({longitude: longitude})
+    this.setState({name:  name})
+    this.setState({street: street})
+    this.setState({state: state})
+    this.setState({city: city})
+    this.setState({changing_table: table})
+    this.setState({directions: directions})
+    this.setState({accessible: accessible})
+    this.setState({unisex:  unisex})
+    this.placeUpdate()
+  }
+
+  placeUpdate = async () =>{
+    try {
+      const response = await restApi.post(`/api/bathrooms/verify`,{
+     latitude: this.state.latitude,
+     longitude: this.state.longitude,
+     name: this.state.name,
+     street: this.state.street,
+     state: this.state.state,
+     city: this.state.city,
+     changing_table: this.state.changing_table,
+     directions: this.state.directions,
+     accessible: this.state.accessible,
+     unisex: this.state.unisex
+
+      });
+
+      if(response.data){
+        console.log('Success!')
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 

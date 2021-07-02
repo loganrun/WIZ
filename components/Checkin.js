@@ -129,7 +129,9 @@ class Checkin extends React.Component {
     const { city } = item;
     const { comment } = item;
     const direction = item.directions;
+    const verified = item.verified
 
+  if(item.verified){
     return (
       <Animated.View style={styles.Card}>
         <TouchableOpacity
@@ -231,7 +233,110 @@ class Checkin extends React.Component {
         
       </Animated.View>
     );
+  }else{
+    return (
+      <Animated.View style={styles.Card}>
+        <TouchableOpacity
+          onPress={() => {
+            Animated.timing(contentMarginTopAnim, {
+              toValue: 200,
+              duration: 400,
+              // useNativeDriver: true
+            }).start();
+
+            Animated.timing(mapTopMarginAnim, {
+              toValue: -250,
+              duration: 400,
+              // useNativeDriver: true
+            }).start();
+          }}
+        >
+          <Card style={{ paddingBottom: 10 }}>
+            <CardItem>
+              <Left 
+                style={{
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  //paddingHorizontal: 10,
+                }}
+              >
+                <Text style={{ fontWeight: 'bold', fontSize: 20, textTransform: 'capitalize' }}>{name}</Text>
+                <Text>{address}</Text>
+                <Text style={{ fontWeight: 'bold', fontSize: 14 }}>
+                  Instructions
+                </Text>
+                <Text>{direction}</Text>
+              </Left>
+              <Right style={{flexDirection: 'column', alignItems: 'flex-end'}}>
+              <Button
+                style={{
+                  //marginTop: 5,
+                  marginRight: 10,
+                  backgroundColor: '#3480CB', // "red",
+                  paddingRight: 10,
+                  paddingLeft: 10,
+                }}
+                onPress={this.handleDirections}
+              >
+                <Text
+                  style={{ color: '#fff', fontSize: 18, fontWeight: 'bold', textAlign:'center',width: '100%' }}
+                >
+                  Directions
+                </Text>
+              </Button>
+              <Button 
+            style={this.state.checkInAvailable ? {
+              marginTop: 10,
+              backgroundColor: '#3480CB',
+              paddingRight: 10,
+              paddingLeft: 10,
+              //width: 130
+            } : {
+              marginTop: 10,
+              backgroundColor: '#ddd',
+              paddingRight: 10,
+              paddingLeft: 10,
+              //width: 130
+            }}
+            onPress={() => {
+              if (this.state.checkInAvailable) {
+                this.props.doCheckIn1();
+              }
+            }}
+          >
+            <Text
+              style={{
+                color: '#fff',
+                fontSize: 18,
+                fontWeight: 'bold',
+                textAlign:'center',
+                width: '100%'
+              }}
+            >
+            Check In
+          </Text>
+        </Button>
+              </Right>
+              
+            </CardItem>
+          </Card>
+        </TouchableOpacity>
+        <Ad adInfo={ad} /> 
+        
+        <Text style={{
+          marginTop: 10, marginBottom: 5, fontSize: 18, fontWeight: 'bold', marginLeft: 25,
+        }}
+        >
+          RATE THE RESTROOM
+        </Text>
+
+        
+        
+        
+      </Animated.View>
+    );
   }
+}
 }
 
 const mapDispatchToProps = (dispatch) => ({
