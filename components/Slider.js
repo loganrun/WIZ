@@ -9,38 +9,38 @@ const slides = [
 
     {
       key: "1",
-      title: 'WELCOME TO Whizz',
-      text: 'Hello fellow Whizzards',
+      title: 'WELCOME \nTO WHIZZ',
+      //text: 'Hello fellow Whizzards',
       image: require('../assets/onboard-welcome.png'),
       backgroundColor: '#fff'//'#8b0000'//'#daa520'//''// //#febe29',
     },
     {
       key: "2",
-      title: 'WELCOME TO WHIZZ',
-      text: 'The Whizz Team would like to thank all of our Essential Workers for taking care of us during these challenging times.\n\nBut we especially want to thank the unsung heroes...',
-      image: require('../assets/essWorker.png'),
-      backgroundColor: '#ff8c00'//'#8b0000'//'#daa520'//''// //#febe29',
+      title: "LET'S GO!!!",
+      text: 'America is back on the road again!!! And Whizz is here to help you find a place to "go" when you are on the go!',
+      image: require('../assets/onboard-lets-go.png'),
+      backgroundColor: '#fff'//'#8b0000'//'#daa520'//''// //#febe29',
     },
     {
       key: "3",
-      title: 'DELIVERY WORKERS!',
-      text: 'You guys are saving lives! Your hard work allows us to stay home and slow the spread of the virus.\n\n So Whizz is partnering with our good friends at Waba Grill to take care of you. How are we going to do that? How about a nice discount on their amazing food and exclusive access to their restrooms!!!',
-      image: require('../assets/maskDeliv.jpg'),
-      backgroundColor: '#22bcb5'//'#59b2ab',
+      title: 'OPEN or CLOSED?',
+      text: "Dark blue pins means the locations are open (subject to business hours) and you are good to go. \n\nLight blue pins means we need you to tell us if it is still there! Please CHECK IN and review to update it's status.",
+      image: require('../assets/onboard-verification-1.png'),
+      backgroundColor: '#fff'//'#59b2ab',
     },
     {
         key: "4",
-        title: 'WELCOME',
-        text: 'This offer is available at participating Waba Grills.  Open the Whizz map and click on the icon. Select the popup to get directions. To gain access to the restroom and the exclusive discount, show the app to the manager.',
-        image: require('../assets/waba.jpg'),
-        backgroundColor: '#ff8c00'//'#22bcb5',
+        title: 'RATE IT!',
+        text: 'Help your fellow Whizzards by rating your visit.',
+        image: require('../assets/onboard-rating.png'),
+        backgroundColor: '#fff' //'#22bcb5',
       },
    {
       key: "5",
-      title: 'BE SAFE!!!',
-      text: 'Please remember to wear your mask at all times, especially in the restaurant.  Be safe out there!\n\n The Whizz Team. \n\nIf you know of any restaurant that wants to join, they can reach us at Whizzzit@gmail.com',
-      image: require('../assets/mask2.jpg'),
-      backgroundColor: '#22bcb5',
+      title: 'CHECK IN!',
+      text: "Remember to check in at your favorite spots, and we'll get busy conjuring up some exclusive discounts for you.",
+      image: require('../assets/onboard-favorite-1.png'),
+      backgroundColor: '#fff',
     } 
   ];
 
@@ -50,14 +50,14 @@ const slides = [
       resizeMode: 'cover',
     },
     image: {
-        width: '90%',
-        height: 300,
+        width: '100%',
+        height: 400,
         resizeMode:'contain'
         
       },
     text: {
       color: '#333',
-      marginTop: '10%',
+      //marginTop: '2%',
       textAlign: 'center',
     },
   });
@@ -69,14 +69,31 @@ const slides = [
         <Image source={item.image} style ={styles.image} />
         </View>
         <Text style={{fontSize:RFPercentage(5), alignSelf:"center"}}>{item.title}</Text>
-        <Text style= {{marginLeft: 40, marginRight:40, marginTop: '5%',fontSize:RFPercentage(2.5)}}>{item.text}</Text>
+        <Text style= {{marginLeft: 40, marginRight:40, marginTop: '4%',fontSize:RFPercentage(2.5)}}>{item.text}</Text>
       </View>
     );
   }
 
+  _renderSkipButton = () =>{
+    return (
+      <View>
+        <Text style={{color: '#333', fontSize: 18}}>Skip</Text>
+      </View>
+    )
+  }
+
+  _renderDoneButton = () => {
+    return (
+      <View>
+        <Text style={{color: '#333', fontSize: 18}}>Done</Text>
+      </View>
+    );
+  };
+
   const Slider = props =>{
       return <AppIntroSlider data={slides} renderItem={this._renderItem} onDone={props.onDoneAllSlides} 
-      onskip={props.onDoneAllSlides} showSkipButton={true}/>
+      onskip={props.onDoneAllSlides} showSkipButton={true} renderSkipButton={this._renderSkipButton} 
+      renderDoneButton={this._renderDoneButton}/>
   }
 
   export default Slider

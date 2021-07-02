@@ -98,7 +98,7 @@ constructor(props) {
 
   useCheck = async () =>{
   newUser = this.props.user
-  this.setState({ newUser: true })
+  this.setState({ newUser: newUser })
   
   }
   

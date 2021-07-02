@@ -68,6 +68,7 @@ class Checkin extends React.Component {
   componentDidMount() {
     this.checkRestroomDistance();
     AppState.addEventListener('change', this._handleAppStateChange);
+    this._mounted = true
   }
 
   _handleAppStateChange = nextAppState => {
@@ -119,7 +120,6 @@ class Checkin extends React.Component {
 
   render() {
     const { item } = this.props;
-    console.log(item);
     let longitude = item.longitude;
     let latitude = item.latitude;
     const { name } = item;
