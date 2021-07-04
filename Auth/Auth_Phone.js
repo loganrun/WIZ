@@ -68,6 +68,7 @@ export default Auth_Phone = () => {
         .auth()
         .signInWithCredential(credential)
         .then((result) => {
+          console.log(result)
           let logger = result
           let user = logger.user.uid
         

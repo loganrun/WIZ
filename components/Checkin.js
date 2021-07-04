@@ -15,6 +15,7 @@ import {
   CardItem,Body, Image
 } from 'native-base';
 
+import * as Amplitude from 'expo-analytics-amplitude'
 import { showLocation } from 'react-native-map-link';
 //import DialogInput from 'react-native-dialog-input';
 import * as Location from 'expo-location';
@@ -197,9 +198,19 @@ class Checkin extends React.Component {
               //width: 130
             }}
             onPress={() => {
+              const eventProp = {
+                id: id,
+                name: name,
+                street: street,
+                city: city,
+                distance: distance
+              }
               if (this.state.checkInAvailable) {
                 this.props.doCheckIn();
+                Amplitude.logEventWithPropertiesAsync("RESTAURANT_SELECT", eventProp)
               }
+              
+              
             }}
           >
             <Text
@@ -299,8 +310,16 @@ class Checkin extends React.Component {
               //width: 130
             }}
             onPress={() => {
+              const eventProp = {
+                id: id,
+                name: name,
+                street: street,
+                city: city,
+                distance: distance
+              }
               if (this.state.checkInAvailable) {
-                this.props.doCheckIn1();
+                this.props.doCheckIn();
+                Amplitude.logEventWithPropertiesAsync("RESTAURANT_SELECT", eventProp)
               }
               
             }}
