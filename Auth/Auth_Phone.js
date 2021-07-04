@@ -84,7 +84,13 @@ export default Auth_Phone = () => {
               phoneNum: logger.user.phoneNumber
             }
           });
+          AsyncStorage.setItem("userToken", user)
           Amplitude.getInstance().setUserId(user)
+        })
+        .catch(function(error) {
+          
+          console.log(error.message);
+          
         });
     };
   

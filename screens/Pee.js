@@ -13,12 +13,6 @@ import {
   Image
 } from "react-native";
 import {
-  Container,
-  Content,
-  Header,
-  Left,
-  Right,
-  Icon,
   Button,
   Body,
   Card,
@@ -32,7 +26,6 @@ import {connect} from 'react-redux'
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
 import { SafeAreaView } from 'react-navigation'
-import Ad from "../components/Ads";
 import restApi from '../services/restroom';
 import Ratings from "../components/Rating"
 import Checkin from "../components/Checkin"
@@ -81,13 +74,13 @@ class Pee extends Component {
         userId: uID,
       });
       if (response.data) {
-        Toast.show(response.data, {
-          duration: Toast.durations.LONG,
-        });
+        //console.log(response.data)
+        
+        Alert.alert(response.data)
       }
     } catch (e) {
-      console.log(e.response);
-      // console.log(e.response);
+      //console.log(e.response);
+       console.log(e.response);
     }
   }
 
@@ -157,7 +150,7 @@ class Pee extends Component {
           });
         }
       } catch (e) {
-        // console.log(e.response);
+        console.log(e.response);
         this.setState({
           showProfileInput: true
         });
@@ -190,7 +183,7 @@ class Pee extends Component {
           });
         }
       } catch (e) {
-        // console.log(e.response);
+        console.log(e.response);
         this.setState({
           showProfileInput: true
         });
@@ -202,7 +195,8 @@ class Pee extends Component {
   }
 
   addVerify = async () => {
-    let item = this.props.item;
+    const { navigation } = this.props;
+    const item = navigation.getParam('item');
     let latitude = item.latitude;
     let longitude = item.longitude
     let name = item.name
@@ -246,7 +240,7 @@ class Pee extends Component {
         console.log('Success!')
       }
     } catch (error) {
-      console.log(error)
+      console.log(error.message)
     }
   }
 
@@ -359,7 +353,7 @@ class Pee extends Component {
               zIndex: 1
             }}
           >
-            <Checkin item={item} sourceLat={curLat} sourceLon={curLon} doCheckIn={this.doCheckIn} leaveReview={this.leaveReview} />
+            <Checkin item={item} sourceLat={curLat} sourceLon={curLon} doCheckIn1={this.doCheckIn1} doCheckIn={this.doCheckIn} leaveReview={this.leaveReview} />
              <Ratings item={this.props.item} leaveReview={this.leaveReview}/>  
           </Animated.View>
         </ScrollView>

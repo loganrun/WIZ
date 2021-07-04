@@ -24,7 +24,7 @@ const slides = [
     {
       key: "3",
       title: 'OPEN or CLOSED?',
-      text: "Dark blue pins means the locations are open (subject to business hours) and you are good to go. \n\nLight blue pins means we need you to tell us if it is still there! Please CHECK IN and review to update it's status.",
+      text: "Dark blue pins means the restrooms are open (subject to business hours) and you are good to go. \n\nLight blue pins means we need you to tell us if it is still there! Please CHECK IN and review the restroom to update it's status.",
       image: require('../assets/onboard-verification-1.png'),
       backgroundColor: '#fff'//'#59b2ab',
     },

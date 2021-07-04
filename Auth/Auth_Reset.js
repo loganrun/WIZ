@@ -75,7 +75,7 @@ class AuthReset extends Component {
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("email")}
-              onBlur={formikProps.handleBlur("email")}
+              //onBlur={formikProps.handleBlur("email")}
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
               Please enter email

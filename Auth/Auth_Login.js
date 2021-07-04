@@ -7,7 +7,7 @@ import {
   TextInput,
   ActivityIndicator,
   KeyboardAvoidingView,
-  Platform,ImageBackground,Image
+  ImageBackground,Image
 } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Formik } from "formik";
@@ -63,12 +63,13 @@ class AuthLogin extends Component {
               //console.log(cred);
               let user = firebase.auth().currentUser;
               //console.log(user);
-              if (!user.emailVerified) {
-                user.sendEmailVerification();
-                AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
-              }
-              AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
+              // if (!user.emailVerified) {
+              //   user.sendEmailVerification();
+              //   AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
+              // }
+              AsyncStorage.setItem("userToken", user.uid);
             })
+            
             .then(cred => this.props.navigation.navigate("Main"))
             .catch(function(error) {
               //console.log(error);
@@ -94,7 +95,7 @@ class AuthLogin extends Component {
             <TextInput
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("email")}
-              onBlur={formikProps.handleBlur("email")}
+              //onBlur={formikProps.handleBlur("email")}
               autoFocus
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
@@ -108,7 +109,7 @@ class AuthLogin extends Component {
               style={styles.textInput}
               onChangeText={formikProps.handleChange("password")}
               secureTextEntry
-              onBlur={formikProps.handleBlur("password")}
+              //onBlur={formikProps.handleBlur("password")}
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
               Password

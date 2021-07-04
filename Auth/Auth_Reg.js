@@ -99,9 +99,9 @@ class AuthReg extends Component {
             
             .then(function(cred) {
               user = firebase.auth().currentUser;
-              user.sendEmailVerification();
-              AsyncStorage.setItem("userToken", JSON.stringify(user.uid));
-              //createUser(value, user);
+              //user.sendEmailVerification();
+              AsyncStorage.setItem("userToken", user.uid);
+              AsyncStorage.setItem("userName", userName)
               
             })
             .then(function(cred) {
@@ -148,7 +148,7 @@ class AuthReg extends Component {
             <TextInput
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("firstName")}
-              onBlur={formikProps.handleBlur("firstName")}
+              //onBlur={formikProps.handleBlur("firstName")}
               autoFocus
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
@@ -160,7 +160,7 @@ class AuthReg extends Component {
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("lastName")}
-              onBlur={formikProps.handleBlur("lastName")}
+              //onBlur={formikProps.handleBlur("lastName")}
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
               Last Name
@@ -171,7 +171,7 @@ class AuthReg extends Component {
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("userName")}
-              onBlur={formikProps.handleBlur("userName")}
+              //onBlur={formikProps.handleBlur("userName")}
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
               User Name
@@ -183,7 +183,7 @@ class AuthReg extends Component {
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("email")}
-              onBlur={formikProps.handleBlur("email")}
+              //onBlur={formikProps.handleBlur("email")}
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
               Email
@@ -195,7 +195,7 @@ class AuthReg extends Component {
               style={styles.textInput}
               onChangeText={formikProps.handleChange("password")}
               secureTextEntry
-              onBlur={formikProps.handleBlur("password")}
+              //onBlur={formikProps.handleBlur("password")}
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
               Password
@@ -203,25 +203,6 @@ class AuthReg extends Component {
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
             </Text>
-            {/* <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("phone number")}
-              secureTextEntry
-              onBlur={formikProps.handleBlur("phone")}
-            />
-            <Text style={{ color: "white", marginLeft: 40 }}>
-              Phone Number
-            </Text>
-            <Text style={{ color: "white", marginLeft: 40 }}>
-              {formikProps.touched.password && formikProps.errors.password}
-            </Text>
-            <TextInput
-              style={styles.textInput}
-              onChangeText={formikProps.handleChange("service")}
-              onBlur={formikProps.handleBlur("service")}
-              placeholder='Do you drive for a service?'
-            /> */}
-            
             {formikProps.isSubmitting ? (
               <ActivityIndicator />
             ) : (

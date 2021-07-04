@@ -302,6 +302,7 @@ class Checkin extends React.Component {
               if (this.state.checkInAvailable) {
                 this.props.doCheckIn1();
               }
+              
             }}
           >
             <Text
@@ -346,3 +347,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Checkin);
+
+
+// if (this.state.checkInAvailable) {
+//   this.props.doCheckIn();
+// }
