@@ -68,9 +68,9 @@ export default Auth_Phone = () => {
         .auth()
         .signInWithCredential(credential)
         .then((result) => {
-          console.log(result)
           let logger = result
           let user = logger.user.uid
+          console.log(user)
         
           axios({
             method: "post",
@@ -80,7 +80,7 @@ export default Auth_Phone = () => {
               Accept: "application/json",
               "Content-Type": "application/json"
             },
-            data: {
+            data:{
               userId: logger.user.uid,
               phoneNum: logger.user.phoneNumber
             }

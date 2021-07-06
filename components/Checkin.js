@@ -89,6 +89,7 @@ class Checkin extends React.Component {
       { latitude, longitude }
     );
     const checkInAvailable =  distance <= this.state.distanceLimit;
+
     this.setState({
       checkInAvailable,
       ctlat: location.coords.latitude,
@@ -103,7 +104,7 @@ class Checkin extends React.Component {
 
   updateDistance = () =>{
     if(!this.state.checkInAvailable){
-      setTimeout(this.checkRestroomDistance, 60000)
+      setTimeout(this._handleAppStateChange, 30000)
     }else{
       return
     }
@@ -199,12 +200,12 @@ class Checkin extends React.Component {
             }}
             onPress={() => {
               const eventProp = {
-                id: id,
-                name: name,
-                street: street,
-                city: city,
-                distance: distance
+                id: this.props.item.id,
+                name: this.props.item.name,
+                street: this.props.item.street,
+                city: this.props.item.city
               }
+              
               if (this.state.checkInAvailable) {
                 this.props.doCheckIn();
                 Amplitude.logEventWithPropertiesAsync("RESTAURANT_SELECT", eventProp)
@@ -311,14 +312,14 @@ class Checkin extends React.Component {
             }}
             onPress={() => {
               const eventProp = {
-                id: id,
-                name: name,
-                street: street,
-                city: city,
-                distance: distance
+                id: this.props.item.id,
+                name: this.props.item.name,
+                street: this.props.item.street,
+                city: this.props.item.city
               }
+              
               if (this.state.checkInAvailable) {
-                this.props.doCheckIn();
+                this.props.doCheckIn1();
                 Amplitude.logEventWithPropertiesAsync("RESTAURANT_SELECT", eventProp)
               }
               

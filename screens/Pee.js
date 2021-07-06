@@ -62,7 +62,8 @@ class Pee extends Component {
       changing_table: null,
       directions:  "",
       accessible: true,
-      unisex: false
+      unisex: false,
+      id: ""
     }
     
   }
@@ -132,12 +133,14 @@ class Pee extends Component {
     const { profileName } = this.props;
     if (profileName === '') {
       const uID = await this.getUserId();
+      //console.log(uID)
       try {
         const response = await restApi.get('/api/users', {
           params: {
             userId: uID
           }
         });
+        console.log(response.data)
         if (response.data) {
           this.props.saveProfileName(response.data);
           this.setState({
@@ -164,6 +167,7 @@ class Pee extends Component {
     const { profileName } = this.props;
     if (profileName === '') {
       const uID = await this.getUserId();
+      //console.log(uID)
       try {
         const response = await restApi.get('/api/users', {
           params: {
@@ -207,6 +211,7 @@ class Pee extends Component {
     let directions = item.directions
     let accessible = item.accessible
     let unisex = item.unisex
+    let id = item.id
     this.setState({latitude: latitude})
     this.setState({longitude: longitude})
     this.setState({name:  name})
@@ -217,6 +222,7 @@ class Pee extends Component {
     this.setState({directions: directions})
     this.setState({accessible: accessible})
     this.setState({unisex:  unisex})
+    this.setState({id: id})
     this.placeUpdate()
   }
 
@@ -232,7 +238,8 @@ class Pee extends Component {
      changing_table: this.state.changing_table,
      directions: this.state.directions,
      accessible: this.state.accessible,
-     unisex: this.state.unisex
+     unisex: this.state.unisex,
+     id: this.state.id
 
       });
 
@@ -251,6 +258,7 @@ class Pee extends Component {
   submitProfileName = async (pname) => {
     const { navigation } = this.props;
     const uID = await this.getUserId();
+    
     try {
       const response = await restApi.patch(`/api/users/${uID}`, {
         userName: pname,

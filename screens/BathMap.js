@@ -198,21 +198,19 @@ constructor(props) {
     
     try{
 
-    
       let params = {
         lat: this.state.region.latitude,
         lng: this.state.region.longitude
       };
       
-
-      const results = await axios.all([
+      const result = await axios.all([
         refugeeApi.get('/v1/restrooms/by_location',{params}),
         restApi.get('/api/bathrooms',{ params })
         
       ]).then(axios.spread((...responses) =>{
          let response1 = responses[0].data;
         let response2 = responses[1].data;
-        let prelim = response1.concat(response2);
+        let prelim = response2.concat(response1);
         //console.log(prelim)
 
         return prelim
@@ -220,12 +218,20 @@ constructor(props) {
         console.log("error", err.message);
       })
 
-       const  bathroom = await results.map(result =>
-         result
-        
+      const  bathroom = await result.reduce((acc, current) =>{
+         const x = acc.find(item => item.street === current.street);
+         if (!x){
+           return acc.concat([current]);
+         }else{
+           return acc;
+         }
+
+       
+      
+      }, []  
       )
-      this.setState({ bathroom: bathroom });
-     
+
+      this.setState({ bathroom: bathroom });     
       this.setState({ loading: false });
     } catch (e) {
       console.log("error", e.message);
