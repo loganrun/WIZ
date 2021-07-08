@@ -17,7 +17,7 @@ import {
 
 //import { showLocation } from "react-native-map-link";
 import StarRating from "react-native-star-rating";
-import MapView,{Callout} from 'react-native-maps';
+import MapView,{PROVIDER_GOOGLE} from 'react-native-maps';
 import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
@@ -489,7 +489,7 @@ constructor(props) {
             latitudeDelta: 0.1564,
             longitudeDelta: 0.0636 }}//.1764,.1236,.0636,.5064
               style={{flex:1, marginTop:this.state.mapMargin}}
-              provider="google"
+              provider= {PROVIDER_GOOGLE}
               showsUserLocation={true}
               showsMyLocationButton={true}
               onMapReady={this.setMargin}
