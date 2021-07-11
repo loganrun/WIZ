@@ -7,7 +7,7 @@
       "ios",
       "android"
     ],
-    "version": "4.0.0",
+    "version": "4.0.1",
     "orientation": "portrait",
     "icon": "./assets/whizz_logo1.png",
     "splash": {
@@ -23,7 +23,7 @@
     "ios": {
       "bundleIdentifier": "com.TheWhizzApp",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "4.0.0",
+      "buildNumber": "4.0.1",
       "supportsTablet": true,
       "config": {
         "googleMapsApiKey": "AIzaSyDutSO9RROS5389Z1laCVu6m4idanT31B8",
@@ -38,7 +38,7 @@
     "android": {
       "package": "com.TheWhizzApp.gotta_go",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 15,
+      "versionCode": 16,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyCFDvLCd6P4F5fyG6OIiJeIcZG6_DS606c"
