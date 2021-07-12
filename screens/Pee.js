@@ -81,6 +81,7 @@ class Pee extends Component {
       }
     } catch (e) {
       //console.log(e.response);
+      Alert.alert(e.response)
        console.log(e.response);
     }
   }
@@ -115,11 +116,13 @@ class Pee extends Component {
         }
       });
       if (response.data) {
+        Alert.alert(response.data)
         Toast.show(response.data, {
           duration: Toast.durations.LONG,
         });
       }
     } catch (e) {
+      Alert.alert(e.response.data.errors[0].msg)
       Toast.show(e.response.data.errors[0].msg, {
         duration: Toast.durations.LONG,
       });
@@ -140,7 +143,7 @@ class Pee extends Component {
             userId: uID
           }
         });
-        console.log(response.data)
+        //console.log(response.data)
         if (response.data) {
           this.props.saveProfileName(response.data);
           this.setState({
@@ -273,6 +276,7 @@ class Pee extends Component {
         this.setState({
           showProfileInput: false,
         });
+        Alert.alert(e.response.data.errors[0].msg)
         Toast.show(e.response.data.errors[0].msg, {
           duration: Toast.durations.LONG,
         });

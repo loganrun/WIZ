@@ -86,7 +86,7 @@ constructor(props) {
     
     this.loadBathroom();
     this.setState({ loading: true });
-    //this.useCheck();
+    this.useCheck();
     //this.index = 0;
     //this.animation = new Animated.Value(0);
     
@@ -96,11 +96,11 @@ constructor(props) {
 
 
 
-  // useCheck = async () =>{
-  // newUser = this.props.user
-  // this.setState({ newUser: true })
+  useCheck = async () =>{
+  newUser = this.props.user
+  this.setState({ newUser: true })
   
-  // }
+  }
   
   setMargin=()=>{
     this.setState({mapMargin: 0});
