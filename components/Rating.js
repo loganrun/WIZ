@@ -62,31 +62,31 @@ class Ratings extends Component {
   //   //this.placeUpdate()
   //   }
 
-    placeUpdate = () =>{
-      //let user = userToken
-      axios({
-        method: "post",
-        baseURL: "https://whizzit.herokuapp.com/api/bathrooms",
-        timeout: 40000,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        data: {
-          latitude: this.state.latitude,
-          longitude: this.state.longitude,
-          name: this.state.name,
-          street: this.state.street,
-          state: this.state.state,
-          table:  this.state.table,
-          city: this.state.city,
-          id: this.state.id,
-          directions: this.state.directions,
-          accessible: this.state.accessible,
-          unisex: this.state.unisex
-        }
-      });
-    }
+    // placeUpdate = () =>{
+    //   //let user = userToken
+    //   axios({
+    //     method: "post",
+    //     baseURL: "https://whizzit.herokuapp.com/api/bathrooms",
+    //     timeout: 40000,
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json"
+    //     },
+    //     data: {
+    //       latitude: this.state.latitude,
+    //       longitude: this.state.longitude,
+    //       name: this.state.name,
+    //       street: this.state.street,
+    //       state: this.state.state,
+    //       table:  this.state.table,
+    //       city: this.state.city,
+    //       id: this.state.id,
+    //       directions: this.state.directions,
+    //       accessible: this.state.accessible,
+    //       unisex: this.state.unisex
+    //     }
+    //   });
+    // }
 
     addOne = () =>{
      Alert.alert('Your rating has been recorded! Thank You.')

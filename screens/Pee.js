@@ -122,6 +122,7 @@ class Pee extends Component {
         });
       }
     } catch (e) {
+      console.log(e)
       Alert.alert(e.response.data.errors[0].msg)
       Toast.show(e.response.data.errors[0].msg, {
         duration: Toast.durations.LONG,
@@ -434,15 +435,15 @@ class Pee extends Component {
                 multiline
                 editable
                 numberOfLines={1}
-                placeholder={"Your rating from 1-5"}
+                placeholder={"Your rating from 1-5. Must be a number"}
                 placeholderTextColor={'#3480CB'}
                 style={{
                   fontSize: 16,
                   padding: 10,
                 }}
-                value={this.state.reviewContent}
+                value={this.state.rating}
                 onChangeText={text => this.setState({
-                  reviewContent: text,
+                  rating: text,
                 })}
               />
             </View>
