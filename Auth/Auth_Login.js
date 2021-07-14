@@ -108,11 +108,11 @@ class AuthLogin extends Component {
             <TextInput
               style={styles.textInput}
               onChangeText={formikProps.handleChange("password")}
-              secureTextEntry
+              secureTextEntry 
               //onBlur={formikProps.handleBlur("password")}
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
-              Password
+              Password - password is case sensitive
             </Text>
             <Text style={{ color: "white", marginLeft: 40 }}>
               {formikProps.touched.password && formikProps.errors.password}
