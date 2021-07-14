@@ -63,7 +63,7 @@ class App extends React.Component {
 
 
   _getLocationAsync = async () => {
-    let { status } = await Location.requestPermissionsAsync();
+    let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       //console.log(status)
       //this.setState({

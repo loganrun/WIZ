@@ -7,7 +7,7 @@
       "ios",
       "android"
     ],
-    "version": "4.0.1",
+    "version": "4.0.2",
     "orientation": "portrait",
     "icon": "./assets/whizz_logo1.png",
     "splash": {
@@ -23,7 +23,7 @@
     "ios": {
       "bundleIdentifier": "com.TheWhizzApp",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "buildNumber": "4.0.1",
+      "buildNumber": "4.0.2",
       "supportsTablet": true,
       "config": {
         "googleMapsApiKey": "AIzaSyDutSO9RROS5389Z1laCVu6m4idanT31B8",
@@ -45,7 +45,7 @@
         }
       },
       "permissions": [
-        "ACCESS_FINE_LOCATION"
+        "ACCESS_FINE_LOCATION","ACCESS_COARSE_LOCATION","FOREGROUND_SERVICE"
       ]
     },
     "web": {
@@ -62,7 +62,7 @@
         }
       }
     },
-    "description": "When you gotta!",
+    "description": "When you gotta go!",
     "hooks": {
       "postPublish": [
         {
