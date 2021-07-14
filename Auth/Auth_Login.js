@@ -72,7 +72,6 @@ class AuthLogin extends Component {
             
             .then(cred => this.props.navigation.navigate("Main"))
             .catch(function(error) {
-              //console.log(error);
               var errorCode = error.code;
               var errorMessage = error.message;
               if (errorCode == "auth/user-not-found") {
@@ -90,12 +89,10 @@ class AuthLogin extends Component {
       >
         {formikProps => (
           <KeyboardAvoidingView style={styles.container} behavior='height'>
-            {/* <View style={styles.container}> */}
-            {/* <Text style={styles.text}>Login</Text> */}
+        
             <TextInput
               style={styles.textInput1}
               onChangeText={formikProps.handleChange("email")}
-              //onBlur={formikProps.handleBlur("email")}
               autoFocus
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
@@ -109,7 +106,6 @@ class AuthLogin extends Component {
               style={styles.textInput}
               onChangeText={formikProps.handleChange("password")}
               secureTextEntry 
-              //onBlur={formikProps.handleBlur("password")}
             />
             <Text style={{ color: "white", marginLeft: 40 }}>
               Password - password is case sensitive
@@ -122,7 +118,7 @@ class AuthLogin extends Component {
               <ActivityIndicator />
             ) : (
               <TouchableOpacity
-                //style={styles.button}
+              
                 onPress={formikProps.handleSubmit}
               >
                 <Image source={loginbtn} style={{width: 300, height: 44, alignContent:"center", marginTop: 40, alignSelf: "center"}}></Image>
