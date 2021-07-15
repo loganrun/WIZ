@@ -32,7 +32,6 @@
 	<string>1:5680477837:ios:8cf7146172b99a092214c4</string>
 	<key>DATABASE_URL</key>
 	<string>https://wizusers.firebaseio.com</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow $(Whizz) to use your location</string>
+	
 </dict>
 </plist>

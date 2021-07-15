@@ -3,7 +3,7 @@ import {
   ActivityIndicator,
   StatusBar,
   StyleSheet,
-  View
+  View, Alert
 } from "react-native";
 import firebase from "firebase";
 import {connect} from "react-redux"
@@ -23,6 +23,7 @@ class AuthLoadingScreen extends React.Component {
   _bootstrapAsync = async () => {
     
     let location = await this.getLocation();
+    Alert.alert(JSON.stringify(location))
     //console.log(location)
     this.props.initLocation(location)
     //this.props.navigation.navigate("Main");
