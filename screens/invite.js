@@ -7,9 +7,9 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Switch
+  Switch, SafeAreaView
 } from "react-native";
-import { SafeAreaView } from 'react-navigation';
+//import { SafeAreaView } from 'react-navigation';
 
 class Invite extends Component {
   static navigationOptions = {

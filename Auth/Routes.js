@@ -6,6 +6,7 @@ import {
   createAppContainer,
   createDrawerNavigator
 } from "react-navigation";
+import {createStackNavigator} from "react-navigation-stack";
 import Explore from "../screens/Explore";
 import Places from "../screens/Places";
 import Favorites from "../screens/Favorites";

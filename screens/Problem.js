@@ -4,9 +4,9 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Platform, Linking
+  Platform, Linking, SafeAreaView
 } from "react-native";
-import { SafeAreaView } from 'react-navigation';
+//import { SafeAreaView } from 'react-navigation';
 import * as MailComposer from "expo-mail-composer"
 //import * as Linking from "expo-linking"
 

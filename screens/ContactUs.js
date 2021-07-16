@@ -5,9 +5,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
-  Linking
+  Linking, SafeAreaView
 } from "react-native";
-import { SafeAreaView } from 'react-navigation';
+//import { SafeAreaView } from 'react-navigation';
 //import { Formik } from "formik";
 //import * as yup from "yup";
 import * as MailComposer from "expo-mail-composer"

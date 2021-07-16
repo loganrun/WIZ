@@ -3,7 +3,7 @@ import {
   View,
   Platform,
   Text,
-  Image,ActivityIndicator, ScrollView, StyleSheet,Dimensions, TouchableOpacity, Animated, FlatList
+  Image,ActivityIndicator, SafeAreaView, StyleSheet,Dimensions, TouchableOpacity, Animated, FlatList
 } from "react-native";
  import {
    Left,
@@ -23,7 +23,7 @@ import { Ionicons } from "@expo/vector-icons";
 import restApi from "../services/restroom";
 import refugeeApi from '../services/refugee'
 import {connect} from "react-redux"
-import { SafeAreaView } from 'react-navigation'
+//import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
 import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
@@ -545,6 +545,7 @@ return{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#3480CB"
   },
   tool:{
     width: 250,

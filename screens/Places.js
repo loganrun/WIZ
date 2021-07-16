@@ -9,7 +9,7 @@ import {
   PanResponder,
   Slider,
   TouchableOpacity,
-  Image
+  Image, SafeAreaView
 } from "react-native";
 import {
   Container,
@@ -29,7 +29,7 @@ import StarRating from "react-native-star-rating";
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
 import Ad from "../components/Ads"
-import { SafeAreaView } from 'react-navigation'
+//import { SafeAreaView } from 'react-navigation'
 //import ContentArea from "../components/ContentArea";
 //var ad = require("../assets/ad.png");
 

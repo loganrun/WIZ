@@ -8,7 +8,7 @@ import {
   Dimensions,
   Animated,
   PanResponder,
-  Modal,Alert,
+  Modal,Alert,SafeAreaView,
   TouchableOpacity,
   Image
 } from "react-native";
@@ -25,7 +25,7 @@ import StarRating from "react-native-star-rating";
 import {connect} from 'react-redux'
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
-import { SafeAreaView } from 'react-navigation'
+//import { SafeAreaView } from 'react-navigation'
 import restApi from '../services/restroom';
 import Ratings from "../components/Rating"
 import Checkin from "../components/Checkin"
