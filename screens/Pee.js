@@ -32,6 +32,7 @@ import Checkin from "../components/Checkin"
 import DialogInput from 'react-native-dialog-input';
 import { storeProfileName } from '../store/actions';
 import Toast from 'react-native-root-toast';
+import { number } from "yup";
 //var vid = require("../assets/donut.mp4")
 
 //const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -437,13 +438,14 @@ class Pee extends Component {
                 numberOfLines={1}
                 placeholder={"Your rating from 1-5. Must be a number"}
                 placeholderTextColor={'#3480CB'}
+                keyboardType="numeric"
                 style={{
                   fontSize: 16,
                   padding: 10,
                 }}
                 value={this.state.rating}
-                onChangeText={text => this.setState({
-                  rating: text,
+                onChangeNumber={number => this.setState({
+                  rating: number,
                 })}
               />
             </View>
