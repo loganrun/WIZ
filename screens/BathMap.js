@@ -136,7 +136,7 @@ constructor(props) {
           </Left> 
             <CardItem style={{flexDirection: 'column', width: 180}}>
             <Right style={{alignItems: 'flex-end',}}>
-              <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 15}}>{item.name}</Text>
+              <Text numberOfLines={2} style={{fontWeight: 'bold',textTransform:'uppercase', color: '#173E81', fontSize: 14}}>{item.name}</Text>
               <Text style={{fontSize:13}}>{item.street}</Text>
               <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
               <Text>Distance: {distance} miles</Text>
@@ -176,7 +176,7 @@ constructor(props) {
           </Left>  
             <CardItem style={{flexDirection: 'column', width: 180}}>
             <Right style={{alignItems: 'flex-end',}}>
-              <Text style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 15}}>{item.name}</Text>
+              <Text numberOfLines={2} style={{fontWeight: 'bold',textTransform:'uppercase', color: '#173E81', fontSize: 14}}>{item.name}</Text>
               <Text style={{fontSize:13}}>{item.street}</Text>
               <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
               <Text>Distance: {distance} miles</Text>
