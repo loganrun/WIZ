@@ -8,7 +8,7 @@ const loginPage = require("../assets/Loginbk.png");
 const signupbtn = require("../assets/sign-up.png");
 const loginbtn = require("../assets/logintransparent.png");
 import Logo from "../components/Logo"
-import { SafeAreaView } from 'react-navigation'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Amplitude from 'expo-analytics-amplitude'
 import * as Facebook from 'expo-facebook'
 import * as GoogleSignIn from "expo-google-sign-in"
@@ -37,13 +37,16 @@ class AuthHome extends Component {
   static navigationOptions = {
     //title: "WHIZZ",
     headerTitle: ()=><Logo/>,
-    // headerStyle: {
+    headerStyle: {
        backgroundColor: "#3480CB",
     //   //justifyContent: "center"
     // },
-    headerTintColor: "#fff",
-    headerTitleStyle: {
-      fontWeight: "bold"
+    //headerTintColor: "#fff",
+    //margin:0,
+    //padding:0,
+    //headerTitleStyle: {
+    //  fontWeight: "bold"
+    height: 80
     },
     
   };

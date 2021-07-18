@@ -8,7 +8,7 @@ import {
   Dimensions,
   Animated,
   PanResponder,
-  Modal,Alert,SafeAreaView,
+  Modal,Alert,
   TouchableOpacity,
   Image
 } from "react-native";
@@ -18,7 +18,7 @@ import {
   Card,
   CardItem
 } from "native-base";
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { showLocation } from "react-native-map-link";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import StarRating from "react-native-star-rating";

@@ -83,7 +83,6 @@ class App extends React.Component {
     try{
 
       let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
-      Alert.alert(JSON.stringify(location))
       this.saveLocation(location)
 
     }catch(error){

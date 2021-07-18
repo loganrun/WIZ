@@ -4,11 +4,12 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Platform, Linking, SafeAreaView
+  Platform, Linking
 } from "react-native";
 //import { SafeAreaView } from 'react-navigation';
 import * as MailComposer from "expo-mail-composer"
 //import * as Linking from "expo-linking"
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 class Problem extends Component {
   static navigationOptions = {

@@ -1,6 +1,8 @@
 import React from "react";
-import {Image, StyleSheet, View} from "react-native";
+import {Image, StyleSheet, View, Dimensions} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+
+const { width, height } = Dimensions.get("window");
 
 class LogoTitle extends React.Component {
     render() {
@@ -17,7 +19,8 @@ class LogoTitle extends React.Component {
           /> */}
         <Image
           source={require('../assets/rectangle_logo.png')}
-          style={{height: 60, width: 100, paddingTop: 10}}
+          style={{height: 60, width: 100}}
+          //style={{height: '100%', width: width}}
         />
         </View>
       );
@@ -28,13 +31,15 @@ class LogoTitle extends React.Component {
 
   const styles = StyleSheet.create({
     header:{
-      width:  '100%',
-      height: 150,
+      //width: width  ,
+      //height: 150,
       flexDirection:  "row",
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: "#3480CB",
-      paddingTop: 10,
-      paddingBottom:5
+      //backgroundColor: "#3480CB",
+      //paddingTop: 10,
+      //paddingBottom:5,
+      //marginLeft: 0,
+      //paddingLeft: 0
     }
   })

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Platform, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, Platform} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView } from 'react-native-safe-area-context';
 //import { SafeAreaView } from 'react-navigation';
-if (Platform.OS === 'android') {
-  SafeAreaView.setStatusBarHeight(0);
-}
+// if (Platform.OS === 'android') {
+//   SafeAreaView.setStatusBarHeight(0);
+// }
 
 
 

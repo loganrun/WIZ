@@ -7,10 +7,10 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Switch, SafeAreaView
+  Switch
 } from "react-native";
 //import { SafeAreaView } from 'react-navigation';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 class Invite extends Component {
   static navigationOptions = {
     title: "Add Bathroom",
