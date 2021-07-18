@@ -1,11 +1,11 @@
 import React from "react";
 import { Platform, Dimensions } from "react-native";
 import {
-  createBottomTabNavigator,
-  createStackNavigator,
-  createAppContainer,
-  createDrawerNavigator
+  createAppContainer
 } from "react-navigation";
+import {createStackNavigator} from "react-navigation-stack";
+import {createBottomTabNavigator} from "react-navigation-tabs";
+import { createDrawerNavigator } from "react-navigation-drawer";
 import Explore from "../screens/Explore";
 import Places from "../screens/Places";
 import Favorites from "../screens/Favorites";
@@ -26,6 +26,7 @@ import Logo2 from "../components/Logo2"
 import Logo3 from "../components/Logo3"
 import Invite from "../screens/invite"
 import Problem from "../screens/Problem"
+import { Tabs } from "native-base";
 
 
 
@@ -42,15 +43,40 @@ const BathStackNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => {
 
       if(Platform.OS === "ios"){
+      const openMenu = () => navigation.openDrawer()
       return {
         
         headerTitle: ()=><Logo2 navigation={navigation}/>,
+        headerLeft:()=>(
+          <Ionicons
+            style={{ marginLeft: 16 }}
+            onPress={openMenu}
+            name='md-menu'
+            size={30}
+            color={"#fff"}
+          />
+
+        ),
+        headerStyle: {
+          backgroundColor: "#3480CB",//"#52AEA0",
+          height: 90,
+          elevation: 0
+          //height: 80        
+        }
         
       };
     }else{
       return {
          
         headerTitle: ()=><Logo3 navigation={navigation}/>,
+        headerStyle: {
+          backgroundColor: "#3480CB",//"#52AEA0",
+          elevation: 0,
+          height: 80        }
+        // headerTintColor: "#fff",
+        // headerTitleStyle: {
+        //   fontWeight: "bold"
+        // }
     
       };
 

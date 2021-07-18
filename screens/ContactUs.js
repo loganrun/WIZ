@@ -7,11 +7,11 @@ import {
   Platform,
   Linking
 } from "react-native";
-import { SafeAreaView } from 'react-navigation';
+//import { SafeAreaView } from 'react-navigation';
 //import { Formik } from "formik";
 //import * as yup from "yup";
 import * as MailComposer from "expo-mail-composer"
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 class ContactUs extends Component {
   static navigationOptions = {
     title: "Add Bathroom",

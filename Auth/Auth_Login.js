@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as firebase from "firebase";
-import { SafeAreaView } from 'react-navigation'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Amplitude from "expo-analytics-amplitude"
 const loginPage = require("../assets/Loginbk.png");
 const loginbtn = require("../assets/login_white.png");

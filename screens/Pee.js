@@ -18,14 +18,14 @@ import {
   Card,
   CardItem
 } from "native-base";
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { showLocation } from "react-native-map-link";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import StarRating from "react-native-star-rating";
 import {connect} from 'react-redux'
 //import { MapView } from "expo";
 import Maps from "../components/Maps";
-import { SafeAreaView } from 'react-navigation'
+//import { SafeAreaView } from 'react-navigation'
 import restApi from '../services/restroom';
 import Ratings from "../components/Rating"
 import Checkin from "../components/Checkin"

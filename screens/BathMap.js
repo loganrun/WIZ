@@ -3,7 +3,7 @@ import {
   View,
   Platform,
   Text,
-  Image,ActivityIndicator, ScrollView, StyleSheet,Dimensions, TouchableOpacity, Animated, FlatList
+  Image,ActivityIndicator, StyleSheet,Dimensions, TouchableOpacity, Animated, FlatList
 } from "react-native";
  import {
    Left,
@@ -15,6 +15,7 @@ import {
    Button
  } from "native-base";
 
+import { SafeAreaView } from 'react-native-safe-area-context';
 //import { showLocation } from "react-native-map-link";
 import StarRating from "react-native-star-rating";
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
@@ -23,7 +24,7 @@ import { Ionicons } from "@expo/vector-icons";
 import restApi from "../services/restroom";
 import refugeeApi from '../services/refugee'
 import {connect} from "react-redux"
-import { SafeAreaView } from 'react-navigation'
+//import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
 import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
@@ -86,7 +87,7 @@ constructor(props) {
     
     this.loadBathroom();
     this.setState({ loading: true });
-    this.useCheck();
+    //this.useCheck();
     //this.index = 0;
     //this.animation = new Animated.Value(0);
     
@@ -96,11 +97,11 @@ constructor(props) {
 
 
 
-  useCheck = async () =>{
-  newUser = this.props.user
-  this.setState({ newUser: true })
+  // useCheck = async () =>{
+  // newUser = this.props.user
+  // this.setState({ newUser: true })
   
-  }
+  // }
   
   setMargin=()=>{
     this.setState({mapMargin: 0});
@@ -136,8 +137,8 @@ constructor(props) {
           </Left> 
             <CardItem style={{flexDirection: 'column', width: 180}}>
             <Right style={{alignItems: 'flex-end',}}>
-              <Text numberOfLines={2} style={{fontWeight: 'bold',textTransform:'uppercase', color: '#173E81', fontSize: 14}}>{item.name}</Text>
-              <Text style={{fontSize:13}}>{item.street}</Text>
+              <Text numberOfLines={1} style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 15}}>{item.name}</Text>
+              <Text numberOfLines={1} style={{fontSize:13}}>{item.street}</Text>
               <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
               <Text>Distance: {distance} miles</Text>
               <Image resizeMode={'cover'} source={verified}style={{width: 160, height: 75}}/>
@@ -176,8 +177,8 @@ constructor(props) {
           </Left>  
             <CardItem style={{flexDirection: 'column', width: 180}}>
             <Right style={{alignItems: 'flex-end',}}>
-              <Text numberOfLines={2} style={{fontWeight: 'bold',textTransform:'uppercase', color: '#173E81', fontSize: 14}}>{item.name}</Text>
-              <Text style={{fontSize:13}}>{item.street}</Text>
+              <Text numberOfLines={1} style={{fontWeight: 'bold',textTransform: 'capitalize', color: '#173E81', fontSize: 15}}>{item.name}</Text>
+              <Text numberOfLines={1} style={{fontSize:13, marginBottom:5}}>{item.street}</Text>
               <Text style={{width: 120, height: 30}}><Image resizeMode={'cover'} source={tprating}style={{width:120, height: 25}}/></Text>
               <Text>Distance: {distance} miles</Text>
               <Image resizeMode={'cover'} source={unverified}style={{width: 160, height: 75}}/> 
@@ -321,6 +322,7 @@ constructor(props) {
         }}
         //title={item.name}
         image={premicon}
+        style={{height: 30, width: 30}}
         onPress={() => {
           const markerProp = {
           id: item.id,
@@ -347,6 +349,7 @@ constructor(props) {
             }}
             //title={item.name}
             image={regIcon}
+            style={{height: 30, width: 30}}
             onPress={() => {
               const markerProp = {
               id: item.id,
@@ -545,6 +548,7 @@ return{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#3480CB"
   },
   tool:{
     width: 250,
@@ -577,7 +581,7 @@ const styles = StyleSheet.create({
   },
   chipsItem: {
     position:'absolute', 
-    top:Platform.OS === 'ios' ? 90 : 30, 
+    top: 30, //Platform.OS === 'ios' ? 40 : 30, 
     paddingHorizontal:10,
     flexDirection:"row",
     alignSelf:'center',

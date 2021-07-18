@@ -3,7 +3,7 @@ import {
   ActivityIndicator,
   StatusBar,
   StyleSheet,
-  View
+  View, Alert
 } from "react-native";
 import firebase from "firebase";
 import {connect} from "react-redux"

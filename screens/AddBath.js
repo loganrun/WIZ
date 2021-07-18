@@ -7,7 +7,8 @@ import {
   Linking,
   TouchableOpacity
 } from "react-native";
-import { SafeAreaView } from 'react-navigation';
+//import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import * as MailComposer from "expo-mail-composer"
 
 class AddBath extends Component {

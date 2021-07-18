@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   TextInput,
   Platform,
   StatusBar,
@@ -32,6 +31,7 @@ import {
   Card,
   CardItem
 } from "native-base";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 import StarRating from "react-native-star-rating";

@@ -2,9 +2,9 @@ import React from "react";
 import {
   createBottomTabNavigator,
   createSwitchNavigator,
-  createStackNavigator,
   createAppContainer
 } from "react-navigation";
+import {createStackNavigator} from "react-navigation-stack";
 import AuthHome from "./Auth_Home";
 import Login from "./Auth_Login";
 import Reset from "./Auth_Reset";
