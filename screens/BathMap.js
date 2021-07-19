@@ -25,16 +25,16 @@ import restApi from "../services/restroom";
 import refugeeApi from '../services/refugee'
 import {connect} from "react-redux"
 //import { SafeAreaView } from 'react-navigation'
-import Intro from '../components/Slider'
+//import Intro from '../components/Slider'
 import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
 var genericFood = require('../assets/SEARCH-lower-card-generic-img-1.png')
 var unverified = require('../assets/mascot-01-unverified-349x161.png')
 var verified = require('../assets/mascot-01-verified-329x161.png')
 var premicon = require('../assets/pin-verified.png')
-//var premicon1 = require('../assets/pin-verified2.png')
+var premicon1 = require('../assets/pin-verified2.png')
 var regIcon = require('../assets/pin-unverified.png')
-//var regIcon1 = require('../assets/pin-unverified1.png')
+var regIcon1 = require('../assets/pin-unverified1.png')
 //import * as Analytics from 'expo-firebase-analytics'
 import * as Amplitude from 'expo-analytics-amplitude'
 import axios from 'axios'
@@ -89,7 +89,7 @@ constructor(props) {
     
     this.loadBathroom();
     this.setState({ loading: true });
-    this.useCheck();
+    //this.useCheck();
     //this.index = 0;
     //this.animation = new Animated.Value(0);
     
@@ -99,11 +99,11 @@ constructor(props) {
 
 
 
-  useCheck = async () =>{
-  newUser = this.props.user
-  this.setState({ newUser: true })
+  // useCheck = async () =>{
+  // newUser = this.props.user
+  // this.setState({ newUser: true })
   
-  }
+  // }
   
   setMargin=()=>{
     this.setState({mapMargin: 0});
@@ -323,7 +323,7 @@ constructor(props) {
           longitude: item.longitude
         }}
         //title={item.name}
-        image={premicon}
+        image={premicon1}
         //style={{height: 30, width: 30}}
         onPress={() => {
           const markerProp = {
@@ -350,7 +350,7 @@ constructor(props) {
               longitude: item.longitude
             }}
             //title={item.name}
-            image={regIcon}
+            image={regIcon1}
             //style={{height: 30, width: 30}}
             onPress={() => {
               const markerProp = {

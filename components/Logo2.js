@@ -10,7 +10,7 @@ class LogoTitle extends React.Component {
           
         <Image
           source={require('../assets/white_logo.png')}
-          style={{height: 60, width: 60}}
+          style={{height: 50, width: 50}}
         />
         </View>
       );
@@ -28,6 +28,6 @@ class LogoTitle extends React.Component {
       justifyContent: 'center',
       //backgroundColor: "#3480CB",
       paddingTop: 10,
-      paddingBottom:5
+      //paddingBottom:5
     }
   })

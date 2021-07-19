@@ -59,7 +59,7 @@ const BathStackNavigator = createStackNavigator({
         ),
         headerStyle: {
           backgroundColor: "#3480CB",//"#52AEA0",
-          height: 90,
+          //height: 90,
           elevation: 0
           //height: 80        
         }
