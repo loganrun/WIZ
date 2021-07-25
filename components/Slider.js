@@ -1,6 +1,6 @@
 import React from 'react'
 import AppIntroSlider from 'react-native-app-intro-slider'
-import { StyleSheet, View, Image,Text } from 'react-native';
+import { StyleSheet, View, Image,Text, Button } from 'react-native';
 import {RFPercentage} from 'react-native-responsive-fontsize'
 
 
@@ -91,9 +91,9 @@ const slides = [
   };
 
   const Slider = props =>{
-      return <AppIntroSlider data={slides} renderItem={this._renderItem} onDone={props.onDoneAllSlides} 
-      onskip={props.onDoneAllSlides} showSkipButton={true} renderSkipButton={this._renderSkipButton} 
-      renderDoneButton={this._renderDoneButton}/>
+      return <AppIntroSlider data={slides} renderItem={this._renderItem} onDone={props.onDone}
+     showSkipButton={true} renderDoneButton={this._renderDoneButton} renderSkipButton={this._renderSkipButton}
+      />
   }
 
   export default Slider

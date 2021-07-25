@@ -25,8 +25,8 @@ import restApi from "../services/restroom";
 import refugeeApi from '../services/refugee'
 import {connect} from "react-redux"
 //import { SafeAreaView } from 'react-navigation'
-//import Intro from '../components/Slider'
-import Over from '../components/Modal'
+import Intro from '../components/Slider'
+//import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
 var genericFood = require('../assets/SEARCH-lower-card-generic-img-1.png')
 var unverified = require('../assets/mascot-01-unverified-349x161.png')
@@ -262,6 +262,10 @@ constructor(props) {
 
   }
 
+  onDone = ()=>{
+    this.setState({newUser: false})
+  }
+
   createMarkers= () => {
     const { navigate } = this.props.navigation;
     //const markAnimation = scrollX(new Animated.Value(0)).current
@@ -463,9 +467,10 @@ constructor(props) {
     if (this.state.newUser){
       return(
 
-        <Over closeModal= { () => 
-             this.setState({ newUser: false })
-           }/>
+        // <Over closeModal= { () => 
+        //      this.setState({ newUser: false })
+        //    }/>
+        <Intro  onDone={this.onDone}/>
       )
 
     } else if (this.state.loading){
