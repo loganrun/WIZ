@@ -7,7 +7,7 @@
       "ios",
       "android"
     ],
-    "version": "4.0.5",
+    "version": "4.0.7",
     "orientation": "portrait",
     "icon": "./assets/whizz_logo1.png",
     "splash": {
@@ -38,7 +38,7 @@
     "android": {
       "package": "com.TheWhizzApp.gotta_go",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 18,
+      "versionCode": 20,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyCFDvLCd6P4F5fyG6OIiJeIcZG6_DS606c"

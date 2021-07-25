@@ -9,37 +9,37 @@ const slides = [
 
     {
       key: "1",
-      title: 'WELCOME \nTO WHIZZ',
+      //title: 'WELCOME \nTO WHIZZ',
       //text: 'Hello fellow Whizzards',
-      image: require('../assets/onboard-welcome.png'),
+      image: require('../assets/onboard-welcome-text.png'),
       backgroundColor: '#fff'//'#8b0000'//'#daa520'//''// //#febe29',
     },
     {
       key: "2",
-      title: "LET'S GO!!!",
-      text: 'America is back on the road again!!! And Whizz is here to help you find a place to "go" when you are on the go!',
-      image: require('../assets/onboard-lets-go.png'),
+      //title: "LET'S GO!!!",
+      //text: 'America is back on the road again!!! And Whizz is here to help you find a place to "go" when you are on the go!',
+      image: require('../assets/onboard-lets-go-text.png'),
       backgroundColor: '#fff'//'#8b0000'//'#daa520'//''// //#febe29',
     },
     {
       key: "3",
-      title: 'OPEN or CLOSED?',
-      text: "Dark blue pins means the restrooms are open (subject to business hours) and you are good to go. \n\nLight blue pins means we need you to tell us if it is still there! Please CHECK IN and review the restroom to update it's status.",
-      image: require('../assets/onboard-verification-1.png'),
+      //title: 'OPEN or CLOSED?',
+      //text: "Dark blue pins means the restrooms are open (subject to business hours) and you are good to go. \n\nLight blue pins means we need you to tell us if it is still there! Please CHECK IN and review the restroom to update it's status.",
+      image: require('../assets/onboard-open-text.png'),
       backgroundColor: '#fff'//'#59b2ab',
     },
     {
         key: "4",
-        title: 'RATE IT!',
-        text: 'Help your fellow Whizzards by rating your visit.',
-        image: require('../assets/onboard-rating.png'),
+        //title: 'RATE IT!',
+        //text: 'Help your fellow Whizzards by rating your visit.',
+        image: require('../assets/onboard-rating-text.png'),
         backgroundColor: '#fff' //'#22bcb5',
       },
    {
       key: "5",
-      title: 'CHECK IN!',
-      text: "Remember to check in at your favorite spots, and we'll get busy conjuring up some exclusive discounts for you.",
-      image: require('../assets/onboard-favorite-1.png'),
+      //title: 'CHECK IN!',
+      //text: "Remember to check in at your favorite spots, and we'll get busy conjuring up some exclusive discounts for you.",
+      image: require('../assets/onboard-check-in-text.png'),
       backgroundColor: '#fff',
     } 
   ];
@@ -68,8 +68,8 @@ const slides = [
         <View style={{alignContent:"center",alignItems: "center", marginTop: '10%'}}>
         <Image source={item.image} style ={styles.image} />
         </View>
-        <Text style={{fontSize:RFPercentage(5), alignSelf:"center"}}>{item.title}</Text>
-        <Text style= {{marginLeft: 40, marginRight:40, marginTop: '4%',fontSize:RFPercentage(2.5)}}>{item.text}</Text>
+        {/* <Text style={{fontSize:RFPercentage(5), alignSelf:"center"}}>{item.title}</Text>
+        <Text style= {{marginLeft: 40, marginRight:40, marginTop: '4%',fontSize:RFPercentage(2.5)}}>{item.text}</Text> */}
       </View>
     );
   }
