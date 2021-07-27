@@ -17,28 +17,27 @@ import {
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 //import { showLocation } from "react-native-map-link";
-import StarRating from "react-native-star-rating";
+//import StarRating from "react-native-star-rating";
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-import { Ionicons } from "@expo/vector-icons";
+//import { Ionicons } from "@expo/vector-icons";
 //import Maps from "../components/Maps";
 import restApi from "../services/restroom";
 import refugeeApi from '../services/refugee'
 import {connect} from "react-redux"
 //import { SafeAreaView } from 'react-navigation'
 import Intro from '../components/Slider'
-//import Over from '../components/Modal'
 var tprating = require("../assets/TPratings_5Stars.png")
 var genericFood = require('../assets/SEARCH-lower-card-generic-img-1.png')
 var unverified = require('../assets/mascot-01-unverified-349x161.png')
 var verified = require('../assets/mascot-01-verified-329x161.png')
-var premicon = require('../assets/pin-verified.png')
-//var premicon1 = require('../assets/pin-verified2.png')
-var regIcon = require('../assets/pin-unverified.png')
-//var regIcon1 = require('../assets/pin-unverified1.png')
+//var premicon = require('../assets/pin-verified.png')
+var premicon1 = require('../assets/pin-verified2.png')
+//var regIcon = require('../assets/pin-unverified.png')
+var regIcon1 = require('../assets/pin-unverified1.png')
 //import * as Analytics from 'expo-firebase-analytics'
 import * as Amplitude from 'expo-analytics-amplitude'
 import axios from 'axios'
-import { Extrapolate } from "react-native-reanimated";
+//import { Extrapolate } from "react-native-reanimated";
 //import { Callout } from "react-native-maps";
 //var bathIcon = require("../assets/waba_icon_location.png");
 //var restRoom= require("../assets/w_logo.png")
@@ -318,33 +317,37 @@ constructor(props) {
 
       
       
-      if(Platform.OS === 'ios' && item.verified){
-      return (
-        <MapView.Marker
-        key= {index}
-        coordinate={{
-          latitude: item.latitude,
-          longitude: item.longitude
-        }}
-        //title={item.name}
-        image={premicon}
-        //style={{height: 30, width: 30}}
-        onPress={() => {
-          const markerProp = {
-          id: item.id,
-          name: item.name,
-          street: item.street,
-          city: item.city,
-          distance: item.distance
-          }
-          Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
-          this.flatListRef.scrollToIndex({animated: true, index: index})
+      if(Platform.OS === 'android' && item.verified){
+        return (
+          <MapView.Marker
+          key= {index}
+          coordinate={{
+            latitude: item.latitude,
+            longitude: item.longitude
+          }}
+          //title={item.name}
+          image={premicon1}
+         // pinColor={'yellow'}
+        //  onPress={() => {
+        //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
+        //    }}
+          onPress={() => {
+            const markerProp = {
+            id: item.id,
+            name: item.name,
+            street: item.street,
+            city: item.city,
+            distance: item.distance
+            }
+            Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
+            this.flatListRef.scrollToIndex({animated: true, index: index})
+            }}
           
-        }}
-        
-        >
-        </MapView.Marker>
-      ) ;
+          >
+            
+          </MapView.Marker>
+        )
+      
         }if(!item.verified){
           return (
             <MapView.Marker
@@ -354,37 +357,7 @@ constructor(props) {
               longitude: item.longitude
             }}
             //title={item.name}
-            image={regIcon}
-            //style={{height: 30, width: 30}}
-            onPress={() => {
-              const markerProp = {
-              id: item.id,
-              name: item.name,
-              street: item.street,
-              city: item.city,
-              distance: item.distance
-              }
-              Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
-              this.flatListRef.scrollToIndex({animated: true, index: index})
-              
-            }}
-            
-            >
-               
-            </MapView.Marker>
-          )
-
-        }else{
-          if(item.verified){
-          return (
-            <MapView.Marker
-            key= {index}
-            coordinate={{
-              latitude: item.latitude,
-              longitude: item.longitude
-            }}
-            //title={item.name}
-            image={premicon}
+            image={regIcon1}
            // pinColor={'yellow'}
           //  onPress={() => {
           //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
@@ -402,9 +375,21 @@ constructor(props) {
               }}
             
             >
+              {/* <Animated.View>
+                <Animated.Image
+                style={[styles.marker, scaleStyle]}
+                source={regIcon}
+                resizeMode="cover"
+                />
+
+              </Animated.View> */}
               
             </MapView.Marker>
-          )}else{
+          )
+          
+
+        }else{
+          if(item.verified){
             return (
               <MapView.Marker
               key= {index}
@@ -413,11 +398,8 @@ constructor(props) {
                 longitude: item.longitude
               }}
               //title={item.name}
-              image={regIcon}
-             // pinColor={'yellow'}
-            //  onPress={() => {
-            //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
-            //    }}
+              image={premicon1}
+              //style={{height: 30, width: 30}}
               onPress={() => {
                 const markerProp = {
                 id: item.id,
@@ -428,20 +410,42 @@ constructor(props) {
                 }
                 Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
                 this.flatListRef.scrollToIndex({animated: true, index: index})
-                }}
+                
+              }}
               
               >
-                <Animated.View>
-                  <Animated.Image
-                  style={[styles.marker, scaleStyle]}
-                  source={regIcon}
-                  resizeMode="cover"
-                  />
+              </MapView.Marker>
+            ) ;
+          }else{
 
-                </Animated.View>
+            return (
+              <MapView.Marker
+              key= {index}
+              coordinate={{
+                latitude: item.latitude,
+                longitude: item.longitude
+              }}
+              //title={item.name}
+              image={regIcon1}
+              //style={{height: 30, width: 30}}
+              onPress={() => {
+                const markerProp = {
+                id: item.id,
+                name: item.name,
+                street: item.street,
+                city: item.city,
+                distance: item.distance
+                }
+                Amplitude.logEventWithPropertiesAsync("MARKER_SELECT", markerProp)
+                this.flatListRef.scrollToIndex({animated: true, index: index})
                 
+              }}
+              
+              >
+                 
               </MapView.Marker>
             )
+            
 
           }
         }
