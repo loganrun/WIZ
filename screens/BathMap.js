@@ -30,10 +30,10 @@ var tprating = require("../assets/TPratings_5Stars.png")
 var genericFood = require('../assets/SEARCH-lower-card-generic-img-1.png')
 var unverified = require('../assets/mascot-01-unverified-349x161.png')
 var verified = require('../assets/mascot-01-verified-329x161.png')
-//var premicon = require('../assets/pin-verified.png')
-var premicon1 = require('../assets/pin-verified2.png')
-//var regIcon = require('../assets/pin-unverified.png')
-var regIcon1 = require('../assets/pin-unverified1.png')
+var premicon = require('../assets/pin-verified.png')
+//var premicon1 = require('../assets/pin-verified2.png')
+var regIcon = require('../assets/pin-unverified.png')
+//var regIcon1 = require('../assets/pin-unverified1.png')
 //import * as Analytics from 'expo-firebase-analytics'
 import * as Amplitude from 'expo-analytics-amplitude'
 import axios from 'axios'
@@ -326,7 +326,7 @@ constructor(props) {
             longitude: item.longitude
           }}
           //title={item.name}
-          image={premicon1}
+          image={premicon}
          // pinColor={'yellow'}
         //  onPress={() => {
         //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
@@ -357,7 +357,7 @@ constructor(props) {
               longitude: item.longitude
             }}
             //title={item.name}
-            image={regIcon1}
+            image={regIcon}
            // pinColor={'yellow'}
           //  onPress={() => {
           //   this.flatListRef.scrollToIndex({animated: true, index: item.id})
@@ -398,7 +398,7 @@ constructor(props) {
                 longitude: item.longitude
               }}
               //title={item.name}
-              image={premicon1}
+              image={premicon}
               //style={{height: 30, width: 30}}
               onPress={() => {
                 const markerProp = {
@@ -426,7 +426,7 @@ constructor(props) {
                 longitude: item.longitude
               }}
               //title={item.name}
-              image={regIcon1}
+              image={regIcon}
               //style={{height: 30, width: 30}}
               onPress={() => {
                 const markerProp = {
