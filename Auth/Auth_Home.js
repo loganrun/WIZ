@@ -10,6 +10,7 @@ const loginbtn = require("../assets/logintransparent.png");
 import Logo from "../components/Logo"
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Amplitude from 'expo-analytics-amplitude'
+import axios from "axios";
 import * as Facebook from 'expo-facebook'
 import * as GoogleSignIn from "expo-google-sign-in"
 
@@ -26,10 +27,17 @@ class AuthHome extends Component {
     };
   }
   
-  //componentDidMount(){
-  //  this.initAsync();
-  //}
-
+  componentDidMount(){
+   this.initAsync();
+  }
+  
+  initAsync = async () => {
+      await GoogleSignIn.initAsync({
+        // You may ommit the clientId when the firebase `googleServicesFile` is configured
+        clientId: '<YOUR_IOS_CLIENT_ID>',
+      });
+      this._syncUserWithStateAsync();
+    };
   
 
   
@@ -53,39 +61,41 @@ class AuthHome extends Component {
   render() {
 
     const {navigate} = this.props.navigation
-    const faceBookLogin = async () => {
-      try {
-        await Facebook.initializeAsync('746838002533627');
-        const {
-          type,
-          token,
-          expires,
-          permissions,
-          declinedPermissions,
-        } = await Facebook.logInWithReadPermissionsAsync({
-          permissions: ['public_profile', 'email'],
-        });
-        if (type === 'success') {
-          // Get the user's name using Facebook's Graph API
-          fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id, name, email, picture`)
-          .then(response => response.json())
-          .then(data => console.log(data))
-          //console.log(response)
-          //.then(Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`))
-          .then(this.props.navigation.navigate("Main"))
-        } else {
-          // type === 'cancel'
-        }
-      } catch ({ message }) {
-        alert(`Facebook Login Error: ${message}`);
-      }
-    }
+    // const faceBookLogin = async () => {
+    //   try {
+    //     await Facebook.initializeAsync('746838002533627');
+    //     const {
+    //       type,
+    //       token,
+    //       expires,
+    //       permissions,
+    //       declinedPermissions,
+    //     } = await Facebook.logInWithReadPermissionsAsync({
+    //       permissions: ['public_profile', 'email'],
+    //     });
+    //     if (type === 'success') {
+    //       // Get the user's name using Facebook's Graph API
+    //       fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id, name, email, picture`)
+    //       .then(response => response.json())
+    //       .then(data => console.log(data))
+    //       //console.log(response)
+    //       //.then(Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`))
+    //       .then(this.props.navigation.navigate("Main"))
+    //     } else {
+    //       // type === 'cancel'
+    //     }
+    //   } catch ({ message }) {
+    //     alert(`Facebook Login Error: ${message}`);
+    //   }
+    // }
 
     
   
     const _syncUserWithStateAsync = async () => {
       const user = await GoogleSignIn.signInSilentlyAsync();
-      this.setState({ user });
+      AsyncStorage.setItem("userToken", user.uid);
+      this.props.navigation.navigate("Main")
+      //this.setState({ user });
     };
   
     const signOutAsync = async () => {
@@ -98,6 +108,23 @@ class AuthHome extends Component {
         await GoogleSignIn.askForPlayServicesAsync();
         const { type, user } = await GoogleSignIn.signInAsync();
         if (type === 'success') {
+          axios({
+            method: "post",
+            baseURL: "http://prototypeapp-env.pafwfr7hjt.us-west-2.elasticbeanstalk.com/api/users",
+            timeout: 40000,
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            },
+            data: {
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              userName: user.displayName,
+              avatar: user.photoURL,
+              userId: user.uid
+            }
+          });
           _syncUserWithStateAsync();
         }
       } catch ({ message }) {
@@ -105,13 +132,7 @@ class AuthHome extends Component {
       }
     };
 
-    const initAsync = async () => {
-      await GoogleSignIn.initAsync({
-        // You may ommit the clientId when the firebase `googleServicesFile` is configured
-        clientId: '<YOUR_IOS_CLIENT_ID>',
-      });
-      this._syncUserWithStateAsync();
-    };
+
   
     //const googleSign = () => {
       //if (this.state.user) {
@@ -174,18 +195,19 @@ else{
     <SafeAreaView style={styles.container}>
       <ImageBackground source={loginPage} style={{width: '100%', height: '100%'}}>
         
-        {/*<View style={styles.btn1}>
+        <View style={styles.btn1}>
             <TouchableOpacity
             style={styles.fabBtn}
-            onPress={initAsync() }   
+            onPress= {()=>signInAsync() }   
             >
-              <Image source={gbutton} style={{height: 44, width: 44, marginRight: 10}}/>
+              <Text style={styles.txt3}>Sign in with Google</Text>
+              <Image source={gbutton} style={{height: 44, width: 44, marginLeft: 20}}/>
               
-                <Text style={styles.txt3}>Sign in with Google</Text>
+                
                 
               </TouchableOpacity> 
   </View> 
-        <View style={styles.btn1}>
+        {/*<View style={styles.btn1}>
             <TouchableOpacity
             style={styles.fabBtn}
             onPress={() => faceBookLogin()}   
@@ -196,7 +218,7 @@ else{
                 
               </TouchableOpacity> 
         </View>*/}
-        <View style={styles.btn1}>
+        <View style={styles.btn2}>
             <TouchableOpacity
             style={styles.fabBtn}
             onPress={() => onSubmit()}  
