@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   textInput1: {
     alignSelf: "stretch",
     height: 50,
-    marginTop: '30%',
+    marginTop: '25%',
     color: "white",
     borderBottomColor: "white",
     borderBottomWidth: 1,
